@@ -1,0 +1,11 @@
+= Domain Model: {project-name}
+Julian Groß <s86368@htw-dresden.de>
+{localdatetime}
+include::../_includes/default-attributes.inc.adoc[]
+// Platzhalter für weitere Dokumenten-Attribute
+
+
+== Allgemeine Informationen
+
+
+== ...
