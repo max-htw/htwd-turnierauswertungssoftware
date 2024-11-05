@@ -1,0 +1,8 @@
+= Meetings mit Coach Herrn Zirkelbach
+Tim Reimann <tim.reimann@stud.htw-dresden.de>
+0.1, 05.11.2024
+:toc:
+:toc-title: Inhaltsverzeichnis
+// Platzhalter für weitere Dokumenten-Attribute
+
+== Meeting vom 05.11.2024 (erstes Meeting)
