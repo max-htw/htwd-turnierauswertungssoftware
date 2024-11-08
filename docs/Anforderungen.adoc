@@ -1,11 +1,14 @@
 = Anforderungen für den Volleyball-planer
-Julian Groß <s86368@htw-dresden.de>; Jonas Grießhaber <s87547@htw-dresden.de>
+Julian Groß <s86368@htw-dresden.de>; Jonas Grießhaber <s87547@htw-dresden.de>; Maximilian Lohr <s86327@htw-dresden.de>
 {localdatetime}
 //:source-highlighter: rouge
 :source-highlighter: highlight.js
 :imagesdir: images
 // :toc:
 // :toc-title: Inhaltsverzeichnis
+== Link zur Visualisierung auf Miro
+https://miro.com/welcomeonboard/QUpMOEdhN01VdDRyVUdlVlgzNXNxdkM0OUlSc1dnSU9EdjJBVVo4UlNzN2xIWnkzSGNXeFNJc28zYVRScm5Hd3wzNDU4NzY0NjA1MzU4MTU0MzQ5fDI=?share_link_id=268593339366[Miro-MindMap]
+
 == Variablen
 * Felder (auf denen gleichzeitig gespielt werden kann)
 * Leistungsgruppen (z.B. Profis und Gelegenheitsspielende)
