@@ -1,0 +1,62 @@
+= Meetings mit Auftraggeber (Stura)
+Tim Reimann <tim.reimann@stud.htw-dresden.de>
+0.1, 02.11.2024
+:toc:
+:toc-title: Inhaltsverzeichnis
+// Platzhalter für weitere Dokumenten-Attribute
+
+== Meeting vom 01.11.2024 (erstes gemeinsames Treffen)
+=== Problem
+Spielstände mussten bisher händisch in eine ausgedruckte Excel Tabelle eingetragen werden.
+
+=== Teil 1 - Spielplangenerierung
+- maximal 2 Leistungsgruppen (S-Schwitzer; F-fun)
+
+- jeder gegen jeden
+
+- wann spielt welches Team auf welchem Feld?
+
+- Welches Team pfeift das Spiel? 
+
+==== !!! Spielplan Inhalt !!! 
+- Feld Nr. 
+
+- Uhrzeiten/ Startzeiten (ein Spiel dauert ca. 20 min)
+
+- so wenig wie möglich Pause pro Team
+
+
+==== Spielplangenerierung variable Abfrage 
+- wie viele Felder stehen zur Auswahl?
+
+- wie viele Leistungsgruppen (maximal 2 möglich)
+
+- wie viele Teams pro Leistungsgruppe (S ≠ F)
+
+- gibt es Hin- und Rückspiel ?
+
+-> wenn ja dann direkt hintereinander 
+
+- !!! wenn zu wenig Teams da, dann vernachlässigen !!! 
+
+=== Teil 2 - Erfassung Spielstände
+- identifizierung Spielstände (ohne vorherige authentifizierung)
+
+==== Problem beim vertippen
+
+=== Teil 3 - Auswertung Spielstände
+- Zwischenansicht während des Turniers möglich für alle machen 
+
+- es wird bis 25 Punkten gespielt mit 2 Punkte Abstand (sudden death???)
+
+=== Wünsche
+- vorher generierter Spielplan soll als PDF exportiert werden und in Halle aushängen
+
+- auf allen bekannten Betriebssystemen
+
+- auch offline spielstände eintragen 
+
+- vorort den Teams noch individuelle Namen zuweisen 
+
+
+
