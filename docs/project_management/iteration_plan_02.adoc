@@ -1,45 +1,67 @@
-= Iteration Plan 01: {project-name}
-;
-{localdatetime}
-include::../_includes/default-attributes.inc.adoc[]
+= Iteration Plan 01: {Turnierauswertungssoftware}
+Kareen Khouri <kareen.khouri@stud.htw-dresden.de>
+Erstellungsdatum 13.11.2024
+
+//include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
 
 
-== Meilensteine
+== Übersicht
 //Meilensteine zeigen den Ablauf der Iteration, wie z.B. den Beginn und das Ende, Zwischen-Meilensteine, Synchronisation mit anderen Teams, Demos usw.
 
 [%header, cols="3,1"]
 |===
-| Meilenstein | Datum
+| Datum | Schwerpunkt
 
-| Beginn der Iteration | -
-| ... | -
-| Ende der Iteration | -
+| 10.11. bis 29.11.2024 | Zweite Iteration
+|  | Erreichen des Lifecycle Objectives Milestone
+| 29.11.2024 | Abgabe der Vision, aktueller Stand Glossar,
+erste User Stories und Risiken
 |===
 
 
 == Wesentliche Ziele
 //Nennen Sie 1-5 wesentliche Ziele für die Iteration.
 
-Beispiele:
-
-* Beheben der Usability-Probleme, die von Abteilung X berichtet wurden
-* Ausliefern der Hauptszenarios, die die Integration mit System Y zeigen
-* Present a technical demonstration (demo).
+* Termin mit potentiellen Nutzern durchführen
+* Visionsdokument erarbeiten
+* Risiken erfassen und Gegenmaßnahmen ableiten
+* Erste User Stories im Product Backlog (auf GitHub) erfassen und verfeinern
+* Erster Entwurf Wireframes 
+* Grobe Idee für technischen Lösungsweg erarbeiten
+* Mit Architecture Notebook vertraut machen
 
 
 == Aufgabenzuordnung
 //Dieser Abschnitt sollte einen Verweis auf die Work Items List enthalten, die die für diese Iteration vorgesehenen Aufgaben dokumentiert sowie die Zuordnung dieser Aufgaben zu Teammitgliedern. Alternativ können die Aufgaben für die Iteration und die Zuordnung zu Teammitgliedern in nachfolgender Tabelle dokumentiert werden - je nach dem, was einfacher für die Projektbeteiligten einfacher zu finden ist.
 
-Die in dieser Iteration geplanten Aufgaben sind in der Work Items List dargestellt (hier Verweis einfügen).
 
-_alternativ:_ Die folgenden Aufgaben werden in dieser Iteration bearbeitet:
+Die folgenden Aufgaben werden in die 2. Iteration bearbeitet:
 [%header, cols="3,1,1,1,2,1,1,1,1"]
 |===
-| Aufgabe bzw. Beschreibung | Priorität | Schätzung der Größe (Punkte) |Status | Referenzen | geplante Iteration | Zugewiesen (Name) | Gearbeite Stunden | Schätzung der verbleibenden Stunden
+| Aufgabe bzw. Beschreibung | Priorität | Komplexität |Status | Notizen/Risiken | geplante Iteration | Verantwortlicher | Startdatum | Fälligkeitsdatum
 
-| Kommunikationswege
-festlegen | 10 | x | x | x | x | x | x | x
+| Termin mit Auftraggeber durchführen | Hoch  | S | In Bearbeitung | - | 2 | Alle Team mitglieder | 13.11.2024 | 29.11.2024
+
+| Visiondokument erarbeiten | Hoch  | L | In Bearbeitung | - | 2 | Kareen und Bene | 13.11.2024 | 29.11.2024
+
+| Risiken erfassen und Gegenmaßnahmen ableiten | Hoch  | M | In Bearbeitung | - | 2 | Tim | 13.11.2024 | 29.11.2024
+
+| Erste User Stories im Product Backlog (auf GitHub) erfassen und verfeinern  | Mittel  | M | In Bearbeitung | - | 2 | alle | 13.11.2024 | 29.11.2024
+
+| Erster Entwurf Wireframes | Hoch  | L | In Bearbeitung | - | 2 | Alexander und Julian | 13.11.204 | 29.11.2024
+
+| Grobe Idee für technischen Lösungsweg | Hoch  | M | In Bearbeitung | - | 2 | Jonas und Julian | 13.11.2024 | 29.11.2024
+
+| Mit Architecture Notebook vertraut machen | Mittel  | 7 | In Bearbeitung | - | L | Max | 13.11.2024 | 29.11.2024
+
+| Treffen mit Coach durchführen | Mittel | S | In Bearbeitung | - | 2 | Alle | 13.11.2024 | 29.11.2024
+
+| Termin für Meeting mit Auftraggeber vereinbaren | Hoch  | XS | In Bearbeitung | - | 2 | Tim | 13.11.2024 | 29.11.2024
+
+| Termin für Meeting mit Coach vereinbaren | Hoch  | XS | In Bearbeitung | - | 2 | Tim | 13.11.2024 | 29.11.2024
+
+| Glossar anfertigen | Hoch  | S | In Bearbeitung | - | 2 | Alle | 13.11.2024 | 29.11.2024
 |===
 
 
@@ -57,11 +79,11 @@ festlegen | 10 | x | x | x | x | x | x | x
 == Bewertungskriterien
 //Eine kurze Beschreibung, wie Erfüllung die o.g. Ziele bewertet werden sollen.
 
-Beispiele:
+Am Ende der 2. Iteration (29.11.2024) muss jedes Team folgende Dokumente an die Coaches abgegeben haben:  
 
-* 97% der Testfälle auf Systemebene sind erfolgreich.
-* Gemeinsame Inspektion des Iterations-Ergebnisses (Inkrement) mit den Abteilungen X und Y ergibt positive Rückmeldung.
-* Technische Präsentation / Demo erhält positive Rückmeldungen.
+* Vision
+* Glossar
+* Erste User Stories und Risiken (Link zum GitHub Project)
 
 
 == Assessment
