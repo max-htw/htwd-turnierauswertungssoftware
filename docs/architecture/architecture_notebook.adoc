@@ -5,6 +5,11 @@ include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
 
 
+== Links zur Erläuterung
+https://www2.htw-dresden.de/~anke/openup/process.openup.base/capabilitypatterns/architecture_notebook_1EE52118.html[HTW Seite] 
+
+https://archive.open-services.net/wiki/architecture-management/Open-UP-Development-Scenario/index.html[OpenUP Doku] 
+
 == Zweck
 Dieses Dokument beschreibt die Philosophie, Entscheidungen, Nebenbedingungen, Begründungen, wesentliche Elemente und andere übergreifende Aspekte des Systems, die Einfluss auf Entwurf und Implementierung haben.
 
