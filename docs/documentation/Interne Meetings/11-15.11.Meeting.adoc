@@ -41,5 +41,44 @@ Der Projektleiter Tim hat die Aufgaben an die Team mitglieder verteilt.
 ==== die gesamte Gruppe:
 - Erste User Stories im Product Backlog (auf GitHub) erfassen und verfeinern
 
-== Treffen am 14.11.2024 über Discord
+
+
+== Interne Meeting vom 14.11.2024
+
+**Anwesend:**
+- Kareen
+- Tim
+- Max
+- Alexander
+- Jonas
+- Julian
+- Bene
+
+
+
+## Besprochene Punkte
+
+1. **Wireframes und Ablaufplanung**
+   - Diskussion über die Erstellung von Wireframes.
+   - Klärung, wie der Ablauf gestaltet werden soll und ob Skizzen erforderlich sind.
+   - Entscheidung, dem Auftraggeber die Skizzen zur besseren Veranschaulichung zu zeigen.
+
+2. **Planung eines Termins mit dem Auftraggeber**
+   - Ziel: Den Termin nutzen, um Ideen zur technischen Lösung und den Ablauf der Wireframes zu besprechen.
+   - Sammlung von Fragen zur technischen Umsetzung, die beim Termin mit dem Auftraggeber geklärt werden sollen.
+
+3. **Treffen mit dem Coach**
+   - Geplantes Treffen mit dem Coach, um Feedback zum weiteren Vorgehen zu erhalten.
+   - Falls erforderlich, sollen spezifische Fragen zum Projektverlauf geklärt werden.
+
+---
+
+## Nächste Schritte
+
+- **Tim** übernimmt die Koordination der Termine mit Auftraggeber und Coach.
+- **Erstellung der ersten Wireframe-Skizzen**, um diese beim nächsten Meeting zu besprechen und finalisieren.
+
+**Protokoll erstellt von:** Kareen Khouri
+**Erstellungsdatum:** 14.11.2024
+
 
