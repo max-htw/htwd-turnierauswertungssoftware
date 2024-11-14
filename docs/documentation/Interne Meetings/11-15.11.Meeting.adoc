@@ -1,0 +1,45 @@
+= Team meeting
+Kareen Khouri <kareen.khouri@stud.htw-dresden.de>
+0.1, 12.11.2024
+:toc:
+:toc-title: Inhaltsverzeichnis
+
+== Meeting vom 12.11.2024
+=== Anwesend:
+- Tim
+- Kareen
+- Jonas
+- Max
+- Alexander
+- Julian
+- Bene
+
+=== Besprechungspunkte
+
+Wir haben die Hinweise für die 2.Iteration gemeinsam besprochen, um ein gutes Verständnis für die Anforderungen zu entwickeln.
+Der Projektleiter Tim hat die Aufgaben an die Team mitglieder verteilt.
+
+
+=== Aufgabenverteilung
+==== Tim:
+- Termin mit dem Coach planen
+- Termin mit dem Auftraggeber planen
+- Risiken erfassen und Gegenmaßnahmen ableiten
+
+==== Jonas und Julian:
+- Grobe Idee für technischen Lösungsweg erarbeiten
+
+==== Kareen und Bene
+- Visionsdokument erarbeiten
+
+==== Alexander und Julian
+- Erster Entwurf Wireframes
+
+==== Max
+- Mit Architecture Notebook vertraut machen
+
+==== die gesamte Gruppe:
+- Erste User Stories im Product Backlog (auf GitHub) erfassen und verfeinern
+
+== Treffen am 14.11.2024 über Discord
+
