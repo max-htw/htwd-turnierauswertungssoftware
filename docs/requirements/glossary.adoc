@@ -12,8 +12,17 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 [%header]
 |===
 | Begriff | Definition und Erläuterung | Synonyme
-//| Kommissionierung | Bereitstellung von Waren aus einem Lager entsprechend eines Kundenauftrags | (keine)
-| xx | xx | xx
+| Leistungsgruppe | Zusammenfassung von Teams mit ähnlichem spielerischen Niveau  | keine
+| Team | Personengruppe, die zusammen gegen Andere spielt | Mannschaft
+| Spiel | Ein Aufeinandertreffen, wo zwei Teams gegeneinander spielen | Match, Partie, Satz, Runde
+| Spielplan | Plan, der die Reihenfolge der Spiele der teilnehmenden Teams regelt | Spiel-Übersicht, Turnierplan
+| Spielstand | Anzahl der nach Ende eines Spiels erzielten Punkte pro Mannschaft | Score, Punktestand
+| Feld | Bereich, auf dem ein Spiel stattfindet | Spielfläche
+| Schiedsrichter | Person, die ein Spiel leitet  | Unparteiischer, Kampfrichter, Referee
+| Spieler | Person, die als Teil eines Teams am Turnier teilnimmt | Teilnehmer, Player, Sportler, Volleyballer
+| Turnier | Veranstaltung, bei der die Teams aufeinandertreffen | Wettkampf, Wettbewerb
+| Aussetzen | Zeit, in der ein Team weder spielt noch den Schiedsrichter-Job übernimmt | Pause
+
 |===
 
 
@@ -21,8 +30,8 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 [%header]
 |===
 | Abkürzung | Bedeutung | Erläuterung
-//| UP | Unified Process | Vorgehensmodell für die Softwareentwicklung
-| xx | xx | xx
+| z.B.: A1 | Leistungsgruppe A, Teamnummer 1 | im Bezug auf Teams
+| Schiri | Schiedsrichter | s. Begriffe
 |===
 
 == Verzeichnis der Datenstrukturen
