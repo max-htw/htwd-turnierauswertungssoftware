@@ -1,3 +1,4 @@
 {
-    "cSpell.language": "de-DE,en"
+    "cSpell.language": "de-DE,en",
+    "editor.renderWhitespace": "selection"
 }
