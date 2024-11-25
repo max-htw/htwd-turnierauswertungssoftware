@@ -32,6 +32,9 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 | Abkürzung | Bedeutung | Erläuterung
 | z.B.: A1 | Leistungsgruppe A, Teamnummer 1 | im Bezug auf Teams
 | Schiri | Schiedsrichter | s. Begriffe
+| --- | Nutzer | Volleyballspieler / Turnierteilnehmer des Turniers
+| Stura | Studentenrat | Auftraggeber und Veranstalter des Turniers
+| --- | Software | Die Turnierauswertungssoftware die entwickelt werden soll
 |===
 
 == Verzeichnis der Datenstrukturen
