@@ -58,12 +58,12 @@ Beispiel:
 
 [cols="1,3"]
 |===
-| Für | [Zielkunde / Nutzer]
-| der / die | [Angabe des Bedarfs oder Chance]
-| Das Produkt / die Lösung ist ein | [Produktkategorie]
-| Die / Das | [Aussage zum Hauptvorteil / Alleinstellungsmerkmal]
-| Im Gegensatz zu | [wesentliche Lösungsalternative]
-| Unser Produkt | [Aussage zum Hauptunterschied]
+| Für | Organisatoren und Teilnehmer des Volleyballturniers
+| die | mehr Effizienz, Transparenz und Eigenverantwortung bei der Verwaltung des Turniers benötigen.
+| Das Produkt /| ist eine Softwarelösung für Turnierplanung und Verwaltung.
+| Die /| automatisierte Spielpläne und Verwaltung der Ergebnisse bietet.
+| Im Gegensatz zu | manueller Planung auf Papier.
+| Unser Produkt | verringert Aufwand für die Organisatoren und bezieht Teilnehmer bei der Verwaltung der Ergebnisse mit ein.
 |===
 
 ////
