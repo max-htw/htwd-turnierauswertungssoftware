@@ -26,16 +26,19 @@ Siehe <<#glossary, Glossar>>.
 
 === Fachliche Motivation
 //Erläutern Sie kurz den Hintergrund, in dem das Projekt angesiedelt ist. Welches Problem soll gelöst werden, wie ist es entstanden? Welche Verbesserung wird angestrebt. Achten Sie darauf, eine fachliche (organisatorische, betriebswirtschaftliche) Perspektive einzunehmen.
+Die bisherige manuelle Turnierplanung ergibt einen hohen Aufwand bei der Erstellung des Turnierplans und der Erfassung der Turnierergebnisse. 
+Eine softwaregestützte Lösung spart Zeit bei der Organisation und bietet den Spielenden mehr Eigenverantwortung, da sie ihre Ergebnisse selbstständig eintragen können.
+Außerdem soll durch die Sofware die Gestaltung der Wartezeiten zwischen den Partien optimiert werden.
 
 === Problem Statement
 //Stellen Sie zusammenfassend das Problem dar, das mit diesem Projekt gelöst werden soll. Das folgende Format kann dazu verwendet werden:
 
 [cols="1,3"]
 |===
-| Das Problem | [beschreiben Sie das Problem]
-| betrifft | [die Stakeholder, die vom Problem betroffen sind]
-| die Auswirkung davon ist | [welche Auswirkungen hat das Problem?]
-| eine erfolgreiche Lösung wäre | Führen Sie einige wesentliche Vorteile einer erfolgreichen Lösung auf]
+| Das Problem | Die Organisation und Auswertung des Volleyballturniers ist zeitaufwendig.
+| betrifft | Turnierorganisatoren und Teilnehmer.
+| die Auswirkung davon ist | Hoher Aufwand für die Organisatoren des Turniers.
+| eine erfolgreiche Lösung wäre | Eine Entlastung für die Organisatoren und mehr Transparenz für die Teilnehmer, da sie zu jeder Zeit digital den Spielplan und die Ergebnisse abrufen können. Zusätzlich können die Teilnehmer selbstständig Ergebnisse eintragen.
 |===
 
 ////
@@ -56,12 +59,12 @@ Beispiel:
 
 [cols="1,3"]
 |===
-| Für | [Zielkunde / Nutzer]
-| der / die | [Angabe des Bedarfs oder Chance]
-| Das Produkt / die Lösung ist ein | [Produktkategorie]
-| Die / Das | [Aussage zum Hauptvorteil / Alleinstellungsmerkmal]
-| Im Gegensatz zu | [wesentliche Lösungsalternative]
-| Unser Produkt | [Aussage zum Hauptunterschied]
+| Für | Organisatoren und Teilnehmer des Volleyballturniers
+| die | mehr Effizienz, Transparenz und Eigenverantwortung bei der Verwaltung des Turniers benötigen.
+| Das Produkt /| ist eine Softwarelösung für Turnierplanung und Verwaltung.
+| Die /| automatisierte Spielpläne und Verwaltung der Ergebnisse bietet.
+| Im Gegensatz zu | manueller Planung auf Papier.
+| Unser Produkt | verringert Aufwand für die Organisatoren und bezieht Teilnehmer bei der Verwaltung der Ergebnisse mit ein.
 |===
 
 ////
@@ -85,9 +88,23 @@ Beispiel Produkt:
 |===
 | Name | Beschreibung | Verantwortlichkeiten
 
-| [Benennung des Stakeholder-Typs.]
-| [Kurze Beschreibung des Stakeholders.]
-| [Fassen Sie die wesentlichen Verantwortlichkeiten des Stakeholder mit Bezug auf das zu entwickelnde System kurz zusammen, d.h. ihr besonderen Interessen. Beispiele: Dieser Stakeholder sorgt dafür, dass das System gewartet wird / dass die angezeigten Daten aktuell sind / überwacht den Projektfortschritt / usw.]
+
+|Organisatoren. 
+|Verantwortlich für die Organisation des Turniers. 
+|Einordnung der Teams, Erstellung des Spielplans, Verwaltung der Ergebnisse.
+
+|Turnierteilnehmer. 
+|Volleyballspieler.
+|Führen die Partien aus und tragen Ergebnisse in den Turnierplaner ein.
+
+|Gesetzgeber.
+|Stellt gesetzliche Anforderungen sicher, die von der Software eingehalten werden müssen.
+|Vorgaben zur Einhaltung von Datenschutz im Bezug auf persönliche Daten.
+
+| IT-Administratoren.
+| Technischer Support.
+| Zuständig für die Funktionalität und Wartung der Software.
+
 |===
 
 === Benutzerumgebung
@@ -95,10 +112,23 @@ Beschreiben Sie die Arbeitsumgebung des Nutzers. Hier sind einige Anregungen:
 
 //Zutreffendes angeben, nicht zutreffendes streichen oder auskommentieren
 . Anzahl der Personen, die an der Erfüllung der Aufgabe beteiligt sind. Ändert sich das?
+- Turnierorganisation: 2 oder mehr?
+- Spieler: 20 bis maximal 50?
+
 . Wie lange dauert die Bearbeitung der Aufgabe? Wie viel Zeit wird für jeden Arbeitsschritt benötigt? Ändert sich das?
+- Planung und Organisation im Vorfeld: mehrere Stunden.
+- Erfassung der Ergebnisse während des Turniers: wenige Sekunden.
+- Turnierauswertung: Wird nach Eintragung der letzten Erbegnisse automatisch ausgegeben.
+
 . Gibt es besondere Umgebungsbedingungen, z.B. mobil, offline, Außeneinsatz, Touchbedienung, Nutzung durch seh- oder hörbeeinträchtigte Personen?
+- Die Software muss auf Mobilgeräten ausführbar und per Touchscreen bedienbar sein.
+- Die Software muss offline bedienbar sein, wegen schwachem Netz in der Turnhalle.
 . Welche Systemplattformen werden heute eingesetzt? Welche sind es ggf. zukünftig?
+- Heute: manuelle Erfassung und Auswertung auf Papier.
+- Zukünftig: Mobile Geräte
 . Welche anderen Anwendungen sind im Einsatz? Muss ihre Anwendung mit diesen integriert werden?
+- PDF-Generatoren, für den Export von Spielplänen und Ergebnislisten. Diese müssen integriert werden.
+
 
 Hier können zudem bei Bedarf Teile des Unternehmensmodells (Prozesse, Organigramme, IT-Landschaft, ...) eingefügt werden, um die beteiligten Aufgaben und Rollen zu skizzieren.
 
