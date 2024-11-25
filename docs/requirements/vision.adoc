@@ -87,9 +87,23 @@ Beispiel Produkt:
 |===
 | Name | Beschreibung | Verantwortlichkeiten
 
-| [Benennung des Stakeholder-Typs.]
-| [Kurze Beschreibung des Stakeholders.]
-| [Fassen Sie die wesentlichen Verantwortlichkeiten des Stakeholder mit Bezug auf das zu entwickelnde System kurz zusammen, d.h. ihr besonderen Interessen. Beispiele: Dieser Stakeholder sorgt dafür, dass das System gewartet wird / dass die angezeigten Daten aktuell sind / überwacht den Projektfortschritt / usw.]
+
+|Organisatoren. 
+|Verantwortlich für die Organisation des Turniers. 
+|Einordnung der Teams, Erstellung des Spielplans, Verwaltung der Ergebnisse.
+
+|Turnierteilnehmer. 
+|Volleyballspieler.
+|Führen die Partien aus und tragen Ergebnisse in den Turnierplaner ein.
+
+|Gesetzgeber.
+|Stellt gesetzliche Anforderungen sicher, die von der Software eingehalten werden müssen.
+|Vorgaben zur Einhaltung von Datenschutz im Bezug auf persönliche Daten.
+
+| IT-Administratoren.
+| Technischer Support.
+| Zuständig für die Funktionalität und Wartung der Software.
+
 |===
 
 === Benutzerumgebung
