@@ -19,10 +19,10 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 | Spielstand | Anzahl der nach Ende eines Spiels erzielten Punkte pro Mannschaft | Score, Punktestand
 | Feld | Bereich, auf dem ein Spiel stattfindet | Spielfläche
 | Schiedsrichter | Person, die ein Spiel leitet  | Unparteiischer, Kampfrichter, Referee
-| Spieler | Person, die als Teil eines Teams am Turnier teilnimmt | Teilnehmer, Player, Sportler, Volleyballer
+| Nutzer | Person, die als Teil eines Teams am Turnier teilnimmt | Teilnehmer, Player, Sportler, Volleyballer, Spieler
 | Turnier | Veranstaltung, bei der die Teams aufeinandertreffen | Wettkampf, Wettbewerb
 | Aussetzen | Zeit, in der ein Team weder spielt noch den Schiedsrichter-Job übernimmt | Pause
-
+| Software | Die Turnierauswertungssoftware die entwickelt werden soll | Turnierauswertungssoftware, Programm, Application
 |===
 
 
@@ -32,9 +32,7 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 | Abkürzung | Bedeutung | Erläuterung
 | z.B.: A1 | Leistungsgruppe A, Teamnummer 1 | im Bezug auf Teams
 | Schiri | Schiedsrichter | s. Begriffe
-| --- | Nutzer | Volleyballspieler / Turnierteilnehmer des Turniers
 | Stura | Studentenrat | Auftraggeber und Veranstalter des Turniers
-| --- | Software | Die Turnierauswertungssoftware die entwickelt werden soll
 |===
 
 == Verzeichnis der Datenstrukturen
