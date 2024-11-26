@@ -1,1 +1,33 @@
-= Meeting mit Coach Herrn Zirkelbach am (..)
+= Meetings mit Coach Herrn Zirkelbach
+Tim Reimann <tim.reimann@stud.htw-dresden.de>
+0.1, 05.11.2024
+:toc:
+:toc-title: Inhaltsverzeichnis
+// Platzhalter für weitere Dokumenten-Attribute
+
+== Meeting mit Coach Herrn Zirkelbach am 26.11.2024 im Rahmen der 2. Iteration
+
+=== Einstieg
+-jeder wurde gefragt was jeweils erledigt wurde.
+-> Soweit in Ordnung
+-Personas und UserStory werden noch ergänzt
+
+=== Hinweise
+==== Visionsdokument
+-gemeinsam durchgehen am 28.11.20224
+
+==== Glossar
+-kleine Änderung (hat tim bereits gemacht)
+-Nutzer evtl. nochmal als eigenes Wort definieren
+
+==== Project
+-neue Ansicht für User-Story erstellen
+-label "workitem" tauschen in "tasks"
+
+==== Risiken
+-ist das Risiko "unzureichende Serverkapazität" teil des Scopes?? - evtl. nochmal drüber sprechen
+-"Teammitglied" überarbeiten (bereits erledigt)
+
+==== Struktur
+für zusätzliche Infos eigene Ordner anlegen
+
