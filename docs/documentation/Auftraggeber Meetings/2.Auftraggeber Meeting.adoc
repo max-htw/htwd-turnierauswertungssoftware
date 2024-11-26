@@ -1,0 +1,71 @@
+= Meeting mit Auftraggeber am 19.11.2024
+Kareen Khouri <kareen.khouri@stud.htw-dresden.de>
+0.1, 19.11.2024
+:toc:
+:toc-title: Inhaltsverzeichnis
+
+// Dieses Treffen ist während der 2.Iteration
+
+== Anwesende
+* Kareen
+* Tim
+* Alexander
+* Max
+* Jonas
+* Bene
+* Julian
+
+== Besprochene Themen:
+
+=== 1. Präsentation der Wireframes
+* **Feedback zur Wireframe-Skizze**:
+  - Alexander hat dem Auftraggeber eine Zeichnung der geplanten Wireframes vorgestellt.
+  - Das Feedback des Auftraggebers war positiv: Die Skizze wurde als gut und durchdacht bewertet.
+  - Der Auftraggeber hat Verbesserungsvorschläge zur Gestaltung des Designs gemacht. Es wurde jedoch betont, dass der Grundplan nicht verändert werden soll.
+
+* **Ablauf der Darstellung**:
+  - Die Reihenfolge der Informationen im Wireframe ist wichtig, insbesondere bei der Anzeige des aktuellen Spielstands.
+
+* **Nummerierung**:
+  - Es wurde empfohlen, eine klare Nummerierung für die Ergebnisse und den aktuellen Spielstand zu verwenden. Dies erleichtert die Lesbarkeit und Strukturierung der Informationen.
+
+=== 2. Anforderungen für das Turnier-Management
+* **Leistungsgruppen**:
+  - Der Auftraggeber möchte die Möglichkeit haben, zwischen verschiedenen Leistungsgruppen zu unterscheiden. Es wurden **Leistungsgruppe A** und **Leistungsgruppe B** als Optionen genannt.
+  - Es sollen maximal 1 bis 3 Gruppen erstellt werden
+
+* **Spielstand und Reihenfolge**:
+  - Die Reihenfolge, in der die Spielergebnisse angezeigt werden, ist entscheidend, um einen klaren Überblick über den aktuellen Stand des Turniers zu gewährleisten.
+
+* **Match-Details**:
+  - Es wurde der Wunsch geäußert, dass bei den Match-Details eine Funktion zum Bearbeiten von Informationen hinzugefügt wird.
+  - Außerdem soll es möglich sein, die Match-Details als **PDF** oder **Excel-Datei** zu exportieren.
+  - Falls eine Bearbeitung der Details erforderlich ist, soll der Benutzer die Option haben, diese Änderungen zu speichern, indem er auf den entsprechenden „Speichern“-Button klickt.
+
+* **Punktestand**:
+  - Der Punktestand soll bis zu 25 Punkte reichen.
+  - Es wurde angemerkt, dass die spezifischen Regeln für Volleyball noch einmal überprüft werden müssen, um sicherzustellen, dass alle Vorgaben korrekt umgesetzt werden.
+
+=== 3. Technische Umsetzung und Anforderungen
+* **Lokaler Hotspot**:
+  - Eine Möglichkeit zur Erstellung eines lokalen Hotspots auf einem Laptop war eine gute Idee.
+  Der **lokale Hotspot** auf dem Laptop würde es ermöglichen, ein eigenes, unabhängiges Netzwerk für alle Turnierteilnehmer oder Geräte zu schaffen, was vor allem dann nützlich ist, wenn keine zuverlässige Internetverbindung vorhanden ist.
+
+
+* **Laufwerk**:
+  - Das System soll sowohl auf **Windows- als auch auf Linux-Rechnern** lauffähig sein.
+
+=== 4. Fragen des Auftraggebers
+* **Erstellung eines neuen Turniers**:
+  - Der Auftraggeber hat gefragt, wie ein neues Turnier erstellt werden kann, nachdem alle Spiele eines aktuellen Turniers abgeschlossen sind.
+  - Es wurde beschlossen, einen neuen Button mit der Bezeichnung „Neuen Turnierplan erstellen“ hinzuzufügen.
+  - Sobald dieser Button geklickt wird, sollen alle Daten des abgeschlossenen Turniers archiviert und für spätere Referenz zugänglich gemacht werden. Dadurch können die alten Turnierpläne auch später noch eingesehen werden.
+
+== Zusammenfassung
+- Die wichtigsten Punkte aus dem Meeting:
+  - **Wireframes**: Positive Rückmeldung, jedoch Verbesserungsvorschläge zur Gestaltung.
+  - **Leistungsgruppen**: 1 bis 3 Gruppen, mit klarer Nummerierung der Ergebnisse.
+  - **Match-Details**: Exportfunktionen (PDF/Excel) und Bearbeitungsoptionen sollen hinzugefügt werden.
+  - **Technische Anforderungen**: Lokale Hotspots,  und Lauffähig für Windows und Linux.
+  - **Erstellung neuer Turniere**: Möglichkeit, nach Abschluss eines Turniers einen neuen Turnierplan zu erstellen und die alten Daten zu archivieren.
+
