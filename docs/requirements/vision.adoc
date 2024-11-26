@@ -112,12 +112,15 @@ Beschreiben Sie die Arbeitsumgebung des Nutzers. Hier sind einige Anregungen:
 
 //Zutreffendes angeben, nicht zutreffendes streichen oder auskommentieren
 . Anzahl der Personen, die an der Erfüllung der Aufgabe beteiligt sind. Ändert sich das?
-- Turnierorganisation: 2 oder mehr?
+- Turnierorganisation: 2 oder mehr? 
 - Spieler: 20 bis maximal 50?
-
+// Fragen klären
 . Wie lange dauert die Bearbeitung der Aufgabe? Wie viel Zeit wird für jeden Arbeitsschritt benötigt? Ändert sich das?
+// überarbeiten! Hier sind zusätzliche Benutzeranforderungen dokumentiert. (mobil, etc... ),
+// Es soll hier aber nur die aktuelle Benutzerumgebung dokumentiert werden.
 - Planung und Organisation im Vorfeld: mehrere Stunden.
 - Erfassung der Ergebnisse während des Turniers: wenige Sekunden.
+// -> gehört auch zu zusätzliche Benutzeranf.
 - Turnierauswertung: Wird nach Eintragung der letzten Erbegnisse automatisch ausgegeben.
 
 . Gibt es besondere Umgebungsbedingungen, z.B. mobil, offline, Außeneinsatz, Touchbedienung, Nutzung durch seh- oder hörbeeinträchtigte Personen?
@@ -128,7 +131,7 @@ Beschreiben Sie die Arbeitsumgebung des Nutzers. Hier sind einige Anregungen:
 - Zukünftig: Mobile Geräte
 . Welche anderen Anwendungen sind im Einsatz? Muss ihre Anwendung mit diesen integriert werden?
 - PDF-Generatoren, für den Export von Spielplänen und Ergebnislisten. Diese müssen integriert werden.
-
+// -> deutlich kürzen, nicht angegebene Punkte weglassen und aktuelle Benutzerumgebung beschreiben.
 
 Hier können zudem bei Bedarf Teile des Unternehmensmodells (Prozesse, Organigramme, IT-Landschaft, ...) eingefügt werden, um die beteiligten Aufgaben und Rollen zu skizzieren.
 
@@ -145,7 +148,7 @@ Hier können zudem bei Bedarf Teile des Unternehmensmodells (Prozesse, Organigra
 |===
 
 
-== Zusätzliche Produktanforderungen
+=== Zusätzliche Produktanforderungen
 //Zutreffendes angeben, nicht zutreffendes streichen oder auskommentieren
 Hinweise:
 
