@@ -31,3 +31,8 @@ Tim Reimann <tim.reimann@stud.htw-dresden.de>
 ==== Struktur
 für zusätzliche Infos eigene Ordner anlegen
 
+==== Abgabe
+-Glossar, Vision als PDF
+-Risks, User storys als Link
+
+-> an Zirkelbach + CC Anke
