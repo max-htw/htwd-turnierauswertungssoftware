@@ -13,22 +13,22 @@ Die Vision dieses Projektes ist es, die wesentlichen Anforderungen an das System
 
 
 === Gültigkeitsbereich (Scope)
-<<<<<<< HEAD
 Dieses Visions-Dokument bezieht sich auf das System {Webbasierte Anwendung zur Turnierorganisation}, das von unserem Team entwickelt wird. Das System wird es den Nutzern erlauben, Turniere online/offline zu erstellen, zu verwalten und auszuwerten, um damit die Organisation und Auswertung von Turnieren wesentlich leichter zu gestalten.
+
 ** Gehört dazu:**
+
 - Webbasierte Anwendung
 - Turnierplan Erstellung
 - Erfassung und Auswertung der Ergebnisse
 - pdf Konfiguration ermöglichen
 
 **Gehört nicht dazu:**
+
 - entwicklung einer mobilen App
 - Teameinteilung
 - erstellung der Teams 
 - Druckfunktion
 =======
-Dieses Visions-Dokument bezieht sich auf das System {project-system-name}, das von unserem Team entwickelt wird. Das System wird es den Nutzern erlauben, Turniere online/offline zu erstellen, zu verwalten und auszuwerten, um damit die Organisation und Auswertung von Turnieren wesentlich leichter zu machen.
->>>>>>> b16168983c276b38b409619a8f3657b45ed28a11
 
 === Definitionen, Akronyme und Abkürzungen
 //Verweis passend zum Belegabgabe-Template se1_belegabgabe_t00.adoc
@@ -144,15 +144,13 @@ Beispiel Produkt:
 [%header, cols="4,1,4,1"]
 |===
 | Bedarf | Priorität | Features | Geplantes Release
-<<<<<<< HEAD
-|Effiziente Turnierorganisation| Hoch | Erstellung, Verwaltung und automatische Auswertung von Turnieren | erstes release
+
 =======
 | Automatisierte Spielplanerstellung | Hoch | Erstellung und Export eines Spielplans | Version 1.0 (??)
 | Erfassung der Turnierergebnisse| Hoch | Speichern der Ergebnisse -lokal wenn kein Netz verfügbar ist- und Synchronisierung bei Netzverfügbarkeit | Version 1.0
 | Turnierauswertung | Hoch | Gewinnerteam soll basierend auf den Ergebnissen ermittelt und angezeigt werden | Version 1.0
 | Speicherung und nachträgliche Bearbeitung | Mittel | Ergebnisse sollen auch nach dem Turnier aufgerufen werden und verändert werden können | Version 1.0
 | Wiederverwendbarkeit | Mittel | Für jedes zukünftige Jahr soll ein neues Turnier erstellt werden können | Version 1.0 
->>>>>>> b16168983c276b38b409619a8f3657b45ed28a11
 |===
 
 
