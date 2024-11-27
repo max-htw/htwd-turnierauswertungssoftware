@@ -130,10 +130,10 @@ Beispiel Produkt:
 |===
 | Bedarf | Priorität | Features | Geplantes Release
 | Automatisierte Spielplanerstellung | Hoch | Erstellung und Export eines Spielplans | Version 1.0 (??)
-| Efassung der Turnierergebnisse| Hoch | Speichern der Ergebnisse -lokal wenn kein Netz verfügbar ist- und Synchronisierung bei Netzverfügbarkeit | Version 1.0
+| Erfassung der Turnierergebnisse| Hoch | Speichern der Ergebnisse -lokal wenn kein Netz verfügbar ist- und Synchronisierung bei Netzverfügbarkeit | Version 1.0
 | Turnierauswertung | Hoch | Gewinnerteam soll basierend auf den Ergebnissen ermittelt und angezeigt werden | Version 1.0
 | Speicherung und nachträgliche Bearbeitung | Mittel | Ergebnisse sollen auch nach dem Turnier aufgerufen werden und verändert werden können | Version 1.0
-| Wiederverwendbarkeit | Mittel | Für jedes zukü nftige Jahr soll ein neues Turnier erstellt werden können | Version 1.0 
+| Wiederverwendbarkeit | Mittel | Für jedes zukünftige Jahr soll ein neues Turnier erstellt werden können | Version 1.0 
 |===
 
 
@@ -150,5 +150,7 @@ Hinweise:
 [%header, cols="4,1,1"]
 |===
 | Anforderung | Priorität | Geplantes Release
-| xx | xx | xx
+| Kompatibilität mit Mobilgeräten | Hoch | Version 1.0
+| PDF-Export des Turnierplans | Hoch | Version 1.0
+| Fehlerprüfung bei Ergebnissen | Mittel | Version1.0
 |===
