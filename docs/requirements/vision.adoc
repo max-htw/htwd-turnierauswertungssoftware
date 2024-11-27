@@ -109,32 +109,16 @@ Beispiel Produkt:
 |===
 
 === Benutzerumgebung
-Beschreiben Sie die Arbeitsumgebung des Nutzers. Hier sind einige Anregungen:
 
-//Zutreffendes angeben, nicht zutreffendes streichen oder auskommentieren
-. Anzahl der Personen, die an der Erfüllung der Aufgabe beteiligt sind. Ändert sich das?
-- Turnierorganisation: 2 oder mehr? 
-- Spieler: 20 bis maximal 50?
-// Fragen klären
-. Wie lange dauert die Bearbeitung der Aufgabe? Wie viel Zeit wird für jeden Arbeitsschritt benötigt? Ändert sich das?
-// überarbeiten! Hier sind zusätzliche Benutzeranforderungen dokumentiert. (mobil, etc... ),
-// Es soll hier aber nur die aktuelle Benutzerumgebung dokumentiert werden.
-- Planung und Organisation im Vorfeld: mehrere Stunden.
-- Erfassung der Ergebnisse während des Turniers: wenige Sekunden.
-// -> gehört auch zu zusätzliche Benutzeranf.
-- Turnierauswertung: Wird nach Eintragung der letzten Erbegnisse automatisch ausgegeben.
+- Turnierorganisation: Eine Person (Lotte Richter).
 
-. Gibt es besondere Umgebungsbedingungen, z.B. mobil, offline, Außeneinsatz, Touchbedienung, Nutzung durch seh- oder hörbeeinträchtigte Personen?
-- Die Software muss auf Mobilgeräten ausführbar und per Touchscreen bedienbar sein.
-- Die Software muss offline bedienbar sein, wegen schwachem Netz in der Turnhalle.
-. Welche Systemplattformen werden heute eingesetzt? Welche sind es ggf. zukünftig?
-- Heute: manuelle Erfassung und Auswertung auf Papier.
-- Zukünftig: Mobile Geräte
-. Welche anderen Anwendungen sind im Einsatz? Muss ihre Anwendung mit diesen integriert werden?
-- PDF-Generatoren, für den Export von Spielplänen und Ergebnislisten. Diese müssen integriert werden.
-// -> deutlich kürzen, nicht angegebene Punkte weglassen und aktuelle Benutzerumgebung beschreiben.
+- Spieler: 20 bis zu maximal 200 Personen.
 
-Hier können zudem bei Bedarf Teile des Unternehmensmodells (Prozesse, Organigramme, IT-Landschaft, ...) eingefügt werden, um die beteiligten Aufgaben und Rollen zu skizzieren.
+- Planung des Turniers erfordert mehrere Stunden im Vorfeld.
+
+- Manuelle Organisation und Auswertung der Turnierergebnisse vor Ort auf Papier.
+
+- Volleyballturnier findet in einer Turnhalle mit schlechter Internetverbindung statt.
 
 
 == Produkt-/Lösungsüberblick
@@ -145,7 +129,11 @@ Hier können zudem bei Bedarf Teile des Unternehmensmodells (Prozesse, Organigra
 [%header, cols="4,1,4,1"]
 |===
 | Bedarf | Priorität | Features | Geplantes Release
-| xx | xx | xx | xx
+| Automatisierte Spielplanerstellung | Hoch | Erstellung und Export eines Spielplans | Version 1.0 (??)
+| Efassung der Turnierergebnisse| Hoch | Speichern der Ergebnisse -lokal wenn kein Netz verfügbar ist- und Synchronisierung bei Netzverfügbarkeit | Version 1.0
+| Turnierauswertung | Hoch | Gewinnerteam soll basierend auf den Ergebnissen ermittelt und angezeigt werden | Version 1.0
+| Speicherung und nachträgliche Bearbeitung | Mittel | Ergebnisse sollen auch nach dem Turnier aufgerufen werden und verändert werden können | Version 1.0
+| Wiederverwendbarkeit | Mittel | Für jedes zukü nftige Jahr soll ein neues Turnier erstellt werden können | Version 1.0 
 |===
 
 
