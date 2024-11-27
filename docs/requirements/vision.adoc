@@ -28,7 +28,7 @@ Dieses Visions-Dokument bezieht sich auf das System {Webbasierte Anwendung zur T
 - Teameinteilung
 - erstellung der Teams 
 - Druckfunktion
-=======
+
 
 === Definitionen, Akronyme und Abkürzungen
 //Verweis passend zum Belegabgabe-Template se1_belegabgabe_t00.adoc
@@ -145,7 +145,6 @@ Beispiel Produkt:
 |===
 | Bedarf | Priorität | Features | Geplantes Release
 
-=======
 | Automatisierte Spielplanerstellung | Hoch | Erstellung und Export eines Spielplans | Version 1.0 (??)
 | Erfassung der Turnierergebnisse| Hoch | Speichern der Ergebnisse -lokal wenn kein Netz verfügbar ist- und Synchronisierung bei Netzverfügbarkeit | Version 1.0
 | Turnierauswertung | Hoch | Gewinnerteam soll basierend auf den Ergebnissen ermittelt und angezeigt werden | Version 1.0
