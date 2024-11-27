@@ -6,14 +6,14 @@ include::../_includes/default-attributes.inc.adoc[]
 
 
 == Einführung
-Der Zweck dieses Dokuments ist es, die wesentlichen Bedarfe und Funktionalitäten des Systems {project-system-name} zu sammeln, zu analysieren und zu definieren. Der Fokus liegt auf den Fähigkeiten, die von Stakeholdern und adressierten Nutzern benötigt werden, und der Begründung dieser Bedarfe. Die  Details, wie das System {project-system-name} diese Bedarfe erfüllt, werden in der Use-Case und Supplementary Specification beschrieben.
+Dieses Dokument soll die wesentlichen Bedarfe und Funktionalitäten des Systems {project-system-name} sammeln, analysieren und definieren. Der Fokus liegt auf den Fähigkeiten, die von Stakeholdern und adressierten Nutzern benötigt werden, und der Begründung dieser Bedarfe. Die  Details, wie das System {project-system-name} diese Bedarfe erfüllt, werden in der Use-Case und Supplementary Specification beschrieben.
 
 === Zweck
 Die Vision dieses Projektes ist es, die wesentlichen Anforderungen an das System aus Sicht und mit den Begriffen der künftigen Anwender zu beschreiben. Das System soll die Turnierorganisation für alle Teilnehmer erleichtern und optimieren.
 
 
 === Gültigkeitsbereich (Scope)
-Dieses Visions-Dokument bezieht sich auf das System {Webbasierte Anwendung zur Turnierauswertung}, das von unserem Team entwickelt wird. Das System wird es den Nutzern erlauben, Turniere online/offline zu erstellen, zu verwalten und auszuwerten, um damit die Organisation und Auswertung von Turnieren wesentlich leichter zu machen.
+Dieses Visions-Dokument bezieht sich auf das System {project-system-name}, das von unserem Team entwickelt wird. Das System wird es den Nutzern erlauben, Turniere online/offline zu erstellen, zu verwalten und auszuwerten, um damit die Organisation und Auswertung von Turnieren wesentlich leichter zu machen.
 
 === Definitionen, Akronyme und Abkürzungen
 //Verweis passend zum Belegabgabe-Template se1_belegabgabe_t00.adoc
