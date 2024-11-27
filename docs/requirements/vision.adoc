@@ -13,7 +13,18 @@ Die Vision dieses Projektes ist es, die wesentlichen Anforderungen an das System
 
 
 === Gültigkeitsbereich (Scope)
-Dieses Visions-Dokument bezieht sich auf das System {Webbasierte Anwendung zur Turnierauswertung}, das von unserem Team entwickelt wird. Das System wird es den Nutzern erlauben, Turniere online/offline zu erstellen, zu verwalten und auszuwerten, um damit die Organisation und Auswertung von Turnieren wesentlich leichter zu machen.
+Dieses Visions-Dokument bezieht sich auf das System {Webbasierte Anwendung zur Turnierorganisation}, das von unserem Team entwickelt wird. Das System wird es den Nutzern erlauben, Turniere online/offline zu erstellen, zu verwalten und auszuwerten, um damit die Organisation und Auswertung von Turnieren wesentlich leichter zu machen.
+** Gehört dazu:**
+- Webbasierte Anwendung
+- Turnierplan Erstellung
+- Erfassung und Auswertung der Ergebnisse
+- pdf Konfiguration ermöglichen
+
+**Gehört nicht dazu:**
+- entwicklung einer mobilen App
+- Teameinteilung
+- erstellung der Teams 
+- Druckfunktion 
 
 === Definitionen, Akronyme und Abkürzungen
 //Verweis passend zum Belegabgabe-Template se1_belegabgabe_t00.adoc
@@ -145,7 +156,7 @@ Hier können zudem bei Bedarf Teile des Unternehmensmodells (Prozesse, Organigra
 [%header, cols="4,1,4,1"]
 |===
 | Bedarf | Priorität | Features | Geplantes Release
-| xx | xx | xx | xx
+|Effiziente Turnierorganisation| Hoch | Erstellung, Verwaltung und automatische Auswertung von Turnieren | erstes release
 |===
 
 
