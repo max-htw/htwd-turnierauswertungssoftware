@@ -6,13 +6,14 @@ include::../_includes/default-attributes.inc.adoc[]
 
 
 == Einführung
-Der Zweck dieses Dokuments ist es, die wesentlichen Bedarfe und Funktionalitäten des Systems {project-system-name} zu sammeln, zu analysieren und zu definieren. Der Fokus liegt auf den Fähigkeiten, die von Stakeholdern und adressierten Nutzern benötigt werden, und der Begründung dieser Bedarfe. Die  Details, wie das System {project-system-name} diese Bedarfe erfüllt, werden in der Use-Case und Supplementary Specification beschrieben.
+Dieses Dokument soll die wesentlichen Bedarfe und Funktionalitäten des Systems {project-system-name} sammeln, analysieren und definieren. Der Fokus liegt auf den Fähigkeiten, die von Stakeholdern und adressierten Nutzern benötigt werden, und der Begründung dieser Bedarfe. Die  Details, wie das System {project-system-name} diese Bedarfe erfüllt, werden in der Use-Case und Supplementary Specification beschrieben.
 
 === Zweck
 Die Vision dieses Projektes ist es, die wesentlichen Anforderungen an das System aus Sicht und mit den Begriffen der künftigen Anwender zu beschreiben. Das System soll die Turnierorganisation für alle Teilnehmer erleichtern und optimieren.
 
 
 === Gültigkeitsbereich (Scope)
+<<<<<<< HEAD
 Dieses Visions-Dokument bezieht sich auf das System {Webbasierte Anwendung zur Turnierorganisation}, das von unserem Team entwickelt wird. Das System wird es den Nutzern erlauben, Turniere online/offline zu erstellen, zu verwalten und auszuwerten, um damit die Organisation und Auswertung von Turnieren wesentlich leichter zu gestalten.
 ** Gehört dazu:**
 - Webbasierte Anwendung
@@ -25,6 +26,9 @@ Dieses Visions-Dokument bezieht sich auf das System {Webbasierte Anwendung zur T
 - Teameinteilung
 - erstellung der Teams 
 - Druckfunktion
+=======
+Dieses Visions-Dokument bezieht sich auf das System {project-system-name}, das von unserem Team entwickelt wird. Das System wird es den Nutzern erlauben, Turniere online/offline zu erstellen, zu verwalten und auszuwerten, um damit die Organisation und Auswertung von Turnieren wesentlich leichter zu machen.
+>>>>>>> b16168983c276b38b409619a8f3657b45ed28a11
 
 === Definitionen, Akronyme und Abkürzungen
 //Verweis passend zum Belegabgabe-Template se1_belegabgabe_t00.adoc
@@ -120,32 +124,16 @@ Beispiel Produkt:
 |===
 
 === Benutzerumgebung
-Beschreiben Sie die Arbeitsumgebung des Nutzers. Hier sind einige Anregungen:
 
-//Zutreffendes angeben, nicht zutreffendes streichen oder auskommentieren
-. Anzahl der Personen, die an der Erfüllung der Aufgabe beteiligt sind. Ändert sich das?
-- Turnierorganisation: 2 oder mehr? 
-- Spieler: 20 bis maximal 50?
-// Fragen klären
-. Wie lange dauert die Bearbeitung der Aufgabe? Wie viel Zeit wird für jeden Arbeitsschritt benötigt? Ändert sich das?
-// überarbeiten! Hier sind zusätzliche Benutzeranforderungen dokumentiert. (mobil, etc... ),
-// Es soll hier aber nur die aktuelle Benutzerumgebung dokumentiert werden.
-- Planung und Organisation im Vorfeld: mehrere Stunden.
-- Erfassung der Ergebnisse während des Turniers: wenige Sekunden.
-// -> gehört auch zu zusätzliche Benutzeranf.
-- Turnierauswertung: Wird nach Eintragung der letzten Erbegnisse automatisch ausgegeben.
+- Turnierorganisation: Eine Person (Lotte Richter).
 
-. Gibt es besondere Umgebungsbedingungen, z.B. mobil, offline, Außeneinsatz, Touchbedienung, Nutzung durch seh- oder hörbeeinträchtigte Personen?
-- Die Software muss auf Mobilgeräten ausführbar und per Touchscreen bedienbar sein.
-- Die Software muss offline bedienbar sein, wegen schwachem Netz in der Turnhalle.
-. Welche Systemplattformen werden heute eingesetzt? Welche sind es ggf. zukünftig?
-- Heute: manuelle Erfassung und Auswertung auf Papier.
-- Zukünftig: Mobile Geräte
-. Welche anderen Anwendungen sind im Einsatz? Muss ihre Anwendung mit diesen integriert werden?
-- PDF-Generatoren, für den Export von Spielplänen und Ergebnislisten. Diese müssen integriert werden.
-// -> deutlich kürzen, nicht angegebene Punkte weglassen und aktuelle Benutzerumgebung beschreiben.
+- Spieler: 20 bis zu maximal 200 Personen.
 
-Hier können zudem bei Bedarf Teile des Unternehmensmodells (Prozesse, Organigramme, IT-Landschaft, ...) eingefügt werden, um die beteiligten Aufgaben und Rollen zu skizzieren.
+- Planung des Turniers erfordert mehrere Stunden im Vorfeld.
+
+- Manuelle Organisation und Auswertung der Turnierergebnisse vor Ort auf Papier.
+
+- Volleyballturnier findet in einer Turnhalle mit schlechter Internetverbindung statt.
 
 
 == Produkt-/Lösungsüberblick
@@ -156,7 +144,15 @@ Hier können zudem bei Bedarf Teile des Unternehmensmodells (Prozesse, Organigra
 [%header, cols="4,1,4,1"]
 |===
 | Bedarf | Priorität | Features | Geplantes Release
+<<<<<<< HEAD
 |Effiziente Turnierorganisation| Hoch | Erstellung, Verwaltung und automatische Auswertung von Turnieren | erstes release
+=======
+| Automatisierte Spielplanerstellung | Hoch | Erstellung und Export eines Spielplans | Version 1.0 (??)
+| Erfassung der Turnierergebnisse| Hoch | Speichern der Ergebnisse -lokal wenn kein Netz verfügbar ist- und Synchronisierung bei Netzverfügbarkeit | Version 1.0
+| Turnierauswertung | Hoch | Gewinnerteam soll basierend auf den Ergebnissen ermittelt und angezeigt werden | Version 1.0
+| Speicherung und nachträgliche Bearbeitung | Mittel | Ergebnisse sollen auch nach dem Turnier aufgerufen werden und verändert werden können | Version 1.0
+| Wiederverwendbarkeit | Mittel | Für jedes zukünftige Jahr soll ein neues Turnier erstellt werden können | Version 1.0 
+>>>>>>> b16168983c276b38b409619a8f3657b45ed28a11
 |===
 
 
@@ -173,5 +169,7 @@ Hinweise:
 [%header, cols="4,1,1"]
 |===
 | Anforderung | Priorität | Geplantes Release
-| xx | xx | xx
+| Kompatibilität mit Mobilgeräten | Hoch | Version 1.0
+| PDF-Export des Turnierplans | Hoch | Version 1.0
+| Fehlerprüfung bei Ergebnissen | Mittel | Version1.0
 |===
