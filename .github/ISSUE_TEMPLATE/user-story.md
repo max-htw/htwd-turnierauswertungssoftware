@@ -3,7 +3,7 @@ name: User Story
 about: Blueprint mit User Story
 title: ''
 labels: user story
-assignees: Juldre
+assignees: ''
 
 ---
 
