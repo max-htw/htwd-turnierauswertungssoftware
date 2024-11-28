@@ -13,14 +13,15 @@ Die Vision dieses Projektes ist es, die wesentlichen Anforderungen an das System
 
 
 === Gültigkeitsbereich (Scope)
-Dieses Visions-Dokument bezieht sich auf das System {Webbasierte Anwendung zur Turnierorganisation}, das von unserem Team entwickelt wird. Das System wird es den Nutzern erlauben, Turniere online/offline zu erstellen, zu verwalten und auszuwerten, um damit die Organisation und Auswertung von Turnieren wesentlich leichter zu gestalten.
+Dieses Visions-Dokument bezieht sich auf das System {project-name}, das von unserem Team entwickelt wird. Das System wird es den Nutzern erlauben, Turniere online/offline zu erstellen, zu verwalten und auszuwerten, um damit die Organisation und Auswertung von Turnieren wesentlich leichter zu gestalten.
 
 **Gehört dazu:**
 
 - Webbasierte Anwendung
 - Turnierplan Erstellung
 - Erfassung und Auswertung der Ergebnisse
-- pdf Konfiguration ermöglichen
+- pdf Export ermöglichen
+- Ergebnisse als Exceldatei speichern
 
 **Gehört nicht dazu:**
 
@@ -35,8 +36,7 @@ Dieses Visions-Dokument bezieht sich auf das System {Webbasierte Anwendung zur T
 Siehe <<#glossary, Glossar>>.
 
 === Referenzen
-(hier externe Verweise zu anderen Dokumenten, Quellen, Standards etc. einfügen, sofern notwendig)
-
+https://miro.com/welcomeonboard/QUpMOEdhN01VdDRyVUdlVlgzNXNxdkM0OUlSc1dnSU9EdjJBVVo4UlNzN2xIWnkzSGNXeFNJc28zYVRScm5Hd3wzNDU4NzY0NjA1MzU4MTU0MzQ5fDI=?share_link_id=268593339366
 
 == Positionierung
 
@@ -44,7 +44,6 @@ Siehe <<#glossary, Glossar>>.
 //Erläutern Sie kurz den Hintergrund, in dem das Projekt angesiedelt ist. Welches Problem soll gelöst werden, wie ist es entstanden? Welche Verbesserung wird angestrebt. Achten Sie darauf, eine fachliche (organisatorische, betriebswirtschaftliche) Perspektive einzunehmen.
 Die bisherige manuelle Turnierplanung ergibt einen hohen Aufwand bei der Erstellung des Turnierplans und der Erfassung der Turnierergebnisse. 
 Eine softwaregestützte Lösung spart Zeit bei der Organisation und bietet den Spielenden mehr Eigenverantwortung, da sie ihre Ergebnisse selbstständig eintragen können.
-Außerdem soll durch die Sofware die Gestaltung der Wartezeiten zwischen den Partien optimiert werden.
 
 === Problem Statement
 //Stellen Sie zusammenfassend das Problem dar, das mit diesem Projekt gelöst werden soll. Das folgende Format kann dazu verwendet werden:
@@ -117,9 +116,9 @@ Beispiel Produkt:
 |Stellt gesetzliche Anforderungen sicher, die von der Software eingehalten werden müssen.
 |Vorgaben zur Einhaltung von Datenschutz im Bezug auf persönliche Daten.
 
-| IT-Administratoren.
-| Technischer Support.
-| Zuständig für die Funktionalität und Wartung der Software.
+| Entwickler.
+| (Weiter-)entwicklung der Software.
+| Zuständig für die Funktionalität.
 
 |===
 
@@ -145,28 +144,23 @@ Beispiel Produkt:
 |===
 | Bedarf | Priorität | Features | Geplantes Release
 
-| Automatisierte Spielplanerstellung | Hoch | Erstellung und Export eines Spielplans | Version 1.0 (??)
-| Erfassung der Turnierergebnisse| Hoch | Speichern der Ergebnisse -lokal wenn kein Netz verfügbar ist- und Synchronisierung bei Netzverfügbarkeit | Version 1.0
-| Turnierauswertung | Hoch | Gewinnerteam soll basierend auf den Ergebnissen ermittelt und angezeigt werden | Version 1.0
-| Speicherung und nachträgliche Bearbeitung | Mittel | Ergebnisse sollen auch nach dem Turnier aufgerufen werden und verändert werden können | Version 1.0
-| Wiederverwendbarkeit | Mittel | Für jedes zukünftige Jahr soll ein neues Turnier erstellt werden können | Version 1.0 
+| Automatisierte Spielplanerstellung | Hoch | Erstellung und Export eines Spielplans | Version 1.0 
+| Erfassung der Turnierergebnisse| Hoch | Speichern der Ergebnisse -lokal wenn kein Netz verfügbar ist- und Synchronisierung bei Netzverfügbarkeit | Version 1.1
+| Turnierauswertung | Hoch | Gewinnerteam soll basierend auf den Ergebnissen ermittelt und angezeigt werden | Version 1.1
+| Speicherung und nachträgliche Bearbeitung | Mittel | Ergebnisse sollen auch nach dem Turnier aufgerufen werden und verändert werden können | Version 1.2
+| Wiederverwendbarkeit | Mittel | Für jedes zukünftige Jahr soll ein neues Turnier erstellt werden können | Version 1.3
 |===
 
 
 === Zusätzliche Produktanforderungen
 //Zutreffendes angeben, nicht zutreffendes streichen oder auskommentieren
-Hinweise:
 
-. Führen Sie die wesentlichen anzuwendenden Standards, Hardware oder andere Plattformanforderungen, Leistungsanforderungen und Umgebungsanforderungen auf
-. Definieren Sie grob die Qualitätsanforderungen für Leistung, Robustheit, Ausfalltoleranz, Benutzbarkeit und ähnliche Merkmale, die nicht von den genannten Features erfasst werden.
-. Notieren Sie alle Entwurfseinschränkungen, externe Einschränkungen, Annahmen oder andere Abhängigkeiten, die wenn Sie geändert werden, das Visions-Dokument beeinflussen. Ein Beispiel wäre die Annahme, dass ein bestimmtes Betriebssystem für die vom System erforderliche Hardware verfügbar ist. Ist das Betriebssystem nicht verfügbar, muss das Visions-Dokument angepasst werden.
-. Definieren Sie alle Dokumentationsanforderugen, inkl. Benutzerhandbücher, Onlinehilfe, Installations-, Kennzeichnungs- und Auslieferungsanforderungen-
-. Definieren Sie die Priorität für diese zusätzlichen Produktanforderungen. Ergänzen Sie, falls sinnvoll, Angaben zu Stabilität, Nutzen, Aufwand und Risiko für diese Anforderungen.
 
 [%header, cols="4,1,1"]
 |===
 | Anforderung | Priorität | Geplantes Release
-| Kompatibilität mit Mobilgeräten | Hoch | Version 1.0
+| Kompatibilität mit Mobilgeräten | Hoch | Version 1.3
 | PDF-Export des Turnierplans | Hoch | Version 1.0
-| Fehlerprüfung bei Ergebnissen | Mittel | Version1.0
+| Fehlerprüfung bei Ergebnissen | Mittel | Version1.2
+| Erfassung der Ergebnisse in Excel | Mittel | Version1.2
 |===
