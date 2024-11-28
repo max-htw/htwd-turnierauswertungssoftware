@@ -28,7 +28,7 @@ Dieses Visions-Dokument bezieht sich auf das System {Webbasierte Anwendung zur T
 - Teameinteilung
 - erstellung der Teams 
 - Druckfunktion
-=======
+
 
 === Definitionen, Akronyme und Abkürzungen
 //Verweis passend zum Belegabgabe-Template se1_belegabgabe_t00.adoc
