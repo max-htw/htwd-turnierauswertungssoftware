@@ -1,4 +1,4 @@
-include::../_includes/default-attributes.inc.adoc[]
+
 = Meeting 28.11.2024
 Tim Reimann <tim.reimann@stud.htw-dresden.de>
 0.1, 12.11.2024
@@ -6,27 +6,24 @@ Tim Reimann <tim.reimann@stud.htw-dresden.de>
 :toc-title: Inhaltsverzeichnis
 
 == Anwesenheit
--Alex
--Benedikt
--Jonas
--Julian
--Max
--Tim
+- Alex
+- Benedikt
+- Jonas
+- Julian
+- Max
+- Tim
 
-=== Abwesend
-
--Kareen (krank)
+== Abwesend
+- Kareen (krank)
 
 == Inhalt
-Visions Dokument besprochen sowie Inhalte Diskutiert und bearbeitet.
-Risiko Liste abgenommen.
-Templates überarbeitet.
-Fragen über Projects festhalten.
-User Story jeder noch eine bis 29.11 16:00 Uhr.
-Glossar abgenommen.
-Wissen über PDF Export aufgefrischt.
+- Visions Dokument besprochen sowie Inhalte diskutiert und bearbeitet.
+- Risiko Liste abgenommen.
+- Templates überarbeitet.
+- Fragen über Projects festhalten.
+- User Story jeder noch eine bis 29.11 16:00 Uhr.
+- Glossar abgenommen.
+- Wissen über PDF Export aufgefrischt.
 
 == Abgabe
-
 freitag 28.11.2024 16:00
-
