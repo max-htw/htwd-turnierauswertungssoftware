@@ -1,0 +1,25 @@
+= 1. Team Meeting am 05.12.2024 in die 3.Iteration
+Kareen Khouri <kareen.khouri@stud.htw-dresden.de>
+0.1, 05.12.2024
+:toc:
+:toc-title: Inhaltsverzeichnis
+
+== Warum
+Infoaustausch
+
+== Beschreibung
+Austausch über das Verständnis der Iteration und dessen Aufgaben.
+
+== Anwesend
+- Kareen
+- Tim
+- Max
+- Alexander
+- Julian
+- Bene
+- Jonas
+
+== Besprochene Punkte
+- Die Aufgaben für die 3. Iteration wurden gemeinsam besprochen.
+- Diskussion über den Ablauf in Miro. Es wurde sichergestellt, dass alle Teammitglieder eingeloggt sind.
+- Aufgabenverteilung wurde überprüft und angepasst.
