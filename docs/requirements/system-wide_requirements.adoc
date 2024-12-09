@@ -17,23 +17,38 @@ NOTE: Die funktionalen Anforderungen, die sich aus der Interaktion von Nutzern m
 
 == Systemweite funktionale Anforderungen
 //Angabe von system-weiten funktionalen Anforderungen, die nicht als Use Cases ausgedrückt werden können. Beispiele sind Drucken, Berichte, Authentifizierung, Änderungsverfolgung (Auditing), zeitgesteuerte Aktivitäten (Scheduling), Sicherheit / Maßnahmen zum Datenschutz
-
+* Druckbarkeit von Spielplan und Turnier-Auswertung
+* optional: Authentifizierung von Spielern -> ermöglicht Auditing von Spielstandsänderungen
+* Behandlung von gleichzeitigen Änderungsanfragen
+* Logging von Fehlern
 
 == Qualitätsanforderungen für das Gesamtsystem
 //Qualitätsanforderungen repräsentieren das "URPS" im FURPS+ zu Klassifikation von Anforderungen
 
 === Benutzbarkeit (Usability)
 //Beschreiben Sie Anforderungen für Eigenschaften wie einfache Bedienung, einfaches Erlernen, Standards für die Benutzerfreundlichkeit, Lokalisierung (landesspezifische Anpassungen von Sprache, Datumsformaten, Währungen usw.)
+* Die Spieler müssen intuitiv die Verwendung der Software verstehen ohne bei der Organisation nachzufragen
+* Das Eintragen der Spielstände darf nicht länger als 30 Sekunden dauern.
+* Die Spieler sollen durch die Software ein besseres Turniererlebnis als ohne haben.
+* Das Öffnen der Softwareumgebung muss innerhalb von 15 Sekunden (z.B. über einen QR-Code) möglich sein.
 
 === Zuverlässigkeit (Reliability)
 // Zuverlässigkeit beinhaltet die Fähigkeit des Produkts und/oder des Systems unter Stress und ungünstigen Bedingungen am laufen zu bleiben. Spezifizieren Sie Anforderungen für zuverlässige Akzeptanzstufen, und wie diese gemessen und evaluiert werden. Vorgeschlagene Themen sind Verfügbarkeit, Häufigkeit und Schwere von Fehlern und Wiederherstellbarkeit.
+* Die Berechnungen des Systems müssen determiniert sein.
+* Fehlerhafte Nutzereingaben müssen korrigiert werden können.
+* Das System stellt keine hohen Ansprüche an die Verfügbarkeit, da es nicht kritisch ist.
+* Die Spielstände sollten wiederherstellbar sein, wenn diese durch technische Fehler oder Fehlverhalten der Nutzer verloren gehen.
 
 === Effizienz (Performance)
 // Die Performanz Charakteristiken des Systems sollten in diesem Bereich ausgeführt werden. Beispiele sind Antwortzeit, Durchsatz, Kapazität und Zeiten zum Starten oder Beenden.
+* Es müssen mindestens 200 Nutzer gleichzeitig auf die Software zugreifen können.
+* Es sollten mehrere Eingaben von Nutzern in nicht-spürbarer Zeit verarbeitet werden können.
 
 === Wartbarkeit (Supportability)
 // Dieser Bereich beschreibt sämtliche Anforderungen welche die Supportfähigkeit oder Wartbarkeit des zu entwickelnden Systems verbessern, einschließlich Anpassungsfähigkeit und Erweiterbarkeit, Kompatibilität, Skalierbarkeit und Anforderungen bezüglich der System Installation sowie Maß an Support und Wartbarkeit.
-
+* Der Quellcode sollte strukturiert und kommentiert sein, um spätere Erweiterungen zu ermöglichen.
+* Die Software muss mit allen aktuellen Betriebssystemen (Windows, MacOS, Linux, iOS, Android) auf Mobil- und Desktopgeräten in aktuellen Browsern (Chrome, Safari, Edge, Firefox, Opera etc.) funktionieren.
+* Das System muss nicht stark skalierbar sein und es sind keine großen Funktionalitätserweiterungen im Nachhinein vorgesehen.
 
 == Zusätzliche Anforderungen
 
