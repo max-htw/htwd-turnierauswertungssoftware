@@ -25,9 +25,9 @@ Dieses Visions-Dokument bezieht sich auf das System {project-name}, das von unse
 
 **Gehört nicht dazu:**
 
-- entwicklung einer mobilen App
+- Entwicklung einer mobilen App
 - Teameinteilung
-- erstellung der Teams 
+- Erstellung der Teams 
 - Druckfunktion
 
 

@@ -23,6 +23,8 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 | Turnier | Veranstaltung, bei der die Teams aufeinandertreffen | Wettkampf, Wettbewerb
 | Aussetzen | Zeit, in der ein Team weder spielt noch den Schiedsrichter-Job übernimmt | Pause
 | Software | Die Turnierauswertungssoftware die entwickelt werden soll | Turnierauswertungssoftware, Programm, Application
+| Organisatoren | Die Person, die das Turnier leiten. | Turnierleitung
+| Nutzer | All diejenigen, die die Software beim Turnier benutzen (v.a. Spieler und Turnierleitung). | User, Benutzer
 |===
 
 
