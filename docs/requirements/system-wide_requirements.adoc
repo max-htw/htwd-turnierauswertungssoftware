@@ -47,31 +47,32 @@ NOTE: Die funktionalen Anforderungen, die sich aus der Interaktion von Nutzern m
 === Wartbarkeit (Supportability)
 // Dieser Bereich beschreibt sämtliche Anforderungen welche die Supportfähigkeit oder Wartbarkeit des zu entwickelnden Systems verbessern, einschließlich Anpassungsfähigkeit und Erweiterbarkeit, Kompatibilität, Skalierbarkeit und Anforderungen bezüglich der System Installation sowie Maß an Support und Wartbarkeit.
 * Der Quellcode sollte strukturiert und kommentiert sein, um spätere Erweiterungen zu ermöglichen.
-* Die Software muss mit allen aktuellen Betriebssystemen (Windows, MacOS, Linux, iOS, Android) auf Mobil- und Desktopgeräten in aktuellen Browsern (Chrome, Safari, Edge, Firefox, Opera etc.) funktionieren.
 * Das System muss nicht stark skalierbar sein und es sind keine großen Funktionalitätserweiterungen im Nachhinein vorgesehen.
 
 == Zusätzliche Anforderungen
 
 === Technische Einschränkungen
 //Angaben ergänzen, nicht relevante Unterpunkte streichen oder auskommentieren
-* Ressourcenbegrenzungen
-* zu nutzende Komponenten / Bibliotheken / Frameworks
-* Vorgaben für die Programmiersprache
-* zu unterstützende Plattformen / Betriebssysteme
-* Physische Begrenzungen für Hardware, auf der das System betrieben werden soll
+//* Ressourcenbegrenzungen:
+//* zu nutzende Komponenten / Bibliotheken / Frameworks
+//* Vorgaben für die Programmiersprache
+* zu unterstützende Plattformen / Betriebssysteme: alle aktuellen Desktop- und mobilen Betriebssysteme (Windows, MacOS, Linux, iOS, Android) mit aktuellen Browsern (Chrome, Safari, Edge, Firefox, Opera etc.)
+* Physische Begrenzungen für Hardware, auf der das System betrieben werden soll: muss auf leistungsschwachem Laptop funktionieren
 
 === Interface Anforderungen
 // Describe both the user interface and interfaces with external systems.
+Die Benutzeroberfläche sollte zeitlos gestaltet sein und alle wichtigen Funktionalitäten sollten ohne langes Scrollen zur Verfügung stehen. Eine intuitive Bedienbarkeit für Menschen mit technischem Grundverständnis soll sichergestellt werden.
 
 === Geschäftsregeln
 // Besides technical requirements, also consider the particular business domain in which the system needs to fit.
+Derzeit sind keine relevanten Geschäftsregeln bekannt.
 
 === Organisatorische Randbedingungen
 //Angaben ergänzen, nicht relevante Unterpunkte streichen oder auskommentieren
-* Anforderungen an Betrieb, Management und Wartung der Anwendung
-* zu beachtende Standards, Normen und Regeln
+* Anforderungen an Betrieb, Management und Wartung der Anwendung: Die Software wird nicht dauerhaft benötigt sondern nur akut im Planungs- und Austragungszeitraum von Turnieren benutzt.
+//* zu beachtende Standards, Normen und Regeln
 
 === Rechtliche Anforderungen
 //Angaben ergänzen, nicht relevante Unterpunkte streichen oder auskommentieren
-* Lizensierung der Anwendung
-* Datenschutz
+//* Lizensierung der Anwendung
+* Datenschutz: Es muss die Datenschutz-Grundverordnung eingehalten werden.
