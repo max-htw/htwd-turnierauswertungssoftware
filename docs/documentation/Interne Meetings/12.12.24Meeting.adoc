@@ -1,0 +1,38 @@
+= 2. Team Meeting am 12.12.2024 in die 3.Iteration
+Kareen Khouri <kareen.khouri@stud.htw-dresden.de>
+0.1, 12.12.2024
+:toc:
+:toc-title: Inhaltsverzeichnis
+
+
+== Beschreibung
+Prototyp-Besprechung und Statusupdate zur 3. Iteration.
+
+== Anwesend
+- Kareen
+- Tim
+- Max
+- Alexander
+- Julian
+- Jonas
+
+== Abwesend
+- Bene
+
+== Inhalt
+- Jeder hat darüber besprochen, was bisher in der 3. Iteration erledigt wurde.
+- Alexander hat sein bearbeitetes Prototyp-Experiment präsentiert. Die Funktionalität wurde als gut bewertet.
+- Diskussion über den aktuellen Stand der Aufgaben in der 3. Iteration:
+  - **Erledigt:** Einige Aufgaben sind abgeschlossen.
+  - **Ausstehend:** Folgende Punkte müssen noch bearbeitet werden:
+    * Personas entwickeln.
+    * Weitere User Stories erfassen.
+    * Auftraggeber-Meeting und Coach-Meeting vereinbaren.
+    * Tests für den Prototyp vorbereiten.
+    * Falls möglich, Ideen für mobile Endgeräte entwickeln.
+
+== Weitere Schritte
+- Prototyp im Auftraggeber-Termin an Lotte vorstellen und bei Bedarf Wireframes für mobile Endgeräte präsentieren.
+
+
+
