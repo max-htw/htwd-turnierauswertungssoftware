@@ -20,9 +20,9 @@ nach dem Ausführen läuft auf dem System ein HTTP-Server auf dem Port :8440.
 in einem Webbrowser die URL http://localhost:8440 aufrufen.
 
 ## Realisierter Umfang
-- die Spielergebnisse werden zufällig generiert und können nicht verändert werden
-- Es ist möglich die Parameter "Anzahl Teams", "Anzahl Spilefelder", "Benutzerrole" auszuwählen.
-- Beim andern der "Anzahl Teams" werden die Spielergebnisse neu generiert.
+- die Spielergebnisse können eingetragen und geändert werden
+- Die Parameter "Anzahl Teams", "Anzahl Spilefelder", "Benutzerrole" funktionieren.
+- Beim andern der "Anzahl Teams", "Anzahl Gruppen" werden die Spielergebnisse neu generiert.
 - Übersicht und Auswertung der aktuellen Spielstände sind auf der Hauptseite in tabelarischer Form dargestellt.
 - Bearbeiten des Spielstandes ist möglich durch klicken auf den Spielstand in der Tabelle.
 - Auf der Seite "Turnierplan" wird ein automatisch generierter Turnierplan angezeigt.
@@ -30,13 +30,12 @@ in einem Webbrowser die URL http://localhost:8440 aufrufen.
   - Organisator darf alle Spielstände bearbeiten.
   - Gast kann keine Spielstände bearbeiten.
   - Team X darf nur die Spielstände bearbeiten, wo es als Richter zugewiesen ist.
+- Export zu PDF und CSV (aber sehr primitiv)
 
 ## Fehlende Funktionalität
 - Http-Server kann nicht mehrere anfragen gleichzeitig bearbeiten.
-- Daten können nicht eingegeben und nicht gespeichert werden.
-- Hin- und Rückspiele Option nicht vorhanden.
-  - Für die Rückspiele ist untere Hälfte der Tabelle gedacht.
+- Daten können nicht gespeichert werden.
+- Es können keine gespeicherten Turniere ausgewählt werden.
 - Kein effizienter Algorythmus für die Turnierplanung
-- Einteilung der Teams in mehrere Gruppen ist nicht möglich.
 - Visuelle Gestaltung fehlt.
 

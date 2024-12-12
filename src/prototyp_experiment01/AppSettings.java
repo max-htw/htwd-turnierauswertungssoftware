@@ -1,10 +1,28 @@
 public class AppSettings {
-    private static int _role;
+    public  static final String post_score_team1_rueckspiel = "score_team1_rueckspiel";
+    public  static final String post_score_team2_rueckspiel = "score_team2_rueckspiel";
+    public  static final String post_score_team1_hinspiel = "score_team1_hinspiel";
+    public  static final String post_score_team2_hinspiel = "score_team2_hinspiel";
 
-    private static int _maxAnzTeams = 8;
-    private static int _anzTeams = 3;
+    private static int _role;
+    private static boolean _needPrefillScores = false;
+
+    private static final int _maxAnzTeams = 8;
+    private static int _anzTeams[] = new int[_maxAnzTeams];
+    static{
+        for(int i=0; i<_maxAnzTeams; i++){
+            _anzTeams[i] = 3;
+        }
+    }
+
+    public static final int _maxAnzGroups = 4;
+    private static int _anzGroups = 1;
+
     private static int _maxAnzSpielfelder = 4;
     private static int _anzSpielfelder = 2;
+
+    private static boolean _needRueckspiele = true;
+    public static boolean needRueckspiele() { return _needRueckspiele;}
 
     public static String getRoleStr(int role){
         String ausgabe = "Organisator";
@@ -14,27 +32,53 @@ public class AppSettings {
     }
     public static int getRole(){return _role;}
     public static void setRole(int role){
-        if(_role > _anzTeams) _role = -1;
+        if(_role > _maxAnzTeams) _role = -1;
         _role = role;
+    }
+
+    public static boolean getNeedPrefillScores(){return _needPrefillScores;}
+    public static  void setNeedPrefillScores(boolean y_n){
+        if(getNeedPrefillScores() != y_n) {
+            _needPrefillScores = y_n;
+            DataBaseQueries.clearAllCurrentScores();
+        }
     }
 
     public static int get_maxAnzSpielfelder(){return _maxAnzSpielfelder;}
     public static int get_anzSpielfelder(){return _anzSpielfelder;}
     public static void set_anzSpielfelder(int anz){
-        _anzSpielfelder = (anz>4 || anz<1)?2:anz;
+        _anzSpielfelder = (anz>_maxAnzSpielfelder || anz<1)?2:anz;
         DataBaseQueries.clearCurrentTurnierplan();
     }
 
-    public  static  int get_maxAnzTeams(){return _maxAnzTeams;}
-    public static int get_anzTeams(){return _anzTeams;}
-    public static void set_anzTeams(int anz)
+    public  static  int get_maxAnzGroups(){return _maxAnzGroups;}
+    public  static  int get_anzGroups(){return _anzGroups;}
+    public static void set_anzGroups(int anz)
     {
-        if(_anzTeams != anz){
-            DataBaseQueries.clearCurrentScores();
+        if(get_anzGroups() != anz){
+            _anzGroups = (anz>_maxAnzGroups || anz<1)?1:anz;
+            DataBaseQueries.initializeMatches();
+            DataBaseQueries.clearAllCurrentScores();
             DataBaseQueries.clearCurrentTurnierplan();
         }
-        _anzTeams = (anz>8 || anz<3)?3:anz;
     }
+
+    public  static  int get_maxAnzTeams(){return _maxAnzTeams;}
+
+    public static int get_anzTeams(int groupID){
+        return _anzTeams[groupID - 1];
+    }
+
+    public static void set_anzTeams(int anz, int groupID){
+        if(get_anzTeams(groupID) != anz){
+            _anzTeams[groupID - 1] = (anz>_maxAnzTeams || anz<3)?3:anz;
+            DataBaseQueries.initializeMatches();
+            DataBaseQueries.clearCurrentScores_(groupID);
+            DataBaseQueries.clearCurrentTurnierplan();
+
+        }
+    }
+
     public static char getTeamLetter(int tID){
         char ausgabe = '-';
         if (tID > 0 && tID <= AppSettings.get_maxAnzTeams())
@@ -64,6 +108,14 @@ public class AppSettings {
                 return "#000000";
         }
 
+    }
+
+    public static String getTimeSlotStr(int nr){
+        if (nr < 0) return "";
+        int timeOffset = 6;
+        String anfang = (nr+timeOffset) + ":" + (30*(nr % 2) + (30*(nr % 2)>0?"":"0"));
+        String ende = (nr+timeOffset + (nr % 2)) + ":" + (30*((nr + 1) % 2) + (30*((nr + 1) % 2)>0?"":"0"));
+        return anfang + " - " + ende;
     }
 
 }
