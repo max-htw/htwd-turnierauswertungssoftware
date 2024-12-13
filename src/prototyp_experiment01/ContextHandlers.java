@@ -4,9 +4,8 @@ import com.sun.net.httpserver.HttpHandler;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.FileWriter;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
@@ -19,9 +18,10 @@ public class ContextHandlers {
     private static  String qs_setAnzahlSpielfelder = "setAnzFields";
     private static  String qs_setRole = "setRole";
     private static  String qs_setPrefillScores = "setPrefillScores";
-    private static  String qs_groupID = "groupid";
     private static  String qs_matchID = "matchid";
     private static  String qs_editmatch = "editmatch";
+    private static  String qs_needRueckspiele = "needrueckspiel";
+    private static  String qs_loadArchiv = "loadarchiv";
 
     public static Map<String, String> queryToMap(String query) {
         if(query == null) {
@@ -53,16 +53,18 @@ public class ContextHandlers {
                         int s = Integer.valueOf(qsParams.get(AppSettings.post_score_team2_hinspiel));
                         m.set_secondTeamHinspielPunkte(s);
                     }
-                    if(qsParams.containsKey(AppSettings.post_score_team1_rueckspiel)){
+                    if(qsParams.containsKey(AppSettings.post_score_team1_rueckspiel) && AppSettings.needRueckspiele()){
                         int s = Integer.valueOf(qsParams.get(AppSettings.post_score_team1_rueckspiel));
                         m.set_firstTeamRueckspielPunkte(s);
                     }
-                    if(qsParams.containsKey(AppSettings.post_score_team2_rueckspiel)){
+                    if(qsParams.containsKey(AppSettings.post_score_team2_rueckspiel) && AppSettings.needRueckspiele()){
                         int s = Integer.valueOf(qsParams.get(AppSettings.post_score_team2_rueckspiel));
                         m.set_secondTeamRueckspielPunkte(s);
                     }
-                }
-                else if (qsParams.containsKey(qs_setAnzahlTeams)) {
+                } else if(qsParams.containsKey(qs_loadArchiv)){
+                    int tid = Integer.valueOf(qsParams.get(qs_loadArchiv));
+                    DataBaseQueries.loadTurnierFromArchive(tid);
+                } else if (qsParams.containsKey(qs_setAnzahlTeams)) {
                     if(qsParams.containsKey(qs_refGroupID)) {
                         AppSettings.set_anzTeams(
                                 Integer.valueOf(qsParams.get(qs_setAnzahlTeams)),
@@ -213,7 +215,13 @@ public class ContextHandlers {
                 } else if (qsParams.containsKey(qs_setPrefillScores)) {
                     AppSettings.setNeedPrefillScores(Boolean.valueOf(qsParams.get(qs_setPrefillScores)));
 
+                } else if (qsParams.containsKey(qs_needRueckspiele)){
+                    AppSettings.set_needRueckspiele(Boolean.valueOf((qsParams.get(qs_needRueckspiele))));
+                }else if(qsParams.containsKey(AppSettings.post_saveTurnierAsName)){
+                    String s = String.valueOf(AppSettings.post_saveTurnierAsName);
+                    DataBaseQueries.saveCurrentTurnierToArchive(qsParams.get(s));
                 }
+
             }
             catch (Exception e) {
                 int dummy = 1;
@@ -264,7 +272,7 @@ public class ContextHandlers {
 
             bs.write(("</div>\n").getBytes()); //ende Gruppen Abschnitt
 
-            bs.write(("<br><br>\nAnzahl Spielfelder: " + AppSettings.get_anzSpielfelder()+"<br>\n").getBytes());
+            bs.write(("<br>\nAnzahl Spielfelder: " + AppSettings.get_anzSpielfelder()+"<br>\n").getBytes());
             trn = " (aendern zu ";
             for (int i=1; i<=AppSettings.get_maxAnzSpielfelder(); i++){
                 if(i != AppSettings.get_anzSpielfelder()){
@@ -273,7 +281,15 @@ public class ContextHandlers {
                 }
             }
 
-            bs.write((")<br><br>\nBenutzerrolle: " + AppSettings.getRoleStr(AppSettings.getRole()) + "<br>\n").getBytes());
+            bs.write(("<br><br>\nmit Rueckspielen: " + AppSettings.needRueckspiele() + "<br>\n").getBytes());
+            trn = "(aendern zu ";
+            bs.write((trn + "<a href=\"./einstellungen?" + qs_needRueckspiele + "="
+                    + !(AppSettings.needRueckspiele()) + "\">"
+                    + !(AppSettings.needRueckspiele())+ "</a>").getBytes());
+
+            bs.write((")<br>\n").getBytes());
+
+            bs.write(("<br>\nBenutzerrolle: " + AppSettings.getRoleStr(AppSettings.getRole()) + "<br>\n").getBytes());
             trn = "(aendern zu ";
             int iVals[] = {-1, 0, 3};
             for (int i: iVals){
@@ -292,7 +308,20 @@ public class ContextHandlers {
 
             bs.write(("</div>\n").getBytes());
 
-            bs.write(("<br><br>\ngespeicherte Turniere:<br>\n").getBytes());
+            bs.write(("<br>\n<form>\n").getBytes());
+            bs.write(("Aktuellen Turnier speichern unter:" +
+                     "<input type=\"text\" name=\"" + AppSettings.post_saveTurnierAsName + "\" value=\"" +
+                    LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"))
+                    + "\">").getBytes());
+
+            bs.write(("<button type=\"submit\">speichern</button>\n").getBytes());
+            bs.write(("</form>\n").getBytes());
+            bs.write(("<br>\neinen gespeicherten Turnier laden:<br>\n").getBytes());
+            int idx = 0;
+            for(String s: DataBaseQueries.getTurnirArchiveNames()){
+                bs.write(("<a href=\"/?" + qs_loadArchiv + "=" + idx + "\">" + s +"</a><br>\n").getBytes());
+                idx++;
+            }
 
             bs.write(("</body></html>").getBytes());
 
@@ -344,7 +373,7 @@ public class ContextHandlers {
                         for (int i = 0; i < AppSettings.get_anzSpielfelder(); i++) {
 
                             bs.write(("<td>").getBytes());
-                            MyHelpers.FeldSpiele_new f = DataBaseQueries.getTurnierplan_new().get(i);
+                            MyHelpers.FeldSpiele f = DataBaseQueries.getTurnierplan_new().get(i);
                             if (f.getAnzahlSpiele() > idx) {
                                 endeErreicht = false;
                                 Integer h = f.getSpielHashByIdx(idx);
@@ -394,7 +423,7 @@ public class ContextHandlers {
             ByteArrayOutputStream bs = new ByteArrayOutputStream();
             bs.write(("<!DOCTYPE html>\n<html>\n<head>\n").getBytes());
             bs.write(("<style>\n").getBytes());
-            bs.write(("div.section{border:0.2vmin solid grey;}\n").getBytes());
+            bs.write(("div.section{border:0.2vmin solid grey;padding:5px;}\n").getBytes());
             bs.write(("</style>\n").getBytes());
             bs.write(("</head>\n<body>\n").getBytes());
             bs.write((MyHelpers.htmlNavigationLinks()).getBytes());
@@ -445,52 +474,53 @@ public class ContextHandlers {
                         bs.write(("Punkte Team " + savedM.groupID() + AppSettings.getTeamLetter(savedM.get_secondTeam()) +
                                 ": " + punkteStr + "<br>\n").getBytes());
                     }
-                    bs.write(("</div>\n").getBytes());//end Div-section-Rueckspiel
+                    bs.write(("</div>\n").getBytes());//end Div-section-Hinspiel
                     bs.write(("<br>\n").getBytes());
 
+            if(AppSettings.needRueckspiele()) {
+                bs.write(("<div class=\"section\">\n").getBytes()); //start Div-section-Rueckspiel
+                bs.write(("Rueckspiel:<br>\n").getBytes());
+                bs.write(("<br>\nRichter: " + savedM.getRichterRueckspiel().x +
+                        AppSettings.getTeamLetter(savedM.getRichterRueckspiel().y) + "<br>\n").getBytes());
+                bs.write(("Spielfeld: " + (savedM.get_feldNrRueckspiel() + 1) + "<br>\n").getBytes());
+                bs.write(("Timeslot: " + AppSettings.getTimeSlotStr(savedM.get_timeslotRueckspiel()) + "<br>\n").getBytes());
+                //Organisatoren und Richter-Team duerfen Spielstand aendern. Die Gaeste koennen nur lesen:
+                if (editRueckspiel &&
+                        (AppSettings.getRole() == 0 || AppSettings.getRole() == savedM.getRichterRueckspiel().y)) {
+                    bs.write(("<form action=\"/\">").getBytes());
+                    bs.write(("\n<input type=\"hidden\" name=\"" + qs_editmatch + "\" value=\"" + savedM.hashCode() + "\">").getBytes());
+                    bs.write(("<br>\nPunkte Team " + savedM.groupID() + AppSettings.getTeamLetter(savedM.get_firstTeam()) +
+                            ": <input type=\"text\" name=\"" + AppSettings.post_score_team1_rueckspiel +
+                            "\"").getBytes());
+                    if (savedM.get_firstTeamRueckspielPunkte() >= 0)
+                        bs.write((" value=\"" + savedM.get_firstTeamRueckspielPunkte() + "\"").getBytes());
+                    bs.write(("><br>\n").getBytes());
 
-                    bs.write(("<div class=\"section\">\n").getBytes()); //start Div-section-Rueckspiel
-                    bs.write(("Rueckspiel:<br>\n").getBytes());
-                    bs.write(("<br>\nRichter: " + savedM.getRichterRueckspiel().x +
-                            AppSettings.getTeamLetter(savedM.getRichterRueckspiel().y) + "<br>\n").getBytes());
-                    bs.write(("Spielfeld: " + (savedM.get_feldNrRueckspiel()+1) + "<br>\n").getBytes());
-                    bs.write(("Timeslot: " + AppSettings.getTimeSlotStr(savedM.get_timeslotRueckspiel()) + "<br>\n").getBytes());
-                    //Organisatoren und Richter-Team duerfen Spielstand aendern. Die Gaeste koennen nur lesen:
-                    if(editRueckspiel && (AppSettings.getRole() == 0 || AppSettings.getRole() == savedM.getRichterRueckspiel().y)){
-                        bs.write(("<form action=\"/\">").getBytes());
-                        bs.write(("\n<input type=\"hidden\" name=\"" + qs_editmatch + "\" value=\"" + savedM.hashCode() + "\">").getBytes());
-                        bs.write(("<br>\nPunkte Team " + savedM.groupID() + AppSettings.getTeamLetter(savedM.get_firstTeam()) +
-                                ": <input type=\"text\" name=\"" + AppSettings.post_score_team1_rueckspiel +
-                                "\"").getBytes());
-                        if (savedM.get_firstTeamRueckspielPunkte() >= 0)
-                            bs.write((" value=\"" + savedM.get_firstTeamRueckspielPunkte()  +"\"").getBytes());
-                        bs.write(("><br>\n").getBytes());
+                    bs.write(("Punkte Team " + savedM.groupID() + AppSettings.getTeamLetter(savedM.get_secondTeam()) +
+                            ": <input type=\"text\" name=\"" + AppSettings.post_score_team2_rueckspiel + "\"").getBytes());
+                    if (savedM.get_secondTeamRueckspielPunkte() >= 0)
+                        bs.write((" value=\"" + savedM.get_secondTeamRueckspielPunkte() + "\"").getBytes());
+                    bs.write(("><br>\n").getBytes());
+                    bs.write(("<button type=\"submit\">speichern</button><br>\n").getBytes());
+                    bs.write(("</form>\n").getBytes());
+                } else {
+                    String punkteStr = "";
+                    if (savedM.get_firstTeamRueckspielPunkte() >= 0)
+                        punkteStr += savedM.get_firstTeamRueckspielPunkte();
 
-                        bs.write(("Punkte Team " + savedM.groupID() + AppSettings.getTeamLetter(savedM.get_secondTeam()) +
-                                ": <input type=\"text\" name=\"" + AppSettings.post_score_team2_rueckspiel + "\"").getBytes());
-                        if (savedM.get_secondTeamRueckspielPunkte() >= 0)
-                            bs.write((" value=\"" + savedM.get_secondTeamRueckspielPunkte()  +"\"").getBytes());
-                        bs.write(("><br>\n").getBytes());
-                        bs.write(("<button type=\"submit\">speichern</button><br>\n").getBytes());
-                        bs.write(("</form>\n").getBytes());
-                    }
-                    else{
-                        String punkteStr = "";
-                        if(savedM.get_firstTeamRueckspielPunkte()>=0)
-                            punkteStr += savedM.get_firstTeamRueckspielPunkte();
+                    bs.write(("<br>\nPunkte Team " + savedM.groupID() + AppSettings.getTeamLetter(savedM.get_firstTeam()) +
+                            ": " + punkteStr + "<br>\n").getBytes());
 
-                        bs.write(("<br>\nPunkte Team " + savedM.groupID() + AppSettings.getTeamLetter(savedM.get_firstTeam()) +
-                                ": " + punkteStr +"<br>\n").getBytes());
+                    punkteStr = "";
+                    if (savedM.get_secondTeamRueckspielPunkte() >= 0)
+                        punkteStr += savedM.get_secondTeamRueckspielPunkte();
 
-                        punkteStr = "";
-                        if(savedM.get_secondTeamRueckspielPunkte()>=0)
-                            punkteStr += savedM.get_secondTeamRueckspielPunkte();
+                    bs.write(("Punkte Team " + savedM.groupID() + AppSettings.getTeamLetter(savedM.get_secondTeam()) +
+                            ": " + punkteStr + "<br>\n").getBytes());
+                }
 
-                        bs.write(("Punkte Team " + savedM.groupID() + AppSettings.getTeamLetter(savedM.get_secondTeam()) +
-                                ": " + punkteStr + "<br>\n").getBytes());
-                    }
-
-                    bs.write(("</div>\n").getBytes());//end Div-section-rueckspiel
+                bs.write(("</div>\n").getBytes());//end Div-section-rueckspiel
+            }
                 }
             }
             bs.write(("</body></html>").getBytes());
@@ -522,7 +552,8 @@ public class ContextHandlers {
 
             String inhaltStr = "Turnierplan (erstellt am " + LocalDateTime.now() +
                     "); Anzahl Felder: " + AppSettings.get_anzSpielfelder() +
-                    "; Anzahl Gruppen: " + AppSettings.get_anzGroups();
+                    "; Anzahl Gruppen: " + AppSettings.get_anzGroups() +
+                    "; " + (AppSettings.needRueckspiele()?"mit Rueckspielen":"ohne Rueckspiele");
 
 
             PDFObject text = new PDFObject(4, 0);
@@ -600,7 +631,7 @@ public class ContextHandlers {
                     bs.write((";").getBytes());
                     try{
 
-                        MyHelpers.FeldSpiele_new f = DataBaseQueries.getTurnierplan_new().get(i);
+                        MyHelpers.FeldSpiele f = DataBaseQueries.getTurnierplan_new().get(i);
                         if (f.getAnzahlSpiele() > idx) {
                             endeErreicht = false;
                             Integer h = f.getSpielHashByIdx(idx);

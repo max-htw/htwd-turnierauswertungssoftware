@@ -125,6 +125,22 @@ public class MyHelpers {
             }
         }
 
+        Match(Match other){
+            _groupID = other._groupID;
+            _firstTeam = other._firstTeam;
+            _secondTeam = other._secondTeam;
+            _firstTeamHinspielPunkte = other._firstTeamHinspielPunkte;
+            _secondTeamHinspielPunkte = other._secondTeamHinspielPunkte;
+            _firstTeamRueckspielPunkte = other._firstTeamRueckspielPunkte;
+            _secondTeamRueckspielPunkte = other._secondTeamRueckspielPunkte;
+            _richterHinspiel = new IntPair(other._richterHinspiel.x,other._richterHinspiel.y);
+            _richterRueckspiel = new IntPair(other._richterRueckspiel.x,other._richterRueckspiel.y);
+            _feldNrHinspiel = other._feldNrHinspiel;
+            _feldNrRueckspiel = other._feldNrRueckspiel;
+            _timeslotHinspiel = other._timeslotHinspiel;
+            _timeslotRueckspiel = other._timeslotRueckspiel;
+        }
+
         @Override
         public boolean equals(Object obj) {
             if (!(obj instanceof Match)) return false;
@@ -156,6 +172,7 @@ public class MyHelpers {
         public static Match hashDecode(int hash){
             return  new Match(hash / 100, (hash - (hash / 100)) / 10 ,hash % 10);
         }
+
     }
 
     public static class SpielStats{
@@ -192,7 +209,7 @@ public class MyHelpers {
         }
     }
 
-    public  static  class FeldSpiele_new {
+    public  static  class FeldSpiele {
         public  final int feldNr;
 
         // Integer-Parameter: hashcode eines Matches 100*groupID + 10*team1 + team2
@@ -200,8 +217,15 @@ public class MyHelpers {
         //             Bei den rueckspielen team2 ist groesser
         private ArrayList<Integer> _Spiele = new ArrayList<>();
 
-        FeldSpiele_new(int fNr){
+        FeldSpiele(int fNr){
             feldNr = fNr;
+        }
+
+        FeldSpiele(FeldSpiele other){
+            feldNr = other.feldNr;
+            for(int s: other._Spiele){
+                _Spiele.add(s);
+            }
         }
 
         public int getAnzahlSpiele(){
@@ -220,35 +244,18 @@ public class MyHelpers {
         }
     }
 
-    public  static class FeldSpiele_old {
-        public final int feldNr;
-        private TreeMap<IntPair, Integer> _Spiele = new TreeMap<>();
+    public static class TurnierArchiv{
 
-        FeldSpiele_old(int fNr){
-            feldNr = fNr;
+        TurnierArchiv(String fileName){
+            this.fileName = fileName;
         }
 
-        public int getAnzahlSpiele(){
-            return _Spiele.size();
-        }
-
-        public void addSpiel(IntPair match, int richterTeamId){
-            _Spiele.put(match, richterTeamId);
-        }
-
-        public IntPair getMatchByIdx(int idx){
-            if(_Spiele.size() <= idx){
-                return  null;
-            }
-            return  (IntPair)_Spiele.keySet().toArray()[idx];
-        }
-
-        public Integer getRichterByIdx(int idx){
-            if(_Spiele.size() <= idx){
-                return  null;
-            }
-            return (Integer)_Spiele.values().toArray()[idx];
-        }
+        public String fileName = "";
+        public ArrayList<Integer> groups = new ArrayList<>();
+        public int anzSpielfelder = -1;
+        public boolean needRueckspiele = true;
+        public HashMap<Integer, MyHelpers.Match> matches = new HashMap<>();
+        public ArrayList<FeldSpiele> turnierPlan = new ArrayList<>();
     }
 
     public static String htmlNavigationLinks(){

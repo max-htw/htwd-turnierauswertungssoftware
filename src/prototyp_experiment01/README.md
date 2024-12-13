@@ -6,7 +6,7 @@
 - Befehle zum compilieren der .java-Dateien mit **javac** und verpacken sie mit **jar**
   - `javac *.java -d ./classes`
     - d - output directory
-  - `jar -v -c -f volley.jar -e Main -C ./classes .`
+  - `jar -v -c -f volley.jar -e Main -C ./classes .` (Achtung: Punkt am Ende nicht vergessen)
     - v - verbose
     - c - create
 	- f - output filename
@@ -20,22 +20,18 @@ nach dem Ausführen läuft auf dem System ein HTTP-Server auf dem Port :8440.
 in einem Webbrowser die URL http://localhost:8440 aufrufen.
 
 ## Realisierter Umfang
-- die Spielergebnisse können eingetragen und geändert werden
-- Die Parameter "Anzahl Teams", "Anzahl Spilefelder", "Benutzerrole" funktionieren.
-- Beim andern der "Anzahl Teams", "Anzahl Gruppen" werden die Spielergebnisse neu generiert.
+- Konfiguration des Turniers möglich:
+  - Anzahl Gruppen, Anzahl Teams pro Gruppe, mit/ohne Rückspiele, Anzahl Spielfelder
+- Eintragen/Ändern der Spielergebnisse
+- Automatische Turnierplangenerierung (Algorythmus muss verbessert werden)
 - Übersicht und Auswertung der aktuellen Spielstände sind auf der Hauptseite in tabelarischer Form dargestellt.
-- Bearbeiten des Spielstandes ist möglich durch klicken auf den Spielstand in der Tabelle.
-- Auf der Seite "Turnierplan" wird ein automatisch generierter Turnierplan angezeigt.
-- Benutzerrolen sind "Organisator", "Gast", "Team ..."
-  - Organisator darf alle Spielstände bearbeiten.
-  - Gast kann keine Spielstände bearbeiten.
-  - Team X darf nur die Spielstände bearbeiten, wo es als Richter zugewiesen ist.
-- Export zu PDF und CSV (aber sehr primitiv)
+- Speichern des Turniers und Laden eines gespeicherten Turniers (nicht Permanent, nur im RAM)
+- Export zu PDF und CSV (nur Ansatz)
+- Benutzerrolen sind "Organisator", "Gast", "Team ..." (nur Ansatz)
 
 ## Fehlende Funktionalität
+- Daten können nicht permanent gespeichert werden.
 - Http-Server kann nicht mehrere anfragen gleichzeitig bearbeiten.
-- Daten können nicht gespeichert werden.
-- Es können keine gespeicherten Turniere ausgewählt werden.
 - Kein effizienter Algorythmus für die Turnierplanung
 - Visuelle Gestaltung fehlt.
 

@@ -1,8 +1,11 @@
+import java.util.ArrayList;
+
 public class AppSettings {
     public  static final String post_score_team1_rueckspiel = "score_team1_rueckspiel";
     public  static final String post_score_team2_rueckspiel = "score_team2_rueckspiel";
     public  static final String post_score_team1_hinspiel = "score_team1_hinspiel";
     public  static final String post_score_team2_hinspiel = "score_team2_hinspiel";
+    public  static final String post_saveTurnierAsName = "saveturnier";
 
     private static int _role;
     private static boolean _needPrefillScores = false;
@@ -23,6 +26,11 @@ public class AppSettings {
 
     private static boolean _needRueckspiele = true;
     public static boolean needRueckspiele() { return _needRueckspiele;}
+    public static void set_needRueckspiele(boolean y_n){
+        _needRueckspiele = y_n;
+        DataBaseQueries.initializeMatches();
+        DataBaseQueries.clearCurrentTurnierplan();
+    }
 
     public static String getRoleStr(int role){
         String ausgabe = "Organisator";
@@ -40,7 +48,7 @@ public class AppSettings {
     public static  void setNeedPrefillScores(boolean y_n){
         if(getNeedPrefillScores() != y_n) {
             _needPrefillScores = y_n;
-            DataBaseQueries.clearAllCurrentScores();
+            DataBaseQueries.initializeMatches();
         }
     }
 
@@ -58,7 +66,6 @@ public class AppSettings {
         if(get_anzGroups() != anz){
             _anzGroups = (anz>_maxAnzGroups || anz<1)?1:anz;
             DataBaseQueries.initializeMatches();
-            DataBaseQueries.clearAllCurrentScores();
             DataBaseQueries.clearCurrentTurnierplan();
         }
     }
@@ -73,10 +80,21 @@ public class AppSettings {
         if(get_anzTeams(groupID) != anz){
             _anzTeams[groupID - 1] = (anz>_maxAnzTeams || anz<3)?3:anz;
             DataBaseQueries.initializeMatches();
-            DataBaseQueries.clearCurrentScores_(groupID);
             DataBaseQueries.clearCurrentTurnierplan();
 
         }
+    }
+
+    public static void  quietSetProperties(ArrayList<Integer> anzGroupsAndTeams,
+                                           int anzSpielfelder, boolean needRueckspiele){
+        _anzGroups = anzGroupsAndTeams.size();
+        for(int t = 0; t < _anzGroups; t++){
+            if(_anzTeams.length > t) {
+                _anzTeams[t] = anzGroupsAndTeams.get(t);
+            }
+        }
+        _anzSpielfelder = anzSpielfelder;
+        _needRueckspiele = needRueckspiele;
     }
 
     public static char getTeamLetter(int tID){
@@ -113,8 +131,8 @@ public class AppSettings {
     public static String getTimeSlotStr(int nr){
         if (nr < 0) return "";
         int timeOffset = 6;
-        String anfang = (nr+timeOffset) + ":" + (30*(nr % 2) + (30*(nr % 2)>0?"":"0"));
-        String ende = (nr+timeOffset + (nr % 2)) + ":" + (30*((nr + 1) % 2) + (30*((nr + 1) % 2)>0?"":"0"));
+        String anfang = (nr/2 +timeOffset) + ":" + (30*(nr % 2) + (30*(nr % 2)>0?"":"0"));
+        String ende = (nr/2 +timeOffset + (nr % 2)) + ":" + (30*((nr + 1) % 2) + (30*((nr + 1) % 2)>0?"":"0"));
         return anfang + " - " + ende;
     }
 
