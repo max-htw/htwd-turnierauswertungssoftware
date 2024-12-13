@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class DataBaseQueries {
@@ -31,16 +30,18 @@ public class DataBaseQueries {
                             m.set_firstTeamHinspielPunkte(_random.nextInt(23));
                             m.set_secondTeamHinspielPunkte(25);
                         }
-                        int resRueck = _random.nextInt(3);
-                        if (resRueck == 0) {
-                            m.set_firstTeamRueckspielPunkte(-1);
-                            m.set_secondTeamRueckspielPunkte(-1);
-                        } else if (resRueck == 1) {
-                            m.set_firstTeamRueckspielPunkte(25);
-                            m.set_secondTeamRueckspielPunkte(_random.nextInt(23));
-                        } else {
-                            m.set_firstTeamRueckspielPunkte(_random.nextInt(23));
-                            m.set_secondTeamRueckspielPunkte(25);
+                        if(AppSettings.needRueckspiele()) {
+                            int resRueck = _random.nextInt(3);
+                            if (resRueck == 0) {
+                                m.set_firstTeamRueckspielPunkte(-1);
+                                m.set_secondTeamRueckspielPunkte(-1);
+                            } else if (resRueck == 1) {
+                                m.set_firstTeamRueckspielPunkte(25);
+                                m.set_secondTeamRueckspielPunkte(_random.nextInt(23));
+                            } else {
+                                m.set_firstTeamRueckspielPunkte(_random.nextInt(23));
+                                m.set_secondTeamRueckspielPunkte(25);
+                            }
                         }
                     }
                     _matches.put(m.hashCode(), m);
@@ -68,7 +69,7 @@ public class DataBaseQueries {
         if(m == null)
             return a;
 
-        boolean isHinspiel = (hash - hash/100)/10 < (hash % 10);
+        boolean isHinspiel = (hash % 100)/10 < (hash % 10);
         a.groupid = m.groupID();
         a.team1 = m.get_firstTeam();
         a.team2 = m.get_secondTeam();
@@ -89,69 +90,71 @@ public class DataBaseQueries {
         return  a;
     }
 
-    private static HashMap<MyHelpers.IntPair, MyHelpers.IntPair> _currentHinspielScores[]
-            = new HashMap[AppSettings._maxAnzGroups];
+    private static ArrayList<MyHelpers.FeldSpiele> _turnierPlan = new ArrayList<>();
+
+    private  static ArrayList<MyHelpers.TurnierArchiv> _turnierArichv = new ArrayList<>();
     static{
-        for (int i = 0; i < _currentHinspielScores.length; i++){
-            _currentHinspielScores[i] = new HashMap<MyHelpers.IntPair, MyHelpers.IntPair>();
+        addTestDataToTurnierArchiv();
+    }
+
+    public static void addTestDataToTurnierArchiv(){
+        MyHelpers.TurnierArchiv ta1 = new MyHelpers.TurnierArchiv("1871_turnier");
+        ta1.groups.add(3);
+        ta1.groups.add(5);
+        ta1.groups.add(3);
+        ta1.anzSpielfelder = 3;
+        ta1.needRueckspiele = true;
+        //.... ToDo
+        //_turnierArichv.add(ta1);
+    }
+
+    public  static void saveCurrentTurnierToArchive(String fileName){
+        for(MyHelpers.TurnierArchiv t: _turnierArichv){
+            if(t.fileName.equals(fileName)) return;
+        }
+
+        MyHelpers.TurnierArchiv t = new MyHelpers.TurnierArchiv(fileName);
+        for(int i = 0; i<AppSettings.get_anzGroups();i++){
+            t.groups.add(AppSettings.get_anzTeams(i+1));
+        }
+        t.anzSpielfelder = AppSettings.get_anzSpielfelder();
+        t.needRueckspiele = AppSettings.needRueckspiele();
+        for(int hash: _matches.keySet()){
+            MyHelpers.Match m = new MyHelpers.Match(_matches.get(hash)); // m ist geklont
+            t.matches.put(hash, m);
+        }
+        for(MyHelpers.FeldSpiele f: _turnierPlan){
+            MyHelpers.FeldSpiele fn = new MyHelpers.FeldSpiele(f); // fn ist geklont
+            t.turnierPlan.add(fn);
+        }
+        _turnierArichv.add(t);
+    }
+
+    public static void loadTurnierFromArchive(int pos){
+        if(_turnierArichv.size() < (pos + 1))
+            return;
+        MyHelpers.TurnierArchiv t = _turnierArichv.get(pos);
+
+        AppSettings.quietSetProperties(t.groups, t.anzSpielfelder, t.needRueckspiele);
+
+        _matches.clear();
+        for(int hash: t.matches.keySet()){
+            MyHelpers.Match m = new MyHelpers.Match(t.matches.get(hash)); // m ist geklont
+            _matches.put(hash, m);
+        }
+        _turnierPlan.clear();
+        for(MyHelpers.FeldSpiele f: t.turnierPlan){
+            MyHelpers.FeldSpiele fn = new MyHelpers.FeldSpiele(f); // fn ist geklont
+            _turnierPlan.add(fn);
         }
     }
 
-    private static HashMap<MyHelpers.IntPair, MyHelpers.IntPair> _currentRueckspielScores[]
-            = new HashMap[AppSettings._maxAnzGroups];
-    static{
-        for (int i = 0; i < _currentRueckspielScores.length; i++){
-            _currentRueckspielScores[i] = new HashMap<MyHelpers.IntPair, MyHelpers.IntPair>();
+    public static ArrayList<String> getTurnirArchiveNames(){
+        ArrayList<String> ausgabe = new ArrayList<>();
+        for(MyHelpers.TurnierArchiv t: _turnierArichv){
+            ausgabe.add(t.fileName);
         }
-    }
-
-
-    private static ArrayList<MyHelpers.FeldSpiele_new> _turnierPlan = new ArrayList<>();
-
-    public static HashMap<MyHelpers.IntPair, MyHelpers.IntPair> getHinspielScores(int groupID) {
-        if(_currentHinspielScores[groupID - 1].isEmpty() && AppSettings.getNeedPrefillScores()) {
-
-        }
-        return  new HashMap<MyHelpers.IntPair, MyHelpers.IntPair>(_currentHinspielScores[groupID - 1]);
-    }
-
-    public static HashMap<MyHelpers.IntPair, MyHelpers.IntPair> getRueckspielScores(int groupID) {
-        if(_currentRueckspielScores[groupID - 1].isEmpty() &&
-                AppSettings.getNeedPrefillScores() &&
-                AppSettings.needRueckspiele()) {
-            if(_random==null) _random = new Random();
-
-            for (int j = 1; j < AppSettings.get_anzTeams(groupID); j++) {
-                for (int i = j + 1; i <= AppSettings.get_anzTeams(groupID); i++) {
-                    //meanings: 0 = not played yet, 1 = team 1 winner, 2 = team 2 winner;
-                    int res = _random.nextInt(3);
-                    if (res == 0) {
-                        _currentRueckspielScores[groupID - 1].put(new MyHelpers.IntPair(i, j), new MyHelpers.IntPair(-1, -1));
-                    } else if (res == 1) {
-                        _currentRueckspielScores[groupID - 1].put(new MyHelpers.IntPair(i, j),
-                                new MyHelpers.IntPair(25, _random.nextInt(23)));
-                    } else if (res == 2) {
-                        _currentRueckspielScores[groupID - 1].put(new MyHelpers.IntPair(i, j),
-                                new MyHelpers.IntPair(_random.nextInt(23), 25));
-                    }
-                }
-            }
-        }
-        return  new HashMap<MyHelpers.IntPair, MyHelpers.IntPair>(_currentRueckspielScores[groupID - 1]);
-    }
-
-
-
-        public static void clearAllCurrentScores(){
-        for(int gid = 1; gid <= AppSettings.get_maxAnzGroups(); gid++){
-            clearCurrentScores_(gid);
-        }
-    }
-
-    public static void clearCurrentScores_(int groupID){
-        //fehler
-        _currentHinspielScores[groupID - 1].clear();
-        _currentRueckspielScores[groupID - 1].clear();
+        return  ausgabe;
     }
 
     public static ArrayList<MyHelpers.AuswertungsEintrag> calculateAuswertung_new(int groupID){
@@ -188,13 +191,13 @@ public class DataBaseQueries {
                         newEintrag.score.x += 1;
                     newEintrag.score.y += teamHinspielPunkte - gegnerHinspielPunkte;
                 }
-
-                if(teamRueckspielPunkte >= 0 && gegnerRueckspielPunkte >= 0){
-                    if (teamRueckspielPunkte > gegnerRueckspielPunkte)
-                        newEintrag.score.x += 1;
-                    newEintrag.score.y += teamRueckspielPunkte - gegnerRueckspielPunkte;
+                if(AppSettings.needRueckspiele()) {
+                    if (teamRueckspielPunkte >= 0 && gegnerRueckspielPunkte >= 0) {
+                        if (teamRueckspielPunkte > gegnerRueckspielPunkte)
+                            newEintrag.score.x += 1;
+                        newEintrag.score.y += teamRueckspielPunkte - gegnerRueckspielPunkte;
+                    }
                 }
-
             }
             ausgabe.add(newEintrag);
         }
@@ -207,12 +210,11 @@ public class DataBaseQueries {
     }
 
 
-    public static ArrayList<MyHelpers.FeldSpiele_new> getTurnierplan_new() throws Exception {
+    public static ArrayList<MyHelpers.FeldSpiele> getTurnierplan_new() throws Exception {
         if(_turnierPlan.isEmpty()){
             for(int i=0; i<AppSettings.get_anzSpielfelder(); i++){
-                _turnierPlan.add(new MyHelpers.FeldSpiele_new(i+1));
+                _turnierPlan.add(new MyHelpers.FeldSpiele(i+1));
             }
-
 
             HashSet<Integer> matchHashesHS = new HashSet<>();
             ArrayList<Integer> matchHashesArr = new ArrayList<>();
