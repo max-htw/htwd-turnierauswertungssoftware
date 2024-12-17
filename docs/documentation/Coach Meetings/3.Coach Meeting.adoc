@@ -1,0 +1,37 @@
+= Meetings mit Coach Herrn Zirkelbach
+Tim Reimann <tim.reimann@stud.htw-dresden.de>
+0.1, 17.12.2024
+:toc:
+:toc-title: Inhaltsverzeichnis
+// Platzhalter für weitere Dokumenten-Attribute
+
+== Meeting mit Coach Herrn Zirkelbach am 17.12.2024 im Rahmen der 3. Iteration
+=== Anwesend
+- bene
+- alex
+- julian
+- Tim
+
+=== Einstieg
+- jeder wurde gefragt was jeweils erledigt wurde.
+- Acht geben der konkreten Rolle "Entwurf"
+-> drüber klar werden ob reverse engineering angewand wird
+
+=== Hinweise
+- verantwortlichkeiten dürfen nicht kippen
+- bei implementierung auf vision achten und änderungen mit analyse abstimmen
+- darauf achten, das bei implemtierung keine aufgaben weggenommen werden
+- WICHTIG !!! - es soll ein vertikaler Prototyp erstellt werden
+- in Vision - zusätzliche Anforderungen ergänzen (bspw.: offline Betrieb)
+- wenn für lotte einige sachen nicht wichtig sind, dann für uns auch nicht auch wenn wir es gerne anders hätten - dokumentieren !!
+- für den vertikalen Prototyp sollen für eine funktion schon spezielle oberflächen Frameworks genutzt werden
+
+==== WICHTIG
+- Gedanken machen zur Dateneingabe -> Analyse
+-> alle ideen mit lotte absprechen - ist ein Login notwendig ?
+- für Prototyp muss geklärt werden wie Daten gespeichert werden sollen -> Auftraggeber Meeting!
+- zu jeglicher aufgabe die erledigt wird soll ein Ticket existieren
+-> dies soll nicht nur Projektleiter machen, aber mit allen absprechen
+
+- für 4. iteration sollen die aufagaben genauer verteilt und besprochen werden
+- frage ob wir 4. Iteration vorziehen wollen und damit verlängern wollen -> stand jetzt ja
