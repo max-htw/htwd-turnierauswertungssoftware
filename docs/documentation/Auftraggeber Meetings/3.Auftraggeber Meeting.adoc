@@ -1,0 +1,35 @@
+= Meeting mit Auftraggeber am 18.12.2024
+Jonas Grießhaber <s87547.htw-dresden.de>
+0.1, 18.12.2024
+:toc:
+:toc-title: Inhaltsverzeichnis
+
+// Dieses Treffen ist während der 3.Iteration
+== Anwesende
+* Max
+* Alex 
+* Jonas 
+
+== Verlauf
+
+=== 1. Präsentation des Prototyps
+** Bedienbarkeit für Spieler auf dem Feld muss einfacher gehalten werden.
+** Aktuelle Partie soll farblich hervorgehoben werden, damit Teams sehen, dass sie dran sind. (nicht nach Uhrzeit, sondern nachdem das Match Ergebnis eingetragen wurde.)
+** Gespielte Matches sollen (wenn möglich) durchgestrichen werden.
+** Legende einfügen, welche anzeigt, wer Schiedsrichter ist und wer spielt.
+** Uhrzeiten tabellarisch besser sichtbar machen.
+** Die letzten 5 Turniere sollten in der Historie sichtbar sein.
+** Ein Turnier, welches gespeichert wurde, muss überschrieben werden können. (Möglicherweise Sicherheitsfrage vorschalten).
+
+=== 2. Präsentation Wireframes
+
+** Im besten Fall bekommt man über seinem Teamnamen die aktuelle Aufgabe (Spiel/Schiri) angezeigt.
+** Zu viele Buttons aktuell -> zu komplex
+** Spielstand Button vergrößern
+** kompakter und übersichtlicher gestalten (zu viele Übersichten).
+** so einfach halten wie möglich.
+** Teamnamen sollten vor Ort zu Begin geändert werden können. Bsp: S1 = "Füchse".
+** Farben vom Stura sollten verwendet werden.
+
+
+
