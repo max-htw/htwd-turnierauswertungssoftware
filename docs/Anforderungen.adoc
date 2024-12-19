@@ -1,5 +1,6 @@
 = Anforderungen für den Volleyball-planer
-Julian Groß <s86368@htw-dresden.de>; Jonas Grießhaber <s87547@htw-dresden.de>; Maximilian Lohr <s86327@htw-dresden.de>
+Julian Groß <s86368@htw-dresden.de>; Jonas Grießhaber <s87547@htw-dresden.de>; Maximilian Lohr <s86327@htw-dresden.de>;
+Kareen Khouri <kareen.khouri@stud.htw-dresden.de>
 {localdatetime}
 //:source-highlighter: rouge
 :source-highlighter: highlight.js
@@ -37,3 +38,101 @@ https://miro.com/welcomeonboard/QUpMOEdhN01VdDRyVUdlVlgzNXNxdkM0OUlSc1dnSU9EdjJB
 ** Regelmäßige Verteilung der Aussetzzeiten
 ** Ein Team soll nicht mehrmals hintereinander pfeifen oder eine Abfolge von pfeifen – aussetzen – pfeifen haben.
 * **Die Software könnte ebenfalls für andere Turniere genutzt werden, die ein ähnliches Format verfolgen.**
+
+== Neue Anforderungen vom Auftraggeber (Stand: Dezember 2024)
+
+
+
+Die folgenden Anforderungen wurden basierend auf den Rückmeldungen des Auftraggebers während der letzten Besprechung festgelegt. Diese Anforderungen betreffen die Verbesserung der Benutzeroberfläche und der Benutzererfahrung sowie die Erweiterung bestimmter Funktionen des Prototyps.
+
+
+
+=== 1. Präsentation des Prototyps
+
+
+
+* **Bedienbarkeit für Spieler auf dem Feld muss einfacher gehalten werden.**
+
+  - Ziel: Die Bedienung der Oberfläche für Spieler soll intuitiver und schneller erfolgen können. Wichtige Funktionen sollen direkt zugänglich sein, ohne unnötige Komplexität.
+
+
+
+* **Aktuelle Partie soll farblich hervorgehoben werden, damit Teams sehen, dass sie dran sind.**
+
+  - Ziel: Das Team, das aktuell spielt, soll visuell hervorgehoben werden (z.B. durch eine Farbänderung), nachdem das Match-Ergebnis eingetragen wurde. Dies ist unabhängig von der Uhrzeit und soll die Benutzererfahrung verbessern.
+
+
+
+* **Gespielte Matches sollen (wenn möglich) durchgestrichen werden.**
+
+  - Ziel: Ein Match, das bereits gespielt wurde, sollte visuell markiert werden (z.B. durch das Durchstreichen des Eintrags), sodass klar erkennbar ist, dass es abgeschlossen ist.
+
+
+
+* **Legende einfügen, die anzeigt, wer Schiedsrichter ist und wer spielt.**
+
+  - Ziel: Eine Legende soll hinzugefügt werden, die es den Nutzern ermöglicht, schnell zu erkennen, wer gerade spielt und wer die Schiedsrichterrolle innehat.
+
+
+
+* **Uhrzeiten tabellarisch besser sichtbar machen.**
+
+  - Ziel: Die Darstellung der Uhrzeiten der Matches soll verbessert werden, idealerweise durch eine tabellarische Darstellung, die eine bessere Übersichtlichkeit bietet.
+
+
+
+* **Die letzten 5 Turniere sollten in der Historie sichtbar sein.**
+
+  - Ziel: In der Historie sollen die letzten fünf Turniere angezeigt werden, damit Nutzer schnell auf vergangene Events zugreifen können.
+
+
+
+* **Ein Turnier, welches gespeichert wurde, muss überschrieben werden können. (Möglicherweise Sicherheitsfrage vorschalten.)**
+
+  - Ziel: Ein bereits gespeichertes Turnier soll bearbeitet und überschrieben werden können. Um unbeabsichtigte Änderungen zu vermeiden, könnte eine Sicherheitsabfrage eingebaut werden, die den Nutzer um Bestätigung bittet.
+
+
+
+=== 2. Präsentation der Wireframes
+
+
+
+* **Im besten Fall bekommt man über dem Teamnamen die aktuelle Aufgabe (Spiel/Schiri) angezeigt.**
+
+  - Ziel: Die aktuelle Aufgabe (ob das Team spielt oder als Schiedsrichter fungiert) soll direkt neben dem Teamnamen angezeigt werden, um eine schnelle Identifikation der Rolle zu ermöglichen.
+
+
+
+* **Zu viele Buttons aktuell – zu komplex.**
+
+  - Ziel: Die Anzahl der Buttons und Bedienungselemente soll reduziert werden, um die Benutzeroberfläche zu vereinfachen und die Bedienung intuitiver zu gestalten.
+
+
+
+* **Spielstand-Button vergrößern.**
+
+  - Ziel: Der Button zum Aktualisieren des Spielstands soll vergrößert werden, damit er leichter zu finden und zu bedienen ist.
+
+
+
+* **Kompakter und übersichtlicher gestalten (zu viele Übersichten).**
+
+  - Ziel: Die Benutzeroberfläche soll kompakter und weniger überladen wirken. Zu viele separate Übersichten sollen vermieden werden, um die Benutzererfahrung zu verbessern.
+
+
+
+* **So einfach halten wie möglich.**
+
+  - Ziel: Die Benutzeroberfläche soll so minimalistisch wie möglich gestaltet werden, ohne wichtige Funktionen zu verlieren. Alles, was nicht notwendig ist, sollte entfernt oder zusammengefasst werden.
+
+
+
+* **Teamnamen sollten vor Ort zu Beginn geändert werden können.**
+
+  - Ziel: Der Teamname sollte zu Beginn eines Turniers direkt im System geändert werden können. Beispiel: „S1“ soll in „Füchse“ umbenannt werden können.
+
+
+
+* **Farben vom Stura sollten verwendet werden.**
+
+  - Ziel: Die Benutzeroberfläche soll in Übereinstimmung mit den Corporate Design-Richtlinien des Stura gestaltet werden, insbesondere durch die Verwendung der offiziellen Farben des Stura.
