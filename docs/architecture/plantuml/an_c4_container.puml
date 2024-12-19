@@ -1,0 +1,26 @@
+@startuml
+!include C4_Context.puml
+!include C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+title System Container diagram for Volleyball-Turnierauswertungssoftware
+
+Person(benutzer, "Benutzer")
+
+
+System_Boundary(turnierauswertungssoftware, "HTWD Turnierauswertungssoftware", "Automatisiert die Plannung, Erfassung und Auswertung eines Volleyball-Turniers."){
+  Container(webserver, "Webserver")
+  Container(web_app, "Web-Anwendung","Java")
+  Container(database, "Datenbank")
+}
+
+Rel_D(benutzer, webserver, "Bedienung", "HTTP")
+Rel_D(webserver, benutzer, "Web-Ressourcen","HTTP")
+Rel_D(webserver, web_app, "Nutzeranfragen")
+Rel_D(web_app, webserver, "Ausgabe")
+Rel_D(web_app, database, "Daten zum Speichern")
+Rel_D(database, web_app, "Ergebnisse der Abfragen.")
+
+SHOW_LEGEND()
+@enduml
