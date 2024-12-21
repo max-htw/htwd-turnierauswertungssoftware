@@ -161,6 +161,15 @@ Beispiel Produkt:
 | Anforderung | Priorität | Geplantes Release
 | Kompatibilität mit Mobilgeräten | Hoch | Version 1.3
 | PDF-Export des Turnierplans | Hoch | Version 1.0
+| Teamnamen sollten vor Ort zu Begin geändert werden können. Bsp: S1 = "Füchse" | Hoch | Version 1.4
+| Farben des Stura sollen verwendet werden | Hoch | Version 1.4
+| Bedienbarkeit soll so einfach wie möglich gehalten werden | Hoch | Version 1.4
 | Fehlerprüfung bei Ergebnissen | Mittel | Version1.2
 | Erfassung der Ergebnisse in Excel | Mittel | Version1.2
+| Spieler sollen sich über ihren Teamnamen am Anfang anmelden und bekommen dann ihren eigenen Turnierbaum angezeigt | Mittel | Version 1.4
+| Aktuelle Partie soll farblich (grün) hervorgehoben werden. Das soll erfolgen nachdem das Ergebnis der vorherigen Partie eingetragen wurde | Mittel | Version 1.4
+| Legende einfügen, welche anzeigt, welches Team spielt und welches Team Schiedrichter ist |Mittel | version 1.4
+| Ein Turnier, welches gespeichert wurde, muss überschrieben werden können. (Möglicherweise Sicherheitsfrage vorschalten). | Mittel | Version 1.4
+| Gespielte Partien sollen auf dem Turnierplan durchgestrichen werden | Niedrig | Version 1.4
+| Die letzten 5 Turniere sollen in der Historie ersichtbar sein | Niedrig | Version 1.4
 |===
