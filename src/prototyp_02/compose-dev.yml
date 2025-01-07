@@ -1,9 +1,17 @@
 services:
+  caddy:
+    image: caddy
+    restart: unless-stopped
+    ports:
+     - "80:80"
+     - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    network_mode: "host"
   database:
     image: postgres:latest
     restart: unless-stopped
-    ports:
-      - 127.0.0.1:5432:5432
+    network_mode: "host"
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
     volumes:
