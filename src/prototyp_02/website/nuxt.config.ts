@@ -8,5 +8,12 @@ export default defineNuxtConfig({
   modules: ['@vite-pwa/nuxt', '@nuxtjs/tailwindcss'],
   pwa: {
 
+  },
+  nitro: {
+    routeRules: {
+      "/api/**": {
+        proxy: 'http://api:8080/**'
+      }
+    }
   }
 })

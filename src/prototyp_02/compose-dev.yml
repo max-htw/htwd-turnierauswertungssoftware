@@ -1,5 +1,6 @@
 services:
   caddy:
+    container_name: turnier-caddy
     image: caddy
     restart: unless-stopped
     ports:
@@ -7,16 +8,32 @@ services:
      - "443:443"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
-    network_mode: "host"
+  website:
+    container_name: turnier-website
+    image: node:lts-alpine
+    restart: unless-stopped
+    working_dir: /home/node/app
+    volumes:
+      - ./website:/home/node/app
+    command: "npm run devexp"
+  api:
+    container_name: turnier-api
+    build: ./api
+    restart: unless-stopped
+    develop:
+      watch:
+        - path: ./api
+          action: rebuild
+
   database:
+    container_name: turnier-database
     image: postgres:latest
     restart: unless-stopped
-    network_mode: "host"
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
     volumes:
-      - postgres-storage-dev:/var/lib/postgresql/data
+      - turnier-postgres-storage-dev:/var/lib/postgresql/data
 
 volumes:
-  postgres-storage-dev: {}
+  turnier-postgres-storage-dev: {}
 
