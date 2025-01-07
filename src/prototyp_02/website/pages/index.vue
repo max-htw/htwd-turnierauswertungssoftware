@@ -1,3 +1,8 @@
+<script lang="ts">
+
+
+</script>
+
 <template>
   <div class="m-1">
     <Nav />

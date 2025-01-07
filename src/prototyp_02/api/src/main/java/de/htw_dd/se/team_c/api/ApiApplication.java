@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ApiApplication.class, args);
+      System.setProperty("server.servlet.context-path", "/api");
+      SpringApplication.run(ApiApplication.class, args);
     }
 
     @CrossOrigin()
