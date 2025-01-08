@@ -1,6 +1,9 @@
 services:
   caddy:
     container_name: turnier-dev-caddy
+    depends_on:
+      website:
+        condition: service_started
     networks:
       - frontend
     image: caddy
@@ -12,6 +15,9 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
   website:
     container_name: turnier-dev-website
+    depends_on:
+      api:
+        condition: service_started
     networks:
       - frontend
       - backend
@@ -23,6 +29,9 @@ services:
     command: "npm run devexp"
   api:
     container_name: turnier-dev-api
+    depends_on:
+      database:
+        condition: service_started
     networks:
       - backend
     build: ./api

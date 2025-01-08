@@ -1,6 +1,9 @@
 services:
   caddy:
     container_name: turnier-caddy
+    depends_on:
+      website:
+        condition: service_started
     networks:
       - frontend
     image: caddy
@@ -22,6 +25,9 @@ services:
       - postgres-storage:/var/lib/postgresql/data
   website:
     container_name: turnier-website
+    depends_on:
+      api:
+        condition: service_started
     networks:
       - frontend
       - backend
@@ -29,6 +35,9 @@ services:
     build: ./website
   api:
     container_name: turnier-api
+    depends_on:
+      database:
+        condition: service_started
     networks:
       - backend
     restart: unless-stopped
