@@ -1,0 +1,35 @@
+= 1. Team Meeting am 09.01.2025 in die 4.Iteration
+Kareen Khouri <kareen.khouri@stud.htw-dresden.de>
+0.1, 09.01.2025
+:toc:
+:toc-title: Inhaltsverzeichnis
+
+== Anwesend
+* Tim
+* Kareen
+* Max
+* Bene
+* Julian
+* Alexander
+* Jonas
+
+== Inhalt
+
+Wir haben den aktuellen Stand unserer Arbeit besprochen, was bisher erreicht wurde und was noch aussteht.
+
+* Der Prototyp wurde erneut überarbeitet, und der aktuelle Zustand ist zufriedenstellend.
+
+== Aufgaben für die 4. Iteration
+
+* Tim und Max bereiten die Präsentation vor.
+* Kareen und Bene entwickeln die Vision weiter.
+* Neue Tickets für die anstehenden Aufgaben wurden bereits von Tim in GitHub erstellt.
+* Die neuen Aufgaben sollen bis zum **15.01.2025** abgeschlossen sein, damit sie im Meeting am **16.01.2025** besprochen werden können.
+
+== Termine
+
+* Termin mit dem Coach und dem Auftraggeber vereinbaren:
+  ** Coach-Termin: Freitag, **17.01.2025** ab **13:00 Uhr**.
+  ** Auftraggeber-Termin: Dienstag, **21.01.2025** ab **15:30 Uhr**.
+
+
