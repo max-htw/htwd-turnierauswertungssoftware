@@ -26,6 +26,8 @@ in einem Webbrowser die URL http://localhost:8440 aufrufen.
 - Automatische Turnierplangenerierung (Algorythmus muss verbessert werden)
 - Übersicht und Auswertung der aktuellen Spielstände sind auf der Hauptseite in tabelarischer Form dargestellt.
 - Speichern des Turniers und Laden eines gespeicherten Turniers (nicht Permanent, nur im RAM)
+- Role des Besuchers wird im ersten Abschnitt der URL gespeichert.
+- Ansichte und Funktionalitäten sind entsprechend der Benutzerrole anpassbar.
 - Export zu PDF und CSV (nur Ansatz)
 - Benutzerrolen sind "Organisator", "Gast", "Team ..." (nur Ansatz)
 
@@ -33,5 +35,4 @@ in einem Webbrowser die URL http://localhost:8440 aufrufen.
 - Daten können nicht permanent gespeichert werden.
 - Http-Server kann nicht mehrere anfragen gleichzeitig bearbeiten.
 - Kein effizienter Algorythmus für die Turnierplanung
-- Visuelle Gestaltung fehlt.
 
