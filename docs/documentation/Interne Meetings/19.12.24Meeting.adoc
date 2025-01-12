@@ -1,0 +1,50 @@
+= 3. Team Meeting am 19.12.2024 in die 3.Iteration
+Kareen Khouri <kareen.khouri@stud.htw-dresden.de>
+0.1, 12.12.2024
+:toc:
+:toc-title: Inhaltsverzeichnis
+
+== Anwesend
+* Tim
+* Kareen
+* Max
+* Bene
+* Julian
+* Alexander
+* Jonas
+
+
+
+== Inhalt
+* Es wurde darüber gesprochen, was im Coach Meeting und Auftraggeber Meeting über Wireframes und Prototyp besprochen wurde, da nicht alle Teammitglieder anwesend waren.
+
+
+* Klärung der Anforderungen:
+    ** Login ist nicht notwendig.
+    ** Authentifizierung ist ebenfalls nicht notwendig.
+    ** Identifikation ist jedoch notwendig (muss noch detaillierter ausgearbeitet werden).
+
+* Jeder berichtete, was bisher in dieser Iteration gemacht wurde.
+
+* Überprüfung und Diskussion der bearbeiteten Personas:
+
+  ** Die Schätzung der Personas war gut.
+  ** Es fehlen jedoch einige Aspekte, die noch überarbeitet werden müssen.
+
+* Max präsentierte seine überarbeiteten Wireframes und erklärte die Änderungen im Detail.
+
+== Abgabe am 21.12.2024
+
+* Fortschritt:
+
+   ** Wir sind gut vorangekommen mit den User Storys und dem Architecture Notebook.
+
+   ** Das C4-Modell ist im Architecture Notebook integriert.
+
+== Planung der 4. Iteration
+
+* Entscheidung, die 4. Iteration vorzuziehen.
+
+* Diskussion über mögliche Aufgaben für die 4. Iteration:
+
+  ** Tim hat bereits einige Tickets für die 4. Iteration in GitHub erstellt.
