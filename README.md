@@ -1,2 +1,2 @@
 # htwd-turnierauswertungssoftware
-Turnierauswertungssoftware im rahmen des Moduls Software Engineering I/II
+Turnierauswertungssoftware im Rahmen des Moduls Software Engineering I/II
