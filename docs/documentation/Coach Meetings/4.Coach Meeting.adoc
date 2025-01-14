@@ -1,0 +1,44 @@
+= Meetings mit Coach Herrn Zirkelbach in der 4.Iteration
+Kareen Khouri <kareen.khouri@stud.htw-dresden.de>
+0.1, 17.12.2024
+:toc:
+:toc-title: Inhaltsverzeichnis
+// Platzhalter für weitere Dokumenten-Attribute
+
+== Anwesenheit
+
+* *Abwesend:*
+  - Tim
+  - Julius
+
+* *Anwesend:*
+  - Kareen
+  - Bene
+  - Jonas
+  - Alexander
+  - Max
+
+== Unklarheiten in der Vision
+
+* Einen groben Überblick in der Vision darstellen, keine detaillierten Beschreibungen.
+* Neue Anforderungen des Auftraggebers stichpunktartig ergänzen, jedoch ohne vollständige Details.
+* Teamnamen vergeben, jedoch nicht in der Vision dokumentieren.
+* Komplett neue Anforderungen sollen in die Hauptfunktionalität der Vision aufgenommen werden, nicht in die zusätzlichen Produktanforderungen.
+* Die Vision wurde mit Herrn Zirkelbach durchgegangen und Feedback zur Verbesserung wurde erhalten.
+
+
+== Prototyp
+
+* *Aktueller Zustand:* Alle neuen Anforderungen des Auftraggebers wurden in den Prototyp umgesetzt, jedoch noch nicht getestet.
+
+== Tipps vom Coach
+
+* Späterer Austausch von Prototyp-Komponenten birgt Risiken!
+* Architekten und Entwickler sollten eng zusammenarbeiten, um Unklarheiten zu vermeiden.
+* In der Präsentation kann erwähnt werden, dass der Prototyp die Anforderungen des Auftraggebers erfüllt und funktional ist. Allerdings sollte er zu Beginn des nächsten Semesters aufgrund architektonischer Entscheidungen überarbeitet werden.
+
+== Nächste Schritte (für das interne Meeting am 16.01.2025)
+
+* Unklarheiten zwischen Entwicklern und Architekten klären.
+* Prototyp erneut besprechen.
+* Risiken identifizieren und Gegenmaßnahmen festlegen.
