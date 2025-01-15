@@ -6,6 +6,6 @@ include::../_includes/default-attributes.inc.adoc[]
 
 
 == Allgemeine Informationen
-
+image :: domänenmodell.drawio
 
 == ...
