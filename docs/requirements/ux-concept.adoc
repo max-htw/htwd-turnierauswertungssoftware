@@ -85,6 +85,3 @@ Intuitive Navigation und klare Beschriftung der Schaltflächen.
 Wenige Buttons, die übersichtlich gestaltet sind.
 
 
-== Schlussbemerkungen
-Dieses UX-Konzept soll die Grundlage für die Umsetzung einer benutzerfreundlichen Oberfläche legen, die sowohl Organisatoren als auch Spielern eine einfache und effiziente Bedienung ermöglicht.
-
