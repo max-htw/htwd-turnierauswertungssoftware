@@ -149,7 +149,7 @@ public class DataBaseQueries {
         }
     }
 
-    public static ArrayList<String> getTurnirArchiveNames(){
+    public static ArrayList<String> GetTurnierArchivenames(){
         ArrayList<String> ausgabe = new ArrayList<>();
         for(MyHelpers.TurnierArchiv t: _turnierArichv){
             ausgabe.add(t.fileName);
@@ -210,7 +210,7 @@ public class DataBaseQueries {
     }
 
 
-    public static ArrayList<MyHelpers.FeldSpiele> getTurnierplan_new() throws Exception {
+    public static ArrayList<MyHelpers.FeldSpiele> getTurnierplan() throws RuntimeException {
         if(_turnierPlan.isEmpty()){
             for(int i=0; i<AppSettings.get_anzSpielfelder(); i++){
                 _turnierPlan.add(new MyHelpers.FeldSpiele(i+1));

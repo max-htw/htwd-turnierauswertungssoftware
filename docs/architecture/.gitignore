@@ -1,4 +1,4 @@
 *.html
-# *.pdf
+*.pdf
 images/diagrams/ 
 .asciidoctor/

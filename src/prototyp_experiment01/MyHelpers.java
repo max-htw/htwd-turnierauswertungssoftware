@@ -265,6 +265,117 @@ public class MyHelpers {
         //Match-Details
         return "<a href=\"/\">Spielstand</a><br>\n" +
                 "<a href=\"/turnierplan\">Turnierplan</a><br><br>\n" +
-                "<a href=\"/einstellungen\">Einstellungen</a><br><br>\n";
+                "<a href=\"/einstellungen\">Einstellungen</a><br>\n" +
+                "<a href=\"http://volleyball.htwd\">http://volleyball.htwd</a><br><br>\n";
+    }
+
+    public static String btnLinkCss(){
+        String ausgabe = "";
+
+        ausgabe += "\na." + StringsCSS.w3btn + ":hover{box-shadow:none;background-color:#174872 !important;outline-width:0;}\n";
+        ausgabe += "a." + StringsCSS.w3btn + "{color:#ffffff;border-color:#205c90;background-color:#205c90;font-size:18px;" +
+                "font-family:'Source Sans Pro', sans-serif;" +
+                "border-radius:5px;user-select:none;padding:8px 16px;overflow:hidden;text-decoration:none;" +
+                "text-align:center;cursor:pointer;white-space:nowrap;line-height:1.5;box-sizing:inherit;" +
+                "}\n";
+        ausgabe += "." + StringsCSS.htwdOrange + "{color:#ec660c;}\n";
+        ausgabe += "body{font-family:sans-serif;}\n";
+
+        return ausgabe;
+    }
+
+    public static String dropDownCSS() {
+        return
+                ".dropbtn {" +
+                        "background-color: #205c90;" +
+                        "color: white;" +
+                        "padding: 16px;" +
+                        "font-size: 16px;" +
+                        "border: none;" +
+                        "cursor: pointer;" +
+                        "}" +
+
+                        ".dropdown {" +
+                        "position: relative;" +
+                        "display: inline-block;" +
+                        "}" +
+
+                        ".dropdown-content {" +
+                        "display: none;" +
+                        "position: absolute;" +
+                        "right: 0;" +
+                        "background-color: #f9f9f9;" +
+                        "min-width: 160px;" +
+                        "box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);" +
+                        "z-index: 1;" +
+                        "}" +
+
+                        ".dropdown-content a {" +
+                        "color: black;" +
+                        "padding: 12px 16px;" +
+                        "text-decoration: none;" +
+                        "display: block;" +
+                        "}" +
+
+                        ".dropdown-content a:hover {background-color: #f1f1f1;}" +
+                        ".dropdown:hover .dropdown-content {display: block;}" +
+                        ".dropdown:hover .dropbtn {background-color: #174872;}";
+    }
+
+    public static String dropDownHTML(boolean rechtsbuendig, String caption, ArrayList<String> values, ArrayList<String> hrefs){
+        String ausgabe = "<div class=\"dropdown\" style=\"float:";
+        if(rechtsbuendig)
+            ausgabe += "right";
+        else
+            ausgabe += "left";
+
+        ausgabe += ";\">\n";
+        ausgabe += "<button class=\"dropbtn\">" + caption + "</button>\n";
+        ausgabe += "<div class=\"dropdown-content\"";
+        if(rechtsbuendig)
+            ausgabe += " style=\"left:0;\"";
+        ausgabe += ">\n";
+        for(int i = 0; i < hrefs.size(); i++){
+            String valStr = "???";
+            if(values.size()>i)
+                valStr = values.get(i);
+            ausgabe += "<a href=\"" + hrefs.get(i) + "\">" + valStr + "</a>\n";
+        }
+        ausgabe += "</div></div>\n";
+        return  ausgabe;
+    }
+
+    public static String dropDownForTeam(boolean rechtsbuendig, String hrefPraefix, int groupID, int teamID){
+        ArrayList<String> groupVals = new ArrayList<>();
+        ArrayList<String> groupLinks = new ArrayList<>();
+        ArrayList<String> teamVals = new ArrayList<>();
+        ArrayList<String> teamLinks = new ArrayList<>();
+        for(int i = 0; i< AppSettings.get_anzGroups(); i++){
+            groupVals.add(""+(i+1));
+            char linkTeamChr = 'a';
+            if(groupID > 0)
+                linkTeamChr = Character.toLowerCase(AppSettings.getTeamLetter(teamID));
+
+            groupLinks.add(hrefPraefix + "/" + (i+1) + linkTeamChr);
+            if((i+1) == groupID){
+                for(int j = 0; j < AppSettings.get_anzTeams(i+1);j++){
+                    teamVals.add("" + AppSettings.getTeamLetter (j+1));
+                    teamLinks.add(hrefPraefix + "/" + (i+1) + Character.toLowerCase(AppSettings.getTeamLetter(j+1)));
+                }
+            }
+        }
+        groupVals.add(StringsRole.Admin.name());
+        groupLinks.add((hrefPraefix + "/" + StringsRole.Admin.name().toLowerCase()));
+
+        String groupIDCaption = "" + groupID;
+        if(groupID == 0)
+            groupIDCaption = StringsRole.Admin.name();
+
+        String ausgabe = "";
+        if(groupID>0)
+            ausgabe  += dropDownHTML(rechtsbuendig, "" + AppSettings.getTeamLetter(teamID), teamVals, teamLinks);
+
+        ausgabe += dropDownHTML(rechtsbuendig, groupIDCaption, groupVals, groupLinks);
+        return  ausgabe;
     }
 }

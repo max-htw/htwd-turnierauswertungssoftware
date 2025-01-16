@@ -5,17 +5,15 @@ import com.sun.net.httpserver.HttpServer;
 public class Main {
 
     public static void main(String[] args) throws IOException {
+        int p = 8440; //80
         HttpServer server = HttpServer.create(
-                new InetSocketAddress(8440), 1024);
-        server.createContext("/", new ContextHandlers.RootHandler());
-        server.createContext("/einstellungen", new ContextHandlers.EinstellungenHandler());
-        server.createContext("/turnierplan", new ContextHandlers.TPlanHandler());
-        server.createContext("/match", new ContextHandlers.MatchDetailsHandler());
+                new InetSocketAddress(p), 1024);
+        server.createContext("/", new ContextHandlers.CombHandler());//new ContextHandlers.RootHandler());
         server.createContext("/turnier.pdf", new ContextHandlers.TurnierPdfHandler());
         server.createContext("/turnier.csv", new ContextHandlers.TurnierCsvHandler());
         server.start();
         System.out.println("\nSE1 Turnierauswertungssoftware, experimenteller Prototyp 01.\n" +
-                "HTTP-Server gestartet unter: http://localhost:8440\n" +
+                "HTTP-Server gestartet unter: http://localhost:" + p + "\n" +
                 "Beenden mit 'CTRL + C'\n");
     }
 }
