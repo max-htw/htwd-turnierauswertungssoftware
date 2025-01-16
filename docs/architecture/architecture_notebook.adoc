@@ -50,8 +50,8 @@ Wir haben uns für eine Client-Server-Webanwendung aus folgenden Gründen entsch
 
 === Auswahl der zuverwendenden Komponenten
 . Das Software-Produkt wird mithilfe von https://www.docker.com[Docker] ausgeliefert, damit sichergestellt ist, dass jedes System die Voraussetzungen erfüllt.
-. Zur Speicherung der Daten wird https://www.postgresql.org[PostgreSQL] benutzt, da die Speicherung in Datenbanken übersichtlicher und robuster ist, als die Speicherung der Daten in Dateien.
-. Für die Entwicklung im Front-End wird https://nuxt.com/[Nuxt] benutzt. Dies vereinfacht die Nutzung von API's und bietet ein Übersichtliches Routing-System an.
+. Zur Speicherung der Daten wollen wird ein Datenbankmanagementsystem nutzen, da die Speicherung in Datenbanken übersichtlicher und robuster ist, als die Speicherung der Daten in Dateien. Desweiteren haben bereits alle *Informatik-Studiengänge vorkenntnisse. Beispiel: https://www.postgresql.org[PostgreSQL]
+. Für die Entwicklung im Front-End könnte ein Framework benutzt werden. Dies würde die Nutzung von API's erleichtern und ein Übersichtliches Routing-System anbieten. Beispiel: https://nuxt.com/[Nuxt]
 . Für eine einfachere Gestaltung der Website wird des weiteren https://tailwindcss.com[TailwindCSS] benutzt.
 . Für das Back-End wird https://www.java.com/en/[Java] benutzt. Dies vereinfacht die Einarbeitung, da bereits jeder Informatik-Studiengang Java behandelt hat.
 
