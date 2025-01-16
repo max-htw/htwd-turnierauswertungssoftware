@@ -1,0 +1,90 @@
+= UX-Konzept: {project-name}
+Jonas Grießhaber <s87547@htw-dresden.de>; 
+{localdatetime}
+include::../_includes/default-attributes.inc.adoc[]
+
+== Einführung
+In diesem Dokument werden die Benutzeroberflächen des Systems {project-system-name} beschrieben. Dies können sein:
+
+* Wireframes relevanter Benutzeroberflächen
+* Zusammenhänge mittels Taskflow-Diagrammen
+* Angaben über die Gestaltung der Benutzeroberfläche, z.B. Styling, Bedienbarkeit, ...
+
+== Anforderungen und Prioritäten
+
+[%header, cols="4,1,1"]
+|===
+| Anforderung | Priorität | Geplantes Release
+| Teamnamen sollten vor Ort zu Beginn geändert werden können. Bsp: S1 = "Füchse" | Hoch | Version 1.4
+| Farben des Stura sollen verwendet werden | Hoch | Version 1.4
+| Bedienbarkeit soll so einfach wie möglich gehalten werden | Hoch | Version 1.4
+| Export der Ergebnisse als Excel-Datei | Mittel | Version 1.2
+| Spieler sollen sich über ihren Teamnamen am Anfang anmelden und bekommen dann ihren eigenen Turnierbaum angezeigt | Mittel | Version 1.4
+| Aktuelle Partie soll farblich (grün) hervorgehoben werden. Das soll erfolgen, nachdem das Ergebnis der vorherigen Partie eingetragen wurde | Mittel | Version 1.4
+| Legende einfügen, welche anzeigt, welches Team spielt und welches Team Schiedsrichter ist | Mittel | Version 1.4
+| Ein Turnier, welches gespeichert wurde, muss überschrieben werden können (möglicherweise Sicherheitsfrage vorschalten). | Mittel | Version 1.4
+| Gespielte Partien sollen auf dem Turnierplan durchgestrichen werden | Niedrig | Version 1.4
+| Die letzten 5 Turniere sollen in der Historie ersichtlich sein | Niedrig | Version 1.4
+|===
+
+== Gestaltung der Benutzeroberfläche
+
+=== Farbgestaltung
+Die Benutzeroberfläche wird in den Farben des Stura gestaltet. Diese Farben sind:
+
+Primärfarbe: Orange
+
+Sekundärfarbe: Schwarz, Grün 
+// ?? die Frage nach den Stura Farben eventuell morgen absprechen.
+
+
+=== Wireframes
+
+Startbildschirm:
+
+Anzeige eines "Begrüßungsbildschirms" mit der Möglichkeit, sich über den Teamnamen anzumelden.
+
+Schaltflächen: "Neues Turnier erstellen", "Turnier laden", "Historie anzeigen".
+
+Turnierplan:
+
+Darstellung eines interaktiven Turnierbaums mit Möglichkeit zur Eingabe von Spielergebnissen.
+
+Grüne Hervorhebung der aktuellen Partie.
+
+Durchgestrichene Darstellung bereits gespielter Partien.
+
+Ergebniseingabe:
+
+Einfache Eingabe der Ergebnisse mit automatischer Fehlerprüfung.
+
+Sicherheitsabfrage beim Überschreiben eines gespeicherten Turniers.
+
+=== Taskflows
+
+Anmeldung:
+
+Spieler geben ihren Teamnamen ein und gelangen zur Ansicht ihres individuellen Turnierbaums.
+
+Erstellung eines neuen Turniers:
+
+Der Organisator gibt die Teams ein und kann vor Ort Namen ändern.
+
+Eintragung von Ergebnissen:
+
+Ergebnisse werden eingetragen, geprüft, und die nächste Partie wird automatisch hervorgehoben.
+
+Export:
+
+PDF-Export des Turnierplans oder Excel-Export der Ergebnisse.
+
+=== Bedienbarkeit
+
+Intuitive Navigation und klare Beschriftung der Schaltflächen.
+
+Wenige Buttons, die übersichtlich gestaltet sind.
+
+
+== Schlussbemerkungen
+Dieses UX-Konzept soll die Grundlage für die Umsetzung einer benutzerfreundlichen Oberfläche legen, die sowohl Organisatoren als auch Spielern eine einfache und effiziente Bedienung ermöglicht.
+
