@@ -1,14 +1,61 @@
 services:
-  database:
-    image: postgres:latest
+  caddy:
+    container_name: turnier-dev-caddy
+    depends_on:
+      website:
+        condition: service_started
+    networks:
+      - frontend
+    image: caddy
     restart: unless-stopped
     ports:
-      - 127.0.0.1:5432:5432
+     - "80:80"
+     - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+  website:
+    container_name: turnier-dev-website
+    depends_on:
+      api:
+        condition: service_started
+    networks:
+      - frontend
+      - backend
+    image: node:lts-alpine
+    restart: unless-stopped
+    working_dir: /home/node/app
+    volumes:
+      - ./website:/home/node/app
+    command: "npm run devexp"
+  api:
+    container_name: turnier-dev-api
+    depends_on:
+      database:
+        condition: service_started
+    networks:
+      - backend
+    build: ./api
+    restart: unless-stopped
+    develop:
+      watch:
+        - path: ./api
+          action: rebuild
+  database:
+    container_name: turnier-dev-database
+    networks:
+      - backend
+    image: postgres:latest
+    restart: unless-stopped
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
     volumes:
-      - postgres-storage-dev:/var/lib/postgresql/data
+      - turnier-dev-postgres-storage:/var/lib/postgresql/data
 
 volumes:
-  postgres-storage-dev: {}
+  turnier-dev-postgres-storage: {}
 
+networks:
+  frontend:
+    name: turnier-dev-network-frontend
+  backend:
+    name: turnier-dev-network-backend
