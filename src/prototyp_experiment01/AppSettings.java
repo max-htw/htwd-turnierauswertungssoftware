@@ -24,24 +24,14 @@ public class AppSettings {
     private static int _maxAnzSpielfelder = 4;
     private static int _anzSpielfelder = 2;
 
+    public static final int urlSectionsOffset = 0;
+
     private static boolean _needRueckspiele = true;
     public static boolean needRueckspiele() { return _needRueckspiele;}
     public static void set_needRueckspiele(boolean y_n){
         _needRueckspiele = y_n;
         DataBaseQueries.initializeMatches();
         DataBaseQueries.clearCurrentTurnierplan();
-    }
-
-    public static String getRoleStr(int role){
-        String ausgabe = "Organisator";
-        if (role < 0) ausgabe = "Gast";
-        else if (role > 0) ausgabe = "Team " + role;
-        return ausgabe;
-    }
-    public static int getRole(){return _role;}
-    public static void setRole(int role){
-        if(_role > _maxAnzTeams) _role = -1;
-        _role = role;
     }
 
     public static boolean getNeedPrefillScores(){return _needPrefillScores;}
