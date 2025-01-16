@@ -1,6 +1,6 @@
 = Domain Model: {project-name}
 ;
-{localdatetime}
+//{localdatetime}
 include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
 
@@ -9,4 +9,5 @@ include::../_includes/default-attributes.inc.adoc[]
 
 
 
-== ...
+== Domain-Model-Diagramm
+plantuml::{plantumlsdir}/domain_model.puml[svg]
