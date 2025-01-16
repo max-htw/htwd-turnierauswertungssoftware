@@ -7,18 +7,31 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.*;
+
 @SpringBootApplication
 @RestController
 public class ApiApplication {
-
+    static SQL sql;
     public static void main(String[] args) {
-        SpringApplication.run(ApiApplication.class, args);
+      try {
+        sql = new SQL();
+      } catch (SQLException e) {
+        throw new RuntimeException(e);
+      }
+      SpringApplication.run(ApiApplication.class, args);
     }
 
     @CrossOrigin()
     @GetMapping("/hello")
     public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
         System.out.println("/hello get");
-        return String.format("{\"Test\":\"Hello %s\"}", name);
+      try(PreparedStatement pstmt = sql.getConnection().prepareStatement("SELECT 'Hello from Database';")) {
+        ResultSet rs = pstmt.executeQuery();
+        rs.next();
+        return rs.getString(1);
+      } catch (SQLException e) {
+        throw new RuntimeException(e);
+      }
     }
 }
