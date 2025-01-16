@@ -1,7 +1,13 @@
+<script lang="ts" setup>
+
+const dataTwice = await $fetch('/api/hello')
+
+</script>
+
 <template>
   <div class="m-1">
     <Nav />
-
+    {{ dataTwice }}
     <h1 class="text-3xl">Startseite: Turnierauswertung</h1><br>
 
     <select class="rounded-lg p-1 bg-slate-100 hover:bg-slate-200">

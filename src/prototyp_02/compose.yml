@@ -1,5 +1,22 @@
 services:
+  caddy:
+    container_name: turnier-caddy
+    depends_on:
+      website:
+        condition: service_started
+    networks:
+      - frontend
+    image: caddy
+    restart: unless-stopped
+    ports:
+     - "80:80"
+     - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
   database:
+    container_name: turnier-database
+    networks:
+      - backend
     image: postgres:latest
     restart: unless-stopped
     environment:
@@ -7,16 +24,31 @@ services:
     volumes:
       - postgres-storage:/var/lib/postgresql/data
   website:
+    container_name: turnier-website
+    depends_on:
+      api:
+        condition: service_started
+    networks:
+      - frontend
+      - backend
     restart: unless-stopped
     build: ./website
-    ports:
-      - "80:3000"
   api:
+    container_name: turnier-api
+    depends_on:
+      database:
+        condition: service_started
+    networks:
+      - backend
     restart: unless-stopped
     build: ./api
-    ports:
-      - "8080:8080"
 
 volumes:
   postgres-storage: {}
+
+networks:
+  frontend:
+    name: turnier-network-frontend
+  backend:
+    name: turnier-network-backend
 
