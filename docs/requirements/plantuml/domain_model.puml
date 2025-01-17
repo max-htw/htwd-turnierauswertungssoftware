@@ -1,6 +1,6 @@
 @startuml Domain Model
 skinparam linetype ortho
-skinparam nodesep 100
+skinparam nodesep 110
 
 object Turnier
 Turnier : + Name
