@@ -4,10 +4,10 @@
 include::../_includes/default-attributes.inc.adoc[]
 //
 // Unterverzeichnisse fuer die Graphiken (sind im .gitignore eingetragen)
-:imagesdir: images 
-:diagramsdir: diagrams
+//   :imagesdir: images 
+//   :diagramsdir: diagrams
 // Unterverzeichniss fuer PlantUML-Quelltexte
-:plantumlsdir: plantuml 
+//   :plantumlsdir: plantuml 
 // Platzhalter fuer weitere Dokumenten-Attribute
 
 
