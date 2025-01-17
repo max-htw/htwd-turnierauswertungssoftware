@@ -7,7 +7,7 @@ include::../_includes/default-attributes.inc.adoc[]
 
 == Einführung
 //Briefly describe the content of the project plan.
-
+Dieser Projektplan beschreibt die Struktur, Methodik und Zielsetzungen des Teams und dient als lebendiges Dokument, das während der Projektumsetzung fortlaufend ergänzt und optimiert wird. Er unterstützt die Transparenz sowohl im Team als auch gegenüber externen Partnern, fördert den Informationsaustausch und hilft, die langfristigen Zielvorgaben des Projekts nicht aus den Augen zu verlieren.
 
 == Projektorganisation
 //Introduce the project team, team members, and roles that they play during this project. If applicable, introduce work areas, domains, or technical work packages that are assigned to team members. Introduce neighboring projects, relationships, and communication channels. If the project is introduced somewhere else, reference that location with a link.
@@ -48,17 +48,30 @@ Die iterative Entwicklung bildet das zentrale Element des Projektansatzes. Das T
 
 | I1
 |
-* Mitigate Risk1
-* Develop Use Case 3, Scenario 2
-| Date from/Date to
-| 15
+* kennenlernen im Team
+* erste Bedarfsanalyse 
+| 24.10.2024/ 11.11.2024
+| 
 
 | I2
 |
-* Mitigate Risk 2
-* Develop Use Case 1, Scenario 2
-| Date from/Date to
-| 16
+* Tiefgründige Bedarfsanalyse 
+| 12.11.2024/ 29.11.2024
+| 
+
+| I3
+| 
+* entwicklung erster Modelle 
+* 1. Prototyp gestartet
+| 30.11.2024/ 20.12.2024
+|
+
+| I4
+|
+* Verfeinerung des 1. Prototyps 
+* Anpassungen der bisherigen Ergebnisse durch neue Bedürfnisse
+| 21.12.2024/ 24.01.2025
+|
 |===
 
 
@@ -68,3 +81,8 @@ Die iterative Entwicklung bildet das zentrale Element des Projektansatzes. Das T
 
 == Erkenntnisse (Lessons learned)
 //List lessons learned from the retrospective, with special emphasis on actions to be taken to improve, for example: the development environment, the process, or team collaboration.
+* Die interne Absprache bei geteilten Aufgaben ist essensziel und darf unter keinen Umständen vernachlässigt werden.
+
+* Die präzise Vorbereitung der Meetings gestaltet diese deutlich effektiver
+
+* Die Kommunikation mit dem Auftraggeber ist der entscheidendste Faktor in der Bedarfsanalyse 
