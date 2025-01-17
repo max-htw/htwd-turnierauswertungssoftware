@@ -3,20 +3,24 @@ skinparam linetype ortho
 skinparam nodesep 140
 
 object Turnier
+Turnier : + Name
+Turnier : + Datum
 object Organisator
+Organisator : + Name
 object Auswertung
 object Turnierplan
   Turnierplan : + Bedingungen
 object Match
   Match : + Spielstand
+  Match : + Zeit
+  Match : + Spielfeld
   Match : \n
 object Team
   Team : + Name
+  Team : + Anzahl
   Team : \n
   
 object Leistungsgruppe
-object Spielfeld
-
 Auswertung "0..1" -r- "1" Turnier
 Turnier "1..*" -r- "1" Organisator
 Turnier "1" -d- "1" Turnierplan
@@ -27,8 +31,7 @@ Leistungsgruppe "1" *-- "3..*" Team
 Leistungsgruppe "1" -- "3..*" Match
 Team "1" -r- "2..*" Match : Team 1
 Team "1" -r- "2..*" Match : Team 2
-Team "1" -r- "0..*" Match : Richter
+Team "1" -r- "0..*" Match : Schiri
 
-Match "0..*" -r- "1" Spielfeld
 
 @enduml
