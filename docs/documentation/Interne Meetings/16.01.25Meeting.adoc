@@ -1,0 +1,47 @@
+= Letzte Team Meeting in die 4.Iteration 16.01.2025
+Kareen Khouri <kareen.khouri@stud.htw-dresden.de>
+0.1, 12.12.2024
+:toc:
+:toc-title: Inhaltsverzeichnis
+
+== Internes Meeting am 16.01.2025
+
+== Anwesend
+* Kareen
+* Jonas
+* Tim
+* Alex
+* Bene
+* Max
+* Julian
+
+== Besprochene Themen
+
+=== Bearbeitete Aufgaben
+* Die erledigten Aufgaben wurden gemeinsam in der Gruppe besprochen.
+
+=== Klärung von Unklarheiten
+* Anpassung des Architektur-Notebooks.
+
+=== Vorbereitung auf die Präsentation
+* Beide Prototypen in der Präsentation vorstellen (je 5 Minuten).
+* Erwähnung der geplanten Schritte für prototyp für das nächste Semester.
+* Kein Code in der Präsentation zeigen.
+* Erklärung, warum zwei Prototypen entwickelt wurden.
+
+=== Anpassung der Präsentation
+* Fertigstellen der Präsentation.
+* Fertigstellung des Domänenmodells.
+
+=== Vision
+* Anpassung des UX-Konzepts.
+
+=== Risiken und Gegenmaßnahmen
+* Weitere Risiken erfassen und den Risikostatus aktualisieren.
+
+=== Personas
+* Weitere Ziele erfassen.
+* Proto-Persona erstellen.
+
+== Nächste Schritte
+* Alle besprochenen Anpassungen bis zum Dienstag den 21.01.2025 fertig stellen.
