@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.*;
 
 public class MyHelpers {
-    public static class IntPair implements Comparable<IntPair>{
+    public static class IntPair implements Comparable<IntPair>, Serializable{
         int x;
         int y;
 
@@ -40,7 +41,7 @@ public class MyHelpers {
         }
     }
 
-    public static class Match{
+    public static class Match implements Serializable{
 
         private int _groupID = -1;
         public int groupID(){
@@ -209,7 +210,7 @@ public class MyHelpers {
         }
     }
 
-    public  static  class FeldSpiele {
+    public  static  class FeldSpiele implements Serializable {
         public  final int feldNr;
 
         // Integer-Parameter: hashcode eines Matches 100*groupID + 10*team1 + team2
@@ -244,7 +245,7 @@ public class MyHelpers {
         }
     }
 
-    public static class TurnierArchiv{
+    public static class TurnierArchiv implements Serializable{
 
         TurnierArchiv(String fileName){
             this.fileName = fileName;
@@ -272,13 +273,21 @@ public class MyHelpers {
     public static String btnLinkCss(){
         String ausgabe = "";
 
-        ausgabe += "\na." + StringsCSS.w3btn + ":hover{box-shadow:none;background-color:#174872 !important;outline-width:0;}\n";
-        ausgabe += "a." + StringsCSS.w3btn + "{color:#ffffff;border-color:#205c90;background-color:#205c90;font-size:18px;" +
+        ausgabe += "\na." + StringsCSS.w3btn + ":hover, button:hover{box-shadow:none;background-color:#1b423e !important;outline-width:0;}\n";
+        ausgabe += "a." + StringsCSS.w3btn + ", button {color:#ffffff;border-color:#387d75;background-color:#387d75;font-size:18px;" +
                 "font-family:'Source Sans Pro', sans-serif;" +
                 "border-radius:5px;user-select:none;padding:8px 16px;overflow:hidden;text-decoration:none;" +
                 "text-align:center;cursor:pointer;white-space:nowrap;line-height:1.5;box-sizing:inherit;" +
                 "}\n";
+        ausgabe += "span." + StringsCSS.w3lbl + "{color:#000000;border-color:#ffd6ba;background-color:#ffd6ba;font-size:18px;" +
+                "font-family:'Source Sans Pro', sans-serif;" +
+                "border-radius:5px;user-select:none;padding:8px 16px;overflow:hidden;text-decoration:none;" +
+                "text-align:center;white-space:nowrap;line-height:1.5;box-sizing:inherit;" +
+                "}\n";
         ausgabe += "." + StringsCSS.htwdOrange + "{color:#ec660c;}\n";
+        ausgabe += "input{padding:5px 10px 5px 15px; border: 1px solid rgba(0,0,0,0.25) !important;border-radius:25px;overflow: visible; }";
+        ausgabe += "input[type=number] {-moz-appearance: textfield;}";
+        ausgabe += "input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {-webkit-appearance: none; margin: 0;}\n";
         ausgabe += "body{font-family:sans-serif;}\n";
 
         return ausgabe;
@@ -287,7 +296,7 @@ public class MyHelpers {
     public static String dropDownCSS() {
         return
                 ".dropbtn {" +
-                        "background-color: #205c90;" +
+                        "background-color: #387d75;" +
                         "color: white;" +
                         "padding: 16px;" +
                         "font-size: 16px;" +
@@ -319,7 +328,7 @@ public class MyHelpers {
 
                         ".dropdown-content a:hover {background-color: #f1f1f1;}" +
                         ".dropdown:hover .dropdown-content {display: block;}" +
-                        ".dropdown:hover .dropbtn {background-color: #174872;}";
+                        ".dropdown:hover .dropbtn {background-color: #1b423e;}";
     }
 
     public static String dropDownHTML(boolean rechtsbuendig, String caption, ArrayList<String> values, ArrayList<String> hrefs){

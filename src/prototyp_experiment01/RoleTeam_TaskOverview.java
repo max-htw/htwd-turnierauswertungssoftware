@@ -34,6 +34,7 @@ public class RoleTeam_TaskOverview extends RoleWithTaskBase{
                     int s = Integer.valueOf(qs.get(AppSettings.post_score_team2_rueckspiel));
                     m.set_secondTeamRueckspielPunkte(s);
                 }
+                DataBaseQueries.currentTurnierChanged = true;
             }
         }
         catch (Exception e) {

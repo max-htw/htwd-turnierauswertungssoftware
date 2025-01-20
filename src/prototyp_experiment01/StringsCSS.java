@@ -8,5 +8,6 @@ public enum StringsCSS {
     gameCurrent,
     gameFuture,
     w3btn,
+    w3lbl,
     htwdOrange
 }
