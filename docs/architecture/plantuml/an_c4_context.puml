@@ -4,13 +4,11 @@
 title C4-Context
 
 Person(organisator, "Organisatoren des Turniers", "Die für die Planung, den Ablauf und die Auswertung des Turniers verantwortliche Personen.")
-Person(shiri, "Schiedsrichter", "Teilnehmer eines Teams, das als Schiedsrichter eines Matches tätig ist.")
-Person(besucher, "Besucher", "Andere Personen, die sich über den Stand des Turniers informieren möchten.")
+Person(spieler, "Spieler", "Teilnehmer eines Teams.")
 
 System(turnierauswertungssoftware, "HTWD Turnierauswertungssoftware", "Automatisiert die Plannung, Erfassung und Auswertung eines Volleyball-Turniers.")
 
 Rel_D(organisator, turnierauswertungssoftware, "Uses")
-Rel_D(shiri, turnierauswertungssoftware, "Uses")
-Rel_D(besucher, turnierauswertungssoftware, "Uses")
+Rel_D(spieler, turnierauswertungssoftware, "Uses")
 
 @enduml
