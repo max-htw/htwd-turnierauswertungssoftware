@@ -29,10 +29,9 @@ in einem Webbrowser die URL http://localhost:8440 aufrufen.
 - Role des Besuchers wird im ersten Abschnitt der URL gespeichert.
 - Ansichte und Funktionalitäten sind entsprechend der Benutzerrole anpassbar.
 - Export zu PDF und CSV (nur Ansatz)
-- Benutzerrolen sind "Organisator", "Gast", "Team ..." (nur Ansatz)
+- Die Turnierdaten werden in einer Datei gespeichert und beim Start des Programms aus der Datei wiederhergestellt.
 
 ## Fehlende Funktionalität
-- Daten können nicht permanent gespeichert werden.
 - Http-Server kann nicht mehrere anfragen gleichzeitig bearbeiten.
 - Kein effizienter Algorythmus für die Turnierplanung
 

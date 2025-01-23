@@ -1,7 +1,11 @@
 // --- 1. Projektthema -------------------------
 = SE I - Belegabgabe: {project-name}
 // --- 2. Teammitglieder -----------------------
+<<<<<<< HEAD
 Julian Groß <s86368@htw-dresden.de>; Alexander Zajcev <s87413@htw-dresden.de>; Kareen Khouri <s85594@htw-dresden.de>; Jonas Grießhaber  <s87547@htw-dresden.de>; Maximilian Lohr <s86327@htw-dresden.de>; Tim Reimann <s85696@htw-dresden.de>; Benedikt Mühlhans <s85662@htw-dresden.de>
+=======
+Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>; Alexander Zajcev <s87413@htw-dresden.de>
+>>>>>>> 022923588b3d1bf85cc16d07bcd190370f5c0b80
 // --- 3. Abgabedatum --------------------------
 01. Januar 2025
 // ---------------------------------------------
@@ -27,6 +31,7 @@ include::{docs}/_includes/default-attributes.inc.adoc[]
 :experimental:
 // Folders
 :imagesdir-reset: {imagesdir}
+:plantumlsdir-reset: {plantumlsdir}
 :docs-test2: {docs}/test2
 :docs-requirements: {docs}/requirements
 :docs-project-management: {docs}/project_management
@@ -56,6 +61,7 @@ include::{docs-project-management}/project_plan.adoc[lines=1..1;4..-1,leveloffse
 * UX-Konzept
 
 :imagesdir: {docs-requirements}/images
+:plantumlsdir: {docs-requirements}/plantuml
 
 // Vision
 include::{docs-requirements}/vision.adoc[lines=1..1;4..-1,leveloffset=+1]
@@ -78,6 +84,8 @@ include::{docs-requirements}/ux-concept.adoc[lines=1..1;4..-1,leveloffset=+1]
 
 // Architektur-Notizbuch
 :imagesdir: {docs-architecture}/images
+:plantumlsdir: {docs-architecture}/plantuml
+
 include::{docs-architecture}/architecture_notebook.adoc[lines=1..1;4..-1,leveloffset=+1]
 <<<
 // Test Cases

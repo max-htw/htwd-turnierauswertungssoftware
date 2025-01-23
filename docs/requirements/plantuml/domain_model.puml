@@ -1,0 +1,35 @@
+@startuml Domain Model
+skinparam linetype ortho
+skinparam nodesep 110
+
+object Turnier
+Turnier : + Name
+Turnier : + Datum
+Turnier : \n
+object Organisator
+Organisator : + Name
+object Auswertung
+object Turnierplan
+  Turnierplan : + Bedingungen
+object Match
+  Match : + Spielstand
+  Match : + Zeit
+  Match : + Spielfeld
+object Team
+  Team : + Name
+  Team : \n
+object Leistungsgruppe
+Leistungsgruppe : + Anzahl Teams
+
+Turnier "1" -r- "\n0..1" Auswertung 
+Turnier "1..*" -r- "1" Organisator
+Turnier "1" -d- "1" Turnierplan
+Turnierplan "1" *-d- "3..*" Match
+Leistungsgruppe "1" *-- "3..*" Team
+
+Leistungsgruppe "1" -- "3..*" Match
+Match "2..*" -r- "Team1   1" Team
+Match "2..*" -r- "Team2   1" Team
+Match "0..*" -r- "Schiri  1" Team
+
+@enduml
