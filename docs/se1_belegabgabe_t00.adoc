@@ -2,10 +2,14 @@
 = SE I - Belegabgabe: {project-name}
 // --- 2. Teammitglieder -----------------------
 <<<<<<< HEAD
+<<<<<<< HEAD
 Julian Groß <s86368@htw-dresden.de>; Alexander Zajcev <s87413@htw-dresden.de>; Kareen Khouri <s85594@htw-dresden.de>; Jonas Grießhaber  <s87547@htw-dresden.de>; Maximilian Lohr <s86327@htw-dresden.de>; Tim Reimann <s85696@htw-dresden.de>; Benedikt Mühlhans <s85662@htw-dresden.de>
 =======
 Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>; Vorname Nachname <s00000@htw-dresden.de>; Alexander Zajcev <s87413@htw-dresden.de>
 >>>>>>> 022923588b3d1bf85cc16d07bcd190370f5c0b80
+=======
+Julian Groß <s86368@htw-dresden.de>; Alexander Zajcev <s87413@htw-dresden.de>; Kareen Khouri <s85594@htw-dresden.de>; Jonas Grießhaber  <s87547@htw-dresden.de>; Maximilian Lohr <s86327@htw-dresden.de>; Tim Reimann <s85696@htw-dresden.de>; Benedikt Mühlhans <s85662@htw-dresden.de>
+>>>>>>> 4ac5df039d70fca8e7dcd9c48ab7654d17c64374
 // --- 3. Abgabedatum --------------------------
 01. Januar 2025
 // ---------------------------------------------
