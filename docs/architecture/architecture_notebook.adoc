@@ -4,10 +4,10 @@
 include::../_includes/default-attributes.inc.adoc[]
 //
 // Unterverzeichnisse fuer die Graphiken (sind im .gitignore eingetragen)
-//   :imagesdir: images 
+//   :imagesdir: images
 //   :diagramsdir: diagrams
 // Unterverzeichniss fuer PlantUML-Quelltexte
-//   :plantumlsdir: plantuml 
+//   :plantumlsdir: plantuml
 // Platzhalter fuer weitere Dokumenten-Attribute
 
 
@@ -81,6 +81,18 @@ Bei Nichterreichbarkeit des Hauptsystems, soll die zweite System die volle Funkt
 
 == Schichten oder Architektur-Framework
 //[Describe the architectural pattern that you will use or how the architecture will be consistent and uniform. This could be a simple reference to an existing or well-known architectural pattern, such as the Layer framework, a reference to a high-level model of the framework, or a description of how the major system components should be put together.]
+
+Wir nutzen die Drei-Schichten-Architektur, um eine klare Trennung zwischen den verschiedenen Komponenten der Anwendung zu ermöglichen. Diese Architektur besteht aus folgenden Schichten:
+
+. Präsentation
+Hier wird die Benutzeroberfläche implementiert. Diese wird dann mittels Front-End-Framework (z.B. Nuxt) erstellt. Diese Schicht ist verantwortlich für die Interaktion mit dem Benutzer und die Darstellung der Daten.
+
+. Anwendungslogik
+Diese Schicht enthält die Logik der Anwendung. Hier werden die Daten verarbeitet und die Regeln für die Interaktion zwischen der Präsentationsschicht und der Datenbank definiert. Java wird in dieser Schicht verwendet, um die Logik zu implementieren und die Kommunikation mit der Datenbank zu steuern.
+
+. Speicherung
+Diese Schicht ist für die Interaktion mit der Datenbank verantwortlich. Sie stellt sicher, dass die Daten effizient gespeichert und abgerufen werden. PostgreSQL wird hier als Datenbankmanagementsystem eingesetzt, um die Daten persistent, robust und sicher zu verwalten.
+
 
 
 == Architektursichten (Views)
