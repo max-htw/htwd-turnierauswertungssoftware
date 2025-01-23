@@ -1,0 +1,29 @@
+= Die letzte Team Meeting am 23.01.2025 in SE1
+Kareen Khouri <kareen.khouri@stud.htw-dresden.de>
+0.1, 23.01.2025
+:toc:
+:toc-title: Inhaltsverzeichnis
+
+
+== Internes Meeting am 23.01.2025
+
+== Anwesend
+- Tim
+- Max
+- Kareen
+- Bene
+- Jonas
+- Julian
+- Alexander
+
+== Themen des Meetings
+
+=== Offene und erledigte Aufgaben
+- **Persona:** Die Persona sieht vollständig und gut aus.
+- **C4-Modell:** Das C4-Modell wird nach der Präsentation neu erstellt und sieht aktuell gut aus.
+- **Vision:** Die Vision wirkt zufriedenstellend und könnte so abgegeben werden.
+- **Architecture Notebook:** Das Notebook ist noch nicht vollständig und sollte bis **24.01.2025 um 17:00 Uhr** fertiggestellt sein.
+
+=== Aufgaben bis zum nächsten Semester
+- **Vision vervollständigen**
+- **Programmierfähigkeiten in Java verbessern**
