@@ -47,7 +47,7 @@ public class RoleAdmin_TaskEinstellungen extends RoleWithTaskBase {
         bs.write(("td.stats{border-bottom:0.2vmin solid grey;font-size:3vmin;font-weight:normal;}").getBytes());
         bs.write(("td.trenner{min-width:4vmin;}").getBytes());
         bs.write(("td a:link, td a:visited, td a:hover, td a:active{text-decoration:none;}\n").getBytes());
-        bs.write(("div.section{border:0.2vmin solid grey;padding:5px;}\n").getBytes());
+        bs.write(("div.section{border:1px solid grey;padding:10px;}\n").getBytes());
         bs.write((MyHelpers.dropDownCSS()).getBytes());
         bs.write((MyHelpers.btnLinkCss()).getBytes());
         bs.write(("</style>\n").getBytes());
@@ -57,36 +57,43 @@ public class RoleAdmin_TaskEinstellungen extends RoleWithTaskBase {
         bs.write((MyHelpers.dropDownForTeam(true, pathPrefix, 0, 0)).getBytes());
         bs.write((htmlNavigationLinks()).getBytes());
 
-        bs.write(("<div style=\"border: 0.2vmin solid #0c0;padding: 1rem;width: 40vmin;font-size:3vmin;\">\n").getBytes());
-        bs.write(("<span style=\"text-decoration:underline;\">Aktuelles Turnier</span><br><br>\n").getBytes());
+        bs.write(("<div style=\"border: 1px solid #0c0;padding: 10px;width: 300px;font-size:18px;\">\n").getBytes());
+        bs.write(("<span style=\"font-weight:bold;\">Turnier konfigurieren</span><br><br>\n").getBytes());
 
         bs.write(("<div class=\"" + StringsCSS.section.name() + "\">").getBytes()); // start Abschnitt Gruppen
-        bs.write(("Anzahl Gruppen: " + AppSettings.get_anzGroups()+"<br>\n").getBytes());
-        String trn = " (aendern zu ";
+        bs.write(("<span style=\"line-height:50px;\">Anzahl Gruppen:</span><br>\n").getBytes());
+        String trn = "";
         for (int i=1; i<=AppSettings.get_maxAnzGroups(); i++){
             if(i != AppSettings.get_anzGroups()){
-                bs.write((trn + "<a href=\"./einstellungen?" + qs_setAnzahlGroups + "=" + i + "\">" + i + "</a>").getBytes());
-                trn = " | ";
+                bs.write((trn + "<a class=\"" + StringsCSS.w3btn + "\" href=\"./einstellungen?" + qs_setAnzahlGroups + "=" + i + "\">" + i + "</a>").getBytes());
+                trn = " ";
+            }
+            else{
+                bs.write((trn + "<span class=\"" + StringsCSS.w3lbl + "\">" + i + "</span>").getBytes());
+                trn = " ";
             }
         }
-        bs.write((")").getBytes());
+        bs.write(("").getBytes());
 
         for(int groupID = 1; groupID <= AppSettings.get_anzGroups(); groupID++) {
-            bs.write(("<br><br>\nAnzahl Teams Gruppe " + groupID + ": " + AppSettings.get_anzTeams(groupID) + "<br>\n").getBytes());
-            trn = " (aendern zu ";
+            bs.write(("<br><br>\n<span style=\"line-height:50px;\">Anzahl Teams Gruppe " + groupID + ":</span><br>\n").getBytes());
+            trn = " ";
             for (int i = 3; i <= AppSettings.get_maxAnzTeams(); i++) {
                 if (i != AppSettings.get_anzTeams(groupID)) {
-                    bs.write((trn + "<a href=\"./einstellungen?" +
+                    bs.write((trn + "<a class=\"" + StringsCSS.w3btn + "\" href=\"./einstellungen?" +
                             qs_setAnzahlTeams + "=" + i + "&" +
                             qs_refGroupID + "=" + groupID +
                             "\">" + i + "</a>").getBytes());
-                    trn = " | ";
+                    trn = " ";
+                }
+                else{
+                    bs.write((trn + "<span class=\"" + StringsCSS.w3lbl + "\">" + i + "</span>").getBytes());
+                    trn = " ";
                 }
             }
-            bs.write((")").getBytes());
         }
 
-        bs.write(("</div>\n").getBytes()); //ende Gruppen Abschnitt
+        bs.write(("<br></div>\n").getBytes()); //ende Gruppen Abschnitt
 
         bs.write(("<br>\nmit Rueckspielen: " + AppSettings.needRueckspiele() + "<br>\n").getBytes());
         trn = "(aendern zu ";
@@ -116,7 +123,7 @@ public class RoleAdmin_TaskEinstellungen extends RoleWithTaskBase {
         bs.write(("</div>\n").getBytes());
 
         bs.write(("<br>\n<form>\n").getBytes());
-        bs.write(("Aktuelles Turnier speichern unter:" +
+        bs.write(("Aktuelles Turnier speichern unter:<br>\n" +
                 "<input type=\"text\" name=\"" + AppSettings.post_saveTurnierAsName + "\" value=\"" +
                 LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"))
                 + "\">").getBytes());

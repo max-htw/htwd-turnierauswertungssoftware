@@ -29,6 +29,9 @@ public class RoleAdmin_TaskStatus extends RoleWithTaskBase{
                     int s = Integer.valueOf(qs.get(AppSettings.post_score_team2_rueckspiel));
                     m.set_secondTeamRueckspielPunkte(s);
                 }
+
+                DataBaseQueries.currentTurnierChanged = true;
+
             } else if(qs.containsKey(qs_loadArchiv)){
                 int tid = Integer.valueOf(qs.get(qs_loadArchiv));
                 DataBaseQueries.loadTurnierFromArchive(tid);
