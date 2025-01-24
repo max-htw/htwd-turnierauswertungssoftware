@@ -1,6 +1,0 @@
-@startuml Use-Case-Diagram
-
-:Organisator: --> (Plant das\nTurnier)
-:Schiri: --> (Erfasst\ndie Punktzahl\neines Matches)
-:Organisator: --> (Lädt\nein gespeichertes\nTurnier)
-@enduml
