@@ -72,7 +72,19 @@ Wir haben uns für eine Client-Server-Webanwendung aus folgenden Gründen entsch
 - Da derselbe Datenbestand von mehreren unabhängigen Benutzern geändert wird, wurde die Datensynchronisation bei einer Peer-To-Peer-Architektur einen zu großen Aufwand erfordern.
 - Die Aufwand für die Konfiguration von den Clientgeräten ist gering, wenn zur Nutzung des Softwaresystems auf der Benuzerseite nur ein Webbrowser benötigt wird.
 
-=== Auswahl der zuverwendenden Komponenten
+Um bei fehlender Internetverbindung die Systemnutzer kabellos zu vernetzen, muss vor Ort ein WLAN-Netz aufgebaut werden.
+
+Wegen widersprüchlichen Kundenanforderungen an die Clientanzahl, wählen wir zwei Sätze von Architekturkomponenten aus: einmal für 20 Clients und einmal für 200 Clients. Beim Entwurf der Komponentenschnittstellen berücksichtigen wir eine spätere Möglichkeit der Hochskallierung des Systems durch Austausch von Komponenten.
+
+=== Auswahl der zuverwendenden Komponenten für 20 Clients
+. WLAN-Netzwerk wird mithilfe der in dem Notebook von Organisatoren eingebauten WLAN-Karte gewährleistet und durch das Linux-Betriebssystem verwaltet.
+
+. Das Software-Produkt wird als eine Java-Anwendung in form von JAR-Datei ausgeliefert.
+. Die Turnierdaten werden zum Archivieren in einfache Dateien geschrieben, beim Programmstart aus den Dateien geladen und intern in den Datenstrukturen von Java (ArrayList, HashMap) verarbeitet.
+. Das Front-End, das die HTML-Code generiert und die Nutzereingaben aus dem Http-Request auswertet programmieren wir selbst.
+
+=== Auswahl der zuverwendenden Komponenten für 200 Clients
+. Das WLAN-Netzwerk muss aus einem oder mehreren externen WiFi-Access-Points bestehen. Die Einrichtung des Netzwerks gehört nicht zu den Funktionen unseres Softwaresystems.
 . Das Software-Produkt wird mithilfe von https://www.docker.com[Docker] ausgeliefert, damit sichergestellt ist, dass jedes System die Voraussetzungen erfüllt.
 . Zur Speicherung der Daten wollen wird ein Datenbankmanagementsystem nutzen, da die Speicherung in Datenbanken übersichtlicher und robuster ist, als die Speicherung der Daten in Dateien. Desweiteren haben bereits alle Informatik-Studiengänge vorkenntnisse. Beispiel: https://www.postgresql.org[PostgreSQL]
 . Für die Entwicklung im Front-End könnte ein Framework benutzt werden. Dies würde die Nutzung von API's erleichtern und ein Übersichtliches Routing-System anbieten. Beispiel: https://nuxt.com/[Nuxt]
@@ -109,7 +121,7 @@ Bei Nichterreichbarkeit des Hauptsystems, soll die zweite System die volle Funkt
 
 -> Ergebnisse und Auswertung: analyse der Ergebnisse und Ermittlung der Gewinner
 
-
+<<<
 == Schichten oder Architektur-Framework
 //[Describe the architectural pattern that you will use or how the architecture will be consistent and uniform. This could be a simple reference to an existing or well-known architectural pattern, such as the Layer framework, a reference to a high-level model of the framework, or a description of how the major system components should be put together.] 
 
@@ -146,7 +158,7 @@ Folgende Sichten werden empfohlen:
 |===
 
 
-
+<<<
 === Physische Sicht (Betriebssicht)
 
 // Das System wird aufgeteilt in mehrere physische Knoten, um eine zuverlässige Ausführung zu gewährleisten und die Ausfallsicherheit zu erhöhen. Die Hauptkomponenten und deren physische Zuordnung sind wie folgt:
