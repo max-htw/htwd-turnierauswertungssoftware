@@ -98,8 +98,30 @@ plantuml::{plantumlsdir}/an_c4_context.puml[svg]
 plantuml::{plantumlsdir}/an_c4_container.puml[svg]
 
 
+
 === Physische Sicht (Betriebssicht)
-//Beschreibt die physischen Knoten (Rechner) des Systems, der Prozesse, Threads und Komponenten, die in diesen Knoten ausgeführt werden. Diese Sicht wird nicht benötigt, wenn das System in einem einzelnen Prozess oder Thread ausgeführt wird.
+
+// Das System wird aufgeteilt in mehrere physische Knoten, um eine zuverlässige Ausführung zu gewährleisten und die Ausfallsicherheit zu erhöhen. Die Hauptkomponenten und deren physische Zuordnung sind wie folgt:
+
+. **Frontend-Server**: 
+  - Bereitstellung der Benutzeroberfläche über Nuxt.
+  - Zugriff über Webbrowser durch Nutzer (Turnierleitung, Spieler).
+  - Läuft als Docker-Container auf einem Server mit Zugang zum Internet.
+
+. **Backend-Server**:
+  - Ausführung der Anwendungslogik in Java.
+  - Verwaltung der REST-API, die die Kommunikation zwischen Frontend und Backend steuert.
+  - Synchronisation von Offline-Daten (falls ein Nutzer offline war und seine Daten später hochlädt).
+  - Läuft in einem separaten Docker-Container auf demselben oder einem anderen Server wie der Frontend-Server.
+
+. **Datenbank-Server**: 
+  - Speicherung aller persistenten Daten, wie Benutzerprofile, Turnierpläne und Ergebnisse.
+  - Läuft PostgreSQL als eigenständiger Docker-Container.
+  - Kann auf einem dedizierten Server gehostet werden, um eine optimale Datenverwaltung zu gewährleisten.
+
+. **Systemkommunikation**:
+  - Alle Komponenten (Frontend, Backend, Datenbank) kommunizieren über ein internes Netzwerk innerhalb des Docker-Ökosystems (z.B. Docker Compose).
+
 
 === Use cases
 //Eine Liste oder ein Diagramm der Use Cases, die architektur-relevante Anforderungne enthalten.
