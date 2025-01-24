@@ -1,0 +1,38 @@
+= Meeting mit Auftraggeber am 21.01.2025
+Jonas Grießhaber <s87547.htw-dresden.de>
+0.1, 18.12.2024
+:toc:
+:toc-title: Inhaltsverzeichnis
+
+// Dieses Treffen ist während der 3.Iteration
+== Anwesende
+* Max
+* Alex
+* Jonas
+* Benedikt
+* Tim
+
+== Verlauf
+
+=== 2. Präsentation des Prototyps (schon während der Vorlesung)
+* schiedsrichter sind nicht die einzigen Änderungsberechtigten - nur die am match beteiligten teams -> änderungen müssen gehighlighted werden im turnierplan für andere Teams
+-> highlight soll durch andere Teams bestätigt werden
+* spielstände sollen gelockt werden
+* es sollen 2 spiele für das Team angezeigt werden. (aktuelles Spiel und nächstes Spiel)
+* aktueller UI hässlich (schrift zu klein, zentrierung, höhe display ausnutzen)
+!!! UI am anfang klären !!! - darauf kann aufgebaut werden
+* UI Admin ebenfalls anpassen
+* Admin soll zugriff auf alle Spielstände haben
+* "Änderungsfeld" - Icon ändern (bleistift zu "Spielstand eintragen")
+
+
+=== Wireframes Nutzeransicht
+* Turnierplan - UI anpassen
+* Ergebnis Ansicht - UI Anpassen
+* in historie ansicht die logdatei einfügen
+
+* soweit anscheinend in Ordnung
+
+=== Fragen
+
+*admin@stura.htw-dresden.de ist ansprechpartner

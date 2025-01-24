@@ -7,7 +7,7 @@ include::../_includes/default-attributes.inc.adoc[]
 
 == Einführung
 //Briefly describe the content of the project plan.
-
+Dieser Projektplan beschreibt die Struktur, Methodik und Zielsetzungen des Teams und dient als lebendiges Dokument, das während der Projektumsetzung fortlaufend ergänzt und optimiert wird. Er unterstützt die Transparenz sowohl im Team als auch gegenüber externen Partnern, fördert den Informationsaustausch und hilft, die langfristigen Zielvorgaben des Projekts nicht aus den Augen zu verlieren.
 
 == Projektorganisation
 //Introduce the project team, team members, and roles that they play during this project. If applicable, introduce work areas, domains, or technical work packages that are assigned to team members. Introduce neighboring projects, relationships, and communication channels. If the project is introduced somewhere else, reference that location with a link.
@@ -23,9 +23,9 @@ Die Entwicklung wird von Alex und Max umgesetzt. Sie programmieren die Kernfunkt
 
 Im Bereich Test ist Jonas verantwortlich. Er stellt sicher, dass die entwickelte Software fehlerfrei funktioniert. Seine Aufgaben umfassen die Erstellung von Testplänen, die Durchführung umfangreicher Funktionstests sowie die Überprüfung, ob die Software die definierten Anforderungen erfüllt.
 
-Zusätzlich besteht eine enge Zusammenarbeit mit der STURA der HTW, insbesondere mit dem Team für die Turnierregistrierungssoftware. Die Kommunikation erfolgt über regelmäßige Meetings und einen gemeinsamen Austausch per Mail.
+Zusätzlich besteht eine enge Zusammenarbeit mit der STURA der HTW, insbesondere mit den Verantwortlichen der Sport-Abteilung. Die Kommunikation erfolgt über regelmäßige Meetings und einen gemeinsamen Austausch per Mail.
 
-Intern kommuniziert das Projektteam über wöchentliche Meetings, die hauptsächlich zur Abstimmung und zur Klärung von Aufgaben dienen. Für die fortlaufende Zusammenarbeit nutzt das Team Tools wie GitHub für den schnellen Austausch sowie zur Aufgabenverfolgung. Dokumente und Projektfortschritte werden auf Visual Studio Code dokumentiert, um Transparenz und Nachvollziehbarkeit sicherzustellen.
+Intern kommuniziert das Projektteam über wöchentliche Meetings, die hauptsächlich zur Abstimmung und zur Klärung von Aufgaben dienen. Für die fortlaufende Zusammenarbeit nutzt das Team Tools wie GitHub für den schnellen Austausch sowie zur Aufgabenverfolgung. Visual Studio Code wurde genutzt, um Änderungen an den Dokumenten vorzunehmen und den Code für die Prototypen zu schreiben.
 
 Durch diese klare Rollenverteilung und die effiziente Zusammenarbeit ist das Team optimal aufgestellt, um eine hochwertige und funktionale Turnierauswertungssoftware zu entwickeln, die den Anforderungen der STURA der HTW gerecht wird.
 
@@ -48,23 +48,41 @@ Die iterative Entwicklung bildet das zentrale Element des Projektansatzes. Das T
 
 | I1
 |
-* Mitigate Risk1
-* Develop Use Case 3, Scenario 2
-| Date from/Date to
-| 15
+* kennenlernen im Team
+* erste Bedarfsanalyse
+| 24.10.2024/ 11.11.2024
+|
 
 | I2
 |
-* Mitigate Risk 2
-* Develop Use Case 1, Scenario 2
-| Date from/Date to
-| 16
+* Tiefgründige Bedarfsanalyse
+| 12.11.2024/ 29.11.2024
+|
+
+| I3
+| 
+* entwicklung erster Modelle
+* 1. Prototyp gestartet
+| 30.11.2024/ 20.12.2024
+|
+
+| I4
+|
+* Verfeinerung des 1. Prototyps
+* Anpassungen der bisherigen Ergebnisse durch neue Bedürfnisse
+| 21.12.2024/ 24.01.2025
+|
 |===
 
 
 == Deployment
 //Outline the strategy for deploying the software (and its updates) into the production environment.
-
+Die Software wird lokal auf einem Rechner des Stura per Docker eingerichtet und kann auch von dort au gestartet werden. Bei Turnieren soll in der Turnhalle ein mobiler Hotspot auf dem Rechner des Stura eröffnet werden, womit sich die Teilnehmenden dann verbinden können. Weitere Details zur Bereitstellung bzw. Übergabe der Software an den Stura werden gegen Ende des nächsten Semesters hinzugefügt.
 
 == Erkenntnisse (Lessons learned)
 //List lessons learned from the retrospective, with special emphasis on actions to be taken to improve, for example: the development environment, the process, or team collaboration.
+* Die interne Absprache bei geteilten Aufgaben ist essenziell und darf unter keinen Umständen vernachlässigt werden.
+
+* Die präzise Vorbereitung der Meetings gestaltet diese deutlich effektiver
+
+* Die Kommunikation mit dem Auftraggeber ist der entscheidendste Faktor in der Bedarfsanalyse

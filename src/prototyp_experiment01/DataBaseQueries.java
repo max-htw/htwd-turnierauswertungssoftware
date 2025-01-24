@@ -1,13 +1,32 @@
+import java.io.*;
 import java.util.*;
 
 public class DataBaseQueries {
+    private static String _currentTurnierFileName = "current.turnier";
     private static Random _random;
+
+    public static boolean currentTurnierChanged = false;
+
+    private static ArrayList<MyHelpers.FeldSpiele> _turnierPlan = new ArrayList<>();
 
     //erster Integer-Parameter: Hinspiel-Hash des Matches
     //zweiter Parameter: der Match selbst
     private static HashMap<Integer, MyHelpers.Match> _matches = new HashMap<>();
     static {
-        initializeMatches();
+        File f = new File(_currentTurnierFileName);
+        if(f.isFile()) {
+            try {
+                loadTurnierFromFile();
+            } catch (IOException e) {
+                System.out.println("DataBaseQueries, static initialisateion, IOException: " + e.getMessage());
+            } catch (ClassNotFoundException e) {
+                System.out.println("DataBaseQueries, static initialisateion, ClassNotFoundException: " + e.getMessage());
+            }
+            currentTurnierChanged = true;
+        }
+        else {
+            initializeMatches();
+        }
     }
 
     public static void  initializeMatches(){
@@ -48,6 +67,7 @@ public class DataBaseQueries {
                 }
             }
         }
+        currentTurnierChanged = true;
     }
 
     public static MyHelpers.Match getMatchByHash(int hash){
@@ -90,8 +110,6 @@ public class DataBaseQueries {
         return  a;
     }
 
-    private static ArrayList<MyHelpers.FeldSpiele> _turnierPlan = new ArrayList<>();
-
     private  static ArrayList<MyHelpers.TurnierArchiv> _turnierArichv = new ArrayList<>();
     static{
         addTestDataToTurnierArchiv();
@@ -130,6 +148,29 @@ public class DataBaseQueries {
         _turnierArichv.add(t);
     }
 
+    public static void archiviateCurrentTurnierToFile() throws IOException {
+
+        MyHelpers.TurnierArchiv t = new MyHelpers.TurnierArchiv(_currentTurnierFileName);
+        for(int i = 0; i<AppSettings.get_anzGroups();i++){
+            t.groups.add(AppSettings.get_anzTeams(i+1));
+        }
+        t.anzSpielfelder = AppSettings.get_anzSpielfelder();
+        t.needRueckspiele = AppSettings.needRueckspiele();
+        for(int hash: _matches.keySet()){
+            MyHelpers.Match m = new MyHelpers.Match(_matches.get(hash)); // m ist geklont
+            t.matches.put(hash, m);
+        }
+        for(MyHelpers.FeldSpiele f: _turnierPlan){
+            MyHelpers.FeldSpiele fn = new MyHelpers.FeldSpiele(f); // fn ist geklont
+            t.turnierPlan.add(fn);
+        }
+
+        FileOutputStream fos = new FileOutputStream(_currentTurnierFileName);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(t);
+        oos.close();
+    }
+
     public static void loadTurnierFromArchive(int pos){
         if(_turnierArichv.size() < (pos + 1))
             return;
@@ -147,6 +188,28 @@ public class DataBaseQueries {
             MyHelpers.FeldSpiele fn = new MyHelpers.FeldSpiele(f); // fn ist geklont
             _turnierPlan.add(fn);
         }
+        currentTurnierChanged = true;
+    }
+
+    public static void loadTurnierFromFile() throws IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream(_currentTurnierFileName);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        MyHelpers.TurnierArchiv t = (MyHelpers.TurnierArchiv) ois.readObject();
+        ois.close();
+
+        AppSettings.quietSetProperties(t.groups, t.anzSpielfelder, t.needRueckspiele);
+
+        _matches.clear();
+        for(int hash: t.matches.keySet()){
+            MyHelpers.Match m = new MyHelpers.Match(t.matches.get(hash)); // m ist geklont
+            _matches.put(hash, m);
+        }
+        _turnierPlan.clear();
+        for(MyHelpers.FeldSpiele f: t.turnierPlan){
+            MyHelpers.FeldSpiele fn = new MyHelpers.FeldSpiele(f); // fn ist geklont
+            _turnierPlan.add(fn);
+        }
+        currentTurnierChanged = true;
     }
 
     public static ArrayList<String> GetTurnierArchivenames(){
@@ -206,7 +269,10 @@ public class DataBaseQueries {
     }
 
     public static void clearCurrentTurnierplan(){
+        boolean needUpdate = (!_turnierPlan.isEmpty());
         _turnierPlan.clear();
+        if(needUpdate)
+            currentTurnierChanged = true;
     }
 
 

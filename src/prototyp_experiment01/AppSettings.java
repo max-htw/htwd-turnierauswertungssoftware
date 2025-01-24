@@ -45,8 +45,11 @@ public class AppSettings {
     public static int get_maxAnzSpielfelder(){return _maxAnzSpielfelder;}
     public static int get_anzSpielfelder(){return _anzSpielfelder;}
     public static void set_anzSpielfelder(int anz){
+        if(anz != _anzSpielfelder)
+            DataBaseQueries.currentTurnierChanged = true;
         _anzSpielfelder = (anz>_maxAnzSpielfelder || anz<1)?2:anz;
         DataBaseQueries.clearCurrentTurnierplan();
+
     }
 
     public  static  int get_maxAnzGroups(){return _maxAnzGroups;}
@@ -71,7 +74,6 @@ public class AppSettings {
             _anzTeams[groupID - 1] = (anz>_maxAnzTeams || anz<3)?3:anz;
             DataBaseQueries.initializeMatches();
             DataBaseQueries.clearCurrentTurnierplan();
-
         }
     }
 

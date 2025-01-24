@@ -1,31 +1,14 @@
 @startuml
 !include C4_Context.puml
 
-LAYOUT_WITH_LEGEND()
-
-title System Context diagram for Volleyball-Turnierauswertungssoftware
+title C4-Context
 
 Person(organisator, "Organisatoren des Turniers", "Die für die Planung, den Ablauf und die Auswertung des Turniers verantwortliche Personen.")
-Person(shiri, "Schiedsrichter", "Teilnehmer eines Teams, das als Schiedsrichter eines Matches tätig ist.")
-Person(besucher, "Besucher", "Andere Personen, die sich über den Stand des Turniers informieren möchten.")
-
-Boundary(webbrowsers,"HTTP-Protocol"){
-  System_Ext(webbrowser1, "Web-Browser", "Webbrowser (z.B. auf einem Linux-Rechner).")
-  System_Ext(webbrowser2, "Web-Browser", "Webbrowser (z.B. auf einem Apple-Tablet).")
-  System_Ext(webbrowser3, "Web-Browser", "Webbrowser (z.B. auf einem Android-Handy).")
-}
+Person(spieler, "Spieler", "Teilnehmer eines Teams.")
 
 System(turnierauswertungssoftware, "HTWD Turnierauswertungssoftware", "Automatisiert die Plannung, Erfassung und Auswertung eines Volleyball-Turniers.")
 
-Rel_D(organisator, webbrowser1, "konfiguriet")
-Rel_D(organisator, webbrowser1, "macht Einträge")
-Rel_D(organisator, webbrowser1, "fragt ab")
-Rel_D(shiri, webbrowser2, "macht Einträge")
-Rel_D(shiri, webbrowser2, "fragt ab")
-Rel_D(besucher, webbrowser3, "fragt ab")
-
-Rel_D(webbrowser2, turnierauswertungssoftware, "nimmt Nutzeranfragen entgegen.")
-Rel_U(turnierauswertungssoftware, webbrowser2, "liefert angefragte Webressourcen an die Nutzer.")
-
+Rel_D(organisator, turnierauswertungssoftware, "Uses")
+Rel_D(spieler, turnierauswertungssoftware, "Uses")
 
 @enduml
