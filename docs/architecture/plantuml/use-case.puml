@@ -1,0 +1,13 @@
+@startuml Use-Case-Diagram
+
+:Organisator: -u-> (Plant das\nTurnier)
+:Organisator: -u-> (Speichert das\naktuelle Turnier)
+:Organisator: -u-> (Wertet das Turnier aus.\nErmittelt den Sieger)
+:Organisator: -l-> (Lädt ein\ngespeichertes\nTurnier)
+:Organisator: --> (Druckt den\nTurnierplan aus\nbzw öffnet mit Excell)
+:Organisator: -r-> (Erfasst\ndie Punktzahl\neines Matches)
+:Organisator: -r-> (Informiert sich\nüber den Stand\ndes Turniers)
+:Spieler: -l-> (Informiert sich\nüber den Stand\ndes Turniers)
+:Spieler: --> (Erfasst\ndie Punktzahl\neines Matches)
+
+@enduml
