@@ -1,6 +1,6 @@
 @startuml Use-Case-Diagram
 
-:Organisator: -u-> (Archiviert den Turniert\nLädt einen Turnier aus dem Archiv)
+:Organisator: -u-> (Archiviert den Turnier.\nLädt einen Turnier aus dem Archiv)
 :Organisator: -r-> (Nutzt die Software um die Turnierdaten\nzu generieren, abfragen\nund zu ändern)
 :Spieler: -l-> (Nutzt die Software um die Turnierdaten\nzu generieren, abfragen\nund zu ändern)
 :Organisator: -d-> (Möchte in der Zukunft\ngrößere Turniere organisieren)
