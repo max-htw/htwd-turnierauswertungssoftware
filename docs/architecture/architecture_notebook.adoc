@@ -77,6 +77,9 @@ Bei Nichterreichbarkeit des Hauptsystems, soll die zweite System die volle Funkt
 
 == Wesentliche Abstraktionen
 //[List and briefly describe the key abstractions of the system. This should be a relatively short list of the critical concepts that define the system. The key abstractions will usually translate to the initial analysis classes and important patterns.]
+- Das System definiert mehrere wesentliche Abstraktionen, darunter:
+
+-> Benutzer: Personen, die die Anwendung nutzen, also Organisatoren Teilnehmer aber auch Besucher
 
 
 == Schichten oder Architektur-Framework
