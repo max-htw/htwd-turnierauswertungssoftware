@@ -50,7 +50,7 @@ Wir haben uns für eine Client-Server-Webanwendung aus folgenden Gründen entsch
 
 === Auswahl der zuverwendenden Komponenten
 . Das Software-Produkt wird mithilfe von https://www.docker.com[Docker] ausgeliefert, damit sichergestellt ist, dass jedes System die Voraussetzungen erfüllt.
-. Zur Speicherung der Daten wollen wird ein Datenbankmanagementsystem nutzen, da die Speicherung in Datenbanken übersichtlicher und robuster ist, als die Speicherung der Daten in Dateien. Desweiteren haben bereits alle *Informatik-Studiengänge vorkenntnisse. Beispiel: https://www.postgresql.org[PostgreSQL]
+. Zur Speicherung der Daten wollen wird ein Datenbankmanagementsystem nutzen, da die Speicherung in Datenbanken übersichtlicher und robuster ist, als die Speicherung der Daten in Dateien. Desweiteren haben bereits alle Informatik-Studiengänge vorkenntnisse. Beispiel: https://www.postgresql.org[PostgreSQL]
 . Für die Entwicklung im Front-End könnte ein Framework benutzt werden. Dies würde die Nutzung von API's erleichtern und ein Übersichtliches Routing-System anbieten. Beispiel: https://nuxt.com/[Nuxt]
 . Für eine einfachere Gestaltung der Website wird des weiteren https://tailwindcss.com[TailwindCSS] benutzt.
 . Für das Back-End wird https://www.java.com/en/[Java] benutzt. Dies vereinfacht die Einarbeitung, da bereits jeder Informatik-Studiengang Java behandelt hat.
@@ -80,7 +80,7 @@ Bei Nichterreichbarkeit des Hauptsystems, soll die zweite System die volle Funkt
 
 
 == Schichten oder Architektur-Framework
-//[Describe the architectural pattern that you will use or how the architecture will be consistent and uniform. This could be a simple reference to an existing or well-known architectural pattern, such as the Layer framework, a reference to a high-level model of the framework, or a description of how the major system components should be put together.]
+//[Describe the architectural pattern that you will use or how the architecture will be consistent and uniform. This could be a simple reference to an existing or well-known architectural pattern, such as the Layer framework, a reference to a high-level model of the framework, or a description of how the major system components should be put together.] 
 
 
 == Architektursichten (Views)
