@@ -79,7 +79,11 @@ Bei Nichterreichbarkeit des Hauptsystems, soll die zweite System die volle Funkt
 //[List and briefly describe the key abstractions of the system. This should be a relatively short list of the critical concepts that define the system. The key abstractions will usually translate to the initial analysis classes and important patterns.]
 - Das System definiert mehrere wesentliche Abstraktionen, darunter:
 
--> Benutzer: Personen, die die Anwendung nutzen, also Organisatoren Teilnehmer aber auch Besucher
+-> Benutzer: Personen, die die Anwendung nutzen, insbesondere Turnierleitung und Spieler
+
+-> Turnierplan: Kern des Systems, der die Struktur und Organisation des Turniers abbildet
+
+-> Ergebnisse und Auswertung: analyse der Ergebnisse und Ermittlung der Gewinner
 
 
 == Schichten oder Architektur-Framework
