@@ -69,19 +69,18 @@ Dieses Dokument beschreibt die Philosophie, Entscheidungen, Nebenbedingungen, Be
 //[List the decisions that have been made regarding architectural approaches and the constraints being placed on the way that the developers build the system. These will serve as guidelines for defining architecturally significant parts of the system. Justify each decision or constraint so that developers understand the importance of building the system according to the context created by those decisions and constraints. This may include a list of DOs and DON’Ts to guide the developers in building the system.]
 Wir haben uns für eine Client-Server-Webanwendung aus folgenden Gründen entschieden:
 
-- Da derselbe Datenbestand von mehreren unabhängigen Benutzern geändert wird, wurde die Datensynchronisation bei einer Peer-To-Peer-Architektur einen zu großen Aufwand erfordern.
-- Die Aufwand für die Konfiguration von den Clientgeräten ist gering, wenn zur Nutzung des Softwaresystems auf der Benuzerseite nur ein Webbrowser benötigt wird.
+- Da derselbe Datenbestand von mehreren unabhängigen Benutzern geändert wird, würde die Datensynchronisation bei einer Peer-To-Peer-Architektur einen zu großen Aufwand erfordern.
+- Der Aufwand für die Konfiguration von den Clientgeräten ist gering, wenn zur Nutzung des Softwaresystems auf der Benuzerseite nur ein Webbrowser benötigt wird.
 
 Um bei fehlender Internetverbindung die Systemnutzer kabellos zu vernetzen, muss vor Ort ein WLAN-Netz aufgebaut werden.
 
-Wegen widersprüchlichen Kundenanforderungen an die Clientanzahl, wählen wir zwei Sätze von Architekturkomponenten aus: einmal für 20 Clients und einmal für 200 Clients. Beim Entwurf der Komponentenschnittstellen berücksichtigen wir eine spätere Möglichkeit der Hochskallierung des Systems durch Austausch von Komponenten.
+Wegen widersprüchlichen Kundenanforderungen an die Clientanzahl, wählen wir zwei Sätze von Architekturkomponenten aus: einmal für 20 Clients und einmal für gleichzeitig aktive 200 Clients. Beim Entwurf der Komponentenschnittstellen berücksichtigen wir eine spätere Möglichkeit der Hochskalierung des Systems durch Austausch von Komponenten.
 
 === Auswahl der zuverwendenden Komponenten für 20 Clients
 . WLAN-Netzwerk wird mithilfe der in dem Notebook von Organisatoren eingebauten WLAN-Karte gewährleistet und durch das Linux-Betriebssystem verwaltet.
-
 . Das Software-Produkt wird als eine Java-Anwendung in form von JAR-Datei ausgeliefert.
 . Die Turnierdaten werden zum Archivieren in einfache Dateien geschrieben, beim Programmstart aus den Dateien geladen und intern in den Datenstrukturen von Java (ArrayList, HashMap) verarbeitet.
-. Das Front-End, das die HTML-Code generiert und die Nutzereingaben aus dem Http-Request auswertet programmieren wir selbst.
+. Das Front-End, das den HTML-Code generiert und die Nutzereingaben aus dem HTTP-Request auswertet, programmieren wir selbst.
 
 === Auswahl der zuverwendenden Komponenten für 200 Clients
 . Das WLAN-Netzwerk muss aus einem oder mehreren externen WiFi-Access-Points bestehen. Die Einrichtung des Netzwerks gehört nicht zu den Funktionen unseres Softwaresystems.
