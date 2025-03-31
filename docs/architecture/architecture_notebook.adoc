@@ -69,10 +69,21 @@ Dieses Dokument beschreibt die Philosophie, Entscheidungen, Nebenbedingungen, Be
 //[List the decisions that have been made regarding architectural approaches and the constraints being placed on the way that the developers build the system. These will serve as guidelines for defining architecturally significant parts of the system. Justify each decision or constraint so that developers understand the importance of building the system according to the context created by those decisions and constraints. This may include a list of DOs and DON’Ts to guide the developers in building the system.]
 Wir haben uns für eine Client-Server-Webanwendung aus folgenden Gründen entschieden:
 
-- Da derselbe Datenbestand von mehreren unabhängigen Benutzern geändert wird, wurde die Datensynchronisation bei einer Peer-To-Peer-Architektur einen zu großen Aufwand erfordern.
-- Die Aufwand für die Konfiguration von den Clientgeräten ist gering, wenn zur Nutzung des Softwaresystems auf der Benuzerseite nur ein Webbrowser benötigt wird.
+- Da derselbe Datenbestand von mehreren unabhängigen Benutzern geändert wird, würde die Datensynchronisation bei einer Peer-To-Peer-Architektur einen zu großen Aufwand erfordern.
+- Der Aufwand für die Konfiguration von den Clientgeräten ist gering, wenn zur Nutzung des Softwaresystems auf der Benuzerseite nur ein Webbrowser benötigt wird.
 
-=== Auswahl der zuverwendenden Komponenten
+Um bei fehlender Internetverbindung die Systemnutzer kabellos zu vernetzen, muss vor Ort ein WLAN-Netz aufgebaut werden.
+
+Wegen widersprüchlichen Kundenanforderungen an die Clientanzahl, wählen wir zwei Sätze von Architekturkomponenten aus: einmal für 20 Clients und einmal für gleichzeitig aktive 200 Clients. Beim Entwurf der Komponentenschnittstellen berücksichtigen wir eine spätere Möglichkeit der Hochskalierung des Systems durch Austausch von Komponenten.
+
+=== Auswahl der zuverwendenden Komponenten für 20 Clients
+. WLAN-Netzwerk wird mithilfe der in dem Notebook von Organisatoren eingebauten WLAN-Karte gewährleistet und durch das Linux-Betriebssystem verwaltet.
+. Das Software-Produkt wird als eine Java-Anwendung in form von JAR-Datei ausgeliefert.
+. Die Turnierdaten werden zum Archivieren in einfache Dateien geschrieben, beim Programmstart aus den Dateien geladen und intern in den Datenstrukturen von Java (ArrayList, HashMap) verarbeitet.
+. Das Front-End, das den HTML-Code generiert und die Nutzereingaben aus dem HTTP-Request auswertet, programmieren wir selbst.
+
+=== Auswahl der zuverwendenden Komponenten für 200 Clients
+. Das WLAN-Netzwerk muss aus einem oder mehreren externen WiFi-Access-Points bestehen. Die Einrichtung des Netzwerks gehört nicht zu den Funktionen unseres Softwaresystems.
 . Das Software-Produkt wird mithilfe von https://www.docker.com[Docker] ausgeliefert, damit sichergestellt ist, dass jedes System die Voraussetzungen erfüllt.
 . Zur Speicherung der Daten wollen wird ein Datenbankmanagementsystem nutzen, da die Speicherung in Datenbanken übersichtlicher und robuster ist, als die Speicherung der Daten in Dateien. Desweiteren haben bereits alle Informatik-Studiengänge vorkenntnisse. Beispiel: https://www.postgresql.org[PostgreSQL]
 . Für die Entwicklung im Front-End könnte ein Framework benutzt werden. Dies würde die Nutzung von API's erleichtern und ein Übersichtliches Routing-System anbieten. Beispiel: https://nuxt.com/[Nuxt]
@@ -109,7 +120,7 @@ Bei Nichterreichbarkeit des Hauptsystems, soll die zweite System die volle Funkt
 
 -> Ergebnisse und Auswertung: analyse der Ergebnisse und Ermittlung der Gewinner
 
-
+<<<
 == Schichten oder Architektur-Framework
 //[Describe the architectural pattern that you will use or how the architecture will be consistent and uniform. This could be a simple reference to an existing or well-known architectural pattern, such as the Layer framework, a reference to a high-level model of the framework, or a description of how the major system components should be put together.] 
 
@@ -131,12 +142,11 @@ Diese Schicht ist für die Interaktion mit der Datenbank verantwortlich. Sie ste
 
 Folgende Sichten werden empfohlen:
 
-<<<
 === Logische Sicht
 //Beschreibt die Struktur und das Verhalten Systemteilen, die hohen Einfluss auf die Architektur haben. Dies kann die Paketstruktur, kritische Schnittstellen, wichtige Klassen und Subsysteme sowie die Beziehungen zwischen diesen Elementen enthalten. Zudem sollten die physische und logische Sicht persistenter Daten beschrieben werden, wenn es diesen Aspekt im System gibt. Dies ist ein hier dokumentierter Teilaspekt des Entwurfs.
 
 
-[cols="1,62a,5,5,26a,1", frame=none, grid=none]
+[cols="1,52a,5,5,36a,1", frame=none, grid=none]
 |===
 |
 | plantuml::{plantumlsdir}/an_c4_context.puml[svg,pdfwidth=100%]
@@ -147,7 +157,7 @@ Folgende Sichten werden empfohlen:
 |===
 
 
-
+<<<
 === Physische Sicht (Betriebssicht)
 
 // Das System wird aufgeteilt in mehrere physische Knoten, um eine zuverlässige Ausführung zu gewährleisten und die Ausfallsicherheit zu erhöhen. Die Hauptkomponenten und deren physische Zuordnung sind wie folgt:
@@ -174,3 +184,9 @@ Folgende Sichten werden empfohlen:
 
 === Use cases
 //Eine Liste oder ein Diagramm der Use Cases, die architektur-relevante Anforderungne enthalten.
+[cols="5,90a,5", frame=none, grid=none]
+|===
+|
+| plantuml::{plantumlsdir}/use-case.puml[svg,pdfwidth=100%]
+|
+|===

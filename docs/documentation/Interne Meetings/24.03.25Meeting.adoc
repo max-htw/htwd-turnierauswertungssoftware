@@ -1,0 +1,33 @@
+= Die Erste Team Meeting im Modul SE2 am 24.03.2025
+Kareen Khouri <kareen.khouri@stud.htw-dresden.de>
+0.1, 23.01.2025
+:toc:
+:toc-title: Inhaltsverzeichnis
+
+
+== Internes Meeting am 24.03.2025
+
+
+== Anwesende
+* Alex
+* Jonas
+* Max
+* Kareen
+
+== Meeting-Inhalt
+
+=== Softwarestruktur – Überblick von Alexander
+* Der gesamte Code wurde mit Java geschrieben.
+* Alex hat den Code erklärt, also wie der Code aufgebaut ist.
+* Es wird keine Datenbank genutzt, sondern eine Textdatei.
+* Die Software läuft über einen Webserver.
+* Alex hat eine View angezeigt und Tests durchgeführt, um den Zusammenhang des Codes zu verstehen.
+* **Frage:** CSS in eine extra Datei auslagern?
+
+=== Rollenverteilung überdenken (v.a. Entwurf)
+* Max übernimmt den Entwurf.
+
+
+=== Ziele diese Woche
+* Code bis **Freitag, den 28.03.2025** lesen, verstehen und ggf. Fragen am Freitag stellen.
+* Wenn möglich, den gesamten Code dokumentieren, um die Weiterentwicklung zu erleichtern.
