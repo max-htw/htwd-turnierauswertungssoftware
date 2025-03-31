@@ -1,0 +1,48 @@
+= Meeting 31.03.2025
+Jonas Grießhaber <jonas.griesshaber@stud.htw-dresden.de>
+0.1, 31.03.2025
+:toc:
+:toc-title: Inhaltsverzeichnis
+
+== Anwesenheit
+- Alex
+- Jonas
+- Max
+
+== Abwesend
+- Kareen (krank)
+
+== Inhalt
+Besprechung des "Änderungsvorschläge_architektureNotebook" Dokument:
+
+Ergebnisse/Fragestellungen:
+
+- Frage an Lotte Richter: ist Linux als Betriebssystem verfügbar und kann es verwendet werden.
+
+- Docker vorerst weglassen. Abhängig von der ausgewählten Datenbank. 
+
+- Anbindung von SQLite als Datenbank. Max übernimmt diese Tätigkeit.
+
+- Backend-frameworks werden nicht verwendet.
+
+- Für Frontend soll das Framework Tailwind CSS verwendet werden.
+
+- Java bleibt weiterhin Programmiersprache
+
+- Trennung von HTML/CSS/Java. Bessere Code-Struktur
+
+== Aufgaben für die neue Iteration
+
+- Alex übernimmt Entwurf für die finale Software, welche aus dem Prototyp1 entwickelt wird.
+
+- Jonas entwickelt Testkonzept.
+
+- Kareen filtert aus allen Userstorys die wichtigsten Anforderungen und priorisiert diese.
+
+- Max implementiert SQLite und Tailwind in den Prototyp.
+
+== Ziele
+
+- Die finale Sofware-Struktur soll bis Ende der Iteration bestehen.
+
+- Testkonzept soll erstellt sein.
