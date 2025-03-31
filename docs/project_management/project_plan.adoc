@@ -29,6 +29,14 @@ Intern kommuniziert das Projektteam über wöchentliche Meetings, die hauptsäch
 
 Durch diese klare Rollenverteilung und die effiziente Zusammenarbeit ist das Team optimal aufgestellt, um eine hochwertige und funktionale Turnierauswertungssoftware zu entwickeln, die den Anforderungen der STURA der HTW gerecht wird.
 
+Überarbeitung der Rollen für SE II:
+
+* Projektleiter: Max
+* Analyse: Kareen
+* Entwurf: Alex
+* Test: Jonas
+* Entwicklung: Alex, Max
+
 == Praktiken und Bewertung
 //Describe or reference which management and technical practices will be used in the project, such as iterative development, continuous integration, independent testing and list any changes or particular configuration to the project. Specify how you will track progress in each practice. As an example, for iterative development the team may decide to use iteration assessments and iteration burndown reports and collect metrics such as velocity (completed work item points/ iteration).
 Im Rahmen des Projekts zur Entwicklung der Turnierauswertungssoftware für die STURA der HTW werden verschiedene Management- und technische Praktiken eingesetzt, um eine strukturierte und qualitativ hochwertige Umsetzung sicherzustellen. Dazu gehört eine iterative Entwicklung.
