@@ -1,0 +1,47 @@
+= Das erste Coach Meeting im Modul SE2 am 28.03.2025
+Kareen Khouri <kareen.khouri@stud.htw-dresden.de>
+0.1, 23.01.2025
+:toc:
+:toc-title: Meeting Inhaltsverzeichnis
+
+
+== Coach Meeting im Modul SE2 am 28.03.2025
+
+
+== Anwesende
+* Alex
+* Jonas
+* Max
+* Kareen
+
+
+
+
+== Thema: Korrektur der Belegabgabe mit dem Coach besprechen
+
+=== Korrekturen in der Projektdokumentation
+* Rollenbeschreibung überarbeiten – Klarstellen, wer welche Rolle hat.
+* **Punkt 2.1.4. – Referenz** In der Referenz fehlt etwas Kontext – Ergänzungen nötig.
+* **Vision-Dokument:** Persönliche Daten sind nicht erforderlich.
+* **Punkt 3.4 – Verzeichnis der Datenstrukturen:** Die Zeile mit „XX“ durchstreichen.
+* **Punkt 5.3 – Gestaltung der Benutzeroberfläche:** Wireframes wären eine bessere Darstellung.
+* **Punkt 6.3 – Architekturziele und Philosophie:** An den aktuellen Zustand anpassen.
+* **Punkt 6.7 – Architekturmechanismen, 4. Systemredundanz:**
+  - Ein zweites System ist keine Anforderung des Auftraggebers.
+  - Nur ein System soll offline und online funktionieren.
+  - Punkt 4 ist daher überflüssig.
+* **Zugang zur Software dokumentieren.**
+* **Punkt 6.10.1 – Logische Sicht:**
+  - Bei C4-Containern statt „Benutzer“ explizit „Organisatoren des Turniers“ und „Spieler“ eintragen.
+  - Unklarheit beseitigen, wer genau als Benutzer gilt.
+* **Punkt 7.2 – Test Cases:**
+ Test Cases entfernen, falls keine vorhanden sind.
+
+== Zusätzliche Informationen für SE2
+* Tests sollen durch den StuRa vor der Abgabe durchgeführt werden.
+* Testkonzept erstellen und überlegen, welche Aspekte getestet werden sollen.
+* Eine Mischung aus Oberflächen-Tests durchführen, dann finalen Test durchführen.
+* Dokumentation immer parallel zur Entwicklung aktualisieren.
+* Jeder soll an der Implementierung teilnehmen, damit alle am Code mitarbeiten.
+* Wichtig: Am Ende des Semesters müssen funktionale Anforderungen demonstriert werden.
+* Bis zur nächsten Iteration die Rolle „Architektur“ klären.
