@@ -74,21 +74,19 @@ Wir haben uns für eine Client-Server-Webanwendung aus folgenden Gründen entsch
 
 Um bei fehlender Internetverbindung die Systemnutzer kabellos zu vernetzen, muss vor Ort ein WLAN-Netz aufgebaut werden.
 
-Wegen widersprüchlichen Kundenanforderungen an die Clientanzahl, wählen wir zwei Sätze von Architekturkomponenten aus: einmal für 20 Clients und einmal für gleichzeitig aktive 200 Clients. Beim Entwurf der Komponentenschnittstellen berücksichtigen wir eine spätere Möglichkeit der Hochskalierung des Systems durch Austausch von Komponenten.
+Um beim Entwurf der Komponentenschnittstellen eine spätere Möglichkeit der Hochskalierung des Systems zu berücksichtigen, haben wir uns entschieden weitere Softwarenkomponenten aufzulisten, die zwar in unserer Software nicht integriert werden, aber Anreize für eine spätere Einbettung bieten.
 
-=== Auswahl der zuverwendenden Komponenten für 20 Clients
-. WLAN-Netzwerk wird mithilfe der in dem Notebook von Organisatoren eingebauten WLAN-Karte gewährleistet und durch das Linux-Betriebssystem verwaltet.
-. Das Software-Produkt wird als eine Java-Anwendung in form von JAR-Datei ausgeliefert.
-. Die Turnierdaten werden zum Archivieren in einfache Dateien geschrieben, beim Programmstart aus den Dateien geladen und intern in den Datenstrukturen von Java (ArrayList, HashMap) verarbeitet.
-. Das Front-End, das den HTML-Code generiert und die Nutzereingaben aus dem HTTP-Request auswertet, programmieren wir selbst.
+=== Auswahl der zuverwendenden Komponenten
+. Das WLAN-Netzwerk wird mithilfe der in dem Notebook von den Organisatoren eingebauten WLAN-Karte als Hotspot aufgebaut und durch das Linux-Betriebssystem verwaltet.
+. Das Software-Produkt wird als eine Java-Anwendung in Form von einer JAR-Datei ausgeliefert. Java als Backend-Sprache wurde gewählt, da alle Informatik-Studiengänge bereits Vorkenntnisse besitzen.
+. Die Turnierdaten werden zum Archivieren in Datenbank-Dateien geschrieben und beim Programmstart aus den Dateien geladen. Dabei wird https://www.sqlite.org[SQLite] als Bibliothek verwendet, da dies eine leichtgewichtige, einfach zu verwendende Datenbank ist und das Team mit dem SQL-Syntax vertraut ist.
+. Das Front-End wird mit Hilfe von HTML und CSS gestaltet. Den zugehörigen Code, der die Nutzereingaben aus dem HTTP-Request auswertet, programmieren wir selbst. Zur einfacheren Gestaltung der Website wird des weiteren https://tailwindcss.com[TailwindCSS] als CSS-Framework benutzt.
 
-=== Auswahl der zuverwendenden Komponenten für 200 Clients
-. Das WLAN-Netzwerk muss aus einem oder mehreren externen WiFi-Access-Points bestehen. Die Einrichtung des Netzwerks gehört nicht zu den Funktionen unseres Softwaresystems.
-. Das Software-Produkt wird mithilfe von https://www.docker.com[Docker] ausgeliefert, damit sichergestellt ist, dass jedes System die Voraussetzungen erfüllt.
-. Zur Speicherung der Daten wollen wird ein Datenbankmanagementsystem nutzen, da die Speicherung in Datenbanken übersichtlicher und robuster ist, als die Speicherung der Daten in Dateien. Desweiteren haben bereits alle Informatik-Studiengänge vorkenntnisse. Beispiel: https://www.postgresql.org[PostgreSQL]
-. Für die Entwicklung im Front-End könnte ein Framework benutzt werden. Dies würde die Nutzung von API's erleichtern und ein Übersichtliches Routing-System anbieten. Beispiel: https://nuxt.com/[Nuxt]
-. Für eine einfachere Gestaltung der Website wird des weiteren https://tailwindcss.com[TailwindCSS] benutzt.
-. Für das Back-End wird https://www.java.com/en/[Java] benutzt. Dies vereinfacht die Einarbeitung, da bereits jeder Informatik-Studiengang Java behandelt hat.
+=== Mögliche Änderungen zur verbesserten Skalierbarkeit in Zukunft
+. Zur Verbesserung der Abdeckung des erforderlichen WLAN-Netzwerkes könnten ein oder mehrere WiFi-Access-Points eingerichtet werden, die die Reichweite erhöhen.
+. Das Software-Produkt könnte mithilfe von https://www.docker.com[Docker] ausgeliefert werden, damit einzelne Software-Komponenten gekapselt werden und die Kompatibilität in jeglichen Umgebungen sichergestellt wird.
+. Zur Speicherung der Daten könnte man ein vollwertiges Datenbankmanagementsystem nutzen, da die Speicherung in Datenbanken übersichtlicher, robuster und zentraler erreichbar ist als es die Speicherung der Daten in Dateien hergibt. Beispiel: https://www.postgresql.org[PostgreSQL]
+. Für die Entwicklung im Front-End könnte ein Framework benutzt werden. Dies würde die Nutzung von API's erleichtern und ein übersichtliches Routing-System anbieten. Beispiel: https://nuxt.com/[Nuxt]
 
 
 == Architekturmechanismen
