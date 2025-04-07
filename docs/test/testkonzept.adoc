@@ -73,5 +73,7 @@ Protokolle werden im Git-Repository abgelegt
 
 Alle kritischen und wichtigen Testfälle müssen erfolgreich bestanden sein
 
+Keine Blocker oder Major Bugs mehr
+
 Software ist stabil im Testbetrieb einsetzbar
 
