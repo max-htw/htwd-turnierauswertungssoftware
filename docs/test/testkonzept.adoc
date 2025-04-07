@@ -4,11 +4,11 @@
 include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
 
-== 1. Einleitung
+== Einleitung
 
 Dieses Testkonzept beschreibt die Vorgehensweise zur Planung, Durchführung und Dokumentation der Tests für die Volleyballturnier-Software. Ziel ist es, die Qualität der Software sicherzustellen und zu gewährleisten, dass alle Anforderungen erfüllt werden.
 
-== 2. Testziele
+== Testziele
 
 Sicherstellung der korrekten Erfassung und Auswertung von Spielergebnissen
 
@@ -18,7 +18,7 @@ Prüfung der Stabilität im Offline-Betrieb
 
 Sicherstellung der korrekten Generierung von Spielplänen und Ergebnislisten (z. B. als PDF)
 
-== 3. Testgegenstand
+== Testgegenstand
 
 Der Testgegenstand ist die entwickelte Webanwendung mit folgenden Technologien:
 
@@ -29,7 +29,7 @@ Frontend: HTML und CSS
 Weitere Tools: PDF-Export 
 //Gibt es hier noch weitere Tools, die getestet werden müssen?
 
-== 4. Testarten
+== Testarten
 
 [cols="2,5"] 
 |=== 
@@ -38,11 +38,11 @@ Weitere Tools: PDF-Export
 | Funktionaler Test | Prüfung, ob die Software alle funktionalen Anforderungen erfüllt (z. B. Ergebnisseingabe, Anzeige der Tabellen) | Usability-Test | Bewertung der Benutzerfreundlichkeit, insbesondere auf Smartphones | Komponententest | Einzeltests der Java-Methoden (Unit Tests) | Integrationstest | Zusammenspiel von Frontend und Backend | Systemtest | Test des Gesamtsystems unter realen Bedingungen 
 |===
 
-== 5. Testvorgehen
+== Testvorgehen
 
 . Erstellung von Testfällen auf Basis der Anforderungen und User Storys . Manuelle Durchführung der Tests (ggf. teilautomatisiert mit JUnit im Backend) . Dokumentation der Ergebnisse in einem Testprotokoll . Rückmeldung an die/den Entwickler bei Fehlern . Wiederholung der Tests nach Fehlerbehebung
 
-== 6. Testumgebung
+== Testumgebung
 
 Testgeräte: Smartphone (Android/iOS), Laptop
 
@@ -52,7 +52,7 @@ Netzwerkbedingungen: Offline-Tests (kein WLAN), normale WLAN-Verbindung
 
 Testdaten: Beispiel-Spielpläne, fiktive Teams, Beispiel-Ergebnisse
 
-== 7. Testfälle (Beispiel)
+== Testfälle (Beispiel)
 
 [cols="1,4,3,2"] 
 |=== 
@@ -61,7 +61,7 @@ Testdaten: Beispiel-Spielpläne, fiktive Teams, Beispiel-Ergebnisse
 | T1 | Ergebnisseingabe für ein Spiel | Ergebnis wird korrekt gespeichert und angezeigt | offen | T2 | Generierung der Gesamttabelle | Tabelle wird korrekt berechnet | offen | T3 | Anzeige auf Smartphone | Layout ist übersichtlich und touchfähig | offen | T4 | PDF-Export | Spielplan kann heruntergeladen werden | offen 
 |===
 
-== 8. Testdokumentation
+== Testdokumentation
 
 Alle durchgeführten Tests werden in einer Testtabelle dokumentiert
 
@@ -69,7 +69,7 @@ Fehlermeldungen werden ausführlich dokumentiert ( beispielsweise Screenshot) un
 
 Protokolle werden im Git-Repository abgelegt
 
-== 9. Abnahmekriterien
+== Abnahmekriterien
 
 Alle kritischen und wichtigen Testfälle müssen erfolgreich bestanden sein
 
