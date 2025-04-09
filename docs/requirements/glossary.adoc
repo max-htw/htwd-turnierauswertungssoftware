@@ -35,7 +35,7 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 | z.B.: A1 | Leistungsgruppe A, Teamnummer 1 | im Bezug auf Teams
 | Schiri | Schiedsrichter | s. Begriffe
 | Stura | Studentenrat | Auftraggeber und Veranstalter des Turniers
-| LG | Leistungsgruppe | Zusammenfassung von Teams mit ähnlichem spielerischen Niveau 
+| LG | Leistungsgruppe | Zusammenfassung von Teams mit ähnlichem spielerischen Niveau
 |===
 
 == Verzeichnis der Datenstrukturen
@@ -49,9 +49,4 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 | Emailadresse muss `@`-Zeichen und `.` Punkt enthalten.
 | Login
 
-| xx
-| xx
-| xx
-| xx
-| xx
-|===
+
