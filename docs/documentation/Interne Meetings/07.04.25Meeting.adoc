@@ -1,0 +1,27 @@
+= Internes Meeting am 07.04.2025 im Modul SE2
+Kareen Khouri <kareen.khouri@stud.htw-dresden.de>
+0.1, 07.04.2025
+:toc:
+:toc-title: Inhaltsverzeichnis
+
+
+
+== Anwesend
+- Alex
+- Max
+- Jonas
+- Kareen
+
+== Inhalt des Meetings
+
+- Erledigte Aufgaben wurden besprochen.
+- Jonas dokumentiert, wie die Benutzeroberfläche getestet wird.
+- Alex erstellt ein Entwurfskonzept.
+- Das nächste Coach-Meeting soll nach den Osterferien stattfinden.
+- Kareen analysiert die Anforderungen und User Stories.
+- Jeder weißt jetzt, was in diese Iteration gemacht werden soll
+
+== Offene Fragen an den StuRa
+
+- Welche Betriebssysteme stehen auf den StuRa-Rechnern zur Verfügung?
+  → Kareen schreibt eine E-Mail an Lotte.
