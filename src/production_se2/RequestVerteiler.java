@@ -24,7 +24,10 @@ public class RequestVerteiler {
             if(task == StringsRole.AdminTasks.Status){
 
             }else if(task == StringsRole.AdminTasks.Einstellungen){
-
+              _requestController = validateRendererType(RoleAdmin_TaskEinstellungen_Renderer.class, r);
+              if(_requestController == null)
+                _requestController = new
+                  RoleAdmin_TaskEinstellungen_Controller((RoleAdmin_TaskEinstellungen_Renderer)r, params);
             }else if(task == StringsRole.AdminTasks.Hallo){
                 _requestController = validateRendererType(RoleAdmin_TaskHallo_Renderer.class, r);
                 if(_requestController == null)

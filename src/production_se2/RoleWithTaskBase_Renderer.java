@@ -4,13 +4,18 @@ import java.io.IOException;
 public abstract class RoleWithTaskBase_Renderer<Class_of_Daten extends  RoleWithTaskBase_Data> {
 
     protected Class_of_Daten daten;
-    public abstract Class_of_Daten getEmptyDaten();//{
+    public abstract Class_of_Daten getEmptyDaten();
+
+    private String _cssHeaderString = "<link href=\"/output.css\" rel=\"stylesheet\">";
 
     RoleWithTaskBase_Renderer(){
         daten = getEmptyDaten();
     }
 
     public StringBuilder renderResponse(){
+
+        _cssHeaderString = "";
+
         StringBuilder r = new StringBuilder();
 
         if(!this.getClass().getName().equals(RoleWithTaskBase_Renderer.class.getName())) {
@@ -26,7 +31,13 @@ public abstract class RoleWithTaskBase_Renderer<Class_of_Daten extends  RoleWith
     }
 
     public String RenderHtmlAnfang_(){
-        return "<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n\n";
+
+        String s = "<!DOCTYPE html>\n<html>\n<head>\n";
+        s+= "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+          + _cssHeaderString ;
+          s += "\n</head>\n<body>\n\n";
+
+        return  s;
     }
 
     public String RenderHtmlEnde_(){

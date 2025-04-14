@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 import java.util.Map;
 
-public class RoleTeam_TaskTurnierplan_Controller extends RoleWithTaskBase_Controller<RoleTeam_TaskTurnierplan_Renderer>{
+public class RoleTeam_TaskTurnierplan_Controller
+  extends RoleWithTaskBase_Controller<RoleTeam_TaskTurnierplan_Renderer>{
 
     RoleTeam_TaskTurnierplan_Controller(RoleTeam_TaskTurnierplan_Renderer renderer,
                                         Map<String,String> params) {
