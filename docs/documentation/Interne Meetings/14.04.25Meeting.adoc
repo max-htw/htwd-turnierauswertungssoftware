@@ -1,0 +1,26 @@
+= Internes Meeting am 14.04.2025 im Modul SE2
+Kareen Khouri <kareen.khouri@stud.htw-dresden.de>
+0.1, 14.04.2025
+:toc:
+:toc-title: Inhaltsverzeichnis
+
+== Anwesend
+* Max
+* Alex
+* Kareen (Discord)
+* Jonas (Disord)
+* Radmir (Discord)
+
+== Themen
+
+=== Besprechung der Tasks in KW 15
+
+* Jonas arbeitet weiterhin am Testkonzept.
+* Max hat bereits TailwindCSS in den Prototypen integriert.
+* Kareen hat die Anmerkungen zum Beleg aus SE1 bereits korrigiert.
+* Alex hat begonnen, ein neues Entwurfsmodell mit praktischer Strukturierung des Codes zu erstellen.
+
+=== Neues Teammitglied
+
+* Das neue Teammitglied Radmir unterstützt bei der Implementierung.
+* Ab der nächsten Iteration (Iteration 9) wird er eigene Aufgaben übernehmen.
