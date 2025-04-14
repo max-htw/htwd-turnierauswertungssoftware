@@ -21,14 +21,14 @@ public class RoleTeam_TaskTurnierplan_Controller
         d.teamName = "Team 1";
         d.navLinks = new ArrayList<>();
         d.planItems = new ArrayList<>();
-        d.navLinks.add(new RoleWithTaskBase_Renderer.NaviLink("Link 1", "/link1", false));
-        d.navLinks.add(new RoleWithTaskBase_Renderer.NaviLink("Link 2", "/link2", true));
-        d.navLinks.add(new RoleWithTaskBase_Renderer.NaviLink("LInk 3", "/link3", false));
+        d.navLinks.add(new RoleWithTaskBase_Renderer.NaviLink("Home-Link", "/1a/overview", false));
+        d.navLinks.add(new RoleWithTaskBase_Renderer.NaviLink("Hallo-Link", "/admin/hallo", true));
+        d.navLinks.add(new RoleWithTaskBase_Renderer.NaviLink("NaviLInk 3", "/link3", false));
 
         for(int i = 0; i<15; i++){
             d.planItems.add(
                     new RoleTeam_TaskTurnierplan_Renderer.PlanItem("00:00",i, "Team " + (i%5),"Team " + (i%5+5),
-                            "Team " + (i%4), (i%5)==0?"/turnierplan":"", "20/" + (i%20)));
+                            "Team " + (i%4), (i%5)==0?"/1a/matchdetails":"", "20/" + (i%20)));
         }
 
     }

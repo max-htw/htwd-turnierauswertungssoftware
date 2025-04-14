@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./dist/output.css" rel="stylesheet">
+</head>
+<body class="font-sans">
+    <div class="border border-gray-400 p-2">
+        <span class="font-bold">Turnier konfigurieren</span><br><br>
+        <div class="border border-gray-400 p-2">
+            <span class="leading-tight">Anzahl Gruppen:</span><br>
+            <!-- Dynamically generated group links go here -->
+        </div>
+        
+        <br><br>mit Rueckspielen: true<br>
+        (aendern zu <a href="./einstellungen?qs_needRueckspiele=false" class="text-blue-500">false</a>)
+        
+        <br><br>
+        Anzahl Spielfelder: 5<br>
+        (aendern zu <a href="./einstellungen?qs_setAnzahlSpielfelder=1" class="text-blue-500">1</a> | <a href="./einstellungen?qs_setAnzahlSpielfelder=2" class="text-blue-500">2</a>)
+        <br><br>
+        Vorausfuellen mit zufaelligen Punktzahlen: true<br>
+        (aendern zu <a href="./einstellungen?qs_setPrefillScores=false" class="text-blue-500">false</a>)
+
+    </div>
+
+    <br>
+    <form class="space-y-2">
+        <div>
+            Aktuelles Turnier speichern unter:<br>
+            <input type="text" name="post_saveTurnierAsName" value="2025-04-09_14-20-00" class="border border-gray-300 rounded px-2 py-1">
+        </div>
+        <button type="submit" class="bg-blue-500 text-white p-2 rounded">speichern</button>
+    </form>
+    <br>
+    Ein gespeichertes Turnier laden:<br>
+    <a href="/path/to/turnier1" class="text-blue-500">Turnier 1</a><br>
+    <a href="/path/to/turnier2" class="text-blue-500">Turnier 2</a><br>
+
+    <br><br><span id="javaScriptTestLbl" class="text-red-500">JavaScript Test: fehlgeschlagen.</span>
+    <script>
+        document.getElementById('javaScriptTestLbl').innerHTML = "JavaScript Test: erfolgreich."
+    </script>
+</body>
+</html>
