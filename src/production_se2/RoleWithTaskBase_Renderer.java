@@ -6,7 +6,7 @@ public abstract class RoleWithTaskBase_Renderer<Class_of_Daten extends  RoleWith
     protected Class_of_Daten daten;
     public abstract Class_of_Daten getEmptyDaten();
 
-    private String _cssHeaderString = "<link href=\"/output.css\" rel=\"stylesheet\">";
+    private String _cssHeaderString = "<link href=\"/output.css\" rel=\"stylesheet\" />\n";
 
     RoleWithTaskBase_Renderer(){
         daten = getEmptyDaten();
@@ -35,7 +35,10 @@ public abstract class RoleWithTaskBase_Renderer<Class_of_Daten extends  RoleWith
         String s = "<!DOCTYPE html>\n<html>\n<head>\n";
         s+= "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
           + _cssHeaderString ;
-          s += "\n</head>\n<body>\n\n";
+        if(!daten.htmlTitel.isEmpty()) {
+          s+= "<title>" + daten.htmlTitel + "</title>\n";
+        }
+        s += "\n</head>\n<body>\n\n";
 
         return  s;
     }
