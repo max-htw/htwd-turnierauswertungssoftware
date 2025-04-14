@@ -11,11 +11,12 @@ public class Main {
             webserverType = AppSettings.getWebServerType();
 
         if(webserverType == AppSettings.SupportedWebServerTypes.internal) {
-            int p = 80; //8440;
+            int p = 8450;
             HttpServer server = HttpServer.create(
                     new InetSocketAddress(p), 1024);
             //server.createContext("/", new ContextHandlers.CombHandler());
             server.createContext("/", new WebserverInternal_ContextHandler());
+            server.createContext("/output.css", new WebserverInternal_ContextHandler.CssHttpHandler());
             server.start();
             System.out.println("\nSE1 Turnierauswertungssoftware, experimenteller Prototyp 01.\n" +
                     "HTTP-Server gestartet unter: http://localhost:" + p + "\n" +

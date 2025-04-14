@@ -1,9 +1,8 @@
+import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -132,4 +131,31 @@ public class WebserverInternal_ContextHandler implements HttpHandler {
             }
         }
     }
+
+  public static class CssHttpHandler implements HttpHandler {
+
+    @Override
+    public void handle(HttpExchange he) throws IOException {
+
+      Headers headers = he.getResponseHeaders();
+      headers.add("Content-Type", "text/css");
+
+      File file = new File("output.css");
+      byte[] bytes = new byte[(int) file.length()];
+      //System.out.println(file.getAbsolutePath());
+      //System.out.println("length:" + file.length());
+
+      FileInputStream fileInputStream = new FileInputStream(file);
+      BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
+      bufferedInputStream.read(bytes, 0, bytes.length);
+
+      he.sendResponseHeaders(200, file.length());
+      OutputStream outputStream = he.getResponseBody();
+      outputStream.write(bytes, 0, bytes.length);
+      outputStream.close();
+    }
+  }
+
 }
+
+

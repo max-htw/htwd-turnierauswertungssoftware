@@ -16,9 +16,12 @@ public class AppSettings {
             }
         }
         else if(role == StringsRole.Admin){
-            if(task == StringsRole.AdminTasks.Hallo){
-                ausgabe = new RoleAdmin_TaskHallo_Renderer();
-            }
+          if(task == StringsRole.AdminTasks.Einstellungen){
+              ausgabe = new RoleAdmin_TaskEinstellungen_Renderer();
+          }
+          else if(task == StringsRole.AdminTasks.Hallo){
+              ausgabe = new RoleAdmin_TaskHallo_Renderer();
+          }
         }
 
         return ausgabe;

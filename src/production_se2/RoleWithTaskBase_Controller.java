@@ -26,7 +26,7 @@ public abstract class RoleWithTaskBase_Controller<Class_of_Renderer extends Role
     }
 
     public String getResponse(){
-        String ausgabe = _renderer.RenderHtmlAnfang_();
+        String ausgabe = "";
 
         //wenn die Entwickler die Rendereinstellungen in DevSettings uebeschrieben haben,
         //rendern wir nach ihren Wunsch:
@@ -42,7 +42,7 @@ public abstract class RoleWithTaskBase_Controller<Class_of_Renderer extends Role
             ausgabe = _renderer.daten.htmlUebersicht().toString();
         }
 
-        ausgabe += _renderer.RenderHtmlEnde_();
+        ausgabe = _renderer.RenderHtmlAnfang_() + ausgabe + _renderer.RenderHtmlEnde_();
         return  ausgabe;
     }
 

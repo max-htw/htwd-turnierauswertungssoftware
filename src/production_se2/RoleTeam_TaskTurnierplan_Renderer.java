@@ -9,15 +9,6 @@ public class RoleTeam_TaskTurnierplan_Renderer extends RoleWithTaskBase_Renderer
         return new RoleTeam_TaskTurnierplan_Data();
     }
 
-    @Override
-    public StringBuilder renderResponse(){
-        StringBuilder r = new StringBuilder();
-
-        r.append("ToDo: RoleTeam_TaskTurnierplan_Renderer.renderResponse()");
-
-        return r;
-    }
-
     public  static  class PlanItem{
         String uhrZeit;
         int feldNr;

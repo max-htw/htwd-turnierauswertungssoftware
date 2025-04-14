@@ -1,5 +1,6 @@
 # jeder Entwickler soll eigene Version der Datei DevSettings.java haben:
 DevSettings.java
+out/
 
 # Comment by AlZaj: folgende Regeln habe ich genommen von:
 # https://gist.github.com/fedir/cd58012d42c8c1edbb3fff611de6c2f6
