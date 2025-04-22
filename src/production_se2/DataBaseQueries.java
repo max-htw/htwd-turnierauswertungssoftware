@@ -373,8 +373,6 @@ public class DataBaseQueries {
                     throw new RuntimeException("watchdog in getTurnierplan");
                 }
 
-                int mh = 0;
-
                 //erster integer: groupID, zweiter: teamID
                 HashSet<MyHelpers.IntPair> teamsAlreadyInTimeslot = new HashSet<>();
 
@@ -440,7 +438,6 @@ public class DataBaseQueries {
                 }
                 timeslotCnt += 1;
             }
-            int dummy = 5;
         }
         return _turnierPlan;
     }
