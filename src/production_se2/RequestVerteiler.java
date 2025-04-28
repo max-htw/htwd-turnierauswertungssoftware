@@ -2,7 +2,7 @@ import java.util.Map;
 
 public class RequestVerteiler {
 
-    private RoleWithTaskBase_Controller _requestController;
+    private RoleWithTaskBase_Controller<?> _requestController;
     private StringsRole _role;
     private StringsRole.RoleTask _task;
 
@@ -11,7 +11,7 @@ public class RequestVerteiler {
         _role = role;
         _task = task;
 
-        RoleWithTaskBase_Renderer r = AppSettings.getRenderer(role, task);
+        RoleWithTaskBase_Renderer<?> r = AppSettings.getRenderer(role, task);
 
         if(r == null){
             //AppSettings.getRenderer() Methode konnte mit der Role und dem Task nicht anfangen.
@@ -76,7 +76,7 @@ public class RequestVerteiler {
 
     public RoleUnbekannt_TaskUnbekannt_Controller validateRendererType(
             Class<?> rendererType,
-            RoleWithTaskBase_Renderer renderer
+            RoleWithTaskBase_Renderer<?> renderer
             )
     {
         RoleUnbekannt_TaskUnbekannt_Controller r = null;

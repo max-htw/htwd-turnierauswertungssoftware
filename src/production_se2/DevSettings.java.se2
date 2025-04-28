@@ -34,4 +34,7 @@ public class DevSettings {
         return null;
     }
 
+    public static AppSettings.SupportedDatabaseTypes getDatabaseType(){
+      return null;
+    }
 }
