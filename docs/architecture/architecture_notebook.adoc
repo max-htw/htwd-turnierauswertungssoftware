@@ -27,11 +27,14 @@ Dieses Dokument beschreibt die Philosophie, Entscheidungen, Nebenbedingungen, Be
 == Architekturziele und Philosophie
 //Hinweise: Beschreiben Sie die Philosophie der Architektur, d.h. den zentralen Ansatz für ihre Architektur. Identifizieren Sie alle Aspekte, die die Philosophie beeinflussen, z.B. komplexe Auslieferung Aspekte, Anpassung von Altsystemen oder besondere Geschwindigkeitsanforderungen. Muss es besonders robust sein, um eine langfristige Wartung und Pflege zu ermöglichen?
 
-- Da die Anzahl der Nutzer nur maximal 200 beträgt, wird keine besondere Architektur gebraucht. Es reicht ein einfacher Webserver.
+Ziel unserer Architektur ist es, eine einfache und trotzdem zuverlässige Lösung bereitzustellen, die bei Turnieren in der Turnhalle gut funktioniert – auch wenn das Internet ausfällt. Dafür haben wir geplant, dass die Anwendung **offline nutzbar** ist. Die eingegebenen Daten (z. B. Spielergebnisse) sollen **lokal gespeichert** werden und sich später mit dem Server **synchronisieren**, wenn wieder eine Verbindung besteht.
+
+Damit die Software möglichst auf allen Geräten läuft, haben wir uns für eine **Webanwendung** entschieden. Die Nutzer greifen einfach über den Browser darauf zu – egal ob mit dem Handy oder am PC. Die Anwendung soll sowohl bei kleinen als auch bei größeren Turnieren (bis zu 200 Teilnehmern) funktionieren. Deshalb gibt es zwei Varianten der Architektur: eine einfache für bis zu 20 Nutzer und eine erweiterte für bis zu 200 Nutzer.
+
+Ein weiteres Ziel ist, dass die Software später auch von anderen weiterentwickelt werden kann. Dafür benutzen wir bekannte Tools und Technologien wie Docker, PostgreSQL und Java, die im Informatik-Studium schon verwendet werden. So soll sichergestellt werden, dass die Anwendung leicht wartbar ist und auch bei zukünftigen Turnieren genutzt oder angepasst werden kann.
 
 //Formulieren Sie eine Reihe von Zielen, die die Architektur in ihrer Struktur und ihrem Verhalten erfüllen muss. Identifizieren Sie kritische Fragen, die von der Architektur adressiert werden müssen, z.B. besondere Hardware-Abhängigkeiten, die vom Rest des Systems isoliert werden sollten oder Sicherstellung der Funktionsfähigkeit unter besonderen Bedingungen (z.B. Offline-Nutzung).
 
-- Die Webseite soll auch offline nutzbar sein und beim späteren synchronisieren eine Möglichkeit bieten, konfligierende Datensätze zu beheben.
 
 == Annahmen und Abhängigkeiten
 //[List the assumptions and dependencies that drive architectural decisions. This could include sensitive or critical areas, dependencies on legacy interfaces, the skill and experience of the team, the availability of important resources, and so forth]
@@ -104,8 +107,6 @@ Eine Folge von Anfragen eines Nutzers, soll demjenigen Nutzer zugeordnet werden 
 Dienste zum Lesen und
 Schreiben von
 gespeicherten Daten.
-. Systemredundanz +
-Bei Nichterreichbarkeit des Hauptsystems, soll die zweite System die volle Funktionalität übernehmen.
 
 
 == Wesentliche Abstraktionen
@@ -120,7 +121,7 @@ Bei Nichterreichbarkeit des Hauptsystems, soll die zweite System die volle Funkt
 
 <<<
 == Schichten oder Architektur-Framework
-//[Describe the architectural pattern that you will use or how the architecture will be consistent and uniform. This could be a simple reference to an existing or well-known architectural pattern, such as the Layer framework, a reference to a high-level model of the framework, or a description of how the major system components should be put together.] 
+//[Describe the architectural pattern that you will use or how the architecture will be consistent and uniform. This could be a simple reference to an existing or well-known architectural pattern, such as the Layer framework, a reference to a high-level model of the framework, or a description of how the major system components should be put together.]
 
 Wir nutzen die Drei-Schichten-Architektur, um eine klare Trennung zwischen den verschiedenen Komponenten der Anwendung zu ermöglichen. Diese Architektur besteht aus folgenden Schichten:
 
@@ -160,7 +161,7 @@ Folgende Sichten werden empfohlen:
 
 // Das System wird aufgeteilt in mehrere physische Knoten, um eine zuverlässige Ausführung zu gewährleisten und die Ausfallsicherheit zu erhöhen. Die Hauptkomponenten und deren physische Zuordnung sind wie folgt:
 
-. **Frontend-Server**: 
+. **Frontend-Server**:
   - Bereitstellung der Benutzeroberfläche über Nuxt.
   - Zugriff über Webbrowser durch Nutzer (Turnierleitung, Spieler).
   - Läuft als Docker-Container auf einem Server mit Zugang zum Internet.
@@ -171,7 +172,7 @@ Folgende Sichten werden empfohlen:
   - Synchronisation von Offline-Daten (falls ein Nutzer offline war und seine Daten später hochlädt).
   - Läuft in einem separaten Docker-Container auf demselben oder einem anderen Server wie der Frontend-Server.
 
-. **Datenbank-Server**: 
+. **Datenbank-Server**:
   - Speicherung aller persistenten Daten, wie Benutzerprofile, Turnierpläne und Ergebnisse.
   - Läuft PostgreSQL als eigenständiger Docker-Container.
   - Kann auf einem dedizierten Server gehostet werden, um eine optimale Datenverwaltung zu gewährleisten.
@@ -180,11 +181,14 @@ Folgende Sichten werden empfohlen:
   - Alle Komponenten (Frontend, Backend, Datenbank) kommunizieren über ein internes Netzwerk innerhalb des Docker-Ökosystems (z.B. Docker Compose).
 
 
-=== Use cases
+//=== Use cases
 //Eine Liste oder ein Diagramm der Use Cases, die architektur-relevante Anforderungne enthalten.
-[cols="5,90a,5", frame=none, grid=none]
-|===
-|
-| plantuml::{plantumlsdir}/use-case.puml[svg,pdfwidth=100%]
-|
-|===
+//[cols="5,90a,5", frame=none, grid=none]
+//|===
+//|
+//| plantuml::{plantumlsdir}/use-case.puml[svg,pdfwidth=100%]
+//|
+//|===
+
+
+// Hinweis: Wir verwenden keine Use Cases, sondern arbeiten mit User Stories, die im Product Backlog gepflegt werden.
