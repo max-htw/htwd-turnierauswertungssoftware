@@ -6,7 +6,7 @@ include::../_includes/default-attributes.inc.adoc[]
 
 
 == Einführung
-Dieses Dokument soll die wesentlichen Bedarfe und Funktionalitäten des Systems {project-system-name} sammeln, analysieren und definieren. Der Fokus liegt auf den Fähigkeiten, die von Stakeholdern und adressierten Nutzern benötigt werden, und der Begründung dieser Bedarfe. Die  Details, wie das System {project-system-name} diese Bedarfe erfüllt, werden in der Use-Case und Supplementary Specification beschrieben.
+Dieses Dokument soll die wesentlichen Bedarfe und Funktionalitäten des Systems {project-system-name} sammeln, analysieren und definieren. Der Fokus liegt auf den Fähigkeiten, die von Stakeholdern und adressierten Nutzern benötigt werden, und der Begründung dieser Bedarfe. Die  Details, wie das System {project-system-name} diese Bedarfe erfüllt, werden mithilfe von User Stories und Constraints im Product Backlog beschrieben.
 
 === Zweck
 Die Vision dieses Projektes ist es, die wesentlichen Anforderungen an das System aus Sicht und mit den Begriffen der künftigen Anwender zu beschreiben. Das System soll die Turnierorganisation für alle Teilnehmer erleichtern und optimieren.
@@ -27,7 +27,7 @@ Dieses Visions-Dokument bezieht sich auf das System {project-name}, das von unse
 
 - Entwicklung einer mobilen App
 - Teameinteilung
-- Erstellung der Teams 
+- Erstellung der Teams
 - Druckfunktion
 
 
@@ -36,13 +36,14 @@ Dieses Visions-Dokument bezieht sich auf das System {project-name}, das von unse
 Siehe <<#glossary, Glossar>>.
 
 === Referenzen
-https://miro.com/welcomeonboard/QUpMOEdhN01VdDRyVUdlVlgzNXNxdkM0OUlSc1dnSU9EdjJBVVo4UlNzN2xIWnkzSGNXeFNJc28zYVRScm5Hd3wzNDU4NzY0NjA1MzU4MTU0MzQ5fDI=?share_link_id=268593339366
+Personas: https://miro.com/app/board/uXjVL8TiKQA=/
+Aufgabenstellung Struktur: https://miro.com/app/board/uXjVLKj1l-I=/
 
 == Positionierung
 
 === Fachliche Motivation
 //Erläutern Sie kurz den Hintergrund, in dem das Projekt angesiedelt ist. Welches Problem soll gelöst werden, wie ist es entstanden? Welche Verbesserung wird angestrebt. Achten Sie darauf, eine fachliche (organisatorische, betriebswirtschaftliche) Perspektive einzunehmen.
-Die bisherige manuelle Turnierplanung ergibt einen hohen Aufwand bei der Erstellung des Turnierplans und der Erfassung der Turnierergebnisse. 
+Die bisherige manuelle Turnierplanung ergibt einen hohen Aufwand bei der Erstellung des Turnierplans und der Erfassung der Turnierergebnisse.
 Eine softwaregestützte Lösung spart Zeit bei der Organisation und bietet den Spielenden mehr Eigenverantwortung, da sie ihre Ergebnisse selbstständig eintragen können.
 
 === Problem Statement
@@ -74,7 +75,7 @@ Beispiel:
 
 [cols="1,3"]
 |===
-| Für | Organisatoren und Teilnehmer des Volleyballturniers
+| Für | Organisatoren und Teilnehmer des Volleyball Turniers
 | die | mehr Effizienz, Transparenz und Eigenverantwortung bei der Verwaltung des Turniers benötigen.
 | Das Produkt /| ist eine Softwarelösung für Turnierplanung und Verwaltung.
 | Die /| automatisierte Spielpläne und Verwaltung der Ergebnisse bietet.
@@ -104,29 +105,33 @@ Beispiel Produkt:
 | Name | Beschreibung | Verantwortlichkeiten
 
 
-|Organisatoren. 
-|Verantwortlich für die Organisation des Turniers. 
+|Organisatoren.
+|Verantwortlich für die Organisation des Turniers.
 |Einordnung der Teams, Erstellung des Spielplans, Verwaltung der Ergebnisse.
 
-|Turnierteilnehmer. 
+|Turnierteilnehmer.
 |Volleyballspieler.
 |Führen die Partien aus und tragen Ergebnisse in den Turnierplaner ein.
 
 |Gesetzgeber.
-|Stellt gesetzliche Anforderungen sicher, die von der Software eingehalten werden müssen.
-|Vorgaben zur Einhaltung von Datenschutz im Bezug auf persönliche Daten.
+|Der Gesetzgeber gibt die Gesetze vor, die von der Software eingehalten werden müssen.
+|Vorgaben zur Einhaltung des Datenschutzes.
 
 | Entwickler.
-| (Weiter-)entwicklung der Software.
-| Zuständig für die Funktionalität.
+| Die Verantwortlichkeit für die Software
+| Zuständig für die Umsetzung der technischen Anforderungen und die Fehlerbehebung.
 
 |===
 
 === Benutzerumgebung
 
-- Turnierorganisation: Eine Person (Lotte Richter).
+- Turnierorganisation: Eine verantwortliche Person, die für die Organisation zuständig ist (Lotte Richter).
 
 - Spieler: 20 bis zu maximal 200 Personen.
+
+• Anzahl der Leistungsgruppen: 3
+• Anzahl der Spielfelder: 4
+• Anzahl der Teams: 8
 
 - Planung des Turniers erfordert mehrere Stunden im Vorfeld.
 
@@ -144,7 +149,7 @@ Beispiel Produkt:
 |===
 | Bedarf | Priorität | Features | Geplantes Release
 
-| Automatisierte Spielplanerstellung und -anzeige | Hoch | Erstellung und Export eines Spielplans | Version 1.0 
+| Automatisierte Spielplanerstellung und -anzeige | Hoch | Erstellung und Export eines Spielplans | Version 1.0
 | Erfassung der Turnierergebnisse | Hoch | Speichern der Ergebnisse -lokal wenn kein Netz verfügbar ist- und Synchronisierung bei Netzverfügbarkeit | Version 1.1
 | Turnierauswertung | Hoch | Gewinnerteam soll basierend auf den Ergebnissen ermittelt und angezeigt werden | Version 1.1
 | Speicherung und nachträgliche Bearbeitung | Mittel | Ergebnisse sollen auch nach dem Turnier aufgerufen werden und verändert werden können | Version 1.2

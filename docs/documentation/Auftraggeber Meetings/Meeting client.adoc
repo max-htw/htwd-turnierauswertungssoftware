@@ -16,17 +16,17 @@ Spielstände mussten bisher händisch in eine ausgedruckte Excel Tabelle eingetr
 
 - wann spielt welches Team auf welchem Feld?
 
-- Welches Team pfeift das Spiel? 
+- Welches Team pfeift das Spiel?
 
-==== !!! Spielplan Inhalt !!! 
-- Feld Nr. 
+==== !!! Spielplan Inhalt !!!
+- Feld Nr.
 
 - Uhrzeiten/ Startzeiten (ein Spiel dauert ca. 20 min)
 
 - so wenig wie möglich Pause pro Team
 
 
-==== Spielplangenerierung variable Abfrage 
+==== Spielplangenerierung variable Abfrage
 - wie viele Felder stehen zur Auswahl?
 
 - wie viele Leistungsgruppen (maximal 2 möglich)
@@ -35,9 +35,9 @@ Spielstände mussten bisher händisch in eine ausgedruckte Excel Tabelle eingetr
 
 - gibt es Hin- und Rückspiel ?
 
--> wenn ja dann direkt hintereinander 
+-> wenn ja dann direkt hintereinander
 
-- !!! wenn zu wenig Teams da, dann vernachlässigen !!! 
+- !!! wenn zu wenig Teams da, dann vernachlässigen !!!
 
 === Teil 2 - Erfassung Spielstände
 - identifizierung Spielstände (ohne vorherige authentifizierung)
@@ -45,7 +45,7 @@ Spielstände mussten bisher händisch in eine ausgedruckte Excel Tabelle eingetr
 ==== Problem beim vertippen
 
 === Teil 3 - Auswertung Spielstände
-- Zwischenansicht während des Turniers möglich für alle machen 
+- Zwischenansicht während des Turniers möglich für alle machen
 
 - es wird bis 25 Punkten gespielt mit 2 Punkte Abstand (sudden death???)
 
@@ -54,9 +54,9 @@ Spielstände mussten bisher händisch in eine ausgedruckte Excel Tabelle eingetr
 
 - auf allen bekannten Betriebssystemen
 
-- auch offline spielstände eintragen 
+- auch offline spielstände eintragen
 
-- vorort den Teams noch individuelle Namen zuweisen 
+- vorort den Teams noch individuelle Namen zuweisen
 
 
 

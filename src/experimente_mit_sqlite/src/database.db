@@ -1,0 +1,18 @@
+-- Beispielumsetzung für die HashMap "Match" aus MyHelpers.java
+
+CREATE TABLE Matches (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    group_id INTEGER DEFAULT -1,
+    first_team INTEGER DEFAULT -1,
+    second_team INTEGER DEFAULT -1,
+    _firstTeamHinspielPunkte INTEGER DEFAULT -1,
+    _secondTeamHinspielPunkte INTEGER DEFAULT -1,
+    _firstTeamRueckspielPunkte INTEGER DEFAULT -1,
+    _secondTeamRueckspielPunkte INTEGER DEFAULT -1,
+    _richterHinspiel INTEGER DEFAULT -1,
+    _richterRueckspiel INTEGER DEFAULT -1,
+    _feldNrHinspiel INTEGER DEFAULT -1,
+    _feldNrRueckspiel INTEGER DEFAULT -1,
+    _timeslotHinspiel INTEGER DEFAULT -1,
+    _timeslotRueckspiel INTEGER DEFAULT -1,
+);

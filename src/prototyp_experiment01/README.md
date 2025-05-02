@@ -3,10 +3,11 @@
 - Voraussetzung: installierte Java Standard Edition.
   - Zum Beispiel von hier: https://adoptium.net/temurin/releases/
     - JDK-Packung auswählen, nicht JRE.
+- Zuerst in den passenden Ordner wechseln, z.B.: `C:\htwd-turnierauswertungssoftware\src\prototyp_experiment01\src`
 - Befehle zum compilieren der .java-Dateien mit **javac** und verpacken sie mit **jar**
-  - `javac *.java -d ./classes`
+  - ~~`javac *.java -d ./classes`~~ <br> -> `javac -cp "libs/sqlite-jdbc-3.43.2.1.jar" *.java -d ./classes`
     - d - output directory
-  - `jar -v -c -f volley.jar -e Main -C ./classes .` (Achtung: Punkt am Ende nicht vergessen)
+  - ~~`jar -v -c -f volley.jar -e Main -C ./classes .`~~ <br> ->  `jar -v -c -f volley.jar -e Main -C ./classes . -C ../libs sqlite-jdbc-3.49.1.0.jar` <br>
     - v - verbose
     - c - create
 	- f - output filename

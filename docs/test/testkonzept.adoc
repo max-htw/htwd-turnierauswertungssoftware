@@ -6,6 +6,7 @@ include::../_includes/default-attributes.inc.adoc[]
 
 == Einleitung
 
+
 Dieses Testkonzept beschreibt die Vorgehensweise zur Planung, Durchführung und Dokumentation der Tests für die Volleyballturnier-Software. Ziel ist es, die Qualität der Software sicherzustellen und zu gewährleisten, dass alle Anforderungen erfüllt werden.
 
 == Testziele
