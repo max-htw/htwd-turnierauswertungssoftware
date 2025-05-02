@@ -52,14 +52,36 @@ Netzwerkbedingungen: Offline-Tests (kein WLAN), normale WLAN-Verbindung
 
 Testdaten: Beispiel-Spielpläne, fiktive Teams, Beispiel-Ergebnisse
 
-== Testfälle (Beispiel)
+== Testfälle (manuell)
 
-[cols="1,4,3,2"] 
-|=== 
+[cols="1,4,3,2"]
+|===
 | Testfall | Beschreibung | Erwartetes Ergebnis | Status
 
-| T1 | Ergebnisseingabe für ein Spiel | Ergebnis wird korrekt gespeichert und angezeigt | offen | T2 | Generierung der Gesamttabelle | Tabelle wird korrekt berechnet | offen | T3 | Anzeige auf Smartphone | Layout ist übersichtlich und touchfähig | offen | T4 | PDF-Export | Spielplan kann heruntergeladen werden | offen 
+| T1  | Ergebnisseingabe für ein Spiel             | Ergebnis wird korrekt gespeichert und angezeigt      | funktioniert
+| T2  | Generierung der Gesamttabelle              | Tabelle wird korrekt berechnet                       | offen
+| T3  | Anzeige auf Smartphone                     | Layout ist übersichtlich und touchfähig              | offen
+| T4  | PDF-Export                                 | Spielplan kann heruntergeladen werden                | teilweise
+
+| T5  | Navigation zwischen Seiten                 | Buttons (z. B. „Startseite“, „Spielplan“) funktionieren korrekt | funktioniert
+| T6  | Responsive Design bei Gerätewechsel        | Darstellung passt sich Desktop, Tablet und Smartphone an | offen
+| T7  | Eingabefelder für Ergebnisse               | Nur gültige Eingaben möglich (z. B. Zahlen, kein Text) | offen
+| T8  | Fehlermeldung bei ungültiger Eingabe       | Nutzer erhält sofort verständliche Rückmeldung       | offen
+| T9  | Anzeige der Teamnamen                      | Teamnamen werden korrekt formatiert und dargestellt  | offen
+| T10 | Farbliche Hervorhebung der zu spielenden Teams | Die Teams, die als nächstes spielen, werden visuell hervorgehoben (z. B. grün hinterlegt) | offen
+| T11 | Anzeige bei fehlenden Daten                | Leere Felder oder fehlende Spiele werden sinnvoll gekennzeichnet | offen
+
+| T12 | Anzeige der aktuellen Uhrzeit/Spielzeit    | Aktuelles Spiel zeigt Uhrzeit oder Restzeit korrekt an | offen
+| T13 | Rollenabhängige Anzeige                    | Oberfläche passt sich der Benutzerrolle (z. B. Admin, Besucher) korrekt an | offen
+| T14 | Speichern eines Turniers                   | Turnierdaten werden erfolgreich im RAM gesichert     | offen
+| T15 | Laden gespeicherter Turnierdaten           | Gespeicherte Turnierdaten werden korrekt wiederhergestellt | offen
+| T16 | Auswahl der Gruppen- und Teamanzahl        | Konfiguration lässt sich korrekt einstellen und abspeichern | offen
+| T17 | Export zu CSV                              | Exportdatei enthält vollständige, korrekt formatierte Turnierdaten | offen
+| T18 | Anzeige des Spielfeldstatus                | Belegte und freie Spielfelder werden visuell dargestellt | offen
+| T19 | URL enthält Benutzerrolle                  | Benutzerrolle ist korrekt in der URL codiert        | offen
 |===
+
+
 
 == Testdokumentation
 

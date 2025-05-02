@@ -10,6 +10,9 @@ In diesem Dokument werden die Benutzeroberflächen des Systems {project-system-n
 * Zusammenhänge mittels Taskflow-Diagrammen
 * Angaben über die Gestaltung der Benutzeroberfläche, z.B. Styling, Bedienbarkeit, ...
 
+
+//Inhaltlich ist das UX-Konzept nicht korrekt. Die Anforderungen müssen in den User Storys neu aufgenommen oder eventuell angepasst werden -> Aufgabe 1. für neues Semester
+// Damit die Anforderungen nicht verloren gehen, bleiben sie erst mal hier stehen 
 == Anforderungen und Prioritäten
 
 [%header, cols="4,1,1"]
