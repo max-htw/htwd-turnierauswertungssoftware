@@ -27,11 +27,12 @@ Dieses Dokument beschreibt die Philosophie, Entscheidungen, Nebenbedingungen, Be
 == Architekturziele und Philosophie
 //Hinweise: Beschreiben Sie die Philosophie der Architektur, d.h. den zentralen Ansatz für ihre Architektur. Identifizieren Sie alle Aspekte, die die Philosophie beeinflussen, z.B. komplexe Auslieferung Aspekte, Anpassung von Altsystemen oder besondere Geschwindigkeitsanforderungen. Muss es besonders robust sein, um eine langfristige Wartung und Pflege zu ermöglichen?
 
-- Da die Anzahl der Nutzer nur maximal 200 beträgt, wird keine besondere Architektur gebraucht. Es reicht ein einfacher Webserver.
+- Die Anwendung verwendet eine Client-Server-Architektur. Da maximal 200 Nutzer gleichzeitig erwartet werden, ist keine Lastverteilung oder zusätzliche Skalierung erforderlich. Ein einzelner Webserver genügt.
+
 
 //Formulieren Sie eine Reihe von Zielen, die die Architektur in ihrer Struktur und ihrem Verhalten erfüllen muss. Identifizieren Sie kritische Fragen, die von der Architektur adressiert werden müssen, z.B. besondere Hardware-Abhängigkeiten, die vom Rest des Systems isoliert werden sollten oder Sicherstellung der Funktionsfähigkeit unter besonderen Bedingungen (z.B. Offline-Nutzung).
 
-- Die Webseite soll auch offline nutzbar sein und beim späteren synchronisieren eine Möglichkeit bieten, konfligierende Datensätze zu beheben.
+- Die Webseite soll auch offline nutzbar sein und beim späteren Synchronisieren eine Möglichkeit bieten, konfligierende Datensätze zu beheben.
 
 == Annahmen und Abhängigkeiten
 //[List the assumptions and dependencies that drive architectural decisions. This could include sensitive or critical areas, dependencies on legacy interfaces, the skill and experience of the team, the availability of important resources, and so forth]
@@ -96,7 +97,7 @@ https://www2.htw-dresden.de/~anke/openup/core.tech.common.extend_supp/guidances/
 //Beispiele: relationales DBMS, Messaging-Dienste, Transaktionsserver, Webserver, Publish-Subscribe Mechanismus
 
 //Beschreiben Sie den Zweck, Eigenschaften und Funktion der Architekturmechanismen.
-. Mehrbenutzer-Zugirff. +
+. Mehrbenutzer-Zugriff. +
 Gleichzeitige Bedienung der Anwendung durch mehrere Nutzer.
 . Nutzer-Identifizierung. +
 Eine Folge von Anfragen eines Nutzers, soll demjenigen Nutzer zugeordnet werden können.
@@ -104,8 +105,8 @@ Eine Folge von Anfragen eines Nutzers, soll demjenigen Nutzer zugeordnet werden 
 Dienste zum Lesen und
 Schreiben von
 gespeicherten Daten.
-. Systemredundanz +
-Bei Nichterreichbarkeit des Hauptsystems, soll die zweite System die volle Funktionalität übernehmen.
+. Netzwerkunabhängigkeit +
+Die Software muss unabhängig von einer Internetverbindung funktionieren können und kommuniziert ausschließlich über ein lokales Netzwerk, das über einen vor Ort eingerichteten WLAN-Hotspot bereitgestellt wird.
 
 
 == Wesentliche Abstraktionen
@@ -179,12 +180,3 @@ Folgende Sichten werden empfohlen:
 . **Systemkommunikation**:
   - Alle Komponenten (Frontend, Backend, Datenbank) kommunizieren über ein internes Netzwerk innerhalb des Docker-Ökosystems (z.B. Docker Compose).
 
-
-=== Use cases
-//Eine Liste oder ein Diagramm der Use Cases, die architektur-relevante Anforderungne enthalten.
-[cols="5,90a,5", frame=none, grid=none]
-|===
-|
-| plantuml::{plantumlsdir}/use-case.puml[svg,pdfwidth=100%]
-|
-|===

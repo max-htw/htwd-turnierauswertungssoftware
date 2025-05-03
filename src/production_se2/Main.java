@@ -17,7 +17,7 @@ public class Main {
             server.createContext("/", new WebserverInternal_ContextHandler());
             server.createContext("/output.css", new WebserverInternal_ContextHandler.CssHttpHandler());
             server.start();
-            System.out.println("\nSE1 Turnierauswertungssoftware, experimenteller Prototyp 01.\n" +
+            System.out.println("\nSE1 Turnierauswertungssoftware, Production Build.\n" +
                     "HTTP-Server gestartet unter: http://localhost:" + p + "\n" +
                     "Beenden mit 'CTRL + C'\n");
         }

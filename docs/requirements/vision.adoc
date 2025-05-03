@@ -106,7 +106,7 @@ Beispiel Produkt:
 
 
 |Organisatoren.
-|Verantwortlich für die Organisation des Turniers.
+|Team, das den Ablauf des Turniers plant und koordiniert.
 |Einordnung der Teams, Erstellung des Spielplans, Verwaltung der Ergebnisse.
 
 |Turnierteilnehmer.
@@ -118,20 +118,20 @@ Beispiel Produkt:
 |Vorgaben zur Einhaltung des Datenschutzes.
 
 | Entwickler.
-| Die Verantwortlichkeit für die Software
+| Team, welches die Software programmiert.
 | Zuständig für die Umsetzung der technischen Anforderungen und die Fehlerbehebung.
 
 |===
 
 === Benutzerumgebung
 
-- Turnierorganisation: Eine verantwortliche Person, die für die Organisation zuständig ist (Lotte Richter).
+- Turnierorganisation: Eine oder mehrere verantwortliche Person, die für die Organisation zuständig ist.
 
 - Spieler: 20 bis zu maximal 200 Personen.
-
-• Anzahl der Leistungsgruppen: 3
-• Anzahl der Spielfelder: 4
-• Anzahl der Teams: 8
+- Anzahl der Leistungsgruppen: 3
+- Anzahl der Spielfelder: 4
+- Anzahl der Teams: 8
+- Entweder nur Hinspiel oder Hin- und Rückspiel
 
 - Planung des Turniers erfordert mehrere Stunden im Vorfeld.
 

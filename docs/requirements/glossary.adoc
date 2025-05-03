@@ -38,15 +38,3 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 | LG | Leistungsgruppe | Zusammenfassung von Teams mit ähnlichem spielerischen Niveau
 |===
 
-== Verzeichnis der Datenstrukturen
-[%header]
-|===
-| Bezeichnung | Definition | Format | Gültigkeitsregeln | Aliase
-
-| Anmeldedaten
-| Zusammensetzung von Benutzername und Passwort.
-| String
-| Emailadresse muss `@`-Zeichen und `.` Punkt enthalten.
-| Login
-
-
