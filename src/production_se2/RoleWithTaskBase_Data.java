@@ -1,7 +1,10 @@
+import java.util.ArrayList;
+
 public class RoleWithTaskBase_Data {
     public String htmlTitel = "";
     public String fehlermeldung = "";
     public String debugMessage = "";
+    public ArrayList<RoleWithTaskBase_Renderer.HyperLink> navLinks = new ArrayList<>();
     public StringsRole role;
     public StringsRole.RoleTask task;
 

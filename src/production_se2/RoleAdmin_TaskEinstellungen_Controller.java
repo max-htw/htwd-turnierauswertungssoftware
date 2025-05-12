@@ -18,6 +18,16 @@ public class RoleAdmin_TaskEinstellungen_Controller extends RoleWithTaskBase_Con
   @Override
   public void applyTestData() {
     RoleAdmin_TaskEinstellungen_Data d = _renderer.daten;
+
+    d.navLinks.add(new RoleWithTaskBase_Renderer.HyperLink("Spielstand",
+      new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Status, 1, 2),
+      false));
+    d.navLinks.add(new RoleWithTaskBase_Renderer.HyperLink("Turnierplan",
+      new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Turnierplan, -1, -1), true));
+    d.navLinks.add(new RoleWithTaskBase_Renderer.HyperLink("Turnierkonfiguration",
+      new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, 1, 2),
+      false));
+
     d.anzGruppen = 2;
     for(int i = 1; i <=4; i++){
       RoleWithTaskBase_Renderer.ActionForRoleAndTask action = null;

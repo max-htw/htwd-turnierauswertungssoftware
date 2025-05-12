@@ -38,6 +38,13 @@ public class RoleAdmin_TaskEinstellungen_Data extends RoleWithTaskBase_Data{
   public StringBuilder htmlOfDerrivedClass(RoleWithTaskBase_Renderer.ActionStringGenerator actionStringGenerator) {
     StringBuilder r = new StringBuilder();
 
+    r.append("<p>NavLinks:<br>\n");
+
+    for(RoleWithTaskBase_Renderer.HyperLink l: navLinks){
+      r.append("<a href=\"").append(actionStringGenerator.generateActionString(l.linkAction)).append("\">")
+        .append(l.linkText).append("</a><br>\n");
+    }
+    
     r.append("<p>Anzahl Gruppen = ").append(anzGruppen).append("; Aendern zu: ");
 
     for(RoleWithTaskBase_Renderer.HyperLink n: anzahlGruppen_Links){

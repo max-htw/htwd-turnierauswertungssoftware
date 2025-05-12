@@ -1,0 +1,25 @@
+= Internes Meeting am 12.05.2025 im Modul SE2
+Kareen Khouri <kareen.khouri@stud.htw-dresden.de>
+0.1, 14.04.2025
+:toc:
+:toc-title: Inhaltsverzeichnis
+
+== Anwesend
+* Max
+* Alex
+* Jonas
+* Radmir
+
+== Themen
+
+=== Besprechung der Tasks in KW 19
+
+* Jonas hat Renderer Aufgabe erledigt.
+* Radmir ebenfalls
+* Alex hat weiter an Admin-Einstellungspanel gearbeitet.
+
+=== Taskverteilung für kommende Woche
+
+* Alex: Datenschnittstelle für Admin-Einstellungspanel
+* Radmir: Algorithmus
+* Max und Jonas: Frontend

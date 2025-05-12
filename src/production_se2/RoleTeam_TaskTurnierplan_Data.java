@@ -3,7 +3,6 @@ import java.util.ArrayList;
 public class RoleTeam_TaskTurnierplan_Data extends  RoleWithTaskBase_Data{
     public String teamName;
     public String gruppenName;
-    public ArrayList<RoleWithTaskBase_Renderer.HyperLink> navLinks = new ArrayList<>();
     public ArrayList<RoleTeam_TaskTurnierplan_Renderer.PlanItem> planItems = new ArrayList<>();
 
     @Override

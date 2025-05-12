@@ -21,12 +21,12 @@ public class RoleTeam_TaskTurnierplan_Controller
         d.teamName = "Team 1";
         d.navLinks = new ArrayList<>();
         d.planItems = new ArrayList<>();
-        d.navLinks.add(new RoleWithTaskBase_Renderer.HyperLink("Home-Link",
+        d.navLinks.add(new RoleWithTaskBase_Renderer.HyperLink("Home",
           new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Team, StringsRole.TeamTasks.Overview, 1, 2),
           false));
         d.navLinks.add(new RoleWithTaskBase_Renderer.HyperLink("Hallo-Link",
           new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Hallo, -1, -1), true));
-        d.navLinks.add(new RoleWithTaskBase_Renderer.HyperLink("NaviLInk 3",
+        d.navLinks.add(new RoleWithTaskBase_Renderer.HyperLink("Aktueller Stand",
           new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Team, StringsRole.TeamTasks.Stand, 1, 2),
           false));
 
