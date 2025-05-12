@@ -1,7 +1,5 @@
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InvalidClassException;
-import java.lang.reflect.Type;
+import javax.swing.*;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +23,8 @@ public abstract class RoleWithTaskBase_Controller<Class_of_Renderer extends Role
 
     }
 
-    public String getResponse(){
+    public String getResponseHtml(RoleWithTaskBase_Renderer.ActionStringGenerator actionStringGenerator){
+        _renderer.setActionStringGenerator(actionStringGenerator);
         String ausgabe = "";
 
         //wenn die Entwickler die Rendereinstellungen in DevSettings uebeschrieben haben,
@@ -35,15 +34,20 @@ public abstract class RoleWithTaskBase_Controller<Class_of_Renderer extends Role
             // der Entwickler moechte explizit, dass dieser Ansicht gerendert wird
             // oder er hat keine besonderen Wuensche bezueglich dieses Renderers.
             // Rendern ganz normal:
-            ausgabe += _renderer.renderResponse().toString();
+            ausgabe += _renderer.renderHtmlResponse().toString();
         }
         else{
             // den Daten-Standardrenderer verwenden:
-            ausgabe = _renderer.daten.htmlUebersicht().toString();
+            ausgabe = _renderer.daten.htmlUebersicht(actionStringGenerator).toString();
         }
 
         ausgabe = _renderer.RenderHtmlAnfang_() + ausgabe + _renderer.RenderHtmlEnde_();
         return  ausgabe;
+    }
+
+    public JPanel getResponseJPanel(int width, int height, ActionListener actionListener,
+                                    RoleWithTaskBase_Renderer.ActionStringGenerator actionStringGenerator){
+        return _renderer.renderJPanel(width, height, actionListener);
     }
 
     public  Class<?> getRendererClass(){

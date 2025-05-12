@@ -21,14 +21,22 @@ public class RoleTeam_TaskTurnierplan_Controller
         d.teamName = "Team 1";
         d.navLinks = new ArrayList<>();
         d.planItems = new ArrayList<>();
-        d.navLinks.add(new RoleWithTaskBase_Renderer.NaviLink("Home-Link", "/1a/overview", false));
-        d.navLinks.add(new RoleWithTaskBase_Renderer.NaviLink("Hallo-Link", "/admin/hallo", true));
-        d.navLinks.add(new RoleWithTaskBase_Renderer.NaviLink("NaviLInk 3", "/link3", false));
+        d.navLinks.add(new RoleWithTaskBase_Renderer.HyperLink("Home-Link",
+          new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Team, StringsRole.TeamTasks.Overview, 1, 2),
+          false));
+        d.navLinks.add(new RoleWithTaskBase_Renderer.HyperLink("Hallo-Link",
+          new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Hallo, -1, -1), true));
+        d.navLinks.add(new RoleWithTaskBase_Renderer.HyperLink("NaviLInk 3",
+          new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Team, StringsRole.TeamTasks.Stand, 1, 2),
+          false));
 
         for(int i = 0; i<15; i++){
+            RoleWithTaskBase_Renderer.ActionForRoleAndTask action =
+                 new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Team, StringsRole.TeamTasks.Matchdetails, 2, 1);
+            action.parameters.put(StringsActions.matchid, "999");
             d.planItems.add(
                     new RoleTeam_TaskTurnierplan_Renderer.PlanItem("00:00",i, "Team " + (i%5),"Team " + (i%5+5),
-                            "Team " + (i%4), (i%5)==0?"/1a/matchdetails":"", "20/" + (i%20)));
+                            "Team " + (i%4), (i%5)==0?action:null, "20/" + (i%20)));
         }
 
     }

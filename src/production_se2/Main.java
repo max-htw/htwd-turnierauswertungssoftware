@@ -29,5 +29,9 @@ public class Main {
         else if(webserverType == AppSettings.SupportedWebServerTypes.mock){
 
         }
+        else if(webserverType == AppSettings.SupportedWebServerTypes.swing){
+          //ToDo: Swing-Oberflaeche entwickeln
+          new WebserverSwing_Handler("Turnierauswertungssoftware");
+        }
     }
 }

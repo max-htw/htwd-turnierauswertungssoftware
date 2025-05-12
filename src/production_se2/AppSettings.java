@@ -26,7 +26,7 @@ public class AppSettings {
     }
 
     public enum SupportedWebServerTypes {
-        cgi, internal, mock;
+        cgi, internal, swing, mock;
     }
 
     public static SupportedWebServerTypes getWebServerType(){

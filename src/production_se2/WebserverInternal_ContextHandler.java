@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class WebserverInternal_ContextHandler implements HttpHandler {
+public class WebserverInternal_ContextHandler implements HttpHandler, RoleWithTaskBase_Renderer.ActionStringGenerator {
 
     private final int urlSectionsOffset = 0;
 
@@ -50,7 +50,7 @@ public class WebserverInternal_ContextHandler implements HttpHandler {
         ByteArrayOutputStream bs = new ByteArrayOutputStream();
 
         //Hier wird Response generiert:
-        bs.write(v.getResponseBytes());
+        bs.write(v.getResponseHtmlBytes(this));
 
         exchange.sendResponseHeaders(200, bs.size());
         OutputStream os = exchange.getResponseBody();
@@ -131,6 +131,24 @@ public class WebserverInternal_ContextHandler implements HttpHandler {
             }
         }
     }
+
+  @Override
+  public String generateActionString(RoleWithTaskBase_Renderer.ActionForRoleAndTask action) {
+      if(action == null){
+        return "/todo/generateActionString(null)";
+      }
+      String roleTeil = action.role.name().toLowerCase();
+      if(action.role == StringsRole.Team){
+        roleTeil = "" + action.groupID + (char)(action.teamID + 96);
+      }
+      String out = "/" + roleTeil + "/" + action.task.toString().toLowerCase();
+      String separator = "?";
+      for(StringsActions sa : action.parameters.keySet()){
+        out += separator + sa.name().toLowerCase() + "=" + action.parameters.get(sa);
+        separator = "&";
+      }
+    return out;
+  }
 
   public static class CssHttpHandler implements HttpHandler {
 

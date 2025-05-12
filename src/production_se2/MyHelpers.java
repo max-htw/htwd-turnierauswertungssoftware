@@ -20,6 +20,29 @@ public class MyHelpers {
         return result;
     }
 
+    public static IntPair GroupIDandTeamIDfromBezeichnung(String groupBezeichnung){
+      int groupID = -1;
+      int teamID = -1;
+      try {
+        groupID = Integer.parseInt("" + groupBezeichnung.charAt(0));
+        teamID = groupBezeichnung.charAt(1) - 96;
+        if(groupID <=0 || groupID >9 || teamID <= 0 || teamID > 9){
+          groupID = -1;
+          teamID = -1;
+        }
+      }
+      catch (Exception e){
+
+      }
+      return new IntPair(groupID, teamID);
+    }
+
+    public static String TeamBezeichnung(Integer groupID, Integer teamID){
+      if(groupID <=0 || groupID >9 || teamID <= 0 || teamID > 9){
+        return "0o";
+      }
+      return groupID.toString() + (char)(teamID + 96);
+    }
 
     public static class IntPair implements Comparable<IntPair>, Serializable{
         int x;

@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.awt.event.ActionListener;
 import java.util.Map;
 
 public class RequestVerteiler {
@@ -25,9 +27,10 @@ public class RequestVerteiler {
 
             }else if(task == StringsRole.AdminTasks.Einstellungen){
               _requestController = validateRendererType(RoleAdmin_TaskEinstellungen_Renderer.class, r);
-              if(_requestController == null)
+              if(_requestController == null) {
                 _requestController = new
-                  RoleAdmin_TaskEinstellungen_Controller((RoleAdmin_TaskEinstellungen_Renderer)r, params);
+                  RoleAdmin_TaskEinstellungen_Controller((RoleAdmin_TaskEinstellungen_Renderer) r, params);
+              }
             }else if(task == StringsRole.AdminTasks.Hallo){
                 _requestController = validateRendererType(RoleAdmin_TaskHallo_Renderer.class, r);
                 if(_requestController == null)
@@ -65,15 +68,31 @@ public class RequestVerteiler {
         }
     }
 
-    public byte[] getResponseBytes(){
+    public byte[] getResponseHtmlBytes(RoleWithTaskBase_Renderer.ActionStringGenerator actionStringGenerator){
         if(_requestController != null) {
-            return _requestController.getResponse().toString().getBytes();
+            return _requestController.getResponseHtml(actionStringGenerator).toString().getBytes();
         }
         else{
             return  "RequestVerteiler: _requestController is null.".getBytes();
         }
     }
 
+    public JPanel getResponseJPanel(int width, int height, ActionListener actionListener,
+                                    RoleWithTaskBase_Renderer.ActionStringGenerator actionStringGenerator){
+      if(_requestController != null) {
+        return _requestController.getResponseJPanel(width, height, actionListener, actionStringGenerator);
+      }
+      else{
+        JPanel p = new JPanel();
+        JLabel l = new JLabel("RequestVerteiler.getResponseJPanel(): requestController is null.");
+        p.add(l);
+        return  p;
+      }
+    }
+
+    //diese Methode prueft, ob der uebergebener Renderer ist vom Typ rendererType,
+    //oder vom einem geerbten Typ. In diesem Fall wird null zurueckgegeben.
+    //wenn die Typen nicht verwandt sind, wird ein RoleUnbekannt_TaskUnbekannt_Controller zurueckgegeben.
     public RoleUnbekannt_TaskUnbekannt_Controller validateRendererType(
             Class<?> rendererType,
             RoleWithTaskBase_Renderer<?> renderer

@@ -10,7 +10,7 @@ public class RoleAdmin_TaskHallo_Renderer extends RoleWithTaskBase_Renderer<Role
 
 
     @Override
-    public StringBuilder renderResponse(){
+    public StringBuilder renderHtmlResponse(){
         StringBuilder r = new StringBuilder();
 
         r.append("<h1>Hallo!</h1>\n");

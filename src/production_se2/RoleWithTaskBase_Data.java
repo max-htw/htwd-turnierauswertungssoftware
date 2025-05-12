@@ -6,7 +6,7 @@ public class RoleWithTaskBase_Data {
     public StringsRole.RoleTask task;
 
 
-    public final StringBuilder htmlUebersicht(){
+    public final StringBuilder htmlUebersicht(RoleWithTaskBase_Renderer.ActionStringGenerator actionStringGenerator){
         StringBuilder r = new StringBuilder();
 
         //Role
@@ -55,12 +55,12 @@ public class RoleWithTaskBase_Data {
             r.append("<p>Debug-Message: leer</p>\n");
         }
 
-        r.append(htmlOfDerrivedClass());
+        r.append(htmlOfDerrivedClass(actionStringGenerator));
 
         return  r;
     }
 
-    public StringBuilder htmlOfDerrivedClass(){
+    public StringBuilder htmlOfDerrivedClass(RoleWithTaskBase_Renderer.ActionStringGenerator actionStringGenerator){
         StringBuilder r = new StringBuilder();
 
         r.append("<p>Um alle Daten anzuzeigen, soll die Methode " + this.getClass().getName()
