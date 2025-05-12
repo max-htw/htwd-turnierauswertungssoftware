@@ -4,7 +4,9 @@
 
 title C4-Container
 
-Person(benutzer, "Benutzer")
+Person(organisator, "Organisatoren")
+Person(spieler, "Spieler")
+
 
 
 System_Boundary(turnierauswertungssoftware, "HTWD Turnierauswertungssoftware", "Automatisiert die Plannung, Erfassung und Auswertung eines Volleyball-Turniers."){
@@ -12,7 +14,8 @@ System_Boundary(turnierauswertungssoftware, "HTWD Turnierauswertungssoftware", "
   Container(database, "Datenbank")
 }
 
-Rel_D(benutzer, web_app, "Uses", "HTTP")
+Rel_D(organisator, web_app, "Uses", "HTTP")
+Rel_D(spieler, web_app, "Uses", "HTTP")
 Rel_D(web_app, database, "Reads from and\n writes to")
 
 @enduml
