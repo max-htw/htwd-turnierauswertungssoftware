@@ -1,8 +1,3 @@
-import javax.swing.*;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-
 public class RoleTeam_TaskTurnierplan_Renderer extends RoleWithTaskBase_Renderer<RoleTeam_TaskTurnierplan_Data>{
 
     @Override

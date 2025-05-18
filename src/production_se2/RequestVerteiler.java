@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 public class RequestVerteiler {
@@ -7,11 +8,23 @@ public class RequestVerteiler {
     private RoleWithTaskBase_Controller<?> _requestController;
     private StringsRole _role;
     private StringsRole.RoleTask _task;
+    private int _groupID;
+    private int _teamNr;
+    private DBInterfaceBase _dbBackend;
+
+
+  RequestVerteiler(StringsRole role, StringsRole.RoleTask task,
+                   int groupNr, int teamNr, Map<String,String> params) {
+    this(role,task,groupNr,teamNr,params, AppSettings.getDatabaseBackend());
+  }
 
     RequestVerteiler(StringsRole role, StringsRole.RoleTask task,
-                     int groupNr, int teamNr, Map<String,String> params){
+                     int groupID, int teamNr, Map<String,String> params, DBInterfaceBase dbBackend ){
         _role = role;
         _task = task;
+        _groupID = groupID;
+        _teamNr = teamNr;
+        _dbBackend = dbBackend;
 
         RoleWithTaskBase_Renderer<?> r = AppSettings.getRenderer(role, task);
 
@@ -20,7 +33,7 @@ public class RequestVerteiler {
             //deswegen geben wir die Kontrolle dem:
             _requestController = new RoleUnbekannt_TaskUnbekannt_Controller(
                     "Meldung vom RequestVerteiler: Check AppSettings.getRenderer() for Role=" + role.toString() +
-                    ", Task=" + task.toString());
+                    ", Task=" + task.toString(), dbBackend);
         }
         else if(role == StringsRole.Admin){
             if(task == StringsRole.AdminTasks.Status){
@@ -29,13 +42,13 @@ public class RequestVerteiler {
               _requestController = validateRendererType(RoleAdmin_TaskEinstellungen_Renderer.class, r);
               if(_requestController == null) {
                 _requestController = new
-                  RoleAdmin_TaskEinstellungen_Controller((RoleAdmin_TaskEinstellungen_Renderer) r, params);
+                  RoleAdmin_TaskEinstellungen_Controller((RoleAdmin_TaskEinstellungen_Renderer) r, params, dbBackend);
               }
             }else if(task == StringsRole.AdminTasks.Hallo){
                 _requestController = validateRendererType(RoleAdmin_TaskHallo_Renderer.class, r);
                 if(_requestController == null)
                     _requestController = new
-                            RoleAdmin_TaskHallo_Controller((RoleAdmin_TaskHallo_Renderer)r, params);
+                            RoleAdmin_TaskHallo_Controller((RoleAdmin_TaskHallo_Renderer)r, params, dbBackend);
             }
             else{ // unbekannter Admin-Task
 
@@ -49,7 +62,7 @@ public class RequestVerteiler {
                 _requestController = validateRendererType(RoleTeam_TaskTurnierplan_Renderer.class, r);
                 if(_requestController == null)
                     _requestController = new
-                            RoleTeam_TaskTurnierplan_Controller((RoleTeam_TaskTurnierplan_Renderer)r, params);
+                            RoleTeam_TaskTurnierplan_Controller(_groupID, _teamNr, (RoleTeam_TaskTurnierplan_Renderer)r, params, dbBackend);
             }
         }
 
@@ -57,7 +70,7 @@ public class RequestVerteiler {
             _requestController =
                     new RoleUnbekannt_TaskUnbekannt_Controller(
                "Check RequestVerteiler.Constructor() for Role=" + role.toString() +
-                    ", Task=" + task.toString());
+                    ", Task=" + task.toString(), dbBackend);
         }
 
         if(DevSettings.useTestDataForRendering()){
@@ -70,7 +83,7 @@ public class RequestVerteiler {
 
     public byte[] getResponseHtmlBytes(RoleWithTaskBase_Renderer.ActionStringGenerator actionStringGenerator){
         if(_requestController != null) {
-            return _requestController.getResponseHtml(actionStringGenerator).toString().getBytes();
+            return _requestController.getResponseHtml(actionStringGenerator).toString().getBytes(StandardCharsets.UTF_8);
         }
         else{
             return  "RequestVerteiler: _requestController is null.".getBytes();
@@ -90,7 +103,11 @@ public class RequestVerteiler {
       }
     }
 
-    //diese Methode prueft, ob der uebergebener Renderer ist vom Typ rendererType,
+    public RoleWithTaskBase_Data getResponseData(){
+      return _requestController.getResponseData();
+    }
+
+    //diese Methode prueft, ob der uebergebener Renderer vom Typ rendererType ist,
     //oder vom einem geerbten Typ. In diesem Fall wird null zurueckgegeben.
     //wenn die Typen nicht verwandt sind, wird ein RoleUnbekannt_TaskUnbekannt_Controller zurueckgegeben.
     public RoleUnbekannt_TaskUnbekannt_Controller validateRendererType(
@@ -106,7 +123,7 @@ public class RequestVerteiler {
                     + " wird ein Renderer vom Typ " + rendererType.getName() + " benoetigt, "
                     + " aber der von AppSettings.getRenderer() bereitgestellte Typ ist "
                     + renderer.getClass().getName();
-            r = new RoleUnbekannt_TaskUnbekannt_Controller(s);
+            r = new RoleUnbekannt_TaskUnbekannt_Controller(s, _dbBackend);
         }
 
         return r;

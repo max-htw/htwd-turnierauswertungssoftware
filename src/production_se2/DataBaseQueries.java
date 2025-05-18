@@ -148,8 +148,8 @@ public class DataBaseQueries {
         return  null;
     }
 
-    public static MyHelpers.SpielStats getSpielStatsByHash(int hash){
-        MyHelpers.SpielStats a = new MyHelpers.SpielStats();
+    public static DBInterfaceBase.SpielStats getSpielStatsByHash(int hash){
+      DBInterfaceBase.SpielStats a = new DBInterfaceBase.SpielStats();
         if(hash <=0)
             return  a;
         MyHelpers.Match m = getMatchByHash(hash);
@@ -164,13 +164,17 @@ public class DataBaseQueries {
         if(isHinspiel) {
             a.team1Punkte = m.get_firstTeamHinspielPunkte();
             a.team2Punkte = m.get_secondTeamHinspielPunkte();
-            a.richter = m.getRichterHinspiel();
+            MyHelpers.IntPair richter = m.getRichterHinspiel();
+            a.richterGroupID = richter.x;
+            a.richterTeamID = richter.y;
             a.feldID = m.get_feldNrHinspiel();
         }
         else{
             a.team1Punkte = m.get_firstTeamRueckspielPunkte();
             a.team2Punkte = m.get_secondTeamRueckspielPunkte();
-            a.richter = m.getRichterRueckspiel();
+            MyHelpers.IntPair richter = m.getRichterRueckspiel();
+            a.richterGroupID = richter.x;
+            a.richterTeamID = richter.y;
             a.feldID = m.get_feldNrRueckspiel();
         }
 

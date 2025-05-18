@@ -96,21 +96,29 @@ public class WebserverInternal_ContextHandler implements HttpHandler, RoleWithTa
                 //Default task (see above) will be used
             }
         } else {
-            //checking if the role-section contains a valid group:
+            //Pruefung, ob in dem Role-Abschnitt eine gueltige Gruppe steht:
+            //es wird nur die Gueltigkeits des Formats bestimmt
+            //ob die Zahlen stimmen oder nicht, wird spaeter im controller geprueft.
 
             if (sections.get(urlSectionsOffset + 0).length() == 2) {
                 //Teamnummer wird in form "dL" dargestellt, mit d - Ziffer, L - Buchstabe.
                 //z.B: 1A oder 8C.
-                setGroupNr(sections.get(urlSectionsOffset + 0).charAt(0) - 48);
-                if (getGroupNr() < 1 || getGroupNr() > DataBaseQueries.get_anzGroups()) {
-                    setGroupNr(0);
+                //
+                //hier nehmen ich an, dass die Programm-interne nullbasierte nummerierung
+                //wird nach aussen als 1-basierte Nummern angezeigt.
+                //deswegen die im URL stehende TeamNr um 1 verkleinern.
+                //die selbe vorgehensweise, aber in andere richtung gibt es in
+                // generateActionString()
+                setGroupNr(sections.get(urlSectionsOffset + 0).charAt(0) - 48 - 1);
+                if (getGroupNr() < 0) {
+                    setGroupNr(-1);
                 } else {
-                    setTeamNr(sections.get(urlSectionsOffset + 0).charAt(1) - 96);
-                    if (getTeamNr() < 1 || getTeamNr() > DataBaseQueries.get_anzTeams(getGroupNr()))
-                        setTeamNr(0);
+                    setTeamNr(sections.get(urlSectionsOffset + 0).charAt(1) - 96 - 1);
+                    if (getTeamNr() < 0)
+                        setTeamNr(-1);
                 }
             }
-            if (getGroupNr() > 0 && getTeamNr() > 0) {
+            if (getGroupNr() > -1 && getTeamNr() > -1) {
                 setRole(StringsRole.Team);
                 setTask(StringsRole.TeamTasks.Overview);
                 if (sections.size() >= (urlSectionsOffset + 2)) {
@@ -132,14 +140,17 @@ public class WebserverInternal_ContextHandler implements HttpHandler, RoleWithTa
         }
     }
 
-  @Override
+
   public String generateActionString(RoleWithTaskBase_Renderer.ActionForRoleAndTask action) {
       if(action == null){
         return "/todo/generateActionString(null)";
       }
       String roleTeil = action.role.name().toLowerCase();
       if(action.role == StringsRole.Team){
-        roleTeil = "" + action.groupID + (char)(action.teamID + 96);
+        //hier ist wie in extractRole_Task_GroupNr_TeamNr_FromUrl():
+        // intern im Programm sind die Group/Team-Nummern nullbasiert,
+        // aber der Nutzer soll 1-basierte nummern sehen.
+        roleTeil = "" + (action.groupID + 1) + (char)(action.teamID + 96+1);
       }
       String out = "/" + roleTeil + "/" + action.task.toString().toLowerCase();
       String separator = "?";

@@ -29,7 +29,7 @@ public abstract class RoleWithTaskBase_Renderer<Class_of_Daten extends  RoleWith
 
         if(!this.getClass().getName().equals(RoleWithTaskBase_Renderer.class.getName())) {
             r.append("<p>Das ist die Standardimplementierung von RoleWithTaskBase_Renderer.renderHtmlResponse().<br>\n" +
-                    "Sie soll in " + this.getClass().getName() + ".renderHtmlResponse() ueberschrieben werden.<br>\n" +
+                    "Sie soll in " + this.getClass().getName() + ".renderHtmlResponse() überschrieben werden.<br>\n" +
                     "</p>\n");
         }
 

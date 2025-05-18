@@ -219,7 +219,7 @@ public class MyHelpers {
 
     }
 
-
+/*
     public static class SpielStats{
         public boolean isHinspiel = false;
         public int groupid = -1;
@@ -230,6 +230,8 @@ public class MyHelpers {
         public int feldID = -1;
         public IntPair richter = new IntPair(-1,-1);
     }
+
+ */
 
     public  static  class AuswertungsEintrag implements Comparable<AuswertungsEintrag>{
         final int teamId;

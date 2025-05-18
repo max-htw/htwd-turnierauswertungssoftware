@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 public class RoleAdmin_TaskHallo_Renderer extends RoleWithTaskBase_Renderer<RoleAdmin_TaskHallo_Data>{
     @Override
     public RoleAdmin_TaskHallo_Data getEmptyDaten() {

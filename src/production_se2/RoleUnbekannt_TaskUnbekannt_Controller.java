@@ -1,10 +1,9 @@
 import java.util.HashMap;
-import java.util.Map;
 
-public class RoleUnbekannt_TaskUnbekannt_Controller extends RoleWithTaskBase_Controller<RoleWithTaskBase_Renderer>{
+public class RoleUnbekannt_TaskUnbekannt_Controller extends RoleWithTaskBase_Controller<RoleWithTaskBase_Renderer<?>>{
 
-    RoleUnbekannt_TaskUnbekannt_Controller(String fehlermeldung) {
-        super(new RoleUnbekannt_TaskUnbekannt_Renderer(), new HashMap<String, String>(), null, null);
+    RoleUnbekannt_TaskUnbekannt_Controller(String fehlermeldung, DBInterfaceBase dbBackend) {
+        super(new RoleUnbekannt_TaskUnbekannt_Renderer(), new HashMap<String, String>(), null, null, dbBackend);
 
         _renderer.daten.fehlermeldung = fehlermeldung;
     }

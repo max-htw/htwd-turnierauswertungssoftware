@@ -37,15 +37,14 @@ public class AppSettings {
       inMemory, sqLite
     }
 
-    public static DBInterfaceBase getDatabaseType(){
+    public static DBInterfaceBase getDatabaseBackend(){
       SupportedDatabaseTypes dbType = DevSettings.getDatabaseType();
       if(dbType == null)
         dbType = SupportedDatabaseTypes.inMemory;
 
       DBInterfaceBase ausgabe;
       if(dbType == SupportedDatabaseTypes.sqLite) {
-        //hier kommt spaeter DBInterface_sqLite, aber er ist noch nicht fertig
-        ausgabe = new DBInterface_InMemory();
+        ausgabe = new DBInterface_SQLite();
       }
       else{
         ausgabe = new DBInterface_InMemory();
@@ -53,4 +52,11 @@ public class AppSettings {
       return ausgabe;
     }
 
+
+    public static final int maxAnzTeams = 8;
+    public static final int minAnzTeams = 3;
+    public static final int maxAnzGroups = 4;
+    public static final int minAnzGroups = 1;
+    public static final int maxAnzSpielfelder = 4;
+    public static final int minAnzSpielfelder = 1;
 }

@@ -7,20 +7,52 @@ public abstract class RoleWithTaskBase_Controller<Class_of_Renderer extends Role
 
     protected Class_of_Renderer _renderer;
     protected Map<String, String> _params = new HashMap<>();
+    protected DBInterfaceBase _dbInterface;
+
+    public boolean existsParam(StringsActions p){
+        return _params.containsKey(p.name().toLowerCase());
+    }
 
     public abstract void applyActions();
 
     public abstract void applyTestData();
 
-    RoleWithTaskBase_Controller(RoleWithTaskBase_Renderer renderer,
+    RoleWithTaskBase_Controller(RoleWithTaskBase_Renderer<?> renderer,
                                 Map<String, String> params,
                                 StringsRole role,
-                                StringsRole.RoleTask task){
-        _renderer = (Class_of_Renderer)(renderer);
-        _renderer.daten.role = role;
-        _renderer.daten.task = task;
-        _params = params;
+                                StringsRole.RoleTask task,
+                                DBInterfaceBase dbBackend){
+      _renderer = (Class_of_Renderer) (renderer);
+      _renderer.daten.role = role;
+      _renderer.daten.task = task;
+      _params = params;
+      if(dbBackend == null) AppSettings.getDatabaseBackend();
+      _dbInterface = dbBackend;
+    }
 
+    public Integer validateIntParam(StringsActions p){
+        Integer ausgabe = null;
+        try{
+            String strParam = _params.get(p.name().toLowerCase());
+            ausgabe = Integer.parseInt(strParam);
+        }
+        catch (Exception e){}
+        return  ausgabe;
+    }
+
+    public Boolean validateBoolParam(StringsActions p){
+        Boolean ausgabe = null;
+        try{
+            String strParam = _params.get(p.name().toLowerCase());
+            if(strParam.equals("true")){
+                ausgabe = true;
+            }
+            else if(strParam.equals("false")){
+                ausgabe = false;
+            }
+        }
+        catch (Exception e){}
+        return  ausgabe;
     }
 
     public String getResponseHtml(RoleWithTaskBase_Renderer.ActionStringGenerator actionStringGenerator){
@@ -29,7 +61,7 @@ public abstract class RoleWithTaskBase_Controller<Class_of_Renderer extends Role
 
         //wenn die Entwickler die Rendereinstellungen in DevSettings uebeschrieben haben,
         //rendern wir nach ihren Wunsch:
-        RoleWithTaskBase_Renderer devRenderer = DevSettings.getRenderer(_renderer.daten.role, _renderer.daten.task);
+        RoleWithTaskBase_Renderer<?> devRenderer = DevSettings.getRenderer(_renderer.daten.role, _renderer.daten.task);
         if((devRenderer != null) || (devRenderer == null && !DevSettings.turnOffAllRenderer())){
             // der Entwickler moechte explizit, dass dieser Ansicht gerendert wird
             // oder er hat keine besonderen Wuensche bezueglich dieses Renderers.
@@ -50,9 +82,16 @@ public abstract class RoleWithTaskBase_Controller<Class_of_Renderer extends Role
         return _renderer.renderJPanel(width, height, actionListener);
     }
 
+    public RoleWithTaskBase_Data getResponseData(){
+      return _renderer.daten;
+    }
+
+    /*
     public  Class<?> getRendererClass(){
         return _renderer.getClass();
     }
+
+     */
 
 
 }

@@ -27,10 +27,26 @@ public class Main {
             // - Threads implementieren
         }
         else if(webserverType == AppSettings.SupportedWebServerTypes.mock){
+          //die Code hier dient nur zur Demonstration des Aufrufs des Mock-Webservers.
+          //die Verwendung des Mock-Webservers findet haupsaechlich in Unit-Tests statt.
+          WebserverMock w = new WebserverMock(new DBInterface_InMemory());
+          w.requestRole = StringsRole.Admin;
+          w.requestTask = StringsRole.AdminTasks.Einstellungen;
+          w.requestGroupID = -1;
+          w.requestTeamNr = -1;
+          w.requestParams.clear();
+          w.requestParams.put(StringsActions.setAnzGroups, "" + 3);
+
+          RoleWithTaskBase_Data d = w.serveUserRequest();
+          if(d instanceof RoleAdmin_TaskEinstellungen_Data){
+            System.out.println(((RoleAdmin_TaskEinstellungen_Data) d).anzGruppen);
+          }
 
         }
         else if(webserverType == AppSettings.SupportedWebServerTypes.swing){
           //ToDo: Swing-Oberflaeche entwickeln
+          //  - der Swing-Webserver ist dafuer gedacht um zu pruefen, ob die Architektur
+          //    der Anwendung es zulaesst, eine andere View-Technologie, als HTML zu verwenden.
           new WebserverSwing_Handler("Turnierauswertungssoftware");
         }
     }

@@ -1,8 +1,8 @@
 import java.util.Map;
 
 public class RoleAdmin_TaskHallo_Controller extends RoleWithTaskBase_Controller<RoleAdmin_TaskHallo_Renderer>{
-    RoleAdmin_TaskHallo_Controller(RoleAdmin_TaskHallo_Renderer renderer, Map<String, String> params) {
-        super(renderer, params, StringsRole.Admin, StringsRole.AdminTasks.Hallo);
+    RoleAdmin_TaskHallo_Controller(RoleAdmin_TaskHallo_Renderer renderer, Map<String, String> params, DBInterfaceBase dbBackend) {
+        super(renderer, params, StringsRole.Admin, StringsRole.AdminTasks.Hallo, dbBackend);
     }
 
     @Override
