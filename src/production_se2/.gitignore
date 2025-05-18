@@ -2,7 +2,7 @@
 DevSettings.java
 bin/
 classes/
-db/
+db/*.db
 frontend/
 out/
 
