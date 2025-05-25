@@ -29,76 +29,78 @@ public class RoleAdmin_TaskEinstellungen_Data extends RoleWithTaskBase_Data{
 
   public ArrayList<RoleWithTaskBase_Renderer.HyperLink> savedTurniereLinks = new ArrayList<>();
 
+  // Navigationslinks
+  public StringBuilder htmlNavLinks(RoleWithTaskBase_Renderer.ActionStringGenerator actionStringGenerator) {
+    StringBuilder r = new StringBuilder();
+    r.append("<p>NavLinks:<br>\n");
+    for(RoleWithTaskBase_Renderer.HyperLink l: navLinks){
+        r.append("<a href=\"").append(actionStringGenerator.generateActionString(l.linkAction)).append("\">")
+          .append(l.linkText).append("</a><br>\n");
+    }
+    return r;
+  }
 
-
-
-
-
-  @Override
-  public StringBuilder htmlOfDerrivedClass(RoleWithTaskBase_Renderer.ActionStringGenerator actionStringGenerator) {
+  // Turniekonfiguration
+  public StringBuilder htmlConfig(RoleWithTaskBase_Renderer.ActionStringGenerator actionStringGenerator) {
     StringBuilder r = new StringBuilder();
 
-    r.append("<p>NavLinks:<br>\n");
-
-    for(RoleWithTaskBase_Renderer.HyperLink l: navLinks){
-      r.append("<a href=\"").append(actionStringGenerator.generateActionString(l.linkAction)).append("\">")
-        .append(l.linkText).append("</a><br>\n");
-    }
-    
     r.append("<p>Anzahl Gruppen = ").append(anzGruppen).append("; Aendern zu: ");
-
     for(RoleWithTaskBase_Renderer.HyperLink n: anzahlGruppen_Links){
-      String href_or_style = "href=\"" + actionStringGenerator.generateActionString(n.linkAction) +"\"";
-      if(!n.isActive)
-        href_or_style = "style=\"font-weight:bold;\" ";
-      r.append("<a ").append(href_or_style).append(">").append(n.linkText).append("</a> | \n");
-    }
-    for(int g: anzTeams_proGruppe.keySet()){
-      r.append("<br>Anzahl Teams in der Gruppe ").append(g).append(" = ").append(anzTeams_proGruppe.get(g))
-        .append("; Aendern zu: ");
-      for(RoleWithTaskBase_Renderer.HyperLink n:anzTeams_Dictionary.get(g)){
-        String href_or_style = "href=\"" + actionStringGenerator.generateActionString(n.linkAction) +"\"";
-        if(!n.isActive)
-          href_or_style = "style=\"font-weight:bold;\" ";
+        String href_or_style = n.isActive 
+            ? "href=\"" + actionStringGenerator.generateActionString(n.linkAction) + "\""
+            : "style=\"font-weight:bold;\" ";
         r.append("<a ").append(href_or_style).append(">").append(n.linkText).append("</a> | \n");
-      }
     }
 
-    r.append("<br>Mit Rueckspielen = ").append(mitRueckspielen).append("; Aendern zu ").
-      append("<a href=\"").append(actionStringGenerator
-        .generateActionString(mit_RueckspielenLink.linkAction))
-        .append("\">")
-        .append(mit_RueckspielenLink.linkText)
-        .append("</a><br>\n");
+    for(int g: anzTeams_proGruppe.keySet()){
+        r.append("<br>Anzahl Teams in der Gruppe ").append(g).append(" = ").append(anzTeams_proGruppe.get(g))
+          .append("; Aendern zu: ");
+        for(RoleWithTaskBase_Renderer.HyperLink n: anzTeams_Dictionary.get(g)){
+            String href_or_style = n.isActive 
+                ? "href=\"" + actionStringGenerator.generateActionString(n.linkAction) + "\""
+                : "style=\"font-weight:bold;\" ";
+            r.append("<a ").append(href_or_style).append(">").append(n.linkText).append("</a> | \n");
+        }
+    }
+
+    r.append("<br>Mit Rueckspielen = ").append(mitRueckspielen).append("; Aendern zu ")
+      .append("<a href=\"").append(actionStringGenerator.generateActionString(mit_RueckspielenLink.linkAction))
+      .append("\">").append(mit_RueckspielenLink.linkText).append("</a><br>\n");
 
     r.append("Anzahl Spielfelder = ").append(anzSpielfelder).append("; Aendern zu ");
     for(RoleWithTaskBase_Renderer.HyperLink n: anzSpielfelder_aendernLinks){
-      String href = "href=\"" + actionStringGenerator.generateActionString(n.linkAction) +"\"";
-      r.append("<a ").append(href).append(">").append(n.linkText).append("</a> | \n");
+        r.append("<a href=\"")
+          .append(actionStringGenerator.generateActionString(n.linkAction))
+          .append("\">")
+          .append(n.linkText).append("</a> | \n");
     }
 
     r.append("<br>Vorausfuellen mit Zufallsdaten = ").append(vorausfuellenData).append("; Aendern zu ")
-        .append("<a href=\"").append(
-          actionStringGenerator.generateActionString(vorausfuellenData_aendernLink.linkAction))
-        .append("\">")
-        .append(vorausfuellenData_aendernLink.linkText)
-        .append("</a><br>\n");
+      .append("<a href=\"").append(actionStringGenerator.generateActionString(vorausfuellenData_aendernLink.linkAction))
+      .append("\">").append(vorausfuellenData_aendernLink.linkText).append("</a><br>\n");
 
     r.append("<br>Aktuelles Turnier speichern unter:<br>\n")
-      .append("<form action=\"")
-      .append(actionStringGenerator.generateActionString(htmlFormAction))
-      .append("\" >\n<input type=\"text\" name=\"")
-      .append(textBoxName.name().toLowerCase())
-      .append("\" value=\"")
-      .append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss")))
-      .append("\"><button type=\"submit\">speichern</button>\n</form>");
+      .append("<form action=\"").append(actionStringGenerator.generateActionString(htmlFormAction)).append("\" >\n")
+      .append("<input type=\"text\" name=\"").append(textBoxName.name().toLowerCase()).append("\" value=\"")
+      .append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"))).append("\">\n")
+      .append("<button type=\"submit\">speichern</button>\n</form>");
 
     r.append("<br>Ein gespeichertes Turnier laden:<br>\n");
-      for(RoleWithTaskBase_Renderer.HyperLink n : savedTurniereLinks){
-        r.append("<a href=\"");
-        r.append(actionStringGenerator.generateActionString(n.linkAction));
-        r.append("\">").append(n.linkText).append("</a><br>\n");
-      }
-    return  r;
+    for(RoleWithTaskBase_Renderer.HyperLink n : savedTurniereLinks){
+        r.append("<a href=\"").append(actionStringGenerator.generateActionString(n.linkAction)).append("\">")
+          .append(n.linkText).append("</a><br>\n");
+    }
+
+    return r;
+  }
+
+  // vereint die beiden Methoden htmlUebersicht() und htmlOfDerrivedClass()
+  @Override
+  public StringBuilder htmlOfDerrivedClass(RoleWithTaskBase_Renderer.ActionStringGenerator actionStringGenerator) {
+    StringBuilder r = new StringBuilder();
+    r.append(htmlNavLinks(actionStringGenerator));
+    r.append("<hr>"); // optische Trennung
+    r.append(htmlConfig(actionStringGenerator));
+    return r;
   }
 }

@@ -39,8 +39,6 @@ Die Benutzeroberfläche wird in den Farben des Stura gestaltet. Diese Farben sin
 Primärfarbe: Orange
 
 Sekundärfarbe: Schwarz, Grün 
-// ?? die Frage nach den Stura Farben eventuell morgen absprechen.
-
 
 === Wireframes
 

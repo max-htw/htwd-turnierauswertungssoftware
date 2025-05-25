@@ -70,53 +70,54 @@ public class RoleAdmin_TaskEinstellungen_Renderer_Arbeitskopie extends RoleAdmin
       0
     );
 
+    r.append("<div class=\"w-full mx-auto px-20\">");
+    
     // Navigationsleiste
-    r.append("<nav class=\"bg-white text-secondary px-10 py-2\">");
-    r.append("<div class=\"flex items-center\">");
+    r.append("<nav class=\"bg-white text-secondary py-3\">");
+    r.append("<div class=\"grid grid-cols-3 items-center\">");
 
     // Linke Seite: statischer Text
-    r.append("<div class=\"text-primary uppercase flex-shrink-0 text-xl font-bold\">Turnierauswertungssoftware</div>");
+    r.append("<div class=\"text-primary uppercase text-xl font-bold\">Turnierauswertungssoftware</div>");
 
     // Mitte: Konfiguration, Turnierplan, Ergebnisse
-    r.append("<div class=\"flex-grow flex justify-center space-x-6\">");
+    r.append("<div class=\"flex justify-center space-x-6\">");
     r.append("<a href=\"").append(getHref(einstellungenAction)).append("\" class=\"hover:text-main hover:font-bold px-3 py-2 rounded\">Konfiguration</a>");
     r.append("<a href=\"").append(getHref(turnierplanAction)).append("\" class=\"hover:text-main hover:font-bold px-3 py-2 rounded\">Turnierplan</a>");
     r.append("<a href=\"").append(getHref(ergebnisseAction)).append("\" class=\"hover:text-main hover:font-bold px-3 py-2 rounded\">Ergebnisse</a>");
     r.append("</div>");
 
     // Rechte Seite: Historie + Home mit Abstand
-    r.append("<div class=\"flex space-x-6 items-center\">");
+    r.append("<div class=\"flex justify-end items-center space-x-6\">");
     r.append("<a href=\"").append(getHref(historieAction)).append("\" class=\"hover:text-main hover:font-bold px-3 py-2 rounded\">Historie</a>");
     r.append("<a href=\"").append(getHref(homeAction)).append("\" class=\"border border-main text-primary hover:text-main hover:font-bold px-3 py-2 rounded\">Home</a>");
     r.append("</div>");
 
     r.append("</div>");
+    r.append("</nav>");
+    
 
-    // Mobile-Menü (optional) - hier kannst du ähnlich anpassen oder erstmal so lassen
-    r.append("<button id=\"menu-button\" class=\"md:hidden ml-auto focus:outline-none\">");
-    r.append("<svg class=\"h-6 w-6 fill-current\" viewBox=\"0 0 24 24\">");
-    r.append("<path d=\"M4 6h16M4 12h16M4 18h16\"/></svg></button>");
+    // Hauptinhalt
+    r.append("<div class=\"grid grid-cols-3 gap-6 py-6\">");
 
-    r.append("<div id=\"mobile-menu\" class=\"md:hidden hidden px-2 pt-2 pb-3 space-y-1\">");
-    r.append("<a href=\"").append(getHref(einstellungenAction)).append("\" class=\"hover:bg-gray-700 px-3 py-2 rounded block\">Konfiguration</a>");
-    r.append("<a href=\"").append(getHref(turnierplanAction)).append("\" class=\"hover:bg-gray-700 px-3 py-2 rounded block\">Turnierplan</a>");
-    r.append("<a href=\"").append(getHref(ergebnisseAction)).append("\" class=\"hover:bg-gray-700 px-3 py-2 rounded block\">Ergebnisse</a>");
-    r.append("<a href=\"").append(getHref(historieAction)).append("\" class=\"hover:bg-gray-700 px-3 py-2 rounded block\">Historie</a>");
-    r.append("<a href=\"").append(getHref(homeAction)).append("\" class=\"hover:bg-gray-700 px-3 py-2 rounded block\">Home</a>");
-    r.append("</div></nav>");
+    r.append("<div>");
+    r.append("<h2 class=\"text-xl text-secondary font-bold mb-2\">Konfiguration</h2>");
+    r.append(daten.htmlConfig(get_actionStringGenerator()));
+    r.append("</div>");
 
+    r.append("<div>");
+    r.append("<h2 class=\"text-xl text-secondary font-bold mb-2\">Teamnamen</h2>");
+    r.append("<p>Hierfür fehlt aktuell noch die Datenschnittstelle.</p>");
+    r.append("</div>");
 
-    // Titel
-    r.append("<h1>").append(daten.htmlTitel).append("</h1>\n<a href=\"");
-
+    r.append("</div>");
 
     // Link zum Vorausfüllen von zufälligen Daten
-    r.append("<br/><br/> <a href=\"");
+    r.append(" <a href=\"");
     r.append(getHref(daten.vorausfuellenData_aendernLink.linkAction));
     r.append("\">Beispiellink zum Vorausfüllen von zufälligen Daten</a><br><br>\n");
 
-    // Debug-Info
-    r.append(daten.htmlUebersicht(get_actionStringGenerator()));
+
+    r.append("</div>"); 
     
    
 
