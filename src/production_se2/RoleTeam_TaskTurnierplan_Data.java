@@ -11,7 +11,7 @@ public class RoleTeam_TaskTurnierplan_Data extends  RoleWithTaskBase_Data{
 
         r.append("<p>NavLinks:<br>\n");
 
-        for(RoleWithTaskBase_Renderer.HyperLink l: navLinks){
+        for(RoleWithTaskBase_Renderer.HyperLink l: navLinksGroup){
             r.append("<a href=\"" + actionStringGenerator.generateActionString(l.linkAction) + "\">" + l.linkText + "</a><br>");
         }
         r.append("</p>\n");

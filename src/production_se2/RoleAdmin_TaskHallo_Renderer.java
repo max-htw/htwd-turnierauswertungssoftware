@@ -1,4 +1,4 @@
-public class RoleAdmin_TaskHallo_Renderer extends RoleWithTaskBase_Renderer<RoleAdmin_TaskHallo_Data>{
+public class RoleAdmin_TaskHallo_Renderer extends RoleWithTaskBase_Renderer_Admin<RoleAdmin_TaskHallo_Data>{
     @Override
     public RoleAdmin_TaskHallo_Data getEmptyDaten() {
       RoleAdmin_TaskHallo_Data ausgabe = new RoleAdmin_TaskHallo_Data();

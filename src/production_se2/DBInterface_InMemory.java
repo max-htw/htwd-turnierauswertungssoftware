@@ -203,7 +203,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   @Override
   boolean turnierKonf_setAnzTeamsByGroupID(int groupID, int anzTeams) {
     int g = turnierKonf_getAnzGruppen();
-    if(groupID < 0 || groupID >= g || anzTeams < 0 || anzTeams >= AppSettings.maxAnzTeams){
+    if(groupID < 0 || groupID >= g || anzTeams < AppSettings.minAnzTeams || anzTeams > AppSettings.maxAnzTeams){
       throw new IllegalArgumentException();
     }
     _anzTeamsProGruppe.set(groupID, anzTeams);

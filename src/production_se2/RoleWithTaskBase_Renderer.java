@@ -10,6 +10,9 @@ public abstract class RoleWithTaskBase_Renderer<Class_of_Daten extends  RoleWith
     public abstract Class_of_Daten getEmptyDaten();
 
     private String _cssHeaderString = "<link href=\"/output.css\" rel=\"stylesheet\" />\n";
+    public void turnOffCss(){
+      _cssHeaderString = "";
+    }
 
     RoleWithTaskBase_Renderer(){
         daten = getEmptyDaten();
@@ -23,7 +26,7 @@ public abstract class RoleWithTaskBase_Renderer<Class_of_Daten extends  RoleWith
 
     public StringBuilder renderHtmlResponse(){
 
-        _cssHeaderString = "";
+        turnOffCss();
 
         StringBuilder r = new StringBuilder();
 
@@ -55,6 +58,13 @@ public abstract class RoleWithTaskBase_Renderer<Class_of_Daten extends  RoleWith
 
     public String RenderHtmlEnde_(){
         return "\n</body>\n</html>";
+    }
+
+    public String RenderBodyAnfang_(){
+      return "";
+    }
+    public String RenderBodyEnde_(){
+      return "";
     }
 
     public  static  class HyperLink {

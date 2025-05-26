@@ -29,17 +29,6 @@ public class RoleAdmin_TaskEinstellungen_Data extends RoleWithTaskBase_Data{
 
   public ArrayList<RoleWithTaskBase_Renderer.HyperLink> savedTurniereLinks = new ArrayList<>();
 
-  // Navigationslinks
-  public StringBuilder htmlNavLinks(RoleWithTaskBase_Renderer.ActionStringGenerator actionStringGenerator) {
-    StringBuilder r = new StringBuilder();
-    r.append("<p>NavLinks:<br>\n");
-    for(RoleWithTaskBase_Renderer.HyperLink l: navLinks){
-        r.append("<a href=\"").append(actionStringGenerator.generateActionString(l.linkAction)).append("\">")
-          .append(l.linkText).append("</a><br>\n");
-    }
-    return r;
-  }
-
   // Turniekonfiguration
   public StringBuilder htmlConfig(RoleWithTaskBase_Renderer.ActionStringGenerator actionStringGenerator) {
     StringBuilder r = new StringBuilder();
@@ -98,7 +87,6 @@ public class RoleAdmin_TaskEinstellungen_Data extends RoleWithTaskBase_Data{
   @Override
   public StringBuilder htmlOfDerrivedClass(RoleWithTaskBase_Renderer.ActionStringGenerator actionStringGenerator) {
     StringBuilder r = new StringBuilder();
-    r.append(htmlNavLinks(actionStringGenerator));
     r.append("<hr>"); // optische Trennung
     r.append(htmlConfig(actionStringGenerator));
     return r;

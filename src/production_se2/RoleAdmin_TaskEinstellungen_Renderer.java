@@ -1,4 +1,4 @@
-public class RoleAdmin_TaskEinstellungen_Renderer extends RoleWithTaskBase_Renderer<RoleAdmin_TaskEinstellungen_Data>{
+public class RoleAdmin_TaskEinstellungen_Renderer extends RoleWithTaskBase_Renderer_Admin<RoleAdmin_TaskEinstellungen_Data>{
 
   /*
   Mitteilung an das FrontEnd-Team:
@@ -11,9 +11,11 @@ public class RoleAdmin_TaskEinstellungen_Renderer extends RoleWithTaskBase_Rende
 
   @Override
   public RoleAdmin_TaskEinstellungen_Data getEmptyDaten() {
-    RoleAdmin_TaskEinstellungen_Data ausgabe = new RoleAdmin_TaskEinstellungen_Data();
-    ausgabe.htmlTitel = "Turnierkonfiguration";
-    return  ausgabe;
+        RoleAdmin_TaskEinstellungen_Data ausgabe = new RoleAdmin_TaskEinstellungen_Data();
+        ausgabe.htmlTitel = "Turnierkonfiguration";
+        return ausgabe;
   }
 
+  
+  
 }

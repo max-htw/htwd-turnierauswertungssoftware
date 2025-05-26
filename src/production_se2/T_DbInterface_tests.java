@@ -37,11 +37,19 @@ public class T_DbInterface_tests extends T_DbInterface_setup {
     db.reset();
 
     //Versuch einiger ungueltigen Konfigurationen:
-    IllegalArgumentException thrown = assertThrows(
-      IllegalArgumentException.class,
-      () -> db.turnierKonf_setAnzGruppen(AppSettings.minAnzGroups - 1));
+    IllegalArgumentException thrown;
+    thrown = assertThrows(IllegalArgumentException.class,
+          () -> db.turnierKonf_setAnzGruppen(AppSettings.minAnzGroups - 1));
+    thrown = assertThrows(IllegalArgumentException.class,
+          () -> db.turnierKonf_setAnzGruppen(AppSettings.maxAnzGroups + 1));
+    thrown = assertThrows(IllegalArgumentException.class,
+          () -> db.turnierKonf_setAnzTeamsByGroupID(0, AppSettings.minAnzTeams - 1));
+    thrown = assertThrows(IllegalArgumentException.class,
+          () -> db.turnierKonf_setAnzTeamsByGroupID(0, AppSettings.maxAnzTeams + 1));
 
+    //nach den ungueltigen Konfigurationen muss die DB so bleiben wie vorher:  
     assertEquals(AppSettings.minAnzGroups, db.turnierKonf_getAnzGruppen());
+    assertEquals(AppSettings.minAnzTeams, db.turnierKonf_getAnzTeamsByGroupID(0));
 
     //gueltige Konfigurationen
     db.turnierKonf_setAnzGruppen(3);

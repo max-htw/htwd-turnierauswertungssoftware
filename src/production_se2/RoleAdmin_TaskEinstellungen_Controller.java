@@ -24,10 +24,16 @@ public class RoleAdmin_TaskEinstellungen_Controller extends RoleWithTaskBase_Con
     else if(existsParam(StringsActions.setAnzTeams) && existsParam(StringsActions.refGroupID)){
       Integer pTeams = validateIntParam(StringsActions.setAnzTeams);
       Integer pGid = validateIntParam(StringsActions.refGroupID);
+      boolean erfolg = false;
       if(pTeams != null && pGid != null){
-        boolean erfolg = _dbInterface.turnierKonf_setAnzTeamsByGroupID(pGid, pTeams);
-        if(!erfolg){
-          _renderer.daten.fehlermeldung += " Fehler bei setAnzTeams().";
+        try{
+          erfolg = _dbInterface.turnierKonf_setAnzTeamsByGroupID(pGid, pTeams);
+          if(!erfolg){
+            _renderer.daten.fehlermeldung += " Fehler bei setAnzTeams().";
+          }
+        }
+        catch(IllegalArgumentException e){
+          _renderer.daten.fehlermeldung += "Fehler bei setAnzTeams(): ungueltiger Argument. TODO: mehr details anzeigen.";
         }
       }
     }
@@ -57,18 +63,9 @@ public class RoleAdmin_TaskEinstellungen_Controller extends RoleWithTaskBase_Con
         }
     }
 
-    //applyTestData();
+    //applyTestData(); //for debugging purposes
 
     RoleAdmin_TaskEinstellungen_Data d = _renderer.daten;
-
-    d.navLinks.add(new RoleWithTaskBase_Renderer.HyperLink("Spielstand",
-            new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Status, 1, 2),
-            false));
-    d.navLinks.add(new RoleWithTaskBase_Renderer.HyperLink("Turnierplan",
-            new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Turnierplan, -1, -1), true));
-    d.navLinks.add(new RoleWithTaskBase_Renderer.HyperLink("Turnierkonfiguration",
-            new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, 1, 2),
-            false));
 
     d.anzGruppen = _dbInterface.turnierKonf_getAnzGruppen();
     for(int i = 1; i <= AppSettings.maxAnzGroups; i++){
@@ -141,15 +138,6 @@ public class RoleAdmin_TaskEinstellungen_Controller extends RoleWithTaskBase_Con
   @Override
   public void applyTestData() {
     RoleAdmin_TaskEinstellungen_Data d = _renderer.daten;
-
-    d.navLinks.add(new RoleWithTaskBase_Renderer.HyperLink("Spielstand",
-      new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Status, 1, 2),
-      false));
-    d.navLinks.add(new RoleWithTaskBase_Renderer.HyperLink("Turnierplan",
-      new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Turnierplan, -1, -1), true));
-    d.navLinks.add(new RoleWithTaskBase_Renderer.HyperLink("Turnierkonfiguration",
-      new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, 1, 2),
-      false));
 
     d.anzGruppen = 2;
     for(int i = 1; i <=4; i++){

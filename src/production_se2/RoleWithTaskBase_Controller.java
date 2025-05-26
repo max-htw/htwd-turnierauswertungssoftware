@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,6 +29,32 @@ public abstract class RoleWithTaskBase_Controller<Class_of_Renderer extends Role
       _params = params;
       if(dbBackend == null) AppSettings.getDatabaseBackend();
       _dbInterface = dbBackend;
+    }
+
+    public void fillNavLinks(){
+        boolean active;
+        if(_renderer.daten.role == StringsRole.Admin){
+            RoleWithTaskBase_Renderer.ActionForRoleAndTask aHome = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Hallo, -1, -1);
+            active = (_renderer.daten.role == aHome.role && _renderer.daten.task == aHome.task );
+            _renderer.daten.navLinkHome = new RoleWithTaskBase_Renderer.HyperLink("Home", aHome, active);
+
+            RoleWithTaskBase_Renderer.ActionForRoleAndTask aHistory = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Historie, -1, -1);
+            active = (_renderer.daten.role == aHistory.role && _renderer.daten.task == aHistory.task);
+            _renderer.daten.navLinkHistory = new RoleWithTaskBase_Renderer.HyperLink("Historie", aHistory, active);
+
+            RoleWithTaskBase_Renderer.ActionForRoleAndTask aKonf = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, -1, -1);
+            active = (_renderer.daten.role == aKonf.role && _renderer.daten.task == aKonf.task);
+            _renderer.daten.navLinksGroup.add(new RoleWithTaskBase_Renderer.HyperLink("Konfiguration", aKonf, active));
+
+            RoleWithTaskBase_Renderer.ActionForRoleAndTask aTurnier = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Turnierplan, -1, -1);
+            active = (_renderer.daten.role == aTurnier.role && _renderer.daten.task == aTurnier.task );
+            _renderer.daten.navLinksGroup.add(new RoleWithTaskBase_Renderer.HyperLink("Turnierplan", aTurnier, active));
+
+            RoleWithTaskBase_Renderer.ActionForRoleAndTask aResults = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Ergebnisse, -1, -1);
+            active = (_renderer.daten.role == aResults.role && _renderer.daten.task == aResults.task );
+            _renderer.daten.navLinksGroup.add(new RoleWithTaskBase_Renderer.HyperLink("Ergebnisse", aResults, active));
+        }
+        
     }
 
     public Integer validateIntParam(StringsActions p){
@@ -70,10 +97,11 @@ public abstract class RoleWithTaskBase_Controller<Class_of_Renderer extends Role
         }
         else{
             // den Daten-Standardrenderer verwenden:
+            _renderer.turnOffCss();
             ausgabe = _renderer.daten.htmlUebersicht(actionStringGenerator).toString();
         }
 
-        ausgabe = _renderer.RenderHtmlAnfang_() + ausgabe + _renderer.RenderHtmlEnde_();
+        ausgabe = _renderer.RenderHtmlAnfang_() + _renderer.RenderBodyAnfang_() + ausgabe + _renderer.RenderBodyEnde_() + _renderer.RenderHtmlEnde_();
         return  ausgabe;
     }
 

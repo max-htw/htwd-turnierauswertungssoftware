@@ -83,6 +83,8 @@ public class RequestVerteiler {
                     ", Task=" + task.toString(), dbBackend);
         }
 
+        _requestController.fillNavLinks();
+
         if(DevSettings.useTestDataForRendering()){
             _requestController.applyTestData();
         }

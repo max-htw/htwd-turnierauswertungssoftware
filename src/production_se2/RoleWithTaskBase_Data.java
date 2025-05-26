@@ -4,7 +4,10 @@ public class RoleWithTaskBase_Data {
     public String htmlTitel = "";
     public String fehlermeldung = "";
     public String debugMessage = "";
-    public ArrayList<RoleWithTaskBase_Renderer.HyperLink> navLinks = new ArrayList<>();
+    public RoleWithTaskBase_Renderer.HyperLink navLinkHome = new RoleWithTaskBase_Renderer.HyperLink(debugMessage, null, false);
+    public RoleWithTaskBase_Renderer.HyperLink navLinkHistory = new RoleWithTaskBase_Renderer.HyperLink(debugMessage, null, false);
+    public ArrayList<RoleWithTaskBase_Renderer.HyperLink> navLinksGroup = new ArrayList<>();
+
     public StringsRole role;
     public StringsRole.RoleTask task;
 
@@ -58,6 +61,8 @@ public class RoleWithTaskBase_Data {
             r.append("<p>Debug-Message: leer</p>\n");
         }
 
+        r.append(htmlNavLinks(actionStringGenerator));
+
         r.append(htmlOfDerrivedClass(actionStringGenerator));
 
         return  r;
@@ -71,4 +76,22 @@ public class RoleWithTaskBase_Data {
 
         return r;
     }
+
+  // Navigationslinks
+  public StringBuilder htmlNavLinks(RoleWithTaskBase_Renderer.ActionStringGenerator actionStringGenerator) {
+    StringBuilder r = new StringBuilder();
+    r.append("Home-Link: ");
+    r.append("<a href=\"").append(actionStringGenerator.generateActionString(navLinkHome.linkAction)).append("\">")
+          .append(navLinkHome.linkText).append("</a><br>\n");
+    r.append("History-Link: ");
+    r.append("<a href=\"").append(actionStringGenerator.generateActionString(navLinkHistory.linkAction)).append("\">")
+          .append(navLinkHistory.linkText).append("</a><br>\n");
+    r.append("<p>NavLinks:<br>\n");
+    for(RoleWithTaskBase_Renderer.HyperLink l: navLinksGroup){
+        r.append("<a href=\"").append(actionStringGenerator.generateActionString(l.linkAction)).append("\">")
+          .append(l.linkText).append("</a><br>\n");
+    }
+    return r;
+  }
+
 }
