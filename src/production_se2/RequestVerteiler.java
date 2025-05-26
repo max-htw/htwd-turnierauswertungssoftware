@@ -65,6 +65,16 @@ public class RequestVerteiler {
                             RoleTeam_TaskTurnierplan_Controller(_groupID, _teamNr, (RoleTeam_TaskTurnierplan_Renderer)r, params, dbBackend);
             }
         }
+        else if (role == StringsRole.Stranger){
+          if(task == StringsRole.KeineRoleTasks.SelectRole){
+            _requestController = validateRendererType(RoleUnbekannt_TaskUnbekannt_Renderer.class, r);
+            if(_requestController == null){
+              _requestController = new
+                            RoleUnbekannt_TaskUnbekannt_Controller("", dbBackend);
+            }
+
+          }
+        }
 
         if(_requestController == null){
             _requestController =

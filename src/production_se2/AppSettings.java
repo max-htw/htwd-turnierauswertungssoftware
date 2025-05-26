@@ -21,6 +21,11 @@ public class AppSettings {
               ausgabe = new RoleAdmin_TaskHallo_Renderer();
           }
         }
+        else if(role == StringsRole.Stranger){
+          if(task == StringsRole.KeineRoleTasks.SelectRole){
+            ausgabe = new RoleUnbekannt_TaskUnbekannt_Renderer();
+          }
+        }
 
         return ausgabe;
     }

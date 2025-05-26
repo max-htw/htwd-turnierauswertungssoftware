@@ -12,7 +12,9 @@ public class T_DbInterface_tests extends T_DbInterface_setup {
 
   @Test
   public void empty_db_initialization(){
-    assumeTrue(db instanceof DBInterface_InMemory);
+    //assumeTrue(!(db instanceof DBInterface_InMemory));
+    assumeTrue(!((db instanceof DBInterface_SQLite)));
+
 
     db.reset();
 
