@@ -29,56 +29,109 @@ public class RoleAdmin_TaskEinstellungen_Data extends RoleWithTaskBase_Data{
 
   public ArrayList<RoleWithTaskBase_Renderer.HyperLink> savedTurniereLinks = new ArrayList<>();
 
-  // Turniekonfiguration
+  // Turnierkonfiguration
   public StringBuilder htmlConfig(RoleWithTaskBase_Renderer.ActionStringGenerator actionStringGenerator) {
     StringBuilder r = new StringBuilder();
 
-    r.append("<p>Anzahl Gruppen = ").append(anzGruppen).append("; Aendern zu: ");
+    // Dropdown-Menü zur Auswahl der Gruppen-Anzahl
+    r.append("<p>Anzahl Gruppen: <select onchange=\"location.href=this.value\">");
     for(RoleWithTaskBase_Renderer.HyperLink n: anzahlGruppen_Links){
-        String href_or_style = n.isActive 
-            ? "href=\"" + actionStringGenerator.generateActionString(n.linkAction) + "\""
-            : "style=\"font-weight:bold;\" ";
-        r.append("<a ").append(href_or_style).append(">").append(n.linkText).append("</a> | \n");
+        String actionUrl = actionStringGenerator.generateActionString(n.linkAction);
+        boolean selected = !n.isActive; // Nur das aktuelle Element ist "nicht aktiv" → also gerade gewählt
+        r.append("<option value=\"").append(actionUrl).append("\"")
+        .append(selected ? " selected" : "")
+        .append(">")
+        .append(n.linkText)
+        .append("</option>");
     }
+    r.append("</select></p>\n");
 
-    for(int g: anzTeams_proGruppe.keySet()){
-        r.append("<br>Anzahl Teams in der Gruppe ").append(g).append(" = ").append(anzTeams_proGruppe.get(g))
-          .append("; Aendern zu: ");
-        for(RoleWithTaskBase_Renderer.HyperLink n: anzTeams_Dictionary.get(g)){
-            String href_or_style = n.isActive 
-                ? "href=\"" + actionStringGenerator.generateActionString(n.linkAction) + "\""
-                : "style=\"font-weight:bold;\" ";
-            r.append("<a ").append(href_or_style).append(">").append(n.linkText).append("</a> | \n");
+    // Dropdown-Menü zur Auswahl der Teams pro Gruppe
+    for(int i = 0; i < anzGruppen; i++){
+        r.append("<p>Anzahl Teams für Gruppe ").append(i + 1).append(": ");
+        r.append("<select onchange=\"location.href=this.value\">");
+        for(RoleWithTaskBase_Renderer.HyperLink n: anzTeams_Dictionary.get(i)){
+            String actionUrl = actionStringGenerator.generateActionString(n.linkAction);
+            boolean selected = !n.isActive;
+            r.append("<option value=\"").append(actionUrl).append("\"")
+            .append(selected ? " selected" : "")
+            .append(">")
+            .append(n.linkText)
+            .append("</option>");
         }
+        r.append("</select></p>\n");
     }
 
-    r.append("<br>Mit Rueckspielen = ").append(mitRueckspielen).append("; Aendern zu ")
-      .append("<a href=\"").append(actionStringGenerator.generateActionString(mit_RueckspielenLink.linkAction))
-      .append("\">").append(mit_RueckspielenLink.linkText).append("</a><br>\n");
+    // Dropdown-Menü für Hin-/Rückspiel
+    r.append("<p>Hin- und Rückspiel: <select onchange=\"location.href=this.value\">");
 
-    r.append("Anzahl Spielfelder = ").append(anzSpielfelder).append("; Aendern zu ");
+    boolean aktuellTrue = mitRueckspielen == true;
+
+    RoleWithTaskBase_Renderer.ActionForRoleAndTask aTrue = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
+        StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, -1, -1);
+    aTrue.parameters.put(StringsActions.needrueckspiel, "ja");
+    String urlTrue = actionStringGenerator.generateActionString(aTrue);
+    r.append("<option value=\"").append(urlTrue).append("\"").append(aktuellTrue ? " selected" : "").append(">true</option>");
+
+    RoleWithTaskBase_Renderer.ActionForRoleAndTask aFalse = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
+        StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, -1, -1);
+    aFalse.parameters.put(StringsActions.needrueckspiel, "nein");
+    String urlFalse = actionStringGenerator.generateActionString(aFalse);
+    r.append("<option value=\"").append(urlFalse).append("\"").append(!aktuellTrue ? " selected" : "").append(">false</option>");
+
+    r.append("</select></p>\n");
+
+    // Dropdown-Menü für Anzahl der Spielfelder
+    r.append("<p>Anzahl Spielfelder: <select onchange=\"location.href=this.value\">");
     for(RoleWithTaskBase_Renderer.HyperLink n: anzSpielfelder_aendernLinks){
-        r.append("<a href=\"")
-          .append(actionStringGenerator.generateActionString(n.linkAction))
-          .append("\">")
-          .append(n.linkText).append("</a> | \n");
+        String actionUrl = actionStringGenerator.generateActionString(n.linkAction);
+        boolean selected = !n.isActive;
+        r.append("<option value=\"").append(actionUrl).append("\"")
+        .append(selected ? " selected" : "")
+        .append(">")
+        .append(n.linkText)
+        .append("</option>");
     }
+    r.append("</select></p>\n");
 
-    r.append("<br>Vorausfuellen mit Zufallsdaten = ").append(vorausfuellenData).append("; Aendern zu ")
-      .append("<a href=\"").append(actionStringGenerator.generateActionString(vorausfuellenData_aendernLink.linkAction))
-      .append("\">").append(vorausfuellenData_aendernLink.linkText).append("</a><br>\n");
+    // Eingabefeld für die Startzeit des Turniers
+    r.append("<p>Startzeit des Turniers: <input type=\"time\" name=\"startzeit\" value=\"08:00\"></p>\n");
 
+
+    // Dropdown-Menp zur Auswahl der Spieldauer
+    r.append("<p>Spieldauer (Minuten): <select name=\"spieldauer\">\n");
+    r.append("<option value=\"15\">15 Minuten</option>\n");
+    r.append("<option value=\"20\">20 Minuten</option>\n");
+    r.append("<option value=\"25\">25 Minuten</option>\n");
+    r.append("<option value=\"30\">30 Minuten</option>\n");
+    r.append("</select></p>\n");
+
+
+    // Dropdown für Vorausfüllen mit Zufallsdaten
+    r.append("<p>(((Vorausfüllen aktivieren:))) <select onchange=\"location.href=this.value\">");
+
+    boolean vorausfuellenAktuellTrue = vorausfuellenData == true;
+
+    RoleWithTaskBase_Renderer.ActionForRoleAndTask aPrefillTrue = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
+        StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, -1, -1);
+    aPrefillTrue.parameters.put(StringsActions.setPrefillScores, "true");
+    String urlPrefillTrue = actionStringGenerator.generateActionString(aPrefillTrue);
+    r.append("<option value=\"").append(urlPrefillTrue).append("\"").append(vorausfuellenAktuellTrue ? " selected" : "").append(">true</option>");
+
+    RoleWithTaskBase_Renderer.ActionForRoleAndTask aPrefillFalse = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
+        StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, -1, -1);
+    aPrefillFalse.parameters.put(StringsActions.setPrefillScores, "false");
+    String urlPrefillFalse = actionStringGenerator.generateActionString(aPrefillFalse);
+    r.append("<option value=\"").append(urlPrefillFalse).append("\"").append(!vorausfuellenAktuellTrue ? " selected" : "").append(">false</option>");
+
+    r.append("</select></p>\n");
+
+    // Aktuelles Turnier speichern
     r.append("<br>Aktuelles Turnier speichern unter:<br>\n")
       .append("<form action=\"").append(actionStringGenerator.generateActionString(htmlFormAction)).append("\" >\n")
       .append("<input type=\"text\" name=\"").append(textBoxName.name().toLowerCase()).append("\" value=\"")
       .append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"))).append("\">\n")
-      .append("<button type=\"submit\">speichern</button>\n</form>");
-
-    r.append("<br>Ein gespeichertes Turnier laden:<br>\n");
-    for(RoleWithTaskBase_Renderer.HyperLink n : savedTurniereLinks){
-        r.append("<a href=\"").append(actionStringGenerator.generateActionString(n.linkAction)).append("\">")
-          .append(n.linkText).append("</a><br>\n");
-    }
+      .append("<button class=\"bg-transparent hover:bg-primary-light text-primary font-semibold hover:text-white hover:cursor-pointer py-1 px-2 border border-primary hover:border-transparent rounded-full\" type=\"submit\">Speichern</button>\n</form>");
 
     return r;
   }
