@@ -17,6 +17,8 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 | Spiel | Ein Aufeinandertreffen, wo zwei Teams gegeneinander spielen | Match, Partie, Satz, Runde
 | Spielplan | Plan, der die Reihenfolge der Spiele der teilnehmenden Teams regelt | Spiel-Übersicht, Turnierplan
 | Spielstand | Anzahl der nach Ende eines Spiels erzielten Punkte pro Mannschaft | Score, Punktestand
+| Begegnung | Eine geplante Spielpaarung zwischen zwei Teams im Turnierplan | Spiel
+| Ergebnis | Die finalen Punkte eines Spiels pro Team | Spielstand, Endstand
 | Feld | Bereich, auf dem ein Spiel stattfindet | Spielfläche
 | Schiedsrichter | Person, die ein Spiel leitet  | Unparteiischer, Kampfrichter, Referee
 | Spieler | Person, die als Teil eines Teams am Turnier teilnimmt | Teilnehmer, Player, Sportler, Volleyballer
@@ -25,6 +27,10 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 | Software | Die Turnierauswertungssoftware die entwickelt werden soll | Turnierauswertungssoftware, Programm, Application
 | Organisatoren | Die Person, die das Turnier leiten. | Turnierleitung
 | Nutzer | All diejenigen, die die Software beim Turnier benutzen (v.a. Spieler und Turnierleitung). | User, Benutzer
+| Frontend | Die Benutzeroberfläche der Anwendung, über die Nutzer mit dem System interagieren | Web-UI
+| Export | Funktion zum Speichern von Spielplänen und Ergebnissen als PDF oder Excel zu exportieren | keine
+| Offlinefähigkeit | Die Fähigkeit des Systems, auch ohne Internet nutzbar zu sein | Offlinemodus
+| Synchronisierung | Der Abgleich lokaler Daten mit dem Server bei wiederhergestellter Verbindung | Datenabgleich
 |===
 
 
@@ -36,5 +42,9 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 | Schiri | Schiedsrichter | s. Begriffe
 | Stura | Studentenrat | Auftraggeber und Veranstalter des Turniers
 | LG | Leistungsgruppe | Zusammenfassung von Teams mit ähnlichem spielerischen Niveau
+| API | Application Programming Interface | Programmierschnittstelle zwischen Frontend und Backend (z. B. REST)
+| PDF | Portable Document Format | Exportformat für Turnierpläne oder Ergebnisse
+| XLSX | Excel Spreadsheet Format | Exportformat für tabellarische Ergebnisse
+| UUID | Universally Unique Identifier | Eindeutige Kennung für Spiele, Teams oder Ergebnisse
 |===
 
