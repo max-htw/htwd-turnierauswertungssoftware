@@ -158,6 +158,9 @@ Beispiel Produkt:
 
 
 === Zusätzliche Produktanforderungen
+
+
+
 //Zutreffendes angeben, nicht zutreffendes streichen oder auskommentieren
 
 
@@ -171,3 +174,16 @@ Beispiel Produkt:
 | Ein Turnier, welches gespeichert wurde, muss überschrieben werden können. (Möglicherweise Sicherheitsfrage vorschalten). | Mittel | Version 1.4
 |===
 
+
+
+=== Qualitätsanforderungen
+
+Das System soll folgende Qualitätsanforderungen erfüllen:
+
+- **Benutzerfreundlichkeit**: Eine intuitive und selbsterklärende Benutzeroberfläche ermöglicht sowohl Organisatoren als auch Teilnehmern eine einfache Nutzung des Systems ohne technische Vorkenntnisse.
+
+- **Offlinefähigkeit**: Das System muss auch ohne Internetverbindung funktionsfähig sein. Ergebnisse sollen lokal speicherbar sein und später synchronisiert werden.
+
+- **Leistungsfähigkeit**: Selbst bei hoher Anzahl von Nutzern (bis zu 200 Teilnehmer) muss das System stabil reagieren und darf unter Last nicht abstürzen.
+
+- **Fehlertoleranz**: Ungültige oder unvollständige Eingaben sollen vom System erkannt und benutzerfreundlich behandelt werden.
