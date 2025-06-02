@@ -14,11 +14,9 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 | Begriff | Definition und Erläuterung | Synonyme
 | Leistungsgruppe | Zusammenfassung von Teams mit ähnlichem spielerischen Niveau  | keine
 | Team | Personengruppe, die zusammen gegen Andere spielt | Mannschaft
-| Spiel | Ein Aufeinandertreffen, wo zwei Teams gegeneinander spielen | Match, Partie, Satz, Runde
+| Spiel | Ein Aufeinandertreffen, wo zwei Teams gegeneinander spielen | Match, Partie, Satz, Runde, Begegnung
 | Spielplan | Plan, der die Reihenfolge der Spiele der teilnehmenden Teams regelt | Spiel-Übersicht, Turnierplan
-| Spielstand | Anzahl der nach Ende eines Spiels erzielten Punkte pro Mannschaft | Score, Punktestand
-| Begegnung | Eine geplante Spielpaarung zwischen zwei Teams im Turnierplan | Spiel
-| Ergebnis | Die finalen Punkte eines Spiels pro Team | Spielstand, Endstand
+| Spielstand | Anzahl der nach Ende eines Spiels erzielten Punkte pro Mannschaft | Score, Punktestand, Endstand, Ergebnis
 | Feld | Bereich, auf dem ein Spiel stattfindet | Spielfläche
 | Schiedsrichter | Person, die ein Spiel leitet  | Unparteiischer, Kampfrichter, Referee
 | Spieler | Person, die als Teil eines Teams am Turnier teilnimmt | Teilnehmer, Player, Sportler, Volleyballer
