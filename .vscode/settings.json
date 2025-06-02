@@ -1,5 +1,6 @@
 {
     "cSpell.language": "de-DE,en",
     "editor.renderWhitespace": "selection",
-    "asciidoc.preview.useEditorStyle": false
+    "asciidoc.preview.useEditorStyle": false,
+    "java.compile.nullAnalysis.mode": "disabled"
 }
