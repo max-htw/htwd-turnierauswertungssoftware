@@ -41,7 +41,7 @@ public void testSetAnzGruppen_aboveMaxValue() {
  @Test
     public void testTurnierSpeichernUndLaden() {
         // Setup: Neues Turnier anlegen und konfigurieren
-        DBInterface db = new DBInterface_SQLite(); // echte DB oder Test-DB
+        DBInterface db = new DBInterface_SQLite(); 
         Turnier turnier = new Turnier("Integrationstest-Cup");
         turnier.setGruppenAnzahl(4);
         turnier.addTeam("Team A");
