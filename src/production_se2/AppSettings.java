@@ -20,6 +20,9 @@ public class AppSettings {
           else if(task == StringsRole.AdminTasks.Hallo){
               ausgabe = new RoleAdmin_TaskHallo_Renderer();
           }
+          else if(task == StringsRole.AdminTasks.Ergebnisse){
+              ausgabe = new RoleAdmin_TaskErgebnisse_Renderer();
+          }
         }
         else if(role == StringsRole.Stranger){
           if(task == StringsRole.KeineRoleTasks.SelectRole){
