@@ -1,7 +1,7 @@
-import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
+import javax.swing.*;
 
 public class RequestVerteiler {
 
@@ -49,6 +49,11 @@ public class RequestVerteiler {
                 if(_requestController == null)
                     _requestController = new
                             RoleAdmin_TaskHallo_Controller((RoleAdmin_TaskHallo_Renderer)r, params, dbBackend);
+            }else if(task == StringsRole.AdminTasks.Ergebnisse){
+                _requestController = validateRendererType(RoleAdmin_TaskErgebnisse_Renderer.class, r);
+                if(_requestController == null)
+                    _requestController = new
+                            RoleAdmin_TaskErgebnisse_Controller((RoleAdmin_TaskErgebnisse_Renderer)r, params, dbBackend);
             }
             else{ // unbekannter Admin-Task
 
