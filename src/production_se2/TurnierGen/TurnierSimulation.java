@@ -29,7 +29,7 @@ public class TurnierSimulation {
                         anzahlSpielfelder,
                         geplanteSpiele,
                         maxMatches,
-                        vollstaendig ? "✅" : "");
+                        vollstaendig ? "gut" : "");
             }
         }
     }
