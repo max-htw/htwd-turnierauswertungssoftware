@@ -7,7 +7,7 @@ public class TurnierplanGenerator {
     public static boolean verbieteSchiriSchiri = true;
     public static boolean verbieteSchiriPauseSchiri = true;
     public static boolean verbieteDreiSpiele = true;
-    public static boolean ausgabeLogs = false;
+    public static boolean ausgabeLogs = true;
 
     public static List<Spiel> generierePlan(
             int anzahlGruppen,
@@ -211,17 +211,11 @@ public class TurnierplanGenerator {
                 String r0 = rollen.getOrDefault(slot, new HashMap<>()).getOrDefault(team, "Pause");
                 String r1 = rollen.getOrDefault(slot - 1, new HashMap<>()).getOrDefault(team, "Pause");
                 String r2 = rollen.getOrDefault(slot - 2, new HashMap<>()).getOrDefault(team, "Pause");
-
-                // блокируем nur Schiri–Schiri и Schiri–Pause–Schiri
-                if (r1.equals("Schiri") && r2.equals("Schiri")) {
+                if ((r1.equals("Schiri") && r2.equals("Schiri")) ||
+                        (r2.equals("Schiri") && r1.equals("Pause") && r0.equals("Schiri"))) {
                     erlaubt = false;
                 }
-                if (r2.equals("Schiri") && r1.equals("Pause") && r0.equals("Schiri")) {
-                    erlaubt = false;
-                }
-                // разрешено: Schiri → Spiel
             }
-
 
             if (erlaubt) {
                 kandidaten.add(team);
