@@ -1,0 +1,104 @@
+import java.util.*;
+
+public class TurnierTest {
+    public static void main(String[] args) {
+        int anzahlGruppen = 2;
+        List<Integer> anzTeamsInGruppe = List.of(4,4);
+        int anzahlTimeSlots = 16;
+        int anzahlSpielfelder = 2;
+        boolean rueckspielErlaubt = false;
+
+        List<Spiel> plan = TurnierplanGenerator.generierePlan(
+            anzahlGruppen,
+            anzTeamsInGruppe,
+            anzahlTimeSlots,
+            anzahlSpielfelder,
+            rueckspielErlaubt
+        );
+
+        druckePlanNachSlots(plan, anzTeamsInGruppe);
+
+        zaehleTeamAktivitaet(plan, anzTeamsInGruppe);
+    }
+
+    public static void druckePlanNachSlots(List<Spiel> turnierplan, List<Integer> anzTeamsInGruppe) {
+    turnierplan.sort(Comparator
+        .comparingInt(Spiel::getTimeSlotNr)
+        .thenComparingInt(Spiel::getFeldNr));
+
+    int aktuellerSlot = -1;
+
+    for (Spiel spiel : turnierplan) {
+        int slot = spiel.getTimeSlotNr();
+        int feld = spiel.getFeldNr();
+        Match match = spiel.getMatch();
+
+        int team1 = match.getTeam1Nr();
+        int team2 = match.getTeam2Nr();
+        int schiri = spiel.getIstHinspiel()
+            ? match.getRichterHinspielTeamNr()
+            : match.getRichterRueckspielTeamNr();
+
+        int[] team1Info = globalToGroup(team1, anzTeamsInGruppe);
+        int[] team2Info = globalToGroup(team2, anzTeamsInGruppe);
+        int[] schiriInfo = globalToGroup(schiri, anzTeamsInGruppe);
+
+        if (slot != aktuellerSlot) {
+            System.out.println("\n=== Slot " + slot + " ===");
+            aktuellerSlot = slot;
+        }
+
+        System.out.printf(
+            "Feld %d: [G%d-T%d] vs [G%d-T%d] | Schiri: [G%d-T%d]%n",
+            feld,
+            team1Info[0], team1Info[1],
+            team2Info[0], team2Info[1],
+            schiriInfo[0], schiriInfo[1]
+        );
+    }
+}
+
+  // Hilfsmethode zum Konvertieren globaler Teamnummern zu Gruppennummer und lokalem Index
+  public static int[] globalToGroup(int globalTeamNr, List<Integer> anzTeamsInGruppe) {
+      int rest = globalTeamNr;
+      for (int gruppe = 0; gruppe < anzTeamsInGruppe.size(); gruppe++) {
+          int size = anzTeamsInGruppe.get(gruppe);
+          if (rest < size) return new int[]{gruppe, rest};
+          rest -= size;
+      }
+      return new int[]{-1, globalTeamNr}; // fallback
+  }
+
+    public static void zaehleTeamAktivitaet(List<Spiel> turnierplan, List<Integer> anzTeamsInGruppe) {
+    int totalTeams = anzTeamsInGruppe.stream().mapToInt(i -> i).sum();
+    int[] spieleAlsSpieler = new int[totalTeams];
+    int[] spieleAlsSchiri = new int[totalTeams];
+
+    for (Spiel spiel : turnierplan) {
+        Match match = spiel.getMatch();
+        int t1 = match.getTeam1Nr();
+        int t2 = match.getTeam2Nr();
+        int schiri = spiel.getIstHinspiel()
+            ? match.getRichterHinspielTeamNr()
+            : match.getRichterRueckspielTeamNr();
+
+        spieleAlsSpieler[t1]++;
+        spieleAlsSpieler[t2]++;
+        if (schiri != -1) {
+            spieleAlsSchiri[schiri]++;
+        }
+    }
+
+    System.out.println("\n=== Spiele pro Team ===");
+    int globalIndex = 0;
+    for (int gruppe = 0; gruppe < anzTeamsInGruppe.size(); gruppe++) {
+        int teamsInGroup = anzTeamsInGruppe.get(gruppe);
+        for (int t = 0; t < teamsInGroup; t++) {
+            System.out.printf("Team [G%d-T%d]: Spieler=%d, Schiri=%d%n",
+                    gruppe, t, spieleAlsSpieler[globalIndex], spieleAlsSchiri[globalIndex]);
+            globalIndex++;
+        }
+    }
+  }
+
+}
