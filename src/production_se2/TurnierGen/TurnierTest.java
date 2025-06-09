@@ -2,7 +2,7 @@ import java.util.*;
 
 public class TurnierTest {
     public static void main(String[] args) {
-        List<Integer> anzTeamsInGruppe = List.of(6, 4); // определяет количество групп и размер групп
+        List<Integer> anzTeamsInGruppe = List.of(6, 4); // definieren anzahl der Gruppen und Anzahl der Teams
         int anzahlTimeSlots = 16;
         int anzahlSpielfelder = 2;
         boolean rueckspielErlaubt = false;

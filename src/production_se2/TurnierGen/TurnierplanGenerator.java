@@ -96,7 +96,7 @@ public class TurnierplanGenerator {
 
                     turnierplan.add(spiel);
                     geplanteSpiele.add(spiel);
-                    break; // выходим из цикла по spielListe
+                    break;
                     }
                 }
         }
@@ -212,14 +212,14 @@ public class TurnierplanGenerator {
                 String r1 = rollen.getOrDefault(slot - 1, new HashMap<>()).getOrDefault(team, "Pause");
                 String r2 = rollen.getOrDefault(slot - 2, new HashMap<>()).getOrDefault(team, "Pause");
 
-                // блокируем nur Schiri–Schiri и Schiri–Pause–Schiri
+                // blockieren nur Schiri–Schiri und Schiri–Pause–Schiri
                 if (r1.equals("Schiri") && r2.equals("Schiri")) {
                     erlaubt = false;
                 }
                 if (r2.equals("Schiri") && r1.equals("Pause") && r0.equals("Schiri")) {
                     erlaubt = false;
                 }
-                // разрешено: Schiri -> Spiel
+                // erlaubt: Schiri -> Spiel
             }
 
 
