@@ -2,13 +2,6 @@ import java.util.*;
 
 public class TurnierplanGenerator {
 
-    // Steuerungsflags
-    public static boolean verbieteDreiPausen = false;
-    public static boolean verbieteSchiriSchiri = true;
-    public static boolean verbieteSchiriPauseSchiri = true;
-    public static boolean verbieteDreiSpiele = true;
-    public static boolean ausgabeLogs = false;
-
     public static List<Spiel> generierePlan(
             int anzahlGruppen,
             List<Integer> anzTeamsInGruppe,
@@ -19,20 +12,19 @@ public class TurnierplanGenerator {
         List<Match> matchListe = new ArrayList<>();
         int matchIdCounter = 0;
 
-        int teamOffset = 0;
+        // Schritt 1: Generiere Matches
         for (int gruppe = 0; gruppe < anzahlGruppen; gruppe++) {
             int teamCount = anzTeamsInGruppe.get(gruppe);
             for (int i = 0; i < teamCount; i++) {
                 for (int j = i + 1; j < teamCount; j++) {
                     Match m = new Match();
                     m.setGroupID(gruppe);
-                    m.setTeam1Nr(i + teamOffset);
-                    m.setTeam2Nr(j + teamOffset);
+                    m.setTeam1Nr(i);
+                    m.setTeam2Nr(j);
                     m.setMatchID(matchIdCounter++);
                     matchListe.add(m);
                 }
             }
-            teamOffset += teamCount;
         }
 
         List<Spiel> spielListe = new ArrayList<>();
@@ -49,7 +41,6 @@ public class TurnierplanGenerator {
 
         List<Spiel> turnierplan = new ArrayList<>();
         Map<Integer, Map<Integer, String>> rollenProTeam = new HashMap<>();
-        Map<Integer, Integer> ersterSlotProTeam = new HashMap<>();
         Set<Spiel> geplanteSpiele = new HashSet<>();
 
         for (int slot = 0; slot < anzahlTimeSlots; slot++) {
@@ -61,24 +52,33 @@ public class TurnierplanGenerator {
                     int team1 = match.getTeam1Nr();
                     int team2 = match.getTeam2Nr();
 
+                    // Check ob die Teams in diesem Slot schon beschäftigt sind
                     if (istTeamBeschaeftigt(turnierplan, slot, team1) || istTeamBeschaeftigt(turnierplan, slot, team2))
                         continue;
 
+                    // Temporär Rollen setzen für Prüfung
                     rollenProTeam.computeIfAbsent(slot, k -> new HashMap<>()).put(team1, "Spiel");
                     rollenProTeam.get(slot).put(team2, "Spiel");
 
-                    Set<Integer> beschaeftigteTeams = ermittleBeschaeftigteTeams(turnierplan, slot);
-                    int schiriTeam = waehleSchiedsrichter(
-                            spiel, slot, rollenProTeam, matchListe,
-                            anzTeamsInGruppe, beschaeftigteTeams);
-
-                    if (schiriTeam == -1 ||
-                            !rollenErlaubt(spiel, slot, rollenProTeam, matchListe, ersterSlotProTeam, schiriTeam)) {
+                    if (!rollenErlaubt(spiel, slot, rollenProTeam, matchListe)) {
                         rollenProTeam.get(slot).remove(team1);
                         rollenProTeam.get(slot).remove(team2);
                         continue;
                     }
 
+                    Set<Integer> beschaeftigteTeams = ermittleBeschaeftigteTeams(turnierplan, slot);
+
+                    int schiriTeam = waehleSchiedsrichter(
+                            spiel, slot, rollenProTeam, matchListe,
+                            anzTeamsInGruppe, beschaeftigteTeams);
+
+                    if (schiriTeam == -1) {
+                        rollenProTeam.get(slot).remove(team1);
+                        rollenProTeam.get(slot).remove(team2);
+                        continue;
+                    }
+
+                    // Match fixieren
                     spiel.setTimeSlotNr(slot);
                     spiel.setFeldNr(feld);
 
@@ -88,83 +88,28 @@ public class TurnierplanGenerator {
                         match.setRichterRueckspielTeamNr(schiriTeam);
                     }
 
+                    // Update Rollen
                     rollenProTeam.get(slot).put(schiriTeam, "Schiri");
-
-                    if (!ersterSlotProTeam.containsKey(team1)) ersterSlotProTeam.put(team1, slot);
-                    if (!ersterSlotProTeam.containsKey(team2)) ersterSlotProTeam.put(team2, slot);
-                    if (!ersterSlotProTeam.containsKey(schiriTeam)) ersterSlotProTeam.put(schiriTeam, slot);
-
                     turnierplan.add(spiel);
                     geplanteSpiele.add(spiel);
                     break;
-                    }
                 }
+            }
         }
+
         return turnierplan;
     }
 
-    private static boolean rollenErlaubt(Spiel spiel, int slot,
-                                         Map<Integer, Map<Integer, String>> rollen,
-                                         List<Match> matches,
-                                         Map<Integer, Integer> ersterSlotProTeam,
-                                         int schiriTeam) {
-        Match match = findeMatchZuSpiel(spiel, matches);
-        int[] teams = {match.getTeam1Nr(), match.getTeam2Nr(), schiriTeam};
-
-        for (int team : teams) {
-            int start = ersterSlotProTeam.getOrDefault(team, slot);
-            List<String> history = new ArrayList<>();
-            for (int s = start; s <= slot; s++) {
-                String rolle = rollen.getOrDefault(s, new HashMap<>()).getOrDefault(team, "Pause");
-                history.add(rolle);
-            }
-
-            if (verbieteDreiPausen && history.size() >= 3) {
-                for (int i = 0; i <= history.size() - 3; i++) {
-                    if (history.get(i).equals("Pause") && history.get(i + 1).equals("Pause") && history.get(i + 2).equals("Pause")) {
-                        if (TurnierplanGenerator.ausgabeLogs) System.out.printf("[INFO] Team %d hätte 3 Pausen.%n", team);
-                        return false;
-                    }
-                }
-            }
-
-            if (verbieteSchiriSchiri && history.size() >= 2) {
-                for (int i = 0; i <= history.size() - 2; i++) {
-                    if (history.get(i).equals("Schiri") && history.get(i + 1).equals("Schiri")) {
-                        if (TurnierplanGenerator.ausgabeLogs) System.out.printf("[INFO] Team %d wäre zweimal Schiri.%n", team);
-                        return false;
-                    }
-                }
-            }
-
-            if (verbieteSchiriPauseSchiri && history.size() >= 3) {
-                for (int i = 0; i <= history.size() - 3; i++) {
-                    if (history.get(i).equals("Schiri") && history.get(i + 1).equals("Pause") && history.get(i + 2).equals("Schiri")) {
-                        if (TurnierplanGenerator.ausgabeLogs) System.out.printf("[INFO] Team %d wäre Schiri–Pause–Schiri.%n", team);
-                        return false;
-                    }
-                }
-            }
-
-            if (verbieteDreiSpiele && hatDreiSpieleInFolge(team, slot, rollen)) {
-                if (TurnierplanGenerator.ausgabeLogs) System.out.printf("[INFO] Team %d hätte 3 Spiele in Folge.%n", team);
-                return false;
-            }
-        }
-
-        return true;
-    }
-
     private static boolean istTeamBeschaeftigt(List<Spiel> plan, int slot, int team) {
-    for (Spiel spiel : plan) {
-        if (spiel.getTimeSlotNr() != slot) continue;
-        Match m = spiel.getMatch();
-        if (m.getTeam1Nr() == team || m.getTeam2Nr() == team) return true;
-        int schiri = spiel.getIstHinspiel() ? m.getRichterHinspielTeamNr() : m.getRichterRueckspielTeamNr();
-        if (schiri == team) return true;
+        for (Spiel spiel : plan) {
+            if (spiel.getTimeSlotNr() != slot) continue;
+            Match m = spiel.getMatch();
+            if (m.getTeam1Nr() == team || m.getTeam2Nr() == team) return true;
+            int schiri = spiel.getIstHinspiel() ? m.getRichterHinspielTeamNr() : m.getRichterRueckspielTeamNr();
+            if (schiri == team) return true;
+        }
+        return false;
     }
-    return false;
-}
 
     private static Set<Integer> ermittleBeschaeftigteTeams(List<Spiel> plan, int slot) {
         Set<Integer> result = new HashSet<>();
@@ -177,6 +122,26 @@ public class TurnierplanGenerator {
             if (schiri != -1) result.add(schiri);
         }
         return result;
+    }
+
+    private static boolean rollenErlaubt(Spiel spiel, int slot,
+                                         Map<Integer, Map<Integer, String>> rollen,
+                                         List<Match> matches) {
+        Match match = findeMatchZuSpiel(spiel, matches);
+        int[] teams = {match.getTeam1Nr(), match.getTeam2Nr()};
+
+        for (int team : teams) {
+            if (hatDreiSpieleInFolge(team, slot, rollen)) return false;
+
+            if (slot >= 2) {
+                String r0 = rollen.getOrDefault(slot, new HashMap<>()).getOrDefault(team, "Pause");
+                String r1 = rollen.getOrDefault(slot - 1, new HashMap<>()).getOrDefault(team, "Pause");
+                String r2 = rollen.getOrDefault(slot - 2, new HashMap<>()).getOrDefault(team, "Pause");
+                if (r0.equals("Pause") && r1.equals("Pause") && r2.equals("Pause")) return false;
+            }
+        }
+
+        return true;
     }
 
     private static boolean hatDreiSpieleInFolge(int team, int slot,
@@ -211,17 +176,11 @@ public class TurnierplanGenerator {
                 String r0 = rollen.getOrDefault(slot, new HashMap<>()).getOrDefault(team, "Pause");
                 String r1 = rollen.getOrDefault(slot - 1, new HashMap<>()).getOrDefault(team, "Pause");
                 String r2 = rollen.getOrDefault(slot - 2, new HashMap<>()).getOrDefault(team, "Pause");
-
-                // blockieren nur Schiri–Schiri und Schiri–Pause–Schiri
-                if (r1.equals("Schiri") && r2.equals("Schiri")) {
+                if ((r1.equals("Schiri") && r2.equals("Schiri")) ||
+                        (r2.equals("Schiri") && r1.equals("Pause") && r0.equals("Schiri"))) {
                     erlaubt = false;
                 }
-                if (r2.equals("Schiri") && r1.equals("Pause") && r0.equals("Schiri")) {
-                    erlaubt = false;
-                }
-                // erlaubt: Schiri -> Spiel
             }
-
 
             if (erlaubt) {
                 kandidaten.add(team);
@@ -244,5 +203,4 @@ public class TurnierplanGenerator {
                 .findFirst()
                 .orElse(null);
     }
-
 }

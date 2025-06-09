@@ -2,11 +2,12 @@ import java.util.*;
 
 public class TurnierTest {
     public static void main(String[] args) {
-        int anzahlGruppen = 1;
-        List<Integer> anzTeamsInGruppe = List.of(8);
+        List<Integer> anzTeamsInGruppe = List.of(6, 4); // definieren anzahl der Gruppen und Anzahl der Teams
         int anzahlTimeSlots = 16;
         int anzahlSpielfelder = 2;
         boolean rueckspielErlaubt = false;
+
+        int anzahlGruppen = anzTeamsInGruppe.size();
 
         List<Spiel> plan = TurnierplanGenerator.generierePlan(
             anzahlGruppen,
@@ -16,11 +17,12 @@ public class TurnierTest {
             rueckspielErlaubt
         );
 
-        druckePlanNachSlots(plan);
-        zaehleTeamAktivitaet(plan, anzTeamsInGruppe.get(0));
+        druckePlanNachSlots(plan, anzTeamsInGruppe);
+        int totalTeams = anzTeamsInGruppe.stream().mapToInt(i -> i).sum();
+        zaehleTeamAktivitaet(plan, totalTeams, anzTeamsInGruppe);
     }
 
-    public static void druckePlanNachSlots(List<Spiel> turnierplan) {
+    public static void druckePlanNachSlots(List<Spiel> turnierplan, List<Integer> anzTeamsInGruppe) {
         turnierplan.sort(Comparator
             .comparingInt(Spiel::getTimeSlotNr)
             .thenComparingInt(Spiel::getFeldNr));
@@ -42,11 +44,14 @@ public class TurnierTest {
                 aktuellerSlot = slot;
             }
 
-            System.out.println("Feld " + feld + ": " + team1 + " vs " + team2 + " | Schiri: " + schiri);
+            System.out.println("Feld " + feld + ": " +
+                getTeamLabel(team1, anzTeamsInGruppe) + " vs " +
+                getTeamLabel(team2, anzTeamsInGruppe) + " | Schiri: " +
+                getTeamLabel(schiri, anzTeamsInGruppe));
         }
     }
 
-    public static void zaehleTeamAktivitaet(List<Spiel> turnierplan, int anzahlTeams) {
+    public static void zaehleTeamAktivitaet(List<Spiel> turnierplan, int anzahlTeams, List<Integer> anzTeamsInGruppe) {
         int[] spieleAlsSpieler = new int[anzahlTeams];
         int[] spieleAlsSchiri = new int[anzahlTeams];
 
@@ -67,7 +72,22 @@ public class TurnierTest {
 
         System.out.println("\n=== Spiele pro Team ===");
         for (int i = 0; i < anzahlTeams; i++) {
-            System.out.println("Team " + i + ": Spieler=" + spieleAlsSpieler[i] + ", Schiri=" + spieleAlsSchiri[i]);
+            System.out.println(getTeamLabel(i, anzTeamsInGruppe) + ": Spieler=" + spieleAlsSpieler[i] + ", Schiri=" + spieleAlsSchiri[i]);
         }
+    }
+
+    public static String getTeamLabel(int teamNr, List<Integer> anzTeamsInGruppe) {
+        int gruppe = 0;
+        int teamOffset = teamNr;
+        for (int i = 0; i < anzTeamsInGruppe.size(); i++) {
+            int size = anzTeamsInGruppe.get(i);
+            if (teamOffset < size) {
+                gruppe = i;
+                break;
+            } else {
+                teamOffset -= size;
+            }
+        }
+        return "[G" + gruppe + "-T" + teamOffset + "]";
     }
 }
