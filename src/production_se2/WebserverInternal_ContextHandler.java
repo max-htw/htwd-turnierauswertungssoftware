@@ -1,7 +1,6 @@
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Map;
@@ -90,6 +89,8 @@ public class WebserverInternal_ContextHandler implements HttpHandler, RoleWithTa
                     setTask(StringsRole.AdminTasks.Matchdetails);
                 } else if (sect1.equals(StringsRole.AdminTasks.Hallo.name().toLowerCase())) {
                     setTask(StringsRole.AdminTasks.Hallo);
+                } else if (sect1.equals(StringsRole.AdminTasks.Ergebnisse.name().toLowerCase())) {
+                    setTask(StringsRole.AdminTasks.Ergebnisse);
                 }
             }
             else{
