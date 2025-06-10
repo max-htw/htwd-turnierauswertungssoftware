@@ -1,0 +1,131 @@
+= Testkonzept: {project-name}
+{localdatetime}
+:toc:
+:toclevels: 2
+
+include::../_includes/default-attributes.inc.adoc[]
+
+// Platzhalter für weitere Dokumenten-Attribute
+
+== Einleitung
+
+Dieses Testkonzept beschreibt die Vorgehensweise zur Planung, Durchführung und Dokumentation der Tests für die Volleyballturnier-Software. Ziel ist es, die Qualität der Software sicherzustellen und zu gewährleisten, dass alle Anforderungen erfüllt werden.
+
+== Testziele
+
+Sicherstellung der korrekten Erfassung und Auswertung von Spielergebnissen
+
+Überprüfung der Benutzerfreundlichkeit auf mobilen Geräten
+
+Prüfung der Stabilität im Offline-Betrieb
+
+Sicherstellung der korrekten Generierung von Spielplänen und Ergebnislisten (z. B. als PDF)
+
+== Testgegenstand
+
+Der Testgegenstand ist die entwickelte Webanwendung mit folgenden Technologien:
+
+Backend: Java und SQLite
+
+Frontend: HTML und CSS
+
+Weitere Tools: PDF-Export, CSV-Export
+
+== Testarten und Testfall-Zuordnung
+
+Hier werden die im Testkonzept definierten Testfälle nach Teststufen gruppiert.
+
+=== Statischer Test (Review & Analyse)
+Ziel: Früherkennung von Fehlern in Anforderungen und Code durch Reviews und Spezifikations-Checks.
+
+Allgemein: Alle Testfälle werden im statischen Test auf Vollständigkeit und Konsistenz der Spezifikation überprüft.
+
+=== Modultest (Unit-Test)
+Ziel: Test einzelner Klassen/Methoden isoliert mit JUnit.
+
+[cols="1,4,3,2", options="header"]
+|===
+| Testfall-ID | Beschreibung                                                                                          | Zielobjekt       | Automatisiert?
+
+| T1  | Dropdown "Anzahl Spielfelder" enthält alle zulässigen Werte und initialisiert korrekt               | KonfValidator       | Nein
+| T2  | Dropdown "Anzahl Leistungsgruppen" (1–3) erlaubt nur Werte 1 bis 3                                   | KonfValidator      | Nein
+| T3  | Dropdown "Teams pro LG" validiert Eingabe auf positive Ganzzahlen innerhalb des zulässigen Bereichs | KonfValidator      | Nein
+| T4  | Auswahl Rückspiel (Ja/Nein) setzt Modus korrekt auf Hinspiel oder Hin-/Rückspiel                      | TurnierKonfig      | Nein
+| T5  | Eingabe "Dauer pro Spiel" validiert numerischen Wert und wirft bei ungültigen Eingaben eine Exception | KonfValidator    | Nein
+| T6  | Eingabe "Startzeit" validiert Zeitformat (HH:mm) und erzeugt bei Fehleingabe eine Fehlermeldung       | KonfValidator      | Nein
+| T7  | Turnierplan-Generator stellt sicher, dass maximal ein Aussetzen (Bye) pro Team in Folge auftritt       | SpielplanGen       | Nein
+| T8  | Spielplan-Generator verteilt Spiele, Pausen und Aussetzen gleichmäßig über den Turnierzeitraum         | SpielplanGen       | Nein
+| T9  | Bearbeiten gespeicherter Spielstände erlaubt und speichert Änderungen korrekt                         | ErgebnisService     | Nein
+| T10 | Blockierung von Nutzern bei Vorsatzfehleingaben verhindert weitere Änderungen                          | ErgebnisService     | Nein
+| T11 | Erfassung eines Spielstandes nach Spielende ermöglicht und Pflichtfelder validiert                   | ErgebnisService     | Nein
+| T12 | Validierung der Zeitspanne zwischen Spielende und Eintrag (max. 3 Minuten)                            | ErgebnisService     | Nein
+|===
+
+=== Integrationstest
+Ziel: Zusammenspiel von Komponenten und Datenbank-Anbindung prüfen.
+
+[cols="1,4,3,2", options="header"]
+|===
+| Testfall-ID | Beschreibung                                            | Zielobjekt       | Automatisiert?
+
+| T13 | Speichern und Laden eines Turniers (SQLite)              | DB-SQLite         | Nein
+| T14 | Laden gespeicherter Turnierdaten                         | DB-SQLite          | Nein
+| T15 | Generierung der Gesamttabelle (Service + UI)             | SpielplanService   | Nein
+| T16 | PDF-Export des Spielplans                                | PDF-Export        | Nein
+| T17 | CSV-Export der Turnierdaten                              | CSV-Export       | Nein
+|===
+
+=== Systemtest (End-to-End)
+Ziel: Endnutzer-Workflows im Browser gegen die vollständige Anwendung testen.
+
+[cols="1,4,3,2", options="header"]
+|===
+| Testfall-ID | Beschreibung                                           | Workflow                | Automatisiert?
+
+| T18 | Anzeige auf Smartphone (Responsive)                     | UI-Frontend             | Nein
+| T19 | Responsive Design bei Gerätewechsel                     | UI-Frontend             | Nein
+| T20 | Navigation zwischen Seiten                              | UI-Frontend             | Nein
+| T21 | Farbliche Hervorhebung der nächsten Teams               | UI-Frontend             | Nein
+| T22 | Anzeige bei fehlenden Daten                             | UI-Frontend             | Nein
+| T23 | Anzeige der aktuellen Uhrzeit/Spielzeit                 | UI-Frontend             | Nein
+| T24 | Rollenabhängige Anzeige                                  | UI-Frontend + Auth      | Nein
+| T25 | Anzeige des Spielfeldstatus                             | UI-Frontend             | Nein
+| T26 | URL enthält Benutzerrolle                               | Routing                 | Nein
+|===
+
+== Testumgebung
+
+Unit-Integration: H2-InMemory-DB, JUnit 5. Frameworks wie Mockito für Mocking zur Unit-Test-Isolierung werden in Überlegung gezogen, sind jedoch bisher noch nicht implementiert.
+
+Datenbank: H2-InMemory-DB & SQLite.
+
+Netzwerk: Offline-Tests.
+
+== Testvorgehen
+
+Statischer Test: Review aller Spezifikationen und Testfall-Definitionen.
+
+Modultests: Implementierung und Ausführung der Unit-Tests mit JUnit.
+
+Integrationstests: Ausführung von Datenbank- und Service-Methoden-Tests.
+
+Systemtests: Manuelle End-to-End-Tests der definierten Workflows (Browser).
+
+Dokumentation: Ergebnisse in Testprotokollen (Asciidoc/Excel) und im Git-Repository ablegen.
+
+== Abnahmekriterien
+
+Alle Must-Have-Testfälle (Modultest & Integration) müssen erfolgreich sein.
+
+Keine Blocker-Bugs mehr offen.
+
+Systemtest-Workflows ohne kritische Fehler.
+
+== Dokumentation und Reporting
+
+Testfälle und -ergebnisse in Asciidoc pflegen.
+
+CI-Pipeline liefert automatisierte Reports (JUnit-XML).
+
+Fehler werden im Issue-Tracker (z. B. Jira) mit Verweis auf Testfall-IDs dokumentiert.
+
