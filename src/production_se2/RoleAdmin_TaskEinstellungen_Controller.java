@@ -91,7 +91,7 @@ public class RoleAdmin_TaskEinstellungen_Controller extends RoleWithTaskBase_Con
                   StringsRole.Admin,
                   StringsRole.AdminTasks.Einstellungen, -1, -1);
           action.parameters.put(StringsActions.setAnzTeams, "" + j);
-          action.parameters.put(StringsActions.refGroupID, "" + (i+1));
+          action.parameters.put(StringsActions.refGroupID, "" + i);
           isActive = true;
         }
         l.add(new RoleWithTaskBase_Renderer.HyperLink(Integer.toString(j), action, isActive));
@@ -152,23 +152,23 @@ public class RoleAdmin_TaskEinstellungen_Controller extends RoleWithTaskBase_Con
     }
 
     for(int i = 0; i < d.anzGruppen; i++) {
-      d.anzTeams_proGruppe.put(i+1, i+3);
+      d.anzTeams_proGruppe.put(i, i+3);
 
       ArrayList<RoleWithTaskBase_Renderer.HyperLink> l = new ArrayList<>();
       for (int j = 3; j <= DataBaseQueries.get_maxAnzTeams(); j++) {
         RoleWithTaskBase_Renderer.ActionForRoleAndTask action = null;
         boolean isActive = false;
-        if(j != d.anzTeams_proGruppe.get(i+1)){
+        if(j != d.anzTeams_proGruppe.get(i)){
           action = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
             StringsRole.Admin,
             StringsRole.AdminTasks.Einstellungen, -1, -1);
           action.parameters.put(StringsActions.setAnzTeams, "" + j);
-          action.parameters.put(StringsActions.refGroupID, "" + (i+1));
+          action.parameters.put(StringsActions.refGroupID, "" + (i));
           isActive = true;
         }
         l.add(new RoleWithTaskBase_Renderer.HyperLink(Integer.toString(j), action, isActive));
       }
-      d.anzTeams_Dictionary.put(i+1,l);
+      d.anzTeams_Dictionary.put(i,l);
     }
 
     d.mitRueckspielen = false;

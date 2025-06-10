@@ -1,11 +1,12 @@
 public enum StringsActions {
   setAnzGroups,
   setAnzTeams,
+  setAnzFields,
   refGroupID,
   refTeam1Nr,
   refTeam2Nr,
   refHinspiel,
-  setAnzFields,
+  selGroupID,
   needrueckspiel,
   setPrefillScores,
   saveTurnier,

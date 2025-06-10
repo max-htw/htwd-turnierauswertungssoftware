@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class RoleAdmin_TaskEinstellungen_Renderer_Arbeitskopie extends RoleAdmin_TaskEinstellungen_Renderer{
 
   /*
@@ -40,7 +43,7 @@ public class RoleAdmin_TaskEinstellungen_Renderer_Arbeitskopie extends RoleAdmin
 
     r.append("<div>");
     r.append("<h2 class=\"text-xl text-secondary font-bold mb-2\">Konfiguration</h2>");
-    r.append(daten.htmlConfig(get_actionStringGenerator()));
+    r.append(htmlConfig(get_actionStringGenerator()));
     r.append("</div>");
 
     r.append("<div>");
@@ -54,4 +57,112 @@ public class RoleAdmin_TaskEinstellungen_Renderer_Arbeitskopie extends RoleAdmin
     
     return r;
   }
+
+  // Turnierkonfiguration
+  public StringBuilder htmlConfig(RoleWithTaskBase_Renderer.ActionStringGenerator actionStringGenerator) {
+    StringBuilder r = new StringBuilder();
+
+    // Dropdown-Menü zur Auswahl der Gruppen-Anzahl
+    r.append("<p>Anzahl Gruppen: <select onchange=\"location.href=this.value\">");
+    for(RoleWithTaskBase_Renderer.HyperLink n: daten.anzahlGruppen_Links){
+        String actionUrl = actionStringGenerator.generateActionString(n.linkAction);
+        boolean selected = !n.isActive; // Nur das aktuelle Element ist "nicht aktiv" → also gerade gewählt
+        r.append("<option value=\"").append(actionUrl).append("\"")
+        .append(selected ? " selected" : "")
+        .append(">")
+        .append(n.linkText)
+        .append("</option>");
+    }
+    r.append("</select></p>\n");
+
+    // Dropdown-Menü zur Auswahl der Teams pro Gruppe
+    for(int i = 0; i < daten.anzGruppen; i++){
+        r.append("<p>Anzahl Teams für Gruppe ").append(i + 1).append(": ");
+        r.append("<select onchange=\"location.href=this.value\">");
+        for(RoleWithTaskBase_Renderer.HyperLink n: daten.anzTeams_Dictionary.get(i)){
+            String actionUrl = actionStringGenerator.generateActionString(n.linkAction);
+            boolean selected = !n.isActive;
+            r.append("<option value=\"").append(actionUrl).append("\"")
+            .append(selected ? " selected" : "")
+            .append(">")
+            .append(n.linkText)
+            .append("</option>");
+        }
+        r.append("</select></p>\n");
+    }
+
+    // Dropdown-Menü für Hin-/Rückspiel
+    r.append("<p>Hin- und Rückspiel: <select onchange=\"location.href=this.value\">");
+
+    boolean aktuellTrue = daten.mitRueckspielen == true;
+
+    RoleWithTaskBase_Renderer.ActionForRoleAndTask aTrue = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
+        StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, -1, -1);
+    aTrue.parameters.put(StringsActions.needrueckspiel, "ja");
+    String urlTrue = actionStringGenerator.generateActionString(aTrue);
+    r.append("<option value=\"").append(urlTrue).append("\"").append(aktuellTrue ? " selected" : "").append(">true</option>");
+
+    RoleWithTaskBase_Renderer.ActionForRoleAndTask aFalse = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
+        StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, -1, -1);
+    aFalse.parameters.put(StringsActions.needrueckspiel, "nein");
+    String urlFalse = actionStringGenerator.generateActionString(aFalse);
+    r.append("<option value=\"").append(urlFalse).append("\"").append(!aktuellTrue ? " selected" : "").append(">false</option>");
+
+    r.append("</select></p>\n");
+
+    // Dropdown-Menü für Anzahl der Spielfelder
+    r.append("<p>Anzahl Spielfelder: <select onchange=\"location.href=this.value\">");
+    for(RoleWithTaskBase_Renderer.HyperLink n: daten.anzSpielfelder_aendernLinks){
+        String actionUrl = actionStringGenerator.generateActionString(n.linkAction);
+        boolean selected = !n.isActive;
+        r.append("<option value=\"").append(actionUrl).append("\"")
+        .append(selected ? " selected" : "")
+        .append(">")
+        .append(n.linkText)
+        .append("</option>");
+    }
+    r.append("</select></p>\n");
+
+    // Eingabefeld für die Startzeit des Turniers
+    r.append("<p>Startzeit des Turniers: <input type=\"time\" name=\"startzeit\" value=\"08:00\"></p>\n");
+
+
+    // Dropdown-Menp zur Auswahl der Spieldauer
+    r.append("<p>Spieldauer (Minuten): <select name=\"spieldauer\">\n");
+    r.append("<option value=\"15\">15 Minuten</option>\n");
+    r.append("<option value=\"20\">20 Minuten</option>\n");
+    r.append("<option value=\"25\">25 Minuten</option>\n");
+    r.append("<option value=\"30\">30 Minuten</option>\n");
+    r.append("</select></p>\n");
+
+
+    // Dropdown für Vorausfüllen mit Zufallsdaten
+    r.append("<p>(((Vorausfüllen aktivieren:))) <select onchange=\"location.href=this.value\">");
+
+    boolean vorausfuellenAktuellTrue = daten.vorausfuellenData == true;
+
+    RoleWithTaskBase_Renderer.ActionForRoleAndTask aPrefillTrue = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
+        StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, -1, -1);
+    aPrefillTrue.parameters.put(StringsActions.setPrefillScores, "true");
+    String urlPrefillTrue = actionStringGenerator.generateActionString(aPrefillTrue);
+    r.append("<option value=\"").append(urlPrefillTrue).append("\"").append(vorausfuellenAktuellTrue ? " selected" : "").append(">true</option>");
+
+    RoleWithTaskBase_Renderer.ActionForRoleAndTask aPrefillFalse = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
+        StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, -1, -1);
+    aPrefillFalse.parameters.put(StringsActions.setPrefillScores, "false");
+    String urlPrefillFalse = actionStringGenerator.generateActionString(aPrefillFalse);
+    r.append("<option value=\"").append(urlPrefillFalse).append("\"").append(!vorausfuellenAktuellTrue ? " selected" : "").append(">false</option>");
+
+    r.append("</select></p>\n");
+
+    // Aktuelles Turnier speichern
+    r.append("<br>Aktuelles Turnier speichern unter:<br>\n")
+      .append("<form action=\"").append(actionStringGenerator.generateActionString(daten.htmlFormAction)).append("\" >\n")
+      .append("<input type=\"text\" name=\"").append(daten.textBoxName.name().toLowerCase()).append("\" value=\"")
+      .append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"))).append("\">\n")
+      .append("<button class=\"bg-transparent hover:bg-primary-light text-primary font-semibold hover:text-white hover:cursor-pointer py-1 px-2 border border-primary hover:border-transparent rounded-full\" type=\"submit\">Speichern</button>\n</form>");
+
+    return r;
+  }
+
 }

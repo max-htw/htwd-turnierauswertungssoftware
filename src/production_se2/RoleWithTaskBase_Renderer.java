@@ -2,11 +2,13 @@ import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class RoleWithTaskBase_Renderer<Class_of_Daten extends  RoleWithTaskBase_Data> {
 
     protected Class_of_Daten daten;
+    public ArrayList<String> scriptSections = new ArrayList<>();
     public abstract Class_of_Daten getEmptyDaten();
 
     private String _cssHeaderString = "<link href=\"/output.css\" rel=\"stylesheet\" />\n";
@@ -50,6 +52,15 @@ public abstract class RoleWithTaskBase_Renderer<Class_of_Daten extends  RoleWith
           _cssHeaderString ;
         if(!daten.htmlTitel.isEmpty()) {
           s+= "<title>" + daten.htmlTitel + "</title>\n";
+        }
+
+        //wenn css ausgeschaltet ist, gehe ich davon aus, dass JavaScript
+        //auch ausgeschaltet werden muss.
+        //sonst muss man hier noch ein JavaScript-Flag implementieren.
+        if(!_cssHeaderString.isEmpty()){
+          for(String scr: scriptSections){
+            s += "<script>\n" + scr + "\n</script>\n";
+          }
         }
         s += "\n</head>\n<body>\n\n";
 

@@ -22,6 +22,8 @@ public class RoleUnbekannt_TaskUnbekannt_Renderer extends RoleWithTaskBase_Rende
 
         action = new ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Einstellungen , -1, -1);
         r.append("<a href=\"").append(getHref(action)).append("\">Admin - Einstellungen</a><br>\n");
+        action = new ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Ergebnisse , -1, -1);
+        r.append("<a href=\"").append(getHref(action)).append("\">Admin - Ergebnisse</a><br>\n");
         action = new ActionForRoleAndTask(StringsRole.Team, StringsRole.TeamTasks.Turnierplan , 0, 0);
         r.append("<a href=\"").append(getHref(action)).append("\">Team - Turnierplan</a><br>\n");
 

@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class RoleWithTaskBase_Controller<Class_of_Renderer extends RoleWithTaskBase_Renderer> {
+public abstract class RoleWithTaskBase_Controller<Class_of_Renderer extends RoleWithTaskBase_Renderer<?>> {
 
     protected Class_of_Renderer _renderer;
     protected Map<String, String> _params = new HashMap<>();

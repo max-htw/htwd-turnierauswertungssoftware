@@ -16,11 +16,20 @@ public class RoleAdmin_TaskErgebnisse_Renderer extends RoleWithTaskBase_Renderer
     // Oben: Überschrift + Dropdown
     r.append("<div class='flex flex-col md:flex-row justify-start items-center md:items-center gap-4'>");
     r.append("<h2 class='text-2xl font-semibold'>Auswahl der Gruppe:</h2>");
-    r.append("<form method='get'>");
-    r.append("<select name='gruppe' onchange='this.form.submit()' ");
-    r.append("class='px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500'>");
-    r.append("<option value='A'>Gruppe A</option>");
-    r.append("<option value='B'>Gruppe B</option>");
+
+    r.append("\n<form method='get' action=\"").append(getHref(daten.htmlFormAction)).append("\">\n");
+    
+    r.append("<select onchange=\"this.form.submit()\" ");
+    r.append("class=\"px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500\" ");
+    r.append("name=\"").append(daten.selectBoxName.name().toLowerCase()).append("\">\n");
+
+    for(RoleWithTaskBase_Renderer.HyperLink l: daten.groupSelectionLinks){
+      String selected = "'>";
+      if(l.isActive){
+        selected = "' selected>";
+      }
+      r.append("<option value='").append(l.linkAction.parameters.get(StringsActions.selGroupID)).append(selected).append(l.linkText).append("</option>\n");
+    }
     r.append("</select>");
     r.append("</form>");
     r.append("</div>");
@@ -44,46 +53,17 @@ public class RoleAdmin_TaskErgebnisse_Renderer extends RoleWithTaskBase_Renderer
         r.append("<tbody>");
 
 
-        // Beispielhafte Datenzeilen
-        r.append("<tr class='hover:bg-gray-50'>");
-        r.append("<td class='px-4 py-2 border'>1.</td>");
-        r.append("<td class='px-4 py-2 border'>Alte Hasen</td>");
-        r.append("<td class='px-4 py-2 border'>5</td>");
-        r.append("<td class='px-4 py-2 border'>6</td>");
-        r.append("<td class='px-4 py-2 border'>+37</td>");
-        r.append("</tr>");
+        // Datenzeilen
 
-        r.append("<tr class='hover:bg-gray-50'>");
-        r.append("<td class='px-4 py-2 border'>2.</td>");
-        r.append("<td class='px-4 py-2 border'>Blitz Kicker</td>");
-        r.append("<td class='px-4 py-2 border'>4</td>");
-        r.append("<td class='px-4 py-2 border'>6</td>");
-        r.append("<td class='px-4 py-2 border'>+15</td>");
-        r.append("</tr>");
-
-        r.append("<tr class='hover:bg-gray-50'>");
-        r.append("<td class='px-4 py-2 border'>3.</td>");
-        r.append("<td class='px-4 py-2 border'>Die Tornados</td>");
-        r.append("<td class='px-4 py-2 border'>3</td>");
-        r.append("<td class='px-4 py-2 border'>6</td>");
-        r.append("<td class='px-4 py-2 border'>+2</td>");
-        r.append("</tr>");
-
-        r.append("<tr class='hover:bg-gray-50'>");
-        r.append("<td class='px-4 py-2 border'>4.</td>");
-        r.append("<td class='px-4 py-2 border'>FC Chaos</td>");
-        r.append("<td class='px-4 py-2 border'>2</td>");
-        r.append("<td class='px-4 py-2 border'>6</td>");
-        r.append("<td class='px-4 py-2 border'>-11</td>");
-        r.append("</tr>");
-
-        r.append("<tr class='hover:bg-gray-50'>");
-        r.append("<td class='px-4 py-2 border'>5.</td>");
-        r.append("<td class='px-4 py-2 border'>Youngstars</td>");
-        r.append("<td class='px-4 py-2 border'>1</td>");
-        r.append("<td class='px-4 py-2 border'>6</td>");
-        r.append("<td class='px-4 py-2 border'>-43</td>");
-        r.append("</tr>");
+        for(int i=0; i<daten.ergebnisse.size(); i++){
+            RoleAdmin_TaskErgebnisse_Renderer.ErgebnisItem e = daten.ergebnisse.get(i);
+            r.append("<tr class='hover:bg-gray-50'><td class='px-4 py-2 border'>").append(i+1).
+            append(".</td><td class='px-4 py-2 border'>").append(e.teamName).
+            append("</td><td class='px-4 py-2 border'>").append(e.gewonneneSpiele).
+            append("</td><td class='px-4 py-2 border'>").append(e.gespielteSpiele).
+            append("</td><td class='px-4 py-2 border'>").append(String.format("%+d", e.punkteDifferenz)).
+            append("</td></tr>\n");
+        }
 
         r.append("</tbody>");
         r.append("</table>");
@@ -101,4 +81,24 @@ public class RoleAdmin_TaskErgebnisse_Renderer extends RoleWithTaskBase_Renderer
 
     return r;
   }
+
+  public  static  class ErgebnisItem{
+      int groupID;
+      int teamID;
+      
+      String teamName;
+      int gewonneneSpiele;
+      int gespielteSpiele;
+      int punkteDifferenz;
+
+      ErgebnisItem(int groupID, int teamID, String teamName, int gewonnen, int gespielt, int differenz){
+        this.groupID = groupID;
+        this.teamID = teamID;
+        this.teamName = teamName;
+        this.gewonneneSpiele = gewonnen;
+        this.gespielteSpiele = gespielt;
+        this.punkteDifferenz = differenz;
+      }
+  }
+
 }

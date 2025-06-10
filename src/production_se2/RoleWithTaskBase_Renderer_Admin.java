@@ -1,5 +1,15 @@
 public abstract class RoleWithTaskBase_Renderer_Admin<Class_of_Daten extends  RoleWithTaskBase_Data> extends RoleWithTaskBase_Renderer<Class_of_Daten>{    
 
+    RoleWithTaskBase_Renderer_Admin(){
+        super();
+        String script = "document.addEventListener('DOMContentLoaded', function() {\n" + //
+                        "  document.getElementById('menu-toggle').addEventListener('click', function() {\n" + //
+                        "    document.getElementById('mobile-menu').classList.toggle('hidden');\n" + //
+                        "  });\n" + //
+                        "});";
+        scriptSections.add(script);
+    }
+
     @Override
     public abstract Class_of_Daten getEmptyDaten();
 
