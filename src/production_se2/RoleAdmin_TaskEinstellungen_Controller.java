@@ -83,7 +83,7 @@ public class RoleAdmin_TaskEinstellungen_Controller extends RoleWithTaskBase_Con
       d.anzTeams_proGruppe.put(i, _dbInterface.turnierKonf_getAnzTeamsByGroupID(i));
 
       ArrayList<RoleWithTaskBase_Renderer.HyperLink> l = new ArrayList<>();
-      for (int j = AppSettings.minAnzTeams; j <= DataBaseQueries.get_maxAnzTeams(); j++) {
+      for (int j = AppSettings.minAnzTeams; j <= AppSettings.maxAnzTeams; j++) {
         RoleWithTaskBase_Renderer.ActionForRoleAndTask action = null;
         boolean isActive = false;
         if(j != d.anzTeams_proGruppe.get(i)){
@@ -106,7 +106,7 @@ public class RoleAdmin_TaskEinstellungen_Controller extends RoleWithTaskBase_Con
     d.mit_RueckspielenLink = new RoleWithTaskBase_Renderer.HyperLink("true", a1, true);
 
     d.anzSpielfelder = _dbInterface.turnierKonf_getAnzSpielfelder();
-    for(int i = 1; i <= DataBaseQueries.get_maxAnzSpielfelder(); i++){
+    for(int i = 1; i <= AppSettings.maxAnzSpielfelder; i++){
       if(i != d.anzSpielfelder){
         RoleWithTaskBase_Renderer.ActionForRoleAndTask a2 = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
                 StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, -1, -1);
@@ -155,7 +155,7 @@ public class RoleAdmin_TaskEinstellungen_Controller extends RoleWithTaskBase_Con
       d.anzTeams_proGruppe.put(i, i+3);
 
       ArrayList<RoleWithTaskBase_Renderer.HyperLink> l = new ArrayList<>();
-      for (int j = 3; j <= DataBaseQueries.get_maxAnzTeams(); j++) {
+      for (int j = 3; j <= AppSettings.maxAnzTeams; j++) {
         RoleWithTaskBase_Renderer.ActionForRoleAndTask action = null;
         boolean isActive = false;
         if(j != d.anzTeams_proGruppe.get(i)){
@@ -178,7 +178,7 @@ public class RoleAdmin_TaskEinstellungen_Controller extends RoleWithTaskBase_Con
     d.mit_RueckspielenLink = new RoleWithTaskBase_Renderer.HyperLink("true", a1, true);
 
     d.anzSpielfelder = 2;
-    for(int i = 1; i <= DataBaseQueries.get_maxAnzSpielfelder(); i++){
+    for(int i = 1; i <= AppSettings.maxAnzSpielfelder; i++){
       if(i != d.anzSpielfelder){
         RoleWithTaskBase_Renderer.ActionForRoleAndTask a2 = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
           StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, -1, -1);

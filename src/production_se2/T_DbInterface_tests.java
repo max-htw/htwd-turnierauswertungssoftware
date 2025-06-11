@@ -47,7 +47,7 @@ public class T_DbInterface_tests extends T_DbInterface_setup {
     thrown = assertThrows(IllegalArgumentException.class,
           () -> db.turnierKonf_setAnzTeamsByGroupID(0, AppSettings.maxAnzTeams + 1));
 
-    //nach den ungueltigen Konfigurationen muss die DB so bleiben wie vorher:  
+    //nach den ungueltigen Konfigurationen muss die DB so bleiben wie vorher:
     assertEquals(AppSettings.minAnzGroups, db.turnierKonf_getAnzGruppen());
     assertEquals(AppSettings.minAnzTeams, db.turnierKonf_getAnzTeamsByGroupID(0));
 
@@ -57,7 +57,29 @@ public class T_DbInterface_tests extends T_DbInterface_setup {
 
     db.turnierKonf_setAnzTeamsByGroupID(2, 4);
     assertEquals(4, db.turnierKonf_getAnzTeamsByGroupID(2));
-  
+
+    db.turnierKonf_setAnzSpielfelder(3);
+    assertEquals(3, db.turnierKonf_getAnzSpielfelder());
+
+    //Turnierplan muss sich automatisch an die neue Konfiguration anpassen
+    assertEquals(3, db.getTurnierPlan().size()); //3 Spielfelder
+
+    //3 Gruppen: jeweils mit 3, 4, 3 Teams
+    // (3x3-3)+(4x4-4)+(3x3-3)=6+12+6=24
+    int anzMatches = 0;
+    ArrayList<DBInterfaceBase.FeldSchedule> tp = db.getTurnierPlan();
+    for(int i = 0; i < tp.size(); i++){
+      for(DBInterfaceBase.SpielStats s: db.getFeldSchedule(i)){
+        if(s.feldID >= 0){ // Platzhalter-Spiele ausschliessen
+          anzMatches ++;
+          System.out.printf("%d. f=%d,g=%d, %d vs %d\n", i, s.feldID, s.groupid, s.team1, s.team2);
+        }
+      }
+    }
+    assertEquals(24,anzMatches);
+
+
+
   }
 
 

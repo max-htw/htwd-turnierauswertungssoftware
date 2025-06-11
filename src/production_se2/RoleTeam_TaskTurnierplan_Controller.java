@@ -39,48 +39,48 @@ public class RoleTeam_TaskTurnierplan_Controller
       for(DBInterfaceBase.TurnierMatch m: matches){
 
         RoleWithTaskBase_Renderer.ActionForRoleAndTask actionHinspiel = null;
-        if(m.team1PunkteHinspiel > 0 || m.team2PunkteHinspiel > 0) {
+        if(m.getTeam1PunkteHinspiel() > 0 || m.getTeam2PunkteHinspiel() > 0) {
           actionHinspiel = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
             StringsRole.Team, StringsRole.TeamTasks.Matchdetails, _groupID, _teamNr);
-          actionHinspiel.parameters.put(StringsActions.refGroupID, "" + m.groupID);
-          actionHinspiel.parameters.put(StringsActions.refTeam1Nr, "" + m.team1Nr);
-          actionHinspiel.parameters.put(StringsActions.refTeam2Nr, "" + m.team2Nr);
+          actionHinspiel.parameters.put(StringsActions.refGroupID, "" + m.getGroupID());
+          actionHinspiel.parameters.put(StringsActions.refTeam1Nr, "" + m.getTeam1Nr());
+          actionHinspiel.parameters.put(StringsActions.refTeam2Nr, "" + m.getTeam2Nr());
           actionHinspiel.parameters.put(StringsActions.refHinspiel, "true");
         }
 
-        String punkteTeam1 = m.team1PunkteHinspiel > 0 ? Integer.toString(m.team1PunkteHinspiel) : "--";
-        String punkteTeam2 = m.team2PunkteHinspiel > 0 ? Integer.toString(m.team2PunkteHinspiel) : "--";
+        String punkteTeam1 = m.getTeam1PunkteHinspiel() > 0 ? Integer.toString(m.getTeam1PunkteHinspiel()) : "--";
+        String punkteTeam2 = m.getTeam2PunkteHinspiel() > 0 ? Integer.toString(m.getTeam2PunkteHinspiel()) : "--";
 
         d.planItems.add(
           new RoleTeam_TaskTurnierplan_Renderer.PlanItem
-            (timeSlotsStrings.get(m.hinspielTimeSlot),
-              m.hinspielFeldNr,
-              teamNames.get(m.team1Nr),
-              teamNames.get(m.team2Nr),
-              teamNames.get(m.hinspielRichterTeamID),
+            (timeSlotsStrings.get(m.getHinspielTimeSlot()),
+              m.getHinspielFeldNr(),
+              teamNames.get(m.getTeam1Nr()),
+              teamNames.get(m.getTeam2Nr()),
+              teamNames.get(m.getHinspielRichterTeamID()),
               actionHinspiel,
               punkteTeam1 + "/" + punkteTeam2));
 
         RoleWithTaskBase_Renderer.ActionForRoleAndTask actionRueckspiel = null;
-        if(m.team1PunkteHinspiel > 0 || m.team2PunkteHinspiel > 0) {
+        if(m.getTeam1PunkteHinspiel() > 0 || m.getTeam2PunkteHinspiel() > 0) {
           actionRueckspiel = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
             StringsRole.Team, StringsRole.TeamTasks.Matchdetails, _groupID, _teamNr);
-          actionRueckspiel.parameters.put(StringsActions.refGroupID, "" + m.groupID);
-          actionRueckspiel.parameters.put(StringsActions.refTeam1Nr, "" + m.team1Nr);
-          actionRueckspiel.parameters.put(StringsActions.refTeam2Nr, "" + m.team2Nr);
+          actionRueckspiel.parameters.put(StringsActions.refGroupID, "" + m.getGroupID());
+          actionRueckspiel.parameters.put(StringsActions.refTeam1Nr, "" + m.getTeam1Nr());
+          actionRueckspiel.parameters.put(StringsActions.refTeam2Nr, "" + m.getTeam2Nr());
           actionRueckspiel.parameters.put(StringsActions.refHinspiel, "false");
         }
 
-        punkteTeam1 = m.team1PunkteRueckspiel > 0 ? Integer.toString(m.team1PunkteRueckspiel) : "--";
-        punkteTeam2 = m.team2PunkteRueckspiel > 0 ? Integer.toString(m.team2PunkteRueckspiel) : "--";
+        punkteTeam1 = m.getTeam1PunkteRueckspiel() > 0 ? Integer.toString(m.getTeam1PunkteRueckspiel()) : "--";
+        punkteTeam2 = m.getTeam2PunkteRueckspiel() > 0 ? Integer.toString(m.getTeam2PunkteRueckspiel()) : "--";
 
         d.planItems.add(
           new RoleTeam_TaskTurnierplan_Renderer.PlanItem
-            (timeSlotsStrings.get(m.rueckspielTimeSlot),
-              m.rueckspielFeldNr,
-              teamNames.get(m.team1Nr),
-              teamNames.get(m.team2Nr),
-              teamNames.get(m.rueckspielRichterTeamID),
+            (timeSlotsStrings.get(m.getRueckspielTimeSlot()),
+              m.getRueckspielFeldNr(),
+              teamNames.get(m.getTeam1Nr()),
+              teamNames.get(m.getTeam2Nr()),
+              teamNames.get(m.getRueckspielRichterTeamID()),
               actionRueckspiel,
               punkteTeam1 + "/" + punkteTeam2));
       }

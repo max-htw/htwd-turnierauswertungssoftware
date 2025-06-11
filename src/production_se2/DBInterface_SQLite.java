@@ -61,18 +61,18 @@ public class DBInterface_SQLite extends DBInterfaceBase{
 
     TurnierMatch tm = new TurnierMatch(grID,t1, t2);
 
-    tm.team1PunkteHinspiel = rs.getInt("_firstTeamHinspielPunkte");
-    tm.team2PunkteHinspiel = rs.getInt("_secondTeamHinspielPunkte");
-    tm.team1PunkteRueckspiel = rs.getInt("_firstTeamRueckspielPunkte");
-    tm.team2PunkteRueckspiel = rs.getInt("_firstTeamRueckspielPunkte");
-    tm.hinspielRichterGroupID = grID;
-    tm.rueckspielRichterGroupID = grID;
-    tm.hinspielRichterTeamID = rs.getInt("_richterHinspiel");
-    tm.rueckspielRichterTeamID = rs.getInt("_richterRueckspiel");
-    tm.hinspielFeldNr = rs.getInt("_feldNrHinspiel");
-    tm.rueckspielFeldNr = rs.getInt("_feldNrRueckspiel");
-    tm.hinspielTimeSlot = rs.getInt("_timeslotHinspiel");
-    tm.rueckspielTimeSlot = rs.getInt("_timeslotRueckspiel");
+    tm.setTeam1PunkteHinspiel(rs.getInt("_firstTeamHinspielPunkte"));
+    tm.setTeam2PunkteHinspiel(rs.getInt("_secondTeamHinspielPunkte"));
+    tm.setTeam1PunkteRueckspiel(rs.getInt("_firstTeamRueckspielPunkte"));
+    tm.setTeam2PunkteRueckspiel(rs.getInt("_firstTeamRueckspielPunkte"));
+    tm.setHinspielRichterGroupID(grID);
+    tm.setRueckspielRichterGroupID(grID);
+    tm.setHinspielRichterTeamID(rs.getInt("_richterHinspiel"));
+    tm.setRueckspielRichterTeamID(rs.getInt("_richterRueckspiel"));
+    tm.setHinspielFeldNr(rs.getInt("_feldNrHinspiel"));
+    tm.setRueckspielFeldNr(rs.getInt("_feldNrRueckspiel"));
+    tm.setHinspielTimeSlot(rs.getInt("_timeslotHinspiel"));
+    tm.setRueckspielTimeSlot(rs.getInt("_timeslotRueckspiel"));
 
     return tm;
   }
@@ -153,6 +153,11 @@ public class DBInterface_SQLite extends DBInterfaceBase{
   }
 
   @Override
+  boolean turnierKonf_getNeedPrefillScores() {
+    return false;
+  }
+
+  @Override
   TurnierMatch getMatch(int groupID, int team1, int team2) {
     return null;
   }
@@ -230,6 +235,11 @@ public class DBInterface_SQLite extends DBInterfaceBase{
 
   @Override
   boolean turnierKonf_setNeedRueckspiele(boolean needRueckspiele) {
+    return false;
+  }
+
+  @Override
+  boolean turnierKonf_setNeedPrefillScores(boolean needPrefillScores) {
     return false;
   }
 

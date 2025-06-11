@@ -2,7 +2,6 @@ import java.io.*;
 import java.util.*;
 
 public class DataBaseQueries {
-
     private static String _currentTurnierFileName = "current.turnier";
     private static Random _random;
 
@@ -30,80 +29,14 @@ public class DataBaseQueries {
         }
     }
 
-    private static final int _maxAnzTeams = 8;
-    private static int _anzTeams[] = new int[_maxAnzTeams];
-    static{
-        for(int i=0; i<_maxAnzTeams; i++){
-            _anzTeams[i] = 3;
-        }
-    }
-
-    public static final int _maxAnzGroups = 4;
-    private static int _anzGroups = 1;
-
-    public  static  int get_anzGroups(){return _anzGroups;}
-    public static void set_anzGroups(int anz)
-    {
-        if(get_anzGroups() != anz){
-            _anzGroups = (anz>_maxAnzGroups || anz<1)?1:anz;
-            DataBaseQueries.initializeMatches();
-            DataBaseQueries.clearCurrentTurnierplan();
-        }
-    }
-
-    public  static  int get_maxAnzTeams(){return _maxAnzTeams;}
-
-    public static int get_anzTeams(int groupID){
-        return _anzTeams[groupID - 1];
-    }
-
-    public static void set_anzTeams(int anz, int groupID){
-        if(get_anzTeams(groupID) != anz){
-            _anzTeams[groupID - 1] = (anz>_maxAnzTeams || anz<3)?3:anz;
-            DataBaseQueries.initializeMatches();
-            DataBaseQueries.clearCurrentTurnierplan();
-        }
-    }
-
-    private static boolean _needRueckspiele = true;
-    public static boolean needRueckspiele() { return _needRueckspiele;}
-    public static void set_needRueckspiele(boolean y_n){
-        _needRueckspiele = y_n;
-        DataBaseQueries.initializeMatches();
-        DataBaseQueries.clearCurrentTurnierplan();
-    }
-
-    private static boolean _needPrefillScores = false;
-    public static boolean getNeedPrefillScores(){return _needPrefillScores;}
-    public static  void setNeedPrefillScores(boolean y_n){
-        if(getNeedPrefillScores() != y_n) {
-            _needPrefillScores = y_n;
-            DataBaseQueries.initializeMatches();
-        }
-    }
-
-    private static int _maxAnzSpielfelder = 4;
-    private static int _anzSpielfelder = 2;
-    public static int get_maxAnzSpielfelder(){return _maxAnzSpielfelder;}
-    public static int get_anzSpielfelder(){return _anzSpielfelder;}
-    public static void set_anzSpielfelder(int anz){
-        if(anz != _anzSpielfelder)
-            DataBaseQueries.currentTurnierChanged = true;
-        _anzSpielfelder = (anz>_maxAnzSpielfelder || anz<1)?2:anz;
-        DataBaseQueries.clearCurrentTurnierplan();
-
-    }
-
-
-
     public static void  initializeMatches(){
         if(_random==null) _random = new Random();
         _matches.clear();
-        for(int g = 1; g <= get_anzGroups(); g++){
-            for(int t1 = 1; t1 <= get_anzTeams(g); t1++){
-                for(int t2 = t1+1; t2<= get_anzTeams(g); t2++){
+        for(int g = 1; g <= AppSettings.get_anzGroups(); g++){
+            for(int t1 = 1; t1 <= AppSettings.get_anzTeams(g); t1++){
+                for(int t2 = t1+1; t2<= AppSettings.get_anzTeams(g); t2++){
                     MyHelpers.Match m = new MyHelpers.Match(g, t1, t2);
-                    if(getNeedPrefillScores()){
+                    if(AppSettings.getNeedPrefillScores()){
                         //meanings: 0 = not played yet, 1 = team 1 winner, 2 = team 2 winner;
                         int resHin = _random.nextInt(3);
                         if (resHin == 0) {
@@ -116,7 +49,7 @@ public class DataBaseQueries {
                             m.set_firstTeamHinspielPunkte(_random.nextInt(23));
                             m.set_secondTeamHinspielPunkte(25);
                         }
-                        if(needRueckspiele()) {
+                        if(AppSettings.needRueckspiele()) {
                             int resRueck = _random.nextInt(3);
                             if (resRueck == 0) {
                                 m.set_firstTeamRueckspielPunkte(-1);
@@ -148,8 +81,8 @@ public class DataBaseQueries {
         return  null;
     }
 
-    public static DBInterfaceBase.SpielStats getSpielStatsByHash(int hash){
-      DBInterfaceBase.SpielStats a = new DBInterfaceBase.SpielStats();
+    public static MyHelpers.SpielStats getSpielStatsByHash(int hash){
+        MyHelpers.SpielStats a = new MyHelpers.SpielStats();
         if(hash <=0)
             return  a;
         MyHelpers.Match m = getMatchByHash(hash);
@@ -164,17 +97,13 @@ public class DataBaseQueries {
         if(isHinspiel) {
             a.team1Punkte = m.get_firstTeamHinspielPunkte();
             a.team2Punkte = m.get_secondTeamHinspielPunkte();
-            MyHelpers.IntPair richter = m.getRichterHinspiel();
-            a.richterGroupID = richter.x;
-            a.richterTeamID = richter.y;
+            a.richter = m.getRichterHinspiel();
             a.feldID = m.get_feldNrHinspiel();
         }
         else{
             a.team1Punkte = m.get_firstTeamRueckspielPunkte();
             a.team2Punkte = m.get_secondTeamRueckspielPunkte();
-            MyHelpers.IntPair richter = m.getRichterRueckspiel();
-            a.richterGroupID = richter.x;
-            a.richterTeamID = richter.y;
+            a.richter = m.getRichterRueckspiel();
             a.feldID = m.get_feldNrRueckspiel();
         }
 
@@ -203,11 +132,11 @@ public class DataBaseQueries {
         }
 
         MyHelpers.TurnierArchiv t = new MyHelpers.TurnierArchiv(fileName);
-        for(int i = 0; i<get_anzGroups();i++){
-            t.groups.add(get_anzTeams(i+1));
+        for(int i = 0; i<AppSettings.get_anzGroups();i++){
+            t.groups.add(AppSettings.get_anzTeams(i+1));
         }
-        t.anzSpielfelder = get_anzSpielfelder();
-        t.needRueckspiele = needRueckspiele();
+        t.anzSpielfelder = AppSettings.get_anzSpielfelder();
+        t.needRueckspiele = AppSettings.needRueckspiele();
         for(int hash: _matches.keySet()){
             MyHelpers.Match m = new MyHelpers.Match(_matches.get(hash)); // m ist geklont
             t.matches.put(hash, m);
@@ -222,11 +151,11 @@ public class DataBaseQueries {
     public static void archiviateCurrentTurnierToFile() throws IOException {
 
         MyHelpers.TurnierArchiv t = new MyHelpers.TurnierArchiv(_currentTurnierFileName);
-        for(int i = 0; i<get_anzGroups();i++){
-            t.groups.add(get_anzTeams(i+1));
+        for(int i = 0; i<AppSettings.get_anzGroups();i++){
+            t.groups.add(AppSettings.get_anzTeams(i+1));
         }
-        t.anzSpielfelder = get_anzSpielfelder();
-        t.needRueckspiele = needRueckspiele();
+        t.anzSpielfelder = AppSettings.get_anzSpielfelder();
+        t.needRueckspiele = AppSettings.needRueckspiele();
         for(int hash: _matches.keySet()){
             MyHelpers.Match m = new MyHelpers.Match(_matches.get(hash)); // m ist geklont
             t.matches.put(hash, m);
@@ -247,7 +176,7 @@ public class DataBaseQueries {
             return;
         MyHelpers.TurnierArchiv t = _turnierArichv.get(pos);
 
-        quietSetProperties(t.groups, t.anzSpielfelder, t.needRueckspiele);
+        AppSettings.quietSetProperties(t.groups, t.anzSpielfelder, t.needRueckspiele);
 
         _matches.clear();
         for(int hash: t.matches.keySet()){
@@ -268,7 +197,7 @@ public class DataBaseQueries {
         MyHelpers.TurnierArchiv t = (MyHelpers.TurnierArchiv) ois.readObject();
         ois.close();
 
-        quietSetProperties(t.groups, t.anzSpielfelder, t.needRueckspiele);
+        AppSettings.quietSetProperties(t.groups, t.anzSpielfelder, t.needRueckspiele);
 
         _matches.clear();
         for(int hash: t.matches.keySet()){
@@ -293,12 +222,12 @@ public class DataBaseQueries {
 
     public static ArrayList<MyHelpers.AuswertungsEintrag> calculateAuswertung_new(int groupID){
         ArrayList<MyHelpers.AuswertungsEintrag> ausgabe = new ArrayList<>();
-        for(int i=1; i<=get_anzTeams(groupID);i++) {
+        for(int i=1; i<=AppSettings.get_anzTeams(groupID);i++) {
 
             //newEintrag.score.x - Anzahl der Siege des Teams
             //newEintrag.score.y - Summe der verdienten Punkte in allen Spielen.
             MyHelpers.AuswertungsEintrag newEintrag = new MyHelpers.AuswertungsEintrag(i);
-            for (int j=1; j<=get_anzTeams(groupID);j++) {
+            for (int j=1; j<=AppSettings.get_anzTeams(groupID);j++) {
                 if(j == i) continue;
 
                 MyHelpers.Match m = getMatchByHash(groupID*100 + i*10 + j);
@@ -325,7 +254,7 @@ public class DataBaseQueries {
                         newEintrag.score.x += 1;
                     newEintrag.score.y += teamHinspielPunkte - gegnerHinspielPunkte;
                 }
-                if(needRueckspiele()) {
+                if(AppSettings.needRueckspiele()) {
                     if (teamRueckspielPunkte >= 0 && gegnerRueckspielPunkte >= 0) {
                         if (teamRueckspielPunkte > gegnerRueckspielPunkte)
                             newEintrag.score.x += 1;
@@ -349,19 +278,19 @@ public class DataBaseQueries {
 
     public static ArrayList<MyHelpers.FeldSpiele> getTurnierplan() throws RuntimeException {
         if(_turnierPlan.isEmpty()){
-            for(int i=0; i<get_anzSpielfelder(); i++){
+            for(int i=0; i<AppSettings.get_anzSpielfelder(); i++){
                 _turnierPlan.add(new MyHelpers.FeldSpiele(i+1));
             }
 
             HashSet<Integer> matchHashesHS = new HashSet<>();
             ArrayList<Integer> matchHashesArr = new ArrayList<>();
-            for(int groupID = 1; groupID <= get_anzGroups(); groupID ++){
-                for(int t1ID = 1; t1ID <= get_anzTeams(groupID); t1ID++){
-                    for(int t2ID = t1ID + 1; t2ID <= get_anzTeams(groupID); t2ID++){
+            for(int groupID = 1; groupID <= AppSettings.get_anzGroups(); groupID ++){
+                for(int t1ID = 1; t1ID <= AppSettings.get_anzTeams(groupID); t1ID++){
+                    for(int t2ID = t1ID + 1; t2ID <= AppSettings.get_anzTeams(groupID); t2ID++){
                         MyHelpers.Match m = new MyHelpers.Match(groupID,t1ID, t2ID);
                         matchHashesHS.add(m.hashCode()); //hashcode des Hinspiels
                         matchHashesArr.add(m.hashCode());
-                        if(needRueckspiele()){
+                        if(AppSettings.needRueckspiele()){
                             matchHashesHS.add(m.hashCodeRueckspiel());
                             matchHashesArr.add(m.hashCodeRueckspiel());
                         }
@@ -377,12 +306,14 @@ public class DataBaseQueries {
                     throw new RuntimeException("watchdog in getTurnierplan");
                 }
 
+                int mh = 0;
+
                 //erster integer: groupID, zweiter: teamID
                 HashSet<MyHelpers.IntPair> teamsAlreadyInTimeslot = new HashSet<>();
 
                 //Auf jedem Feld fuer den Timeslot ein Match suchen, der gespielt werden kann
                 //und auch einen Richter finden
-                for(int f = 0; f < get_anzSpielfelder(); f++){
+                for(int f = 0; f < AppSettings.get_anzSpielfelder(); f++){
                     boolean needEmptyMatch = true;
                     for(int i = matchHashesArr.size() - 1; i >= 0 ; i--){
                         int h = matchHashesArr.get(i);
@@ -398,7 +329,7 @@ public class DataBaseQueries {
                         // ob ein der beiden match-Teams im selben timeslot shon auf einem vorherigen Feld spielen.
                         boolean shonVorhanden =
                                 teamsAlreadyInTimeslot.contains(new MyHelpers.IntPair(g,t1)) ||
-                                        teamsAlreadyInTimeslot.contains(new MyHelpers.IntPair(g,t2));
+                                teamsAlreadyInTimeslot.contains(new MyHelpers.IntPair(g,t2));
 
 
                         if(shonVorhanden) continue;
@@ -411,7 +342,7 @@ public class DataBaseQueries {
                         _turnierPlan.get(f).addSpiel(h);
 
                         //now the richter has to be found:
-                        for(int nr = 1; nr <= get_anzTeams(g); nr++){
+                        for(int nr = 1; nr <= AppSettings.get_anzTeams(g); nr++){
                             if(teamsAlreadyInTimeslot.contains(new MyHelpers.IntPair(g,nr))){
                                 //das Team kann nicht pfeifen, da es schon an einem anderen Feld beschaeftigt ist
                                 continue;
@@ -442,21 +373,8 @@ public class DataBaseQueries {
                 }
                 timeslotCnt += 1;
             }
+            int dummy = 5;
         }
         return _turnierPlan;
     }
-
-    public static void  quietSetProperties(ArrayList<Integer> anzGroupsAndTeams,
-                                           int anzSpielfelder, boolean needRueckspiele){
-        _anzGroups = anzGroupsAndTeams.size();
-        for(int t = 0; t < _anzGroups; t++){
-            if(_anzTeams.length > t) {
-                _anzTeams[t] = anzGroupsAndTeams.get(t);
-            }
-        }
-        _anzSpielfelder = anzSpielfelder;
-        _needRueckspiele = needRueckspiele;
-    }
-
-
 }
