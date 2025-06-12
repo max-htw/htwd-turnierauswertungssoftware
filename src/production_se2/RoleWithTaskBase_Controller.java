@@ -9,6 +9,23 @@ public abstract class RoleWithTaskBase_Controller<Class_of_Renderer extends Role
     protected Map<String, String> _params = new HashMap<>();
     protected DBInterfaceBase _dbInterface;
 
+    private int _groupID = -1;
+    public int getGroupID(){
+        return _groupID;
+    }
+    public void setGroupID(int gid){
+        _groupID = gid;
+    }
+    
+    private int _teamNr = -1;
+    public int getTeamNr(){
+        return _teamNr;
+    }
+    public void setTeamNr(int tnr){
+        _teamNr = tnr;
+    }
+
+
     public boolean existsParam(StringsActions p){
         return _params.containsKey(p.name().toLowerCase());
     }
@@ -52,6 +69,22 @@ public abstract class RoleWithTaskBase_Controller<Class_of_Renderer extends Role
             RoleWithTaskBase_Renderer.ActionForRoleAndTask aResults = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Ergebnisse, -1, -1);
             active = (_renderer.daten.role == aResults.role && _renderer.daten.task == aResults.task );
             _renderer.daten.navLinksGroup.add(new RoleWithTaskBase_Renderer.HyperLink("Ergebnisse", aResults, active));
+        }
+        else if(_renderer.daten.role == StringsRole.Team){
+            RoleWithTaskBase_Renderer.ActionForRoleAndTask aOverview = 
+                new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Team, StringsRole.TeamTasks.Overview, this.getGroupID(), this.getTeamNr());
+            active = (_renderer.daten.role == aOverview.role && _renderer.daten.task == aOverview.task );
+            _renderer.daten.navLinksGroup.add(new RoleWithTaskBase_Renderer.HyperLink("Home", aOverview, active));
+
+            RoleWithTaskBase_Renderer.ActionForRoleAndTask aTurnierPlan = 
+                new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Team, StringsRole.TeamTasks.Turnierplan, this.getGroupID(), this.getTeamNr());
+            active = (_renderer.daten.role == aTurnierPlan.role && _renderer.daten.task == aTurnierPlan.task );
+            _renderer.daten.navLinksGroup.add(new RoleWithTaskBase_Renderer.HyperLink("Turnierplan", aTurnierPlan, active));
+
+            RoleWithTaskBase_Renderer.ActionForRoleAndTask aStand = 
+                new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Team, StringsRole.TeamTasks.Stand, this.getGroupID(), this.getTeamNr());
+            active = (_renderer.daten.role == aStand.role && _renderer.daten.task == aStand.task );
+            _renderer.daten.navLinksGroup.add(new RoleWithTaskBase_Renderer.HyperLink("Aktueller Stand", aStand, active));
         }
         
     }

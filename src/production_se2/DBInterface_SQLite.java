@@ -253,4 +253,10 @@ public class DBInterface_SQLite extends DBInterfaceBase{
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'reset'");
   }
+
+  @Override
+  public ArrayList<DBInterfaceBase.AuswertungsEintrag> calculateAuswertung(int groupID) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'calculateAuswertung'");
+  }
 }

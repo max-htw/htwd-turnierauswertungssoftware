@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
@@ -46,8 +47,8 @@ public class DBInterface_InMemory extends DBInterfaceBase{
           _teamNames.add(new ArrayList<String>());
         }
         if(_teamNames.get(i).size() < _anzTeamsProGruppe.get(i)){
-          for(int j = _teamNames.get(i).size() - 1; j < _anzTeamsProGruppe.get(i); j++){
-            _teamNames.get(i).add("Team" + j + "(ToDo: _initTurnier())");
+          for(int j = _teamNames.get(i).size(); j < _anzTeamsProGruppe.get(i); j++){
+            _teamNames.get(i).add("Team" + (char)('A' + j) + "(ToDo: _initTurnier())");
           }
         }
 
@@ -292,7 +293,13 @@ public class DBInterface_InMemory extends DBInterfaceBase{
 
   @Override
   ArrayList<TurnierMatch> getMatchesByGroupID(int groupID) {
-    return new ArrayList<TurnierMatch>();
+    ArrayList<TurnierMatch> a = new ArrayList<>();
+    for(int h : _matches.keySet()){
+      if(groupIdFromHash(h) == groupID){
+        a.add(_matches.get(h));
+      }
+    }
+    return a;
   }
 
   @Override
@@ -382,7 +389,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
         _anzTeamsProGruppe.add(AppSettings.minAnzTeams);
         _teamNames.add(new ArrayList<String>());
         for(int j = 0; j < AppSettings.minAnzTeams; j++){
-          _teamNames.get(i).add("Team" + j + "(ToDo: setAnzGruppen())");
+          _teamNames.get(i).add("Team" + (char)('A' + j) + "(ToDo: setAnzGruppen())");
         }
       }
     _initialized = false;
@@ -398,7 +405,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     _anzTeamsProGruppe.set(groupID, anzTeams);
     _teamNames.set(groupID, new ArrayList<>());
     for(int j = 0; j < anzTeams; j++){
-      _teamNames.get(groupID).add("Team" + j + "(ToDo: _setAnzTeamsByGroupID())");
+      _teamNames.get(groupID).add("Team" + (char)('A' + j) + "(ToDo: _setAnzTeamsByGroupID())");
     }
     _initialized = false;
     return true;
@@ -430,4 +437,58 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   void reset() {
     _initTurnier();
   }
+
+  @Override 
+  public ArrayList<AuswertungsEintrag> calculateAuswertung(int groupID){
+        ArrayList<AuswertungsEintrag> ausgabe = new ArrayList<>();
+        for(int i=0; i<turnierKonf_getAnzTeamsByGroupID(groupID);i++) {
+
+            //newEintrag.score.x - Anzahl der Siege des Teams
+            //newEintrag.score.y - Summe der verdienten Punkte in allen Spielen.
+            AuswertungsEintrag newEintrag = new AuswertungsEintrag(i);
+            for (int j=0; j<turnierKonf_getAnzTeamsByGroupID(groupID);j++) {
+                if(j == i) continue;
+
+                TurnierMatch m = this.getMatch(groupID, i, j);
+                int teamHinspielPunkte = 0;
+                int gegnerHinspielPunkte = 0;
+                int teamRueckspielPunkte = 0;
+                int gegnerRueckspielPunkte = 0;
+
+                if(i == m.getTeam1Nr()){
+                    teamHinspielPunkte = m.getTeam1PunkteHinspiel() >= 0 ? m.getTeam1PunkteHinspiel():-1;
+                    gegnerHinspielPunkte = m.getTeam2PunkteHinspiel() >=0 ? m.getTeam2PunkteHinspiel():-1;
+                    teamRueckspielPunkte = m.getTeam1PunkteRueckspiel() >=0 ? m.getTeam1PunkteRueckspiel():-1;
+                    gegnerRueckspielPunkte = m.getTeam2PunkteRueckspiel() >=0 ? m.getTeam2PunkteRueckspiel():-1;
+                }
+                else{
+                    gegnerHinspielPunkte = m.getTeam1PunkteHinspiel() >= 0 ? m.getTeam1PunkteHinspiel():-1;
+                    teamHinspielPunkte = m.getTeam2PunkteHinspiel() >=0 ? m.getTeam2PunkteHinspiel():-1;
+                    gegnerRueckspielPunkte = m.getTeam1PunkteRueckspiel() >=0 ? m.getTeam1PunkteRueckspiel():-1;
+                    teamRueckspielPunkte = m.getTeam2PunkteRueckspiel() >=0 ? m.getTeam2PunkteRueckspiel():-1;
+                }
+
+                if(teamHinspielPunkte >= 0 && gegnerHinspielPunkte >= 0){
+                    newEintrag.anzGespielt += 1;
+                    if (teamHinspielPunkte > gegnerHinspielPunkte){
+                        newEintrag.anzGewonnen+=1;
+                    }
+                    newEintrag.pktDifferenz += teamHinspielPunkte - gegnerHinspielPunkte;
+                }
+                if(this.turnierKonf_getNeedRueckspiele()) {
+                    if (teamRueckspielPunkte >= 0 && gegnerRueckspielPunkte >= 0) {
+                        newEintrag.anzGespielt += 1;
+                        if (teamRueckspielPunkte > gegnerRueckspielPunkte){
+                            newEintrag.anzGewonnen += 1;
+                        }
+                        newEintrag.pktDifferenz += teamRueckspielPunkte - gegnerRueckspielPunkte;
+                    }
+                }
+            }
+            ausgabe.add(newEintrag);
+        }
+        ausgabe.sort(Collections.reverseOrder());
+        return  ausgabe;
+    }
+
 }

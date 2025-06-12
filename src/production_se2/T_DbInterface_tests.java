@@ -61,11 +61,15 @@ public class T_DbInterface_tests extends T_DbInterface_setup {
     db.turnierKonf_setAnzSpielfelder(3);
     assertEquals(3, db.turnierKonf_getAnzSpielfelder());
 
+    db.turnierKonf_setNeedRueckspiele(true);
+
     //Turnierplan muss sich automatisch an die neue Konfiguration anpassen
     assertEquals(3, db.getTurnierPlan().size()); //3 Spielfelder
 
     //3 Gruppen: jeweils mit 3, 4, 3 Teams
     // (3x3-3)+(4x4-4)+(3x3-3)=6+12+6=24
+    assertEquals(6, db.getMatchesByGroupID(2).size());
+
     int anzMatches = 0;
     ArrayList<DBInterfaceBase.FeldSchedule> tp = db.getTurnierPlan();
     for(int i = 0; i < tp.size(); i++){

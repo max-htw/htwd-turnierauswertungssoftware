@@ -10,5 +10,6 @@ public enum StringsActions {
   needrueckspiel,
   setPrefillScores,
   saveTurnier,
-  loadArchiv
+  loadArchiv,
+  matchID
 }

@@ -33,6 +33,8 @@ public abstract class DBInterfaceBase {
   abstract int turnierKonf_getAnzTimeSlots();
   abstract ArrayList<String> getTimeSlotsStrings();
 
+  abstract public ArrayList<AuswertungsEintrag> calculateAuswertung(int groupID);
+
   //Datenmanipulationen
 
   abstract boolean turnierKonf_setAnzGruppen(int anz);
@@ -176,6 +178,33 @@ public abstract class DBInterfaceBase {
       return spiele;
     }
   }
+
+  public  static  class AuswertungsEintrag implements Comparable<AuswertungsEintrag>{
+        final int teamId;
+        public int anzGewonnen = 0;
+        public int anzGespielt = 0;
+        public int pktDifferenz = 0;
+        //MyHelpers.IntPair score = new MyHelpers.IntPair(0,0);
+
+        AuswertungsEintrag(int id) {
+            this.teamId = id;
+        }
+
+        public int compareTo(AuswertungsEintrag a){
+            if(this.anzGewonnen > a.anzGewonnen) // wenn this mehr Siege hat als a
+                return 1;
+            else if(a.anzGewonnen > this.anzGewonnen)// wenn this weniger siege hat als a
+                return -1;
+            else{ //wenn beide gleiche Anzahle der Siege haben
+                if(this.pktDifferenz > a.pktDifferenz) //jetzt muessen die gesammte Punkte beruecksichtigt werden
+                    return 1;
+                else if(a.pktDifferenz > this.pktDifferenz)
+                    return -1;
+            }
+            return  0; // unentschieden, da gleiche anzahl von siegen und gesamtpunkte sind gleich
+        }
+  }
+
 
 
 }

@@ -98,28 +98,4 @@ public class MyHelpers {
 
  */
 
-    public  static  class AuswertungsEintrag implements Comparable<AuswertungsEintrag>{
-        final int teamId;
-        IntPair score = new IntPair(0,0);
-
-        AuswertungsEintrag(int id) {
-            this.teamId = id;
-        }
-
-        public int compareTo(AuswertungsEintrag a){
-            if(this.score.x > a.score.x) // wenn this mehr Siege hat als a
-                return 1;
-            else if(a.score.x > this.score.x)// wenn this weniger siege hat als a
-                return -1;
-            else{ //wenn beide gleiche Anzahle der Siege haben
-                if(this.score.y > a.score.y) //jetzt muessen die gesammte Punkte beruecksichtigt werden
-                    return 1;
-                else if(a.score.y > this.score.y)
-                    return -1;
-            }
-            return  0; // unentschieden, da gleiche anzahl von siegen und gesamtpunkte sind gleich
-        }
-    }
-
-
 }

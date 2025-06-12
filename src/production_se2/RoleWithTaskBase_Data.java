@@ -14,7 +14,7 @@ public class RoleWithTaskBase_Data {
 
     public final StringBuilder htmlUebersicht(RoleWithTaskBase_Renderer.ActionStringGenerator actionStringGenerator){
         StringBuilder r = new StringBuilder();
-
+        r.append("<hr>Folgende Daten sind definiert in: ").append("RoleWithTaskBase_Data:<br>\n");
         //Role
         r.append("<p>Role: " );
         if(role!=null){
@@ -62,6 +62,8 @@ public class RoleWithTaskBase_Data {
         }
 
         r.append(htmlNavLinks(actionStringGenerator));
+
+        r.append("<hr>Folgende Daten sind definiert in: ").append(this.getClass().getName()).append(":<br>\n");
 
         r.append(htmlOfDerrivedClass(actionStringGenerator));
 

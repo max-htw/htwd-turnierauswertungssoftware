@@ -24,7 +24,7 @@ public class RoleAdmin_TaskErgebnisse_Data extends RoleWithTaskBase_Data {
         r.append("<a ").append(href_or_style).append(">").append(n.linkText).append("</a> | \n");
         }
 
-        r.append("<table>\n<tr><th>Team</th><th>Gewonnene Spiele</th><th>Gespielte Spiele</th><th>Punktedifferenz</th></tr>\n");
+        r.append("<table>\n<tr><th></th><th>Team</th><th>Gewonnene Spiele</th><th>Gespielte Spiele</th><th>Punktedifferenz</th></tr>\n");
         for(int i=0; i<ergebnisse.size(); i++){
             RoleAdmin_TaskErgebnisse_Renderer.ErgebnisItem e = ergebnisse.get(i);
             r.append("<tr><td>").append(i+1).
