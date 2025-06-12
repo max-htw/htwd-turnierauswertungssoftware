@@ -9,6 +9,7 @@ public abstract class RoleWithTaskBase_Renderer<Class_of_Daten extends  RoleWith
 
     protected Class_of_Daten daten;
     public ArrayList<String> scriptSections = new ArrayList<>();
+    public ArrayList<String> styleSections = new ArrayList<>();
     public abstract Class_of_Daten getEmptyDaten();
 
     private String _cssHeaderString = "<link href=\"/output.css\" rel=\"stylesheet\" />\n";
@@ -52,6 +53,12 @@ public abstract class RoleWithTaskBase_Renderer<Class_of_Daten extends  RoleWith
           _cssHeaderString ;
         if(!daten.htmlTitel.isEmpty()) {
           s+= "<title>" + daten.htmlTitel + "</title>\n";
+        }
+
+        if(!_cssHeaderString.isEmpty()){
+          for(String st: styleSections){
+            s += "<style>\n" + st + "\n</style>\n";
+          }
         }
 
         //wenn css ausgeschaltet ist, gehe ich davon aus, dass JavaScript

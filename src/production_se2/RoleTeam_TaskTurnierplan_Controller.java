@@ -4,44 +4,33 @@ import java.util.Map;
 public class RoleTeam_TaskTurnierplan_Controller
   extends RoleWithTaskBase_Controller<RoleTeam_TaskTurnierplan_Renderer>{
 
-    protected int _groupID;
-    protected int _teamNr;
-
     RoleTeam_TaskTurnierplan_Controller(int groupID, int teamNr, RoleTeam_TaskTurnierplan_Renderer renderer,
                                         Map<String,String> params, DBInterfaceBase dbBackend) {
 
         super(renderer, params,StringsRole.Team, StringsRole.TeamTasks.Turnierplan,dbBackend);
-        _groupID = groupID;
-        _teamNr = teamNr;
+        setGroupID(groupID);
+        setTeamNr(teamNr);
     }
 
     @Override
     public void applyActions() {
       RoleTeam_TaskTurnierplan_Data d = _renderer.daten;
 
-      ArrayList<DBInterfaceBase.TurnierMatch> matches = _dbInterface.getMatchesByGroupID(_groupID);
-      String groupName = _dbInterface.turnierKonf_getGroupNames().get(_groupID);
-      ArrayList<String> teamNames = _dbInterface.turnierKonf_getTeamNamesByGroupID(_groupID);
-      String teamName = teamNames.get(_teamNr);
+      ArrayList<DBInterfaceBase.TurnierMatch> matches = _dbInterface.getMatchesByGroupID(this.getGroupID());
+      String groupName = _dbInterface.turnierKonf_getGroupNames().get(this.getGroupID());
+      ArrayList<String> teamNames = _dbInterface.turnierKonf_getTeamNamesByGroupID(this.getGroupID());
+      String teamName = teamNames.get(this.getTeamNr());
       ArrayList<String> timeSlotsStrings = _dbInterface.getTimeSlotsStrings();
 
       d.gruppenName = groupName;
       d.teamName = teamName;
-
-      d.navLinksGroup = new ArrayList<>();
-      d.navLinksGroup.add(new RoleWithTaskBase_Renderer.HyperLink("Home",
-        new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Team, StringsRole.TeamTasks.Overview, _groupID, _teamNr),
-        false));
-      d.navLinksGroup.add(new RoleWithTaskBase_Renderer.HyperLink("Aktueller Stand",
-        new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Team, StringsRole.TeamTasks.Stand, _groupID, _teamNr),
-        false));
 
       for(DBInterfaceBase.TurnierMatch m: matches){
 
         RoleWithTaskBase_Renderer.ActionForRoleAndTask actionHinspiel = null;
         if(m.getTeam1PunkteHinspiel() > 0 || m.getTeam2PunkteHinspiel() > 0) {
           actionHinspiel = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
-            StringsRole.Team, StringsRole.TeamTasks.Matchdetails, _groupID, _teamNr);
+            StringsRole.Team, StringsRole.TeamTasks.Matchdetails, this.getGroupID(), this.getTeamNr());
           actionHinspiel.parameters.put(StringsActions.refGroupID, "" + m.getGroupID());
           actionHinspiel.parameters.put(StringsActions.refTeam1Nr, "" + m.getTeam1Nr());
           actionHinspiel.parameters.put(StringsActions.refTeam2Nr, "" + m.getTeam2Nr());
@@ -64,7 +53,7 @@ public class RoleTeam_TaskTurnierplan_Controller
         RoleWithTaskBase_Renderer.ActionForRoleAndTask actionRueckspiel = null;
         if(m.getTeam1PunkteHinspiel() > 0 || m.getTeam2PunkteHinspiel() > 0) {
           actionRueckspiel = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
-            StringsRole.Team, StringsRole.TeamTasks.Matchdetails, _groupID, _teamNr);
+            StringsRole.Team, StringsRole.TeamTasks.Matchdetails, this.getGroupID(), this.getTeamNr());
           actionRueckspiel.parameters.put(StringsActions.refGroupID, "" + m.getGroupID());
           actionRueckspiel.parameters.put(StringsActions.refTeam1Nr, "" + m.getTeam1Nr());
           actionRueckspiel.parameters.put(StringsActions.refTeam2Nr, "" + m.getTeam2Nr());
@@ -91,16 +80,7 @@ public class RoleTeam_TaskTurnierplan_Controller
         RoleTeam_TaskTurnierplan_Data d = _renderer.daten;
         d.gruppenName = "Gruppe 0";
         d.teamName = "Team 1";
-        d.navLinksGroup = new ArrayList<>();
         d.planItems = new ArrayList<>();
-        d.navLinksGroup.add(new RoleWithTaskBase_Renderer.HyperLink("Home",
-          new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Team, StringsRole.TeamTasks.Overview, 1, 2),
-          false));
-        d.navLinksGroup.add(new RoleWithTaskBase_Renderer.HyperLink("Hallo-Link",
-          new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Hallo, -1, -1), true));
-        d.navLinksGroup.add(new RoleWithTaskBase_Renderer.HyperLink("Aktueller Stand",
-          new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Team, StringsRole.TeamTasks.Stand, 1, 2),
-          false));
 
         for(int i = 0; i<15; i++){
             RoleWithTaskBase_Renderer.ActionForRoleAndTask action =
@@ -110,7 +90,7 @@ public class RoleTeam_TaskTurnierplan_Controller
           action.parameters.put(StringsActions.refTeam2Nr, "" + (i%5+5));
           action.parameters.put(StringsActions.refHinspiel, "false");
             d.planItems.add(
-                    new RoleTeam_TaskTurnierplan_Renderer.PlanItem("00:00",i, "Team " + (i%5),"Team " + (i%5+5),
+                    new RoleTeam_TaskTurnierplan_Renderer.PlanItem("00:00",(i%3)+1, "Team " + (i%5),"Team " + (i%5+5),
                             "Team " + (i%4), (i%5)==0?action:null, "20/" + (i%20)));
         }
 

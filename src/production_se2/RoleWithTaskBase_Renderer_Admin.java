@@ -80,13 +80,6 @@ public abstract class RoleWithTaskBase_Renderer_Admin<Class_of_Daten extends  Ro
         }
 
         // Toggle-Skript fürs mobile Menü
-        a.append("<script>\n")
-        .append("document.addEventListener('DOMContentLoaded', function() {\n")
-        .append("  document.getElementById('menu-toggle').addEventListener('click', function() {\n")
-        .append("    document.getElementById('mobile-menu').classList.toggle('hidden');\n")
-        .append("  });\n")
-        .append("});\n")
-        .append("</script>\n");
 
         return a.toString();
     }

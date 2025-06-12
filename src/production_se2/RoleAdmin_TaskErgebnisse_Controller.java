@@ -25,8 +25,14 @@ public class RoleAdmin_TaskErgebnisse_Controller extends RoleWithTaskBase_Contro
             RoleWithTaskBase_Renderer.ActionForRoleAndTask a = 
             new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Ergebnisse, -1, -1);
             a.parameters.put(StringsActions.selGroupID, "" + i);
-            RoleWithTaskBase_Renderer.HyperLink l = new RoleWithTaskBase_Renderer.HyperLink(names.get(i), a, i==1 ? true : false);
+            RoleWithTaskBase_Renderer.HyperLink l = new RoleWithTaskBase_Renderer.HyperLink(names.get(i), a, i==selectedGroup ? true : false);
             d.groupSelectionLinks.add(l);
+        }
+
+        for(DBInterfaceBase.AuswertungsEintrag a : _dbInterface.calculateAuswertung(selectedGroup)){
+            d.ergebnisse.add(
+                new RoleAdmin_TaskErgebnisse_Renderer.ErgebnisItem(selectedGroup, a.teamId, 
+                        _dbInterface.turnierKonf_getTeamNamesByGroupID(selectedGroup).get(a.teamId), a.anzGewonnen, a.anzGespielt, a.pktDifferenz));
         }
     }
 

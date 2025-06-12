@@ -24,6 +24,8 @@ public class RoleUnbekannt_TaskUnbekannt_Renderer extends RoleWithTaskBase_Rende
         r.append("<a href=\"").append(getHref(action)).append("\">Admin - Einstellungen</a><br>\n");
         action = new ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Ergebnisse , -1, -1);
         r.append("<a href=\"").append(getHref(action)).append("\">Admin - Ergebnisse</a><br>\n");
+        action = new ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Turnierplan , -1, -1);
+        r.append("<a href=\"").append(getHref(action)).append("\">Admin - Turnierplan</a><br>\n");
         action = new ActionForRoleAndTask(StringsRole.Team, StringsRole.TeamTasks.Turnierplan , 0, 0);
         r.append("<a href=\"").append(getHref(action)).append("\">Team - Turnierplan</a><br>\n");
 
@@ -32,10 +34,15 @@ public class RoleUnbekannt_TaskUnbekannt_Renderer extends RoleWithTaskBase_Rende
 
         action = new ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Status , -1, -1);
         r.append("<a href=\"").append(getHref(action)).append("\">Admin - Status</a><br>\n");
-        action = new ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Turnierplan , -1, -1);
-        r.append("<a href=\"").append(getHref(action)).append("\">Admin - Turnierplan</a><br>\n");
         action = new ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Matchdetails , -1, -1);
         r.append("<a href=\"").append(getHref(action)).append("\">Admin - Matchdetails</a><br>\n");
+
+        action = new ActionForRoleAndTask(StringsRole.Team, StringsRole.TeamTasks.Overview , 1, 1);
+        r.append("<a href=\"").append(getHref(action)).append("\">Team - Overview</a><br>\n");
+
+        action = new ActionForRoleAndTask(StringsRole.Team, StringsRole.TeamTasks.Matchdetails , 1, 1);
+        r.append("<a href=\"").append(getHref(action)).append("\">Team - Matchdetails</a><br>\n");
+
 
         
         return r;

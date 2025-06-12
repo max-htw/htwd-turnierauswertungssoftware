@@ -54,6 +54,11 @@ public class RequestVerteiler {
                 if(_requestController == null)
                     _requestController = new
                             RoleAdmin_TaskErgebnisse_Controller((RoleAdmin_TaskErgebnisse_Renderer)r, params, dbBackend);
+            }else if(task == StringsRole.AdminTasks.Turnierplan){
+                _requestController = validateRendererType(RoleAdmin_TaskTurnierplan_Renderer.class, r);
+                if(_requestController == null)
+                    _requestController = new
+                            RoleAdmin_TaskTurnierplan_Controller((RoleAdmin_TaskTurnierplan_Renderer)r, params, dbBackend);
             }
             else{ // unbekannter Admin-Task
 
