@@ -2,19 +2,27 @@ import java.util.ArrayList;
 
 public class RoleAdmin_TaskTurnierplan_Renderer extends RoleWithTaskBase_Renderer_Admin<RoleAdmin_TaskTurnierplan_Data>{
 
-    @Override
-    public RoleAdmin_TaskTurnierplan_Data getEmptyDaten() {
-        return new RoleAdmin_TaskTurnierplan_Data();
-    } 
-
-    public  static  class PlanItem{
+    // Alte PlanItem-Klasse
+    /*public static class PlanItem {
         String uhrZeit;
-        ArrayList<HyperLink> fieldLinks = new ArrayList<>();
-        PlanItem(String zeit, ArrayList<HyperLink> links){
-            this.uhrZeit = zeit;
-            this.fieldLinks = links;
+        int feldNr;
+        String team1Name;
+        String team2Name;
+        String shiriName;
+        Object linkAction; // Use the correct type here
+        String ergebnis;
+
+        public PlanItem(String uhrZeit, int feldNr, String team1Name, String team2Name, String shiriName, Object linkAction, String ergebnis) {
+            this.uhrZeit = uhrZeit;
+            this.feldNr = feldNr;
+            this.team1Name = team1Name;
+            this.team2Name = team2Name;
+            this.shiriName = shiriName;
+            this.linkAction = linkAction;
+            this.ergebnis = ergebnis;
         }
-    }
+    }*/
+
 
     @Override
     public StringBuilder renderHtmlResponse() {
@@ -22,10 +30,10 @@ public class RoleAdmin_TaskTurnierplan_Renderer extends RoleWithTaskBase_Rendere
 
       r.append("<div class='p-6 space-y-6'>");
       // Testdaten mit 2 Spielfeldern
-      this.daten.planItems.add(new RoleTeam_TaskTurnierplan_Renderer.PlanItem("10:00", 1, "Team A", "Team B", "Schiri X", null, ""));
+      /*this.daten.planItems.add(new RoleTeam_TaskTurnierplan_Renderer.PlanItem("10:00", 1, "Team A", "Team B", "Schiri X", null, ""));
       this.daten.planItems.add(new RoleTeam_TaskTurnierplan_Renderer.PlanItem("10:00", 2, "Team C", "Team D", "Schiri Y", null, ""));
       this.daten.planItems.add(new RoleTeam_TaskTurnierplan_Renderer.PlanItem("10:30", 1, "Team E", "Team F", "Schiri Z", null, ""));
-      this.daten.planItems.add(new RoleTeam_TaskTurnierplan_Renderer.PlanItem("10:30", 2, "Team G", "Team H", "Schiri W", null, ""));
+      this.daten.planItems.add(new RoleTeam_TaskTurnierplan_Renderer.PlanItem("10:30", 2, "Team G", "Team H", "Schiri W", null, ""));*/
     
 
       // Oben: Überschrift + Dropdown
@@ -64,7 +72,7 @@ public class RoleAdmin_TaskTurnierplan_Renderer extends RoleWithTaskBase_Rendere
 
       // Tabellenkörper
       r.append("<tbody>");
-      for (RoleTeam_TaskTurnierplan_Renderer.PlanItem item : this.daten.planItems) {
+      /*for (RoleTeam_TaskTurnierplan_Renderer.PlanItem item : this.daten.planItems) {
           r.append("<tr class='hover:bg-gray-50'>");
           r.append("<td class='px-4 py-2 border'>").append(item.uhrZeit).append("</td>");
           r.append("<td class='px-4 py-2 border'>").append(item.feldNr).append("</td>");
@@ -73,7 +81,7 @@ public class RoleAdmin_TaskTurnierplan_Renderer extends RoleWithTaskBase_Rendere
           r.append("<td class='px-4 py-2 border'>").append(item.shiriName).append("</td>");
           r.append("<td class='px-4 py-2 border'>").append(item.linkAction).append("</td>");
           r.append("</tr>");
-      }
+      }*/
       r.append("</tbody>");
 
       r.append("</table>");
@@ -82,6 +90,20 @@ public class RoleAdmin_TaskTurnierplan_Renderer extends RoleWithTaskBase_Rendere
       r.append("</div>");
 
       return r;
+    }
+
+    @Override
+    public RoleAdmin_TaskTurnierplan_Data getEmptyDaten() {
+        return new RoleAdmin_TaskTurnierplan_Data();
+    } 
+
+    public  static  class PlanItem{
+        String uhrZeit;
+        ArrayList<HyperLink> fieldLinks = new ArrayList<>();
+        PlanItem(String zeit, ArrayList<HyperLink> links){
+            this.uhrZeit = zeit;
+            this.fieldLinks = links;
+        }
     }
 
 }

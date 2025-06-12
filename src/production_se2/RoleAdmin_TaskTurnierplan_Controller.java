@@ -10,6 +10,7 @@ public class RoleAdmin_TaskTurnierplan_Controller
         super(renderer, params,StringsRole.Admin, StringsRole.TeamTasks.Turnierplan,dbBackend);
     }
 
+
     @Override
     public void applyActions() {
         RoleAdmin_TaskTurnierplan_Data d = _renderer.daten;
