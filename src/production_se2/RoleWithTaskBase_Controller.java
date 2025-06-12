@@ -1,8 +1,7 @@
-import javax.swing.*;
-
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.*;
 
 public abstract class RoleWithTaskBase_Controller<Class_of_Renderer extends RoleWithTaskBase_Renderer<?>> {
 

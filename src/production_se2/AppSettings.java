@@ -17,6 +17,9 @@ public class AppSettings {
           if(task == StringsRole.AdminTasks.Einstellungen){
               ausgabe = new RoleAdmin_TaskEinstellungen_Renderer();
           }
+          else if(task == StringsRole.AdminTasks.Turnierplan){
+              ausgabe = new RoleAdmin_TaskTurnierplan_Renderer();
+          }
           else if(task == StringsRole.AdminTasks.Hallo){
               ausgabe = new RoleAdmin_TaskHallo_Renderer();
           }

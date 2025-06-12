@@ -65,9 +65,9 @@ public class RoleAdmin_TaskErgebnisse_Renderer extends RoleWithTaskBase_Renderer
             append("</td></tr>\n");
         }
 
-        r.append("</tbody>");
-        r.append("</table>");
-        r.append("</div>");
+    r.append("</tbody>");
+    r.append("</table>");
+    r.append("</div>");
 
     // Unten: Download-Links
     r.append("<div class='flex gap-4 mt-6'>");

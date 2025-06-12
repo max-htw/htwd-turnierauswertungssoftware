@@ -1,15 +1,22 @@
-public class RoleTeam_TaskTurnierplan_Renderer_Max extends RoleTeam_TaskTurnierplan_Renderer {
+public class RoleAdmin_TaskTurnierplan_Renderer extends RoleWithTaskBase_Renderer_Admin<RoleAdmin_TaskTurnierplan_Data> {
 
+
+
+    @Override
+      public RoleAdmin_TaskTurnierplan_Data getEmptyDaten() {
+          return new RoleAdmin_TaskTurnierplan_Data();
+      }
+    
     @Override
     public StringBuilder renderHtmlResponse() {
       StringBuilder r = new StringBuilder();
 
       r.append("<div class='p-6 space-y-6'>");
       // Testdaten mit 2 Spielfeldern
-      this.daten.planItems.add(new PlanItem("10:00", 1, "Team A", "Team B", "Schiri X", null, ""));
-      this.daten.planItems.add(new PlanItem("10:00", 2, "Team C", "Team D", "Schiri Y", null, ""));
-      this.daten.planItems.add(new PlanItem("10:30", 1, "Team E", "Team F", "Schiri Z", null, ""));
-      this.daten.planItems.add(new PlanItem("10:30", 2, "Team G", "Team H", "Schiri W", null, ""));
+      this.daten.planItems.add(new RoleTeam_TaskTurnierplan_Renderer.PlanItem("10:00", 1, "Team A", "Team B", "Schiri X", null, ""));
+      this.daten.planItems.add(new RoleTeam_TaskTurnierplan_Renderer.PlanItem("10:00", 2, "Team C", "Team D", "Schiri Y", null, ""));
+      this.daten.planItems.add(new RoleTeam_TaskTurnierplan_Renderer.PlanItem("10:30", 1, "Team E", "Team F", "Schiri Z", null, ""));
+      this.daten.planItems.add(new RoleTeam_TaskTurnierplan_Renderer.PlanItem("10:30", 2, "Team G", "Team H", "Schiri W", null, ""));
     
 
       // Oben: Überschrift + Dropdown
@@ -48,7 +55,7 @@ public class RoleTeam_TaskTurnierplan_Renderer_Max extends RoleTeam_TaskTurnierp
 
       // Tabellenkörper
       r.append("<tbody>");
-      for (PlanItem item : this.daten.planItems) {
+      for (RoleTeam_TaskTurnierplan_Renderer.PlanItem item : this.daten.planItems) {
           r.append("<tr class='hover:bg-gray-50'>");
           r.append("<td class='px-4 py-2 border'>").append(item.uhrZeit).append("</td>");
           r.append("<td class='px-4 py-2 border'>").append(item.feldNr).append("</td>");
@@ -67,4 +74,6 @@ public class RoleTeam_TaskTurnierplan_Renderer_Max extends RoleTeam_TaskTurnierp
 
       return r;
     }
+
+
 }
