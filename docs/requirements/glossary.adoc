@@ -14,7 +14,8 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet (Fa
 | Begriff | Definition und Erläuterung | Synonyme
 | Leistungsgruppe | Zusammenfassung von Teams mit ähnlichem spielerischen Niveau  | keine
 | Team | Personengruppe, die zusammen gegen Andere spielt | Mannschaft
-| Spiel | Ein Aufeinandertreffen, wo zwei Teams gegeneinander spielen | Match, Partie, Satz, Runde, Begegnung
+| Spiel | Ein Aufeinandertreffen, wo zwei Teams gegeneinander spielen. Spiel ist ein Teil vom Match | Match, Partie, Satz, Runde, Begegnung
+| Match | Eine Paarung von zwei Teams, die gegeneinander spielen sollen (zwei- oder einmal anhand Rückspielerlaub) | Match, Partie, Satz, Runde, Begegnung
 | Spielplan | Plan, der die Reihenfolge der Spiele der teilnehmenden Teams regelt | Spiel-Übersicht, Turnierplan
 | Spielstand | Anzahl der nach Ende eines Spiels erzielten Punkte pro Mannschaft | Score, Punktestand, Endstand, Ergebnis
 | Feld | Bereich, auf dem ein Spiel stattfindet | Spielfläche
