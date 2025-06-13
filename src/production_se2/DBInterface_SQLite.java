@@ -259,4 +259,16 @@ public class DBInterface_SQLite extends DBInterfaceBase{
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'calculateAuswertung'");
   }
+
+  @Override
+  boolean isTurnierPlanAktuell() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'isTurnierPlanAktuell'");
+  }
+
+  @Override
+  void fillTurnierPlan(ArrayList<DBInterfaceBase.FeldSchedule> turnierPlan) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'fillTurnierPlan'");
+  }
 }

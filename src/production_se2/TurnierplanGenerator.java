@@ -245,4 +245,120 @@ public class TurnierplanGenerator {
                 .orElse(null);
     }
 
+public static class Spiel {
+    private int matchID;
+    private boolean istHinspiel;
+    private int timeSlotNr;
+    private int feldNr;
+    private Match match;
+
+    public Spiel(Match match, boolean istHinspiel, int slot, int feld) {
+        this.match = match;
+        this.istHinspiel = istHinspiel;
+        this.timeSlotNr = slot;
+        this.feldNr = feld;
+        this.matchID = match != null ? match.getMatchID() : -1;
+    }
+
+
+    public int getMatchID() {
+        return matchID;
+    }
+
+    public void setMatchID(int matchID) {
+        this.matchID = matchID;
+    }
+
+    public boolean getIstHinspiel() {
+        return istHinspiel;
+    }
+
+    public void setIstHinspiel(boolean istHinspiel) {
+        this.istHinspiel = istHinspiel;
+    }
+
+    public int getTimeSlotNr() {
+        return timeSlotNr;
+    }
+
+    public void setTimeSlotNr(int timeSlotNr) {
+        this.timeSlotNr = timeSlotNr;
+    }
+
+    public int getFeldNr() {
+        return feldNr;
+    }
+
+    public void setFeldNr(int feldNr) {
+        this.feldNr = feldNr;
+    }
+
+    public Match getMatch() {
+        return match;
+    }
+
+    public void setMatch(Match match) {
+        this.match = match;
+    }
+}
+
+
+public static class Match {
+    private int matchID;
+    private int groupID;
+    private int team1Nr;
+    private int team2Nr;
+    private int richterHinspielTeamNr = -1;
+    private int richterRueckspielTeamNr = -1;
+
+    public int getMatchID() {
+        return matchID;
+    }
+
+    public void setMatchID(int matchID) {
+        this.matchID = matchID;
+    }
+
+    public int getGroupID() {
+        return groupID;
+    }
+
+    public void setGroupID(int groupID) {
+        this.groupID = groupID;
+    }
+
+    public int getTeam1Nr() {
+        return team1Nr;
+    }
+
+    public void setTeam1Nr(int team1Nr) {
+        this.team1Nr = team1Nr;
+    }
+
+    public int getTeam2Nr() {
+        return team2Nr;
+    }
+
+    public void setTeam2Nr(int team2Nr) {
+        this.team2Nr = team2Nr;
+    }
+
+    public int getRichterHinspielTeamNr() {
+        return richterHinspielTeamNr;
+    }
+
+    public void setRichterHinspielTeamNr(int richterHinspielTeamNr) {
+        this.richterHinspielTeamNr = richterHinspielTeamNr;
+    }
+
+    public int getRichterRueckspielTeamNr() {
+        return richterRueckspielTeamNr;
+    }
+
+    public void setRichterRueckspielTeamNr(int richterRueckspielTeamNr) {
+        this.richterRueckspielTeamNr = richterRueckspielTeamNr;
+    }
+}
+
+
 }

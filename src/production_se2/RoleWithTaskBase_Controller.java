@@ -1,4 +1,5 @@
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.*;
@@ -45,6 +46,9 @@ public abstract class RoleWithTaskBase_Controller<Class_of_Renderer extends Role
       _params = params;
       if(dbBackend == null) AppSettings.getDatabaseBackend();
       _dbInterface = dbBackend;
+      //if(!_dbInterface.isTurnierPlanAktuell()){
+      //  _dbInterface.fillTurnierPlan(new ArrayList<DBInterfaceBase.FeldSchedule>());
+      //}
     }
 
     public void fillNavLinks(){

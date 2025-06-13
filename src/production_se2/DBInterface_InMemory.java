@@ -107,7 +107,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
 
   private void fillTurnierPlan(){
     _turnierPlan.clear();
-    for(int i = 0; i< _anzSpielfelder; i++){
+    for(int i = 0; i< turnierKonf_getAnzSpielfelder(); i++){
       _turnierPlan.add(new FeldSchedule(i));
     }
     HashSet<Integer> matchHashesHS = new HashSet<>();
@@ -490,5 +490,17 @@ public class DBInterface_InMemory extends DBInterfaceBase{
         ausgabe.sort(Collections.reverseOrder());
         return  ausgabe;
     }
+
+  @Override
+  boolean isTurnierPlanAktuell() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'isTurnierPlanAktuell'");
+  }
+
+  @Override
+  void fillTurnierPlan(ArrayList<DBInterfaceBase.FeldSchedule> turnierPlan) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'fillTurnierPlan'");
+  }
 
 }

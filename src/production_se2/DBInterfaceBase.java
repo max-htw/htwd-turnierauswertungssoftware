@@ -33,6 +33,9 @@ public abstract class DBInterfaceBase {
   abstract int turnierKonf_getAnzTimeSlots();
   abstract ArrayList<String> getTimeSlotsStrings();
 
+  abstract boolean isTurnierPlanAktuell();
+  abstract void fillTurnierPlan(ArrayList<FeldSchedule> turnierPlan);
+
   abstract public ArrayList<AuswertungsEintrag> calculateAuswertung(int groupID);
 
   //Datenmanipulationen
