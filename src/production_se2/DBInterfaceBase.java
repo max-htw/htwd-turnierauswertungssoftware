@@ -103,7 +103,9 @@ public abstract class DBInterfaceBase {
 
     private int hinspielRichterGroupID;
     public int getHinspielRichterGroupID(){return  hinspielRichterGroupID;}
-    public void setHinspielRichterGroupID(int id){hinspielRichterGroupID = id;}
+    public void setHinspielRichterGroupID(int id){
+      hinspielRichterGroupID = id;
+    }
 
     private int hinspielRichterTeamID;
     public int getHinspielRichterTeamID(){return hinspielRichterTeamID;}
@@ -159,9 +161,15 @@ public abstract class DBInterfaceBase {
   }
 
   public static class TurnierKonfiguration{
-    public int anzGruppen;
-    public ArrayList<Integer> anzTeams;
-    public boolean needRueckspiele;
+    
+    TurnierKonfiguration(){
+      anzTeamsJedeGruppe = new ArrayList<>();
+        anzahlSpielfelder = -1;
+        needRueckspiele = false;
+      }
+      public ArrayList<Integer> anzTeamsJedeGruppe;
+      public int anzahlSpielfelder;
+      public boolean needRueckspiele;
   }
 
   public  static  class FeldSchedule  {
@@ -208,6 +216,5 @@ public abstract class DBInterfaceBase {
         }
   }
 
-
-
+  
 }

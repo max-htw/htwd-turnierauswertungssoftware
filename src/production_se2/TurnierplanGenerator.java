@@ -10,6 +10,21 @@ public class TurnierplanGenerator {
     public static boolean ausgabeLogs = false;
 
     public static List<Spiel> generierePlan(
+            List<Integer> anzTeamsInGruppe,
+            int anzahlTimeSlots,
+            int anzahlSpielfelder,
+            boolean rueckspielErlaubt
+    ) {
+        return generierePlan_01(
+                anzTeamsInGruppe.size(),
+                anzTeamsInGruppe,
+                anzahlTimeSlots,
+                anzahlSpielfelder,
+                rueckspielErlaubt
+        );      
+    }
+
+    public static List<Spiel> generierePlan_01(
             int anzahlGruppen,
             List<Integer> anzTeamsInGruppe,
             int anzahlTimeSlots,

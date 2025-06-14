@@ -1,6 +1,8 @@
 import java.awt.event.ActionListener;
+import java.security.InvalidAlgorithmParameterException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.swing.*;
 
@@ -46,10 +48,116 @@ public abstract class RoleWithTaskBase_Controller<Class_of_Renderer extends Role
       _params = params;
       if(dbBackend == null) AppSettings.getDatabaseBackend();
       _dbInterface = dbBackend;
-      //if(!_dbInterface.isTurnierPlanAktuell()){
-      //  _dbInterface.fillTurnierPlan(new ArrayList<DBInterfaceBase.FeldSchedule>());
-      //}
+
+      //wenn Turnierkonfigurationen des letzten Turnierplans sich vom den aktuellen Turnierkonfigurationen unterscheiden,
+      //wird automatisch ein neuer Turnierplan berechnet. 
+      //Aber nur, wenn der Nutzer nicht gerade die Turnierkonfigurationen vornimmt.
+      if(!_dbInterface.isTurnierPlanAktuell() && !(this.getClass().equals(RoleAdmin_TaskEinstellungen_Controller.class))){
+        //hier geht es darum den Turnierplan vom Turnierplangenerator (im Format List<TurnierplanGenerator.Spiel>)
+        //in den Format des DBInterfaceBase Turniers (im Format ArrayList<DBInterfaceBase.FeldSchedule>) umzuwandeln.
+        _dbInterface.reset();
+        ArrayList<Integer> tgr = new ArrayList<>();
+        for(int i = 0; i<_dbInterface.turnierKonf_getAnzGruppen(); i++){
+            tgr.add(_dbInterface.turnierKonf_getAnzTeamsByGroupID(i));
+        }
+        List<TurnierplanGenerator.Spiel> tp = 
+            TurnierplanGenerator.generierePlan(tgr, _dbInterface.turnierKonf_getAnzTimeSlots(),
+                                                    _dbInterface.turnierKonf_getAnzSpielfelder(), 
+                                                    _dbInterface.turnierKonf_getNeedRueckspiele());
+
+
+        ArrayList<DBInterfaceBase.FeldSchedule> turnierPlan = new ArrayList<>();
+        for( int idx = 0; idx < tp.size(); idx++){
+            TurnierplanGenerator.Spiel s = tp.get(idx);
+            //benoetigte Anzahl von Spielfelder im DBInterfaceBase-Turnierplan initialisieren
+            if(s.getFeldNr() > turnierPlan.size() -1){
+                for(int i = turnierPlan.size(); i <= s.getFeldNr(); i++){
+                    turnierPlan.add(new DBInterfaceBase.FeldSchedule(i));
+                }
+            }
+            //benoetigte Anzahl von Spiele im benoetigtem Spielfeld im DBInterfaceBase-Turnierplan initialisieren.
+            //Sie werden mit dem leeren Spiel (mit allen TeamID = -1) initialisiert
+            if(s.getTimeSlotNr() >= turnierPlan.get(s.getFeldNr()).getSpiele().size()){
+                for(int i = turnierPlan.get(s.getFeldNr()).getSpiele().size(); i <= s.getTimeSlotNr(); i++){
+                    turnierPlan.get(s.getFeldNr()).addSpiel(new DBInterfaceBase.SpielStats());
+                }
+            }
+
+            //jetzt der eigenliche Mapping. 
+            //im TurnierplanGenerator-Turnierplan sind die GruppenNr und TeamNr-in-der-Gruppe zusammen in dem TeamNr wie Folgt codiert:
+            //jedes Team aus der Gruppe 0 bekommt den TeamNr = TeamNr-in-der-Gruppe
+            //Teams aus den naechsten Gruppen bekommen fortlaufende Nummern.
+            //z.B. Team 0 aus der Gruppe 1: TeamNr = Anzahl_Teams_in_Gruppe_0 + 0
+            DBInterfaceBase.SpielStats stats = turnierPlan.get(s.getFeldNr()).getSpiele().get(s.getTimeSlotNr());
+            int team1GrNr = -1;
+            int team1TeamNr = -1;
+            int team2GrNr = -1;
+            int team2TeamNr = -1;
+            int richterHinspielGrNr = -1;
+            int richterHinspielTeamNr = -1;
+            int richterRueckGrNr = -1;
+            int richterRueckTeamNr = -1;
+            ArrayList<Integer> firstNrOfNextGroup = new ArrayList<>();
+            for(int i = 0; i<_dbInterface.turnierKonf_getAnzGruppen(); i++){
+                int prevNr = 0;
+                if(i>0){
+                    prevNr = firstNrOfNextGroup.get(i-1);
+                }
+                firstNrOfNextGroup.add(_dbInterface.turnierKonf_getAnzTeamsByGroupID(i) + prevNr);
+            }
+
+            //vor der for-Schleife: s.getMatch().getTeamXnr() enthaelt die Fortlaufende TurnierplanGenerator-TeamNr
+            //nach der for-Schleife: s.getMatch().getTeamXnr() enthaelt die TeamNr-in-der-Gruppe und die GruppenNr 
+            //                       ist in einer Variable gespeichert
+            int firstNrOfThisGroup = 0;
+            int dbgBakTeam1Nr = s.getMatch().getTeam1Nr();
+            int dbgBakTeam2Nr = s.getMatch().getTeam2Nr();
+            for(int i = 0; i<_dbInterface.turnierKonf_getAnzGruppen(); i++){
+                if((s.getMatch().getTeam1Nr() < firstNrOfNextGroup.get(i)) && team1GrNr < 0){
+                    team1GrNr = i;
+                    team1TeamNr = s.getMatch().getTeam1Nr() - firstNrOfThisGroup;
+                }
+
+                if((s.getMatch().getTeam2Nr() < firstNrOfNextGroup.get(i)) && team2GrNr < 0){
+                    team2GrNr = i;
+                    team2TeamNr = s.getMatch().getTeam2Nr() - firstNrOfThisGroup;
+                }
+
+                if((s.getMatch().getRichterHinspielTeamNr() < firstNrOfNextGroup.get(i)) && richterHinspielGrNr < 0){
+                    richterHinspielGrNr = i;
+                    richterHinspielTeamNr = s.getMatch().getRichterHinspielTeamNr() - firstNrOfThisGroup;
+                }
+
+                if((s.getMatch().getRichterRueckspielTeamNr() < firstNrOfNextGroup.get(i)) && (richterRueckGrNr < 0) && _dbInterface.turnierKonf_getNeedRueckspiele()){
+                    richterRueckGrNr = i;
+                    richterRueckTeamNr = s.getMatch().getRichterRueckspielTeamNr() - firstNrOfThisGroup;
+                }
+                firstNrOfThisGroup = firstNrOfNextGroup.get(i);
+            }
+            if((team1GrNr != team2GrNr) || (team1GrNr != s.getMatch().getGroupID())){
+                throw new RuntimeException("Laut Programmlogik muessen team1GrNr und team2GrNr und getGroupID() gleich sein.");
+            }
+
+            stats.feldID = s.getFeldNr();
+            stats.groupid = team1GrNr;
+            stats.isHinspiel = s.getIstHinspiel();
+            stats.team1 = team1TeamNr;
+            stats.team2 = team2TeamNr;
+            if(stats.isHinspiel){
+                _dbInterface.getMatch(stats.groupid, stats.team1, stats.team2).setHinspielRichterGroupID(richterHinspielGrNr);
+                _dbInterface.getMatch(stats.groupid, stats.team1, stats.team2).setHinspielRichterTeamID(richterHinspielTeamNr);
+            }
+            else if(_dbInterface.turnierKonf_getNeedRueckspiele()){
+                _dbInterface.getMatch(stats.groupid, stats.team1, stats.team2).setRueckspielRichterGroupID(richterRueckGrNr);
+                _dbInterface.getMatch(stats.groupid, stats.team1, stats.team2).setRueckspielRichterTeamID(richterRueckTeamNr);
+            }
+        }
+        _dbInterface.fillTurnierPlan(turnierPlan);
+      }
+      int dummy = 5;
     }
+
+
 
     public void fillNavLinks(){
         boolean active;

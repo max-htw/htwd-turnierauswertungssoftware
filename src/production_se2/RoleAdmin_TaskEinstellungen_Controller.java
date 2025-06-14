@@ -103,7 +103,7 @@ public class RoleAdmin_TaskEinstellungen_Controller extends RoleWithTaskBase_Con
     RoleWithTaskBase_Renderer.ActionForRoleAndTask a1 = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
             StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, -1, -1);
     a1.parameters.put(StringsActions.needrueckspiel, (!d.mitRueckspielen)?"true":"false");
-    d.mit_RueckspielenLink = new RoleWithTaskBase_Renderer.HyperLink("true", a1, true);
+    d.mit_RueckspielenLink = new RoleWithTaskBase_Renderer.HyperLink((!d.mitRueckspielen)?"true":"false", a1, true);
 
     d.anzSpielfelder = _dbInterface.turnierKonf_getAnzSpielfelder();
     for(int i = 1; i <= AppSettings.maxAnzSpielfelder; i++){

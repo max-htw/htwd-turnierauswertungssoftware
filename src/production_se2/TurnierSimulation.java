@@ -13,7 +13,7 @@ public class TurnierSimulation {
 
         for (int anzahlTimeSlots = 10; anzahlTimeSlots <= 24; anzahlTimeSlots += 2) {
             for (int anzahlSpielfelder = 1; anzahlSpielfelder <= 4; anzahlSpielfelder++) {
-                List<Spiel> plan = TurnierplanGenerator.generierePlan(
+                List<TurnierplanGenerator.Spiel> plan = TurnierplanGenerator.generierePlan_01(
                     anzahlGruppen,
                     anzTeamsInGruppe,
                     anzahlTimeSlots,

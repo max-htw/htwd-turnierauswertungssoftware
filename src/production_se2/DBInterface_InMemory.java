@@ -7,6 +7,7 @@ import java.util.Random;
 public class DBInterface_InMemory extends DBInterfaceBase{
 
   private static boolean _initialized = false;
+  private static TurnierKonfiguration _turnierPlanKonfig = new TurnierKonfiguration();
   private static ArrayList<FeldSchedule> _turnierPlan = new ArrayList<>();
   private static HashMap<Integer, TurnierMatch> _matches = new HashMap<>();
   private static ArrayList<ArrayList<String>> _teamNames = new ArrayList<>();
@@ -14,11 +15,14 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   private static Random _random;
 
   public DBInterface_InMemory(){
-    _initTurnier();
+    if(!_initialized) {
+      _initTurnier();
+    }
+    _initialized = true;
   }
 
   private void _initTurnier(){
-    if(!_initialized) {
+    
 
       if(_anzTeamsProGruppe.size() < _anzGruppen) {
         _anzTeamsProGruppe = new ArrayList<>();
@@ -55,8 +59,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
       }
 
       _initializeMatches();
-    }
-    _initialized = true;
+    
   }
 
   private void  _initializeMatches(){
@@ -102,7 +105,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
         }
       }
     }
-    fillTurnierPlan();
+    //fillTurnierPlan();
   }
 
   private void fillTurnierPlan(){
@@ -177,7 +180,6 @@ public class DBInterface_InMemory extends DBInterfaceBase{
           s.isHinspiel = isHinspiel;
 
           _turnierPlan.get(f).addSpiel(s);
-          System.out.printf("%d. Feld %d Gr. %d: %d vs %d\n", i, f, g, s.team1, s.team2);
 
           //now the richter has to be found:
           for(int nr = 0; nr < turnierKonf_getAnzTeamsByGroupID(g); nr++){
@@ -217,6 +219,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
       timeslotCnt += 1;
     }
     int dummy = 5;
+
   }
 
   public static int groupIdFromHash(int hashCode){
@@ -352,7 +355,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
 
   @Override
   int turnierKonf_getAnzTimeSlots() {
-    return 20;
+    return 1000;
   }
 
   @Override
@@ -493,14 +496,28 @@ public class DBInterface_InMemory extends DBInterfaceBase{
 
   @Override
   boolean isTurnierPlanAktuell() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'isTurnierPlanAktuell'");
+    boolean a = _turnierPlanKonfig.needRueckspiele == turnierKonf_getNeedRueckspiele();
+    a = a && _turnierPlanKonfig.anzahlSpielfelder == turnierKonf_getAnzSpielfelder();
+    a = a && _turnierPlanKonfig.anzTeamsJedeGruppe.size() == turnierKonf_getAnzGruppen();
+    if(a){
+      for(int i = 0; i < turnierKonf_getAnzGruppen(); i++){
+        a = a && _turnierPlanKonfig.anzTeamsJedeGruppe.get(i) == turnierKonf_getAnzTeamsByGroupID(i);
+      }
+    }
+
+    return a;
   }
 
   @Override
   void fillTurnierPlan(ArrayList<DBInterfaceBase.FeldSchedule> turnierPlan) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'fillTurnierPlan'");
+    _turnierPlan = turnierPlan;
+
+    _turnierPlanKonfig.anzTeamsJedeGruppe.clear();
+    for(int i = 0; i<_anzTeamsProGruppe.size(); i++){
+      _turnierPlanKonfig.anzTeamsJedeGruppe.add(_anzTeamsProGruppe.get(i));
+    }
+    _turnierPlanKonfig.anzahlSpielfelder = turnierKonf_getAnzSpielfelder();
+    _turnierPlanKonfig.needRueckspiele = turnierKonf_getNeedRueckspiele();
   }
 
 }

@@ -76,7 +76,6 @@ public class T_DbInterface_tests extends T_DbInterface_setup {
       for(DBInterfaceBase.SpielStats s: db.getFeldSchedule(i)){
         if(s.feldID >= 0){ // Platzhalter-Spiele ausschliessen
           anzMatches ++;
-          System.out.printf("%d. f=%d,g=%d, %d vs %d\n", i, s.feldID, s.groupid, s.team1, s.team2);
         }
       }
     }

@@ -35,6 +35,7 @@ public class RoleAdmin_TaskTurnierplan_Controller
                     RoleWithTaskBase_Renderer.HyperLink hl = 
                         new RoleWithTaskBase_Renderer.HyperLink("Gr." + (st.groupid+1) + ": " + 
                             (char)('A' + st.team1) + " vs. " + (char)('A' + st.team2) + " | " + 
+                            (char)('1' + (st.isHinspiel? tm.getHinspielRichterGroupID() : tm.getRueckspielRichterGroupID())) +
                             (char)('A' + (st.isHinspiel? tm.getHinspielRichterTeamID() : tm.getRueckspielRichterTeamID())), a, false);
                     fieldLinks.add(hl);
                 }

@@ -2,14 +2,15 @@ import java.util.*;
 
 public class TurnierTest {
     public static void main(String[] args) {
-        List<Integer> anzTeamsInGruppe = List.of(6, 4); // definieren anzahl der Gruppen und Anzahl der Teams
-        int anzahlTimeSlots = 16;
-        int anzahlSpielfelder = 2;
-        boolean rueckspielErlaubt = false;
+        //List<Integer> anzTeamsInGruppe = List.of(6, 4); // definieren anzahl der Gruppen und Anzahl der Teams
+List<Integer> anzTeamsInGruppe = List.of(3,5,3);
+int anzahlTimeSlots = 1000;
+int anzahlSpielfelder = 3;
+boolean rueckspielErlaubt = false;
 
         int anzahlGruppen = anzTeamsInGruppe.size();
 
-        List<Spiel> plan = TurnierplanGenerator.generierePlan(
+        List<TurnierplanGenerator.Spiel> plan = TurnierplanGenerator.generierePlan_01(
             anzahlGruppen,
             anzTeamsInGruppe,
             anzahlTimeSlots,
@@ -22,17 +23,17 @@ public class TurnierTest {
         zaehleTeamAktivitaet(plan, totalTeams, anzTeamsInGruppe);
     }
 
-    public static void druckePlanNachSlots(List<Spiel> turnierplan, List<Integer> anzTeamsInGruppe) {
+    public static void druckePlanNachSlots(List<TurnierplanGenerator.Spiel> turnierplan, List<Integer> anzTeamsInGruppe) {
         turnierplan.sort(Comparator
-            .comparingInt(Spiel::getTimeSlotNr)
-            .thenComparingInt(Spiel::getFeldNr));
+            .comparingInt(TurnierplanGenerator.Spiel::getTimeSlotNr)
+            .thenComparingInt(TurnierplanGenerator.Spiel::getFeldNr));
 
         int aktuellerSlot = -1;
 
-        for (Spiel spiel : turnierplan) {
+        for (TurnierplanGenerator.Spiel spiel : turnierplan) {
             int slot = spiel.getTimeSlotNr();
             int feld = spiel.getFeldNr();
-            Match match = spiel.getMatch();
+            TurnierplanGenerator.Match match = spiel.getMatch();
             int team1 = match.getTeam1Nr();
             int team2 = match.getTeam2Nr();
             int schiri = spiel.getIstHinspiel()
@@ -51,12 +52,12 @@ public class TurnierTest {
         }
     }
 
-    public static void zaehleTeamAktivitaet(List<Spiel> turnierplan, int anzahlTeams, List<Integer> anzTeamsInGruppe) {
+    public static void zaehleTeamAktivitaet(List<TurnierplanGenerator.Spiel> turnierplan, int anzahlTeams, List<Integer> anzTeamsInGruppe) {
         int[] spieleAlsSpieler = new int[anzahlTeams];
         int[] spieleAlsSchiri = new int[anzahlTeams];
 
-        for (Spiel spiel : turnierplan) {
-            Match match = spiel.getMatch();
+        for (TurnierplanGenerator.Spiel spiel : turnierplan) {
+            TurnierplanGenerator.Match match = spiel.getMatch();
             int t1 = match.getTeam1Nr();
             int t2 = match.getTeam2Nr();
             int schiri = spiel.getIstHinspiel()
