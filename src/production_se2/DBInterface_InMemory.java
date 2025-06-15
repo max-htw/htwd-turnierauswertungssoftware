@@ -488,21 +488,21 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     return _turnierPlan;
   }
 
-  private int _anzTimeSlots = 1000;
+  private static int _anzTimeSlots = 1000;
   @Override
   int turnierKonf_getAnzTimeSlots() {
     if(!_initialized) _initTurnier();
     return _anzTimeSlots;
   }
 
-  private int _turnierStartMinute = 420;
+  private static int _turnierStartMinute = 420;
   @Override
   public int turnierKonf_getTurnierStartAsMinutes(){
     if(!_initialized) _initTurnier();
     return _turnierStartMinute;
   }
 
-  private int _timeSlotDuration = 0;
+  private static int _timeSlotDuration = 0;
   @Override
   int turnierKonf_getTimeSlotDuration(){
     if(!_initialized) _initTurnier();

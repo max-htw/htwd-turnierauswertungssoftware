@@ -55,6 +55,15 @@ public class RoleAdmin_TaskEinstellungen_Controller extends RoleWithTaskBase_Con
         }
       }
     }
+    else if(existsParam(StringsActions.setPrefillScores)){
+      Boolean p = validateBoolParam(StringsActions.setPrefillScores);
+     _dbInterface.turnierKonf_setNeedPrefillScores(p);
+     _dbInterface.resetMatches();
+    }
+    else if(existsParam(StringsActions.setSpielDauer)){
+      Integer p = validateIntParam(StringsActions.setSpielDauer);
+      _dbInterface.turnierKonf_setTimeSlotDuration(p);
+    }
     else if(existsParam(StringsActions.saveTurnier)){
         String p = _params.get(StringsActions.saveTurnier.name().toLowerCase());
         boolean erfolg = _dbInterface.saveCurrentTurnierToArchive(p);
@@ -107,19 +116,38 @@ public class RoleAdmin_TaskEinstellungen_Controller extends RoleWithTaskBase_Con
 
     d.anzSpielfelder = _dbInterface.turnierKonf_getAnzSpielfelder();
     for(int i = 1; i <= AppSettings.maxAnzSpielfelder; i++){
+      boolean isActive = false;
+      RoleWithTaskBase_Renderer.ActionForRoleAndTask a2 = null;
       if(i != d.anzSpielfelder){
-        RoleWithTaskBase_Renderer.ActionForRoleAndTask a2 = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
+        a2 = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
                 StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, -1, -1);
         a2.parameters.put(StringsActions.setAnzFields, "" + i);
-        d.anzSpielfelder_aendernLinks.add(new RoleWithTaskBase_Renderer.HyperLink("" + i, a2, true));
+        isActive = true;
       }
+        d.anzSpielfelder_aendernLinks.add(new RoleWithTaskBase_Renderer.HyperLink("" + i, a2, isActive));
     }
 
-    d.vorausfuellenData = false;
+    d.anfangZeitStr = _dbInterface.getTimeSlotString(0);
+
+    d.spielDauer = _dbInterface.turnierKonf_getTimeSlotDuration();
+    for(int i=AppSettings.minTimeSlotDuration; i<=AppSettings.maxTimeSlotDuration; i+=5){
+      boolean isActive = false;
+      RoleWithTaskBase_Renderer.ActionForRoleAndTask a2 = null;
+      if(i != d.spielDauer){
+        a2 = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
+          StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, -1, -1);
+        a2.parameters.put((StringsActions.setSpielDauer), "" + i);
+        isActive = true;
+      };
+      d.spielDauer_aendernLinks.add(new RoleWithTaskBase_Renderer.HyperLink("" + i, a2, isActive));
+    }
+
+    d.vorausfuellenData = _dbInterface.turnierKonf_getNeedPrefillScores();
     RoleWithTaskBase_Renderer.ActionForRoleAndTask a3 = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
             StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, -1, -1);
-    a3.parameters.put(StringsActions.setPrefillScores, "true");
-    d.vorausfuellenData_aendernLink = new RoleWithTaskBase_Renderer.HyperLink("true", a3, true);
+    a3.parameters.put(StringsActions.setPrefillScores, (!d.vorausfuellenData)?"true":"false");
+    d.vorausfuellenData_aendernLink = new RoleWithTaskBase_Renderer.HyperLink((!d.vorausfuellenData)?"true":"false", a3, true);
+
 
     d.htmlFormAction = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
             StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, -1, -1);

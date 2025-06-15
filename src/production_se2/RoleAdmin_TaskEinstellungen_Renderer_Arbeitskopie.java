@@ -92,28 +92,21 @@ public class RoleAdmin_TaskEinstellungen_Renderer_Arbeitskopie extends RoleAdmin
     }
 
     // Dropdown-Menü für Hin-/Rückspiel
+    String selTxt = "ja";
+    String notSelText = "nein";
+    if(!daten.mitRueckspielen){
+      selTxt = "nein";
+      notSelText = "ja";
+    }
     r.append("<p>Hin- und Rückspiel: <select onchange=\"location.href=this.value\">");
-
-    boolean aktuellTrue = daten.mitRueckspielen == true;
-
-    RoleWithTaskBase_Renderer.ActionForRoleAndTask aTrue = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
-        StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, -1, -1);
-    aTrue.parameters.put(StringsActions.needrueckspiel, "ja");
-    String urlTrue = actionStringGenerator.generateActionString(aTrue);
-    r.append("<option value=\"").append(urlTrue).append("\"").append(aktuellTrue ? " selected" : "").append(">true</option>");
-
-    RoleWithTaskBase_Renderer.ActionForRoleAndTask aFalse = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
-        StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, -1, -1);
-    aFalse.parameters.put(StringsActions.needrueckspiel, "nein");
-    String urlFalse = actionStringGenerator.generateActionString(aFalse);
-    r.append("<option value=\"").append(urlFalse).append("\"").append(!aktuellTrue ? " selected" : "").append(">false</option>");
-
+    r.append("<option value=\"\">").append(selTxt).append("</option>\n");
+    r.append("<option value=\"").append(getHref(daten.mit_RueckspielenLink.linkAction)).append("\">").append(notSelText).append("</option>");
     r.append("</select></p>\n");
 
     // Dropdown-Menü für Anzahl der Spielfelder
     r.append("<p>Anzahl Spielfelder: <select onchange=\"location.href=this.value\">");
     for(RoleWithTaskBase_Renderer.HyperLink n: daten.anzSpielfelder_aendernLinks){
-        String actionUrl = actionStringGenerator.generateActionString(n.linkAction);
+        String actionUrl = getHref(n.linkAction);
         boolean selected = !n.isActive;
         r.append("<option value=\"").append(actionUrl).append("\"")
         .append(selected ? " selected" : "")
@@ -124,35 +117,34 @@ public class RoleAdmin_TaskEinstellungen_Renderer_Arbeitskopie extends RoleAdmin
     r.append("</select></p>\n");
 
     // Eingabefeld für die Startzeit des Turniers
-    r.append("<p>Startzeit des Turniers: <input type=\"time\" name=\"startzeit\" value=\"08:00\"></p>\n");
+    r.append("<p>Startzeit des Turniers: <input type=\"time\" name=\"startzeit\" value=\""+ daten.anfangZeitStr + "\"></p>\n");
 
 
     // Dropdown-Menp zur Auswahl der Spieldauer
-    r.append("<p>Spieldauer (Minuten): <select name=\"spieldauer\">\n");
-    r.append("<option value=\"15\">15 Minuten</option>\n");
-    r.append("<option value=\"20\">20 Minuten</option>\n");
-    r.append("<option value=\"25\">25 Minuten</option>\n");
-    r.append("<option value=\"30\">30 Minuten</option>\n");
+    r.append("<p>Spieldauer (Minuten): <select onchange=\"location.href=this.value\">\n");
+    for(RoleWithTaskBase_Renderer.HyperLink n: daten.spielDauer_aendernLinks){
+        String actionUrl = getHref(n.linkAction);
+        boolean selected = !n.isActive;
+        r.append("<option value=\"").append(actionUrl).append("\"")
+        .append(selected ? " selected" : "")
+        .append(">")
+        .append(n.linkText)
+        .append("</option>");
+    }
+
     r.append("</select></p>\n");
 
 
     // Dropdown für Vorausfüllen mit Zufallsdaten
+    selTxt = "ja";
+    notSelText = "nein";
+    if(!daten.vorausfuellenData){
+      selTxt = "nein";
+      notSelText = "ja";
+    }
     r.append("<p>(((Vorausfüllen aktivieren:))) <select onchange=\"location.href=this.value\">");
-
-    boolean vorausfuellenAktuellTrue = daten.vorausfuellenData == true;
-
-    RoleWithTaskBase_Renderer.ActionForRoleAndTask aPrefillTrue = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
-        StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, -1, -1);
-    aPrefillTrue.parameters.put(StringsActions.setPrefillScores, "true");
-    String urlPrefillTrue = actionStringGenerator.generateActionString(aPrefillTrue);
-    r.append("<option value=\"").append(urlPrefillTrue).append("\"").append(vorausfuellenAktuellTrue ? " selected" : "").append(">true</option>");
-
-    RoleWithTaskBase_Renderer.ActionForRoleAndTask aPrefillFalse = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
-        StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, -1, -1);
-    aPrefillFalse.parameters.put(StringsActions.setPrefillScores, "false");
-    String urlPrefillFalse = actionStringGenerator.generateActionString(aPrefillFalse);
-    r.append("<option value=\"").append(urlPrefillFalse).append("\"").append(!vorausfuellenAktuellTrue ? " selected" : "").append(">false</option>");
-
+    r.append("<option value=\"\">").append(selTxt).append("</option>\n");
+    r.append("<option value=\"").append(getHref(daten.vorausfuellenData_aendernLink.linkAction)).append("\">").append(notSelText).append("</option>");
     r.append("</select></p>\n");
 
     // Aktuelles Turnier speichern

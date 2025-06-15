@@ -37,7 +37,7 @@ public abstract class DBInterfaceBase {
   abstract int turnierKonf_getAnzTimeSlots();
 
   public String getTimeSlotString(int timeSlotNr) {
-    if(timeSlotNr < 0){return "-- : --";}
+    if(timeSlotNr < 0){return "--:--";}
 
     int minutes = turnierKonf_getTurnierStartAsMinutes();
     minutes += turnierKonf_getTimeSlotDuration() * timeSlotNr;
@@ -45,7 +45,7 @@ public abstract class DBInterfaceBase {
     int h = minutes / 60;
     int m = minutes % 60;
 
-    String a = String.format("%02d : %02d", h, m);
+    String a = String.format("%02d:%02d", h, m);
     return a;
   }
 

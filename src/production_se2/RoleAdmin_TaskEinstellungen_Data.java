@@ -15,8 +15,13 @@ public class RoleAdmin_TaskEinstellungen_Data extends RoleWithTaskBase_Data{
   public RoleWithTaskBase_Renderer.HyperLink mit_RueckspielenLink = new
     RoleWithTaskBase_Renderer.HyperLink("",null, false);
 
+  public String anfangZeitStr;
+
   public int anzSpielfelder;
   public ArrayList<RoleWithTaskBase_Renderer.HyperLink> anzSpielfelder_aendernLinks = new ArrayList<>();
+
+  public int spielDauer;
+  public ArrayList<RoleWithTaskBase_Renderer.HyperLink> spielDauer_aendernLinks = new ArrayList<>();
 
   public boolean vorausfuellenData;
   public RoleWithTaskBase_Renderer.HyperLink vorausfuellenData_aendernLink = new
