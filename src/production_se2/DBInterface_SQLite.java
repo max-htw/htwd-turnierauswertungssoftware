@@ -198,27 +198,6 @@ public class DBInterface_SQLite extends DBInterfaceBase{
   }
 
   @Override
-  ArrayList<String> getTimeSlotsStrings() {
-    ArrayList<String> a = new ArrayList<>();
-
-    for(int i = 0; i < (turnierKonf_getAnzTimeSlots() / 2); i++){
-      StringBuilder s = new StringBuilder();
-      s.append(6+i);
-      s.append(":00 - ");
-      s.append(6+i);
-      s.append(":30");
-      a.add(s.toString());
-      s = new StringBuilder();
-      s.append(6+i);
-      s.append(":30 - ");
-      s.append(6+i+1);
-      s.append(":00");
-      a.add(s.toString());
-    }
-    return a;
-  }
-
-  @Override
   boolean turnierKonf_setAnzGruppen(int anz) {
     return false;
   }
@@ -249,12 +228,6 @@ public class DBInterface_SQLite extends DBInterfaceBase{
   }
 
   @Override
-  void reset() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'reset'");
-  }
-
-  @Override
   public ArrayList<DBInterfaceBase.AuswertungsEintrag> calculateAuswertung(int groupID) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'calculateAuswertung'");
@@ -270,5 +243,72 @@ public class DBInterface_SQLite extends DBInterfaceBase{
   void fillTurnierPlan(ArrayList<DBInterfaceBase.FeldSchedule> turnierPlan) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'fillTurnierPlan'");
+  }
+
+  @Override
+  int turnierKonf_getTimeSlotDuration() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'turnierKonf_getTimeSlotDuration'");
+  }
+
+
+  @Override
+  void resetKonfiguration() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'resetKonfiguration'");
+  }
+
+  @Override
+  void resetMatches() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'resetMatches'");
+  }
+
+  @Override
+  void match_setPunkteTeam1Hinspiel(int groupID, int team1id, int team2id, int team1Punkte) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'match_setPunkteTeam1Hinspiel'");
+  }
+
+  @Override
+  void match_setPunkteTeam1Rueckspiel(int groupID, int team1id, int team2id, int team1Punkte) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'match_setPunkteTeam1Rueckspiel'");
+  }
+
+  @Override
+  void match_setPunkteTeam2Hinspiel(int groupID, int team1id, int team2id, int team2Punkte) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'match_setPunkteTeam2Hinspiel'");
+  }
+
+  @Override
+  void match_setPunkteTeam2Rueckspiel(int groupID, int team1id, int team2id, int team2Punkte) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'match_setPunkteTeam2Rueckspiel'");
+  }
+
+  @Override
+  int turnierKonf_getTurnierStartAsMinutes() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'turnierKonf_getTurnierStartAsMinutes'");
+  }
+
+  @Override
+  void turnierKonf_setTurnierStartAsMinutes(int minutes) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'turnierKonf_setTurnierStartAsMinutes'");
+  }
+
+  @Override
+  void turnierKonf_setTimeSlotDuration(int minutes) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'turnierKonf_setTimeSlotDuration'");
+  }
+
+  @Override
+  void turnierKonf_setAnzTimeSlots(int minutes) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'turnierKonf_setAnzTimeSlots'");
   }
 }

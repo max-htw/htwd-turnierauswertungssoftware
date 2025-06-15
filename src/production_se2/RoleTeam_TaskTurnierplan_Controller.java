@@ -20,7 +20,6 @@ public class RoleTeam_TaskTurnierplan_Controller
       String groupName = _dbInterface.turnierKonf_getGroupNames().get(this.getGroupID());
       ArrayList<String> teamNames = _dbInterface.turnierKonf_getTeamNamesByGroupID(this.getGroupID());
       String teamName = teamNames.get(this.getTeamNr());
-      ArrayList<String> timeSlotsStrings = _dbInterface.getTimeSlotsStrings();
 
       d.gruppenName = groupName;
       d.teamName = teamName;
@@ -42,7 +41,7 @@ public class RoleTeam_TaskTurnierplan_Controller
 
         d.planItems.add(
           new RoleTeam_TaskTurnierplan_Renderer.PlanItem
-            (timeSlotsStrings.get(m.getHinspielTimeSlot()),
+            (_dbInterface.getTimeSlotString(m.getHinspielTimeSlot()),
               m.getHinspielFeldNr(),
               teamNames.get(m.getTeam1Nr()),
               teamNames.get(m.getTeam2Nr()),
@@ -65,7 +64,7 @@ public class RoleTeam_TaskTurnierplan_Controller
 
         d.planItems.add(
           new RoleTeam_TaskTurnierplan_Renderer.PlanItem
-            (timeSlotsStrings.get(m.getRueckspielTimeSlot()),
+            (_dbInterface.getTimeSlotString(m.getRueckspielTimeSlot()),
               m.getRueckspielFeldNr(),
               teamNames.get(m.getTeam1Nr()),
               teamNames.get(m.getTeam2Nr()),

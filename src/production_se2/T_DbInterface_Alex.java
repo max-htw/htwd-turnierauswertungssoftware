@@ -9,7 +9,7 @@ public class T_DbInterface_Alex extends T_DbInterface_setup {
   public void turnier_konfiguration(){
     assumeTrue(!((db instanceof DBInterface_SQLite)));
 
-    db.reset();
+    db.resetKonfiguration();
 
     db.turnierKonf_setAnzGruppen(4);
     assertEquals(4, db.turnierKonf_getAnzGruppen());

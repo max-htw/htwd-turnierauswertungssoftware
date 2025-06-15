@@ -72,16 +72,24 @@ public class RoleAdmin_TaskTurnierplan_Renderer extends RoleWithTaskBase_Rendere
 
       // Tabellenkörper
       r.append("<tbody>");
-      /*for (RoleTeam_TaskTurnierplan_Renderer.PlanItem item : this.daten.planItems) {
-          r.append("<tr class='hover:bg-gray-50'>");
-          r.append("<td class='px-4 py-2 border'>").append(item.uhrZeit).append("</td>");
-          r.append("<td class='px-4 py-2 border'>").append(item.feldNr).append("</td>");
-          r.append("<td class='px-4 py-2 border'>").append(item.team1Name).append("</td>");
-          r.append("<td class='px-4 py-2 border'>").append(item.team2Name).append("</td>");
-          r.append("<td class='px-4 py-2 border'>").append(item.shiriName).append("</td>");
-          r.append("<td class='px-4 py-2 border'>").append(item.linkAction).append("</td>");
-          r.append("</tr>");
-      }*/
+      for (RoleAdmin_TaskTurnierplan_Renderer.TimeSlotPlanItem item : this.daten.planItems) {
+          String zeitText = item.timeSlotString;
+          for(int i = 0; i < item.fieldLinks.size(); i++){
+            r.append("<tr class='hover:bg-gray-50'>");
+            r.append("<td class='px-4 py-2 border'>").append(zeitText).append("</td>");
+            r.append("<td class='px-4 py-2 border'>").append(i+1).append("</td>");
+            r.append("<td class='px-4 py-2 border'>").append(item.teamANames.get(i)).append("</td>");
+            r.append("<td class='px-4 py-2 border'>").append(item.teamBNames.get(i)).append("</td>");
+            r.append("<td class='px-4 py-2 border'>").append(item.schiriNames.get(i)).append("</td>");
+            String lText = "";
+            if(item.ergebnisLinks.get(i) != null){
+                lText = item.ergebnisLinks.get(i).linkText;
+            }
+            r.append("<td class='px-4 py-2 border'>").append(lText).append("</td>");
+            r.append("</tr>");
+            zeitText = "";
+          }
+      }
       r.append("</tbody>");
 
       r.append("</table>");
@@ -97,12 +105,30 @@ public class RoleAdmin_TaskTurnierplan_Renderer extends RoleWithTaskBase_Rendere
         return new RoleAdmin_TaskTurnierplan_Data();
     } 
 
-    public  static  class PlanItem{
-        String uhrZeit;
-        ArrayList<HyperLink> fieldLinks = new ArrayList<>();
-        PlanItem(String zeit, ArrayList<HyperLink> links){
-            this.uhrZeit = zeit;
-            this.fieldLinks = links;
+    public  static  class TimeSlotPlanItem{
+        public int timeSlotNr;
+        public String timeSlotString;
+
+        public ArrayList<HyperLink> fieldLinks = new ArrayList<>();
+        public ArrayList<String> teamANames = new ArrayList<>();
+        public ArrayList<String> teamBNames = new ArrayList<>();
+        public ArrayList<String> schiriNames = new ArrayList<>();
+        public ArrayList<HyperLink> ergebnisLinks = new ArrayList<>();
+
+        TimeSlotPlanItem(int timeSlot, 
+                         String timeSlotText, 
+                         ArrayList<HyperLink> fieldLinks, 
+                         ArrayList<String> teamANames, 
+                         ArrayList<String> teamBNames,
+                         ArrayList<String> schiriNames,
+                         ArrayList<HyperLink> ergebnisLinks){
+            this.timeSlotNr = timeSlot;
+            this.timeSlotString = timeSlotText;
+            this.fieldLinks = fieldLinks;
+            this.teamANames = teamANames;
+            this.teamBNames = teamBNames;
+            this.schiriNames = schiriNames;
+            this.ergebnisLinks = ergebnisLinks;
         }
     }
 

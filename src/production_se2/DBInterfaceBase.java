@@ -4,7 +4,9 @@ public abstract class DBInterfaceBase {
 
   //Datenabfragen
 
-  abstract void reset();
+  //die zwei Funktionen werden hauptsaechlich in Tests verwendet.
+  abstract void resetKonfiguration();
+  abstract void resetMatches();
 
   abstract ArrayList <String> turnierKonf_getGroupNames(); // index = groupID -> groupName
   abstract int turnierKonf_getAnzGruppen();
@@ -30,8 +32,23 @@ public abstract class DBInterfaceBase {
 
   abstract ArrayList<FeldSchedule> getTurnierPlan();
 
+  abstract int turnierKonf_getTurnierStartAsMinutes();
+  abstract int turnierKonf_getTimeSlotDuration();
   abstract int turnierKonf_getAnzTimeSlots();
-  abstract ArrayList<String> getTimeSlotsStrings();
+
+  public String getTimeSlotString(int timeSlotNr) {
+    if(timeSlotNr < 0){return "-- : --";}
+
+    int minutes = turnierKonf_getTurnierStartAsMinutes();
+    minutes += turnierKonf_getTimeSlotDuration() * timeSlotNr;
+
+    int h = minutes / 60;
+    int m = minutes % 60;
+
+    String a = String.format("%02d : %02d", h, m);
+    return a;
+  }
+
 
   abstract boolean isTurnierPlanAktuell();
   abstract void fillTurnierPlan(ArrayList<FeldSchedule> turnierPlan);
@@ -45,6 +62,16 @@ public abstract class DBInterfaceBase {
   abstract boolean turnierKonf_setAnzSpielfelder(int anz);
   abstract boolean turnierKonf_setNeedRueckspiele(boolean needRueckspiele);
   abstract boolean turnierKonf_setNeedPrefillScores(boolean needPrefillScores);
+
+  abstract void turnierKonf_setTurnierStartAsMinutes(int minutes);
+  abstract void turnierKonf_setTimeSlotDuration(int minutes);
+  abstract void turnierKonf_setAnzTimeSlots(int anz);
+
+  abstract void match_setPunkteTeam1Hinspiel(int groupID, int team1ID, int team2ID, int team1Punkte);
+  abstract void match_setPunkteTeam1Rueckspiel(int groupID, int team1ID, int team2ID, int team1Punkte);
+
+  abstract void match_setPunkteTeam2Hinspiel(int groupID, int team1ID, int team2ID, int team2Punkte);
+  abstract void match_setPunkteTeam2Rueckspiel(int groupID, int team1ID, int team2ID, int team2Punkte);
 
   abstract boolean saveCurrentTurnierToArchive(String turnierName);
 
@@ -65,11 +92,11 @@ public abstract class DBInterfaceBase {
       }
     }
 
-    private int groupID;
+    private int groupID = -1;
     public int getGroupID(){ return groupID;}
     public void setGroupID(int id){ groupID = id;}
 
-    private int team1Nr;
+    private int team1Nr = -1;
     public int getTeam1Nr(){return team1Nr;}
     public void setTeam1Nr(int nr){team1Nr = nr;}
 
@@ -77,15 +104,15 @@ public abstract class DBInterfaceBase {
     public String getTeam1Name(){return team1Name;}
     public void setTeam1Name(String name){team1Name = name;}
 
-    private int team1PunkteHinspiel;
+    private int team1PunkteHinspiel = -1;
     public int getTeam1PunkteHinspiel(){return  team1PunkteHinspiel;}
     public void setTeam1PunkteHinspiel(int punkte){team1PunkteHinspiel = punkte;}
 
-    private int team1PunkteRueckspiel;
+    private int team1PunkteRueckspiel = -1;
     public int getTeam1PunkteRueckspiel(){return team1PunkteRueckspiel;}
     public void setTeam1PunkteRueckspiel(int punkte){team1PunkteRueckspiel = punkte;}
 
-    private int team2Nr;
+    private int team2Nr = -1;
     public int getTeam2Nr(){return team2Nr;}
     public void setTeam2Nr(int nr){team2Nr = nr;}
 
@@ -93,45 +120,45 @@ public abstract class DBInterfaceBase {
     public String getTeam2Name(){return team2Name;}
     public void setTeam2Name(String name){team2Name = name;}
 
-    private int team2PunkteHinspiel;
+    private int team2PunkteHinspiel = -1;
     public int getTeam2PunkteHinspiel(){return  team2PunkteHinspiel;}
     public void setTeam2PunkteHinspiel(int punkte){team2PunkteHinspiel = punkte;}
 
-    private int team2PunkteRueckspiel;
+    private int team2PunkteRueckspiel = -1;
     public int getTeam2PunkteRueckspiel(){return team2PunkteRueckspiel;}
     public void setTeam2PunkteRueckspiel(int punkte){team2PunkteRueckspiel = punkte;}
 
-    private int hinspielRichterGroupID;
+    private int hinspielRichterGroupID = -1;
     public int getHinspielRichterGroupID(){return  hinspielRichterGroupID;}
     public void setHinspielRichterGroupID(int id){
       hinspielRichterGroupID = id;
     }
 
-    private int hinspielRichterTeamID;
+    private int hinspielRichterTeamID = -1;
     public int getHinspielRichterTeamID(){return hinspielRichterTeamID;}
     public void setHinspielRichterTeamID(int id){hinspielRichterTeamID = id;}
 
-    private int hinspielFeldNr;
+    private int hinspielFeldNr = -1;
     public int getHinspielFeldNr(){return hinspielFeldNr;}
     public void setHinspielFeldNr(int nr){hinspielFeldNr = nr;}
 
-    private int hinspielTimeSlot;
+    private int hinspielTimeSlot = -1;
     public int getHinspielTimeSlot(){return hinspielTimeSlot;}
     public void setHinspielTimeSlot(int slot){hinspielTimeSlot = slot;}
 
-    private int rueckspielRichterGroupID;
+    private int rueckspielRichterGroupID = -1;
     public int getRueckspielRichterGroupID(){return  rueckspielRichterGroupID;}
     public void setRueckspielRichterGroupID(int id){rueckspielRichterGroupID = id;}
 
-    private int rueckspielRichterTeamID;
+    private int rueckspielRichterTeamID = -1;
     public int getRueckspielRichterTeamID(){return rueckspielRichterTeamID;}
     public void setRueckspielRichterTeamID(int id){rueckspielRichterTeamID = id;}
 
-    private int rueckspielFeldNr;
+    private int rueckspielFeldNr = -1;
     public int getRueckspielFeldNr(){return rueckspielFeldNr;}
     public void setRueckspielFeldNr(int nr){rueckspielFeldNr = nr;}
 
-    private int rueckspielTimeSlot;
+    private int rueckspielTimeSlot = -1;
     public int getRueckspielTimeSlot(){return rueckspielTimeSlot;}
     public void setRueckspielTimeSlot(int slot){rueckspielTimeSlot = slot;}
 

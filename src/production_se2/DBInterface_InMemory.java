@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 
 public class DBInterface_InMemory extends DBInterfaceBase{
@@ -17,12 +18,19 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   public DBInterface_InMemory(){
     if(!_initialized) {
       _initTurnier();
+      _initializeMatches();
     }
     _initialized = true;
   }
 
   private void _initTurnier(){
-    
+
+    if(_anzGruppen < AppSettings.minAnzGroups) _anzGruppen = AppSettings.minAnzGroups;
+    if(_anzSpielfelder < AppSettings.minAnzSpielfelder) _anzSpielfelder = AppSettings.minAnzSpielfelder;
+    if(_anzTimeSlots < 1) _anzTimeSlots = 1000;
+    if(_timeSlotDuration < AppSettings.minTimeSlotDuration || _timeSlotDuration > AppSettings.maxTimeSlotDuration){
+      _timeSlotDuration = AppSettings.minTimeSlotDuration;
+    }
 
       if(_anzTeamsProGruppe.size() < _anzGruppen) {
         _anzTeamsProGruppe = new ArrayList<>();
@@ -57,9 +65,6 @@ public class DBInterface_InMemory extends DBInterfaceBase{
         }
 
       }
-
-      _initializeMatches();
-    
   }
 
   private void  _initializeMatches(){
@@ -108,6 +113,10 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     //fillTurnierPlan();
   }
 
+  //das ist eine Platzhalterfunktion fuer die Turnierplanung. 
+  //Sie wurde verwendet befor der TurnierplanGenerator implementiert wurde.
+  //ich lasse sie erstmal drin fuer den Fall, wenn TurnierplanGenerator weiterentwickelt wird
+  //und temporaer nicht verfuegbar ist.
   private void fillTurnierPlan(){
     _turnierPlan.clear();
     for(int i = 0; i< turnierKonf_getAnzSpielfelder(); i++){
@@ -222,6 +231,110 @@ public class DBInterface_InMemory extends DBInterfaceBase{
 
   }
 
+  private void setupTurnierPlanFromGenerator(){
+        //hier geht es darum den Turnierplan vom Turnierplangenerator (im Format List<TurnierplanGenerator.Spiel>)
+        //in den Format des DBInterfaceBase Turniers (im Format ArrayList<DBInterfaceBase.FeldSchedule>) umzuwandeln.
+
+        ArrayList<Integer> tgr = new ArrayList<>();
+        for(int i = 0; i<turnierKonf_getAnzGruppen(); i++){
+            tgr.add(turnierKonf_getAnzTeamsByGroupID(i));
+        }
+        List<TurnierplanGenerator.Spiel> tp = 
+            TurnierplanGenerator.generierePlan(tgr, turnierKonf_getAnzTimeSlots(),
+                                                    turnierKonf_getAnzSpielfelder(), 
+                                                    turnierKonf_getNeedRueckspiele());
+
+
+        ArrayList<DBInterfaceBase.FeldSchedule> turnierPlan = new ArrayList<>();
+        for( int idx = 0; idx < tp.size(); idx++){
+            TurnierplanGenerator.Spiel s = tp.get(idx);
+            //benoetigte Anzahl von Spielfelder im DBInterfaceBase-Turnierplan initialisieren
+            if(s.getFeldNr() > turnierPlan.size() -1){
+                for(int i = turnierPlan.size(); i <= s.getFeldNr(); i++){
+                    turnierPlan.add(new DBInterfaceBase.FeldSchedule(i));
+                }
+            }
+            //benoetigte Anzahl von Spiele im benoetigtem Spielfeld im DBInterfaceBase-Turnierplan initialisieren.
+            //Sie werden mit dem leeren Spiel (mit allen TeamID = -1) initialisiert
+            if(s.getTimeSlotNr() >= turnierPlan.get(s.getFeldNr()).getSpiele().size()){
+                for(int i = turnierPlan.get(s.getFeldNr()).getSpiele().size(); i <= s.getTimeSlotNr(); i++){
+                    turnierPlan.get(s.getFeldNr()).addSpiel(new DBInterfaceBase.SpielStats());
+                }
+            }
+
+            //jetzt der eigenliche Mapping. 
+            //im TurnierplanGenerator-Turnierplan sind die GruppenNr und TeamNr-in-der-Gruppe zusammen in dem TeamNr wie Folgt codiert:
+            //jedes Team aus der Gruppe 0 bekommt den TeamNr = TeamNr-in-der-Gruppe
+            //Teams aus den naechsten Gruppen bekommen fortlaufende Nummern.
+            //z.B. Team 0 aus der Gruppe 1: TeamNr = Anzahl_Teams_in_Gruppe_0 + 0
+            DBInterfaceBase.SpielStats stats = turnierPlan.get(s.getFeldNr()).getSpiele().get(s.getTimeSlotNr());
+            int team1GrNr = -1;
+            int team1TeamNr = -1;
+            int team2GrNr = -1;
+            int team2TeamNr = -1;
+            int richterHinspielGrNr = -1;
+            int richterHinspielTeamNr = -1;
+            int richterRueckGrNr = -1;
+            int richterRueckTeamNr = -1;
+            ArrayList<Integer> firstNrOfNextGroup = new ArrayList<>();
+            for(int i = 0; i<turnierKonf_getAnzGruppen(); i++){
+                int prevNr = 0;
+                if(i>0){
+                    prevNr = firstNrOfNextGroup.get(i-1);
+                }
+                firstNrOfNextGroup.add(turnierKonf_getAnzTeamsByGroupID(i) + prevNr);
+            }
+
+            //vor der for-Schleife: s.getMatch().getTeamXnr() enthaelt die Fortlaufende TurnierplanGenerator-TeamNr
+            //nach der for-Schleife: s.getMatch().getTeamXnr() enthaelt die TeamNr-in-der-Gruppe und die GruppenNr 
+            //                       ist in einer Variable gespeichert
+            int firstNrOfThisGroup = 0;
+            int dbgBakTeam1Nr = s.getMatch().getTeam1Nr();
+            int dbgBakTeam2Nr = s.getMatch().getTeam2Nr();
+            for(int i = 0; i<turnierKonf_getAnzGruppen(); i++){
+                if((s.getMatch().getTeam1Nr() < firstNrOfNextGroup.get(i)) && team1GrNr < 0){
+                    team1GrNr = i;
+                    team1TeamNr = s.getMatch().getTeam1Nr() - firstNrOfThisGroup;
+                }
+
+                if((s.getMatch().getTeam2Nr() < firstNrOfNextGroup.get(i)) && team2GrNr < 0){
+                    team2GrNr = i;
+                    team2TeamNr = s.getMatch().getTeam2Nr() - firstNrOfThisGroup;
+                }
+
+                if((s.getMatch().getRichterHinspielTeamNr() < firstNrOfNextGroup.get(i)) && richterHinspielGrNr < 0){
+                    richterHinspielGrNr = i;
+                    richterHinspielTeamNr = s.getMatch().getRichterHinspielTeamNr() - firstNrOfThisGroup;
+                }
+
+                if((s.getMatch().getRichterRueckspielTeamNr() < firstNrOfNextGroup.get(i)) && (richterRueckGrNr < 0) && turnierKonf_getNeedRueckspiele()){
+                    richterRueckGrNr = i;
+                    richterRueckTeamNr = s.getMatch().getRichterRueckspielTeamNr() - firstNrOfThisGroup;
+                }
+                firstNrOfThisGroup = firstNrOfNextGroup.get(i);
+            }
+            if((team1GrNr != team2GrNr) || (team1GrNr != s.getMatch().getGroupID())){
+                throw new RuntimeException("Laut Programmlogik muessen team1GrNr und team2GrNr und getGroupID() gleich sein.");
+            }
+
+            stats.feldID = s.getFeldNr();
+            stats.groupid = team1GrNr;
+            stats.isHinspiel = s.getIstHinspiel();
+            stats.team1 = team1TeamNr;
+            stats.team2 = team2TeamNr;
+            if(stats.isHinspiel){
+                getMatch(stats.groupid, stats.team1, stats.team2).setHinspielRichterGroupID(richterHinspielGrNr);
+                getMatch(stats.groupid, stats.team1, stats.team2).setHinspielRichterTeamID(richterHinspielTeamNr);
+            }
+            else if(turnierKonf_getNeedRueckspiele()){
+                getMatch(stats.groupid, stats.team1, stats.team2).setRueckspielRichterGroupID(richterRueckGrNr);
+                getMatch(stats.groupid, stats.team1, stats.team2).setRueckspielRichterTeamID(richterRueckTeamNr);
+            }
+        }
+        fillTurnierPlan(turnierPlan);
+
+  }
+
   public static int groupIdFromHash(int hashCode){
     return hashCode / 100000;
   }
@@ -238,12 +351,14 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   private static int _anzGruppen = AppSettings.minAnzGroups;
   @Override
   int turnierKonf_getAnzGruppen() {
+    if(!_initialized) _initTurnier();
     return _anzGruppen;
   }
 
   private  static ArrayList<String> _groupNames = new ArrayList<>();
   @Override
   ArrayList<String> turnierKonf_getGroupNames() {
+    if(!_initialized) _initTurnier();
     if(_groupNames == null) {
       _groupNames = new ArrayList<>();
     }
@@ -252,6 +367,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
 
   @Override
   ArrayList<String> turnierKonf_getTeamNamesByGroupID(int groupID) {
+    if(!_initialized) _initTurnier();
     if(_teamNames == null){
       _teamNames = new ArrayList<>();
     }
@@ -268,6 +384,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   private static ArrayList<Integer> _anzTeamsProGruppe = new ArrayList<>();
   @Override
   int turnierKonf_getAnzTeamsByGroupID(int GroupID) {
+    if(!_initialized) _initTurnier();
     if(_anzTeamsProGruppe.size() <= GroupID){
       throw new IllegalArgumentException();
     }
@@ -279,23 +396,30 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   private static boolean _needRueckspiele = true;
   @Override
   boolean turnierKonf_getNeedRueckspiele() {
+    if(!_initialized) _initTurnier();
     return _needRueckspiele;
   }
 
   private static int _anzSpielfelder = AppSettings.minAnzSpielfelder;
   @Override
   int turnierKonf_getAnzSpielfelder() {
+    if(!_initialized) _initTurnier();
     return _anzSpielfelder;
   }
 
   private static boolean _needPrefillScores = true;
   @Override
   boolean turnierKonf_getNeedPrefillScores() {
+    if(!_initialized) _initTurnier();
     return _needPrefillScores;
   }
 
   @Override
   ArrayList<TurnierMatch> getMatchesByGroupID(int groupID) {
+    if(!_initialized){
+      _initTurnier();
+      _initializeMatches();
+    }
     ArrayList<TurnierMatch> a = new ArrayList<>();
     for(int h : _matches.keySet()){
       if(groupIdFromHash(h) == groupID){
@@ -307,6 +431,10 @@ public class DBInterface_InMemory extends DBInterfaceBase{
 
   @Override
   TurnierMatch getMatch(int groupID, int team1, int team2) {
+    if(!_initialized){
+      _initTurnier();
+      _initializeMatches();
+    }
     TurnierMatch m = new TurnierMatch(groupID, team1, team2);
     return  _matches.get(m.hashCode());
   }
@@ -349,35 +477,38 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   ArrayList<FeldSchedule> getTurnierPlan() {
     if(_turnierPlan.isEmpty() || !_initialized){
       _initTurnier();
+      _initializeMatches();
+    }
+
+    //wenn Turnierkonfigurationen des letzten Turnierplans sich vom den aktuellen Turnierkonfigurationen unterscheiden,
+    //wird automatisch ein neuer Turnierplan berechnet. 
+    if(!isTurnierPlanAktuell()){
+      setupTurnierPlanFromGenerator();
     }
     return _turnierPlan;
   }
 
+  private int _anzTimeSlots = 1000;
   @Override
   int turnierKonf_getAnzTimeSlots() {
-    return 1000;
+    if(!_initialized) _initTurnier();
+    return _anzTimeSlots;
   }
 
+  private int _turnierStartMinute = 420;
   @Override
-  ArrayList<String> getTimeSlotsStrings() {
-    ArrayList<String> a = new ArrayList<>();
-
-    for(int i = 0; i < (turnierKonf_getAnzTimeSlots() / 2); i++){
-      StringBuilder s = new StringBuilder();
-      s.append(6+i);
-      s.append(":00 - ");
-      s.append(6+i);
-      s.append(":30");
-      a.add(s.toString());
-      s = new StringBuilder();
-      s.append(6+i);
-      s.append(":30 - ");
-      s.append(6+i+1);
-      s.append(":00");
-      a.add(s.toString());
-    }
-    return a;
+  public int turnierKonf_getTurnierStartAsMinutes(){
+    if(!_initialized) _initTurnier();
+    return _turnierStartMinute;
   }
+
+  private int _timeSlotDuration = 0;
+  @Override
+  int turnierKonf_getTimeSlotDuration(){
+    if(!_initialized) _initTurnier();
+    return _timeSlotDuration;
+  }
+
   @Override
   boolean turnierKonf_setAnzGruppen(int anz) {
     if(anz < AppSettings.minAnzGroups || anz > AppSettings.maxAnzGroups){
@@ -434,11 +565,6 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   boolean turnierKonf_setNeedPrefillScores(boolean needPrefillScores) {
     _needPrefillScores = needPrefillScores;
     return true;
-  }
-
-  @Override
-  void reset() {
-    _initTurnier();
   }
 
   @Override 
@@ -518,6 +644,109 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     }
     _turnierPlanKonfig.anzahlSpielfelder = turnierKonf_getAnzSpielfelder();
     _turnierPlanKonfig.needRueckspiele = turnierKonf_getNeedRueckspiele();
+  }
+
+  @Override
+  void resetKonfiguration() {
+    _anzGruppen = -1;
+    _anzSpielfelder = -1;
+    _anzTeamsProGruppe = new ArrayList<>();
+    _groupNames = new ArrayList<>();
+    _needRueckspiele = true;
+    _needPrefillScores = false;
+
+    _initTurnier();
+    _initialized = true;
+    _initializeMatches();
+  }
+
+  @Override
+  void resetMatches() {
+    for(int h : _matches.keySet()){
+      TurnierMatch m = _matches.get(h);
+      m.setHinspielFeldNr(-1);
+      m.setRueckspielFeldNr(-1);
+      m.setHinspielTimeSlot(-1);
+      m.setRueckspielTimeSlot(-1);
+      m.setTeam1PunkteHinspiel(-1);
+      m.setTeam1PunkteRueckspiel(-1);
+      m.setTeam2PunkteHinspiel(-1);
+      m.setTeam2PunkteRueckspiel(-1);
+      m.setHinspielRichterGroupID(-1);
+      m.setRueckspielRichterGroupID(-1);
+      m.setHinspielRichterTeamID(-1);
+      m.setRueckspielRichterTeamID(-1);
+    }
+  }
+
+  @Override
+  void match_setPunkteTeam1Hinspiel(int groupID, int team1id, int team2id, int team1Punkte) {
+    TurnierMatch m = getMatch(groupID, team1id, team2id);
+    if(m != null){
+      m.setTeam1PunkteHinspiel(team1Punkte);
+    }
+    else{
+      throw new IllegalArgumentException("Den Match gibt es nicht");
+    }
+  }
+
+  @Override
+  void match_setPunkteTeam1Rueckspiel(int groupID, int team1id, int team2id, int team1Punkte) {
+    TurnierMatch m = getMatch(groupID, team1id, team2id);
+    if(m != null){
+      m.setTeam1PunkteRueckspiel(team1Punkte);
+    }
+    else{
+      throw new IllegalArgumentException("Den Match gibt es nicht");
+    }
+  }
+
+  @Override
+  void match_setPunkteTeam2Hinspiel(int groupID, int team1id, int team2id, int team2Punkte) {
+    TurnierMatch m = getMatch(groupID, team1id, team2id);
+    if(m != null){
+      m.setTeam2PunkteHinspiel(team2Punkte);
+    }
+    else{
+      throw new IllegalArgumentException("Den Match gibt es nicht");
+    }
+  }
+
+  @Override
+  void match_setPunkteTeam2Rueckspiel(int groupID, int team1id, int team2id, int team2Punkte) {
+    TurnierMatch m = getMatch(groupID, team1id, team2id);
+    if(m != null){
+      m.setTeam2PunkteRueckspiel(team2Punkte);
+    }
+    else{
+      throw new IllegalArgumentException("Den Match gibt es nicht");
+    }
+  }
+
+  @Override
+  void turnierKonf_setTurnierStartAsMinutes(int minutes) {
+    if (minutes > 0){
+      _turnierStartMinute = minutes;
+    }
+    else{
+      _turnierStartMinute = 0;
+    }
+  }
+
+  @Override
+  void turnierKonf_setTimeSlotDuration(int minutes) {
+    if(minutes < AppSettings.minTimeSlotDuration || minutes > AppSettings.maxTimeSlotDuration){
+      minutes = AppSettings.minTimeSlotDuration;
+    }
+    _timeSlotDuration = minutes;
+  }
+
+  @Override
+  void turnierKonf_setAnzTimeSlots(int anz) {
+    _anzTimeSlots = 1000;
+    if(anz > 0){
+      _anzTimeSlots = anz;
+    }
   }
 
 }

@@ -16,7 +16,7 @@ public class T_Pipeline_tests extends T_Pipeline_setup {
         //mit dem Mock-Webserver wird die RoleAdmin_TaskEinstellungen Seite aufgerufen 
         //und die User-Action für das aendern der Anzahl der Gruppen aufgefordert:
         
-        db.reset();
+        db.resetKonfiguration();
         ws.requestRole = StringsRole.Admin;
         ws.requestTask = StringsRole.AdminTasks.Einstellungen;
         ws.requestGroupID = -1;

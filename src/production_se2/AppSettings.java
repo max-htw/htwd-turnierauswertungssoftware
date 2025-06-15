@@ -73,4 +73,6 @@ public class AppSettings {
     public static final int minAnzGroups = 1;
     public static final int maxAnzSpielfelder = 4;
     public static final int minAnzSpielfelder = 1;
+    public static final int  minTimeSlotDuration = 15;
+    public static final int  maxTimeSlotDuration = 30;
 }
