@@ -1,62 +1,83 @@
 import static org.junit.Assert.*;
+import static org.junit.Assume.*;
+import org.junit.Before;
 import org.junit.Test;
+import java.util.List;
 
 public class T_Pipeline_Jonas {
 
-    // Beispiel-Test für turnierKonf_setAnzGruppen
-@Test
-public void testSetAnzGruppen_validValue() {
-    DBInterface_InMemory db = new DBInterface_InMemory();
-    boolean result = db.turnierKonf_setAnzGruppen(AppSettings.minAnzGroups);
-    assertTrue(result);
+    private DBInterfaceBase db;
+
+    @Before
+    public void setUp() {
+        // Wir testen über das Interface, aber mit der In-Memory-Implementierung
+        db = new DBInterface_InMemory();
+        db.reset();  // frischer Zustand vor jedem Test
+    }
+
+    // ----------------------
+    // Modultests (JUnit 4)
+    // ----------------------
+
+    @Test
+    public void testSetAnzGruppen_validValue() {
+        boolean result = db.turnierKonf_setAnzGruppen(AppSettings.minAnzGroups);
+        assertTrue("Mindestanzahl Gruppen sollte erlaubt sein", result);
+        assertEquals("Anzahl Gruppen sollte korrekt gesetzt sein",
+                     AppSettings.minAnzGroups,
+                     db.turnierKonf_getAnzGruppen());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetAnzGruppen_invalidValue() {
+        db.turnierKonf_setAnzGruppen(-1); // Ungültiger Wert, sollte Exception werfen
+    }
+
+    @Test
+    public void testSetAnzGruppen_maxValue() {
+        boolean result = db.turnierKonf_setAnzGruppen(AppSettings.maxAnzGroups);
+        assertTrue("Maximalanzahl Gruppen sollte erlaubt sein", result);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetAnzGruppen_aboveMaxValue() {
+        db.turnierKonf_setAnzGruppen(AppSettings.maxAnzGroups + 1);
+    }
+
+    
+    //Test T13 für Speichern und Laden eines Turniers
+
+    @Test
+    public void testSpeichernUndLaden_ÜberInterface() {
+        // 1) Turnier konfigurieren
+        db.turnierKonf_setAnzGruppen(3);
+        db.turnierKonf_setAnzTeamsByGroupID(0, 3);
+        db.turnierKonf_setNeedRueckspiele(true);
+
+        // 2) Speichern unter Name "MeinCup"
+        boolean saved = db.saveCurrentTurnierToArchive("MeinCup");
+        assertTrue("Speichern sollte true zurückgeben", saved);
+
+        // 3) Archivliste prüfen
+        List<String> archive = db.getTurnierArchiveNames();
+        assertNotNull("Archiv-Liste darf nicht null sein", archive);
+        assertTrue("Archiv muss 'MeinCup' enthalten", archive.contains("MeinCup"));
+
+        // 4) In neuen Zustand wechseln
+        db.reset();
+        assertNotEquals("Nach reset darf Gruppenanzahl nicht mehr 3 sein",
+                       3, db.turnierKonf_getAnzGruppen());
+
+        // 5) Turnier aus Archiv laden
+        db.loadTurnierFromArchive( archive.indexOf("MeinCup") );
+
+        // 6) Konfiguration nach Laden prüfen
+        assertEquals("Anzahl Gruppen muss nach Laden 3 sein",
+                     3, db.turnierKonf_getAnzGruppen());
+        assertEquals("Team-Anzahl Gruppe 0 muss 2 sein",
+                     2, db.turnierKonf_getAnzTeamsByGroupID(0));
+        assertTrue("Rückspiel-Flag muss true sein",
+                   db.turnierKonf_getNeedRueckspiele());
+    }
 }
 
-@Test(expected = IllegalArgumentException.class)
-public void testSetAnzGruppen_invalidValue() {
-    DBInterface_InMemory db = new DBInterface_InMemory();
-    db.turnierKonf_setAnzGruppen(-1); // Ungültiger Wert, sollte Exception werfen
-}
-
-@Test
-public void testSetAnzGruppen_minValue() {
-    DBInterface_InMemory db = new DBInterface_InMemory();
-    boolean result = db.turnierKonf_setAnzGruppen(AppSettings.minAnzGroups);
-    assertTrue(result); // Mindestanzahl sollte erlaubt sein
-}
-
-@Test
-public void testSetAnzGruppen_maxValue() {
-    DBInterface_InMemory db = new DBInterface_InMemory();
-    boolean result = db.turnierKonf_setAnzGruppen(AppSettings.maxAnzGroups);
-    assertTrue(result); // Maximalanzahl sollte erlaubt sein
-}
-
-@Test(expected = IllegalArgumentException.class)
-public void testSetAnzGruppen_aboveMaxValue() {
-    DBInterface_InMemory db = new DBInterface_InMemory();
-    db.turnierKonf_setAnzGruppen(AppSettings.maxAnzGroups + 1); // Über Maximalwert, sollte Exception werfen
-}
-// Bis hier hin Logik Tests
-
-/*  @Test
-    assertTrue(false);)
-    public void testTurnierSpeichernUndLaden() {
-        // Setup: Neues Turnier anlegen und konfigurieren
-        DBInterface db = new DBInterface_SQLite(); 
-        Turnier turnier = new Turnier("Integrationstest-Cup");
-        turnier.setGruppenAnzahl(4);
-        turnier.addTeam("Team A");
-        turnier.addTeam("Team B");
-        db.speichereTurnier(turnier);
-
-        // Aktion: Turnier laden
-        Turnier geladen = db.ladeTurnier("Integrationstest-Cup");
-
-        // Überprüfen, ob die geladenen Daten korrekt sind
-        assertNotNull(geladen);
-        assertEquals("Integrationstest-Cup", geladen.getName());
-        assertEquals(4, geladen.getGruppenAnzahl());
-        assertTrue(geladen.getTeams().contains("Team A"));
-        assertTrue(geladen.getTeams().contains("Team B"));
-    } */
-}
