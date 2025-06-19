@@ -13,17 +13,17 @@ Dieser Projektplan beschreibt die Struktur, Methodik und Zielsetzungen des Teams
 //Introduce the project team, team members, and roles that they play during this project. If applicable, introduce work areas, domains, or technical work packages that are assigned to team members. Introduce neighboring projects, relationships, and communication channels. If the project is introduced somewhere else, reference that location with a link.
 Das Projektteam für die Entwicklung der Turnierauswertungssoftware der STURA der HTW besteht aus engagierten Mitgliedern mit klar definierten Rollen, die ihre individuellen Stärken in das Projekt einbringen. Ziel des Projekts ist es, eine benutzerfreundliche und zuverlässige Software zu entwickeln, die die Erstellung von Spielplänen, die Erfassung von Ergebnissen und die Auswertung von Turnieren effizient unterstützt.
 
-Die Leitung des Projekts übernimmt Tim als Projektleiter. Seine Hauptaufgaben umfassen die Koordination des Teams, die Überwachung des Projektfortschritts sowie die Kommunikation mit den Stakeholdern.
+Die Leitung des Projekts übernimmt Max als Projektleiter. Seine Hauptaufgaben umfassen die Koordination des Teams, die Überwachung des Projektfortschritts sowie die Kommunikation mit den Stakeholdern.
 
-Der Bereich Analyse wird von Benedikt und Kareen verantwortet. Ihre Aufgabe ist es, die Anforderungen an die Software zu erheben, zu dokumentieren und mit den Bedürfnissen der STURA-Mitglieder abzugleichen.
+Der Bereich Analyse wird von Kareen verantwortet. Ihren Aufgabe ist es, die Anforderungen an die Software zu erheben, zu dokumentieren und mit den Bedürfnissen der STURA-Mitglieder abzugleichen.
 
-Der Bereich Entwurf liegt in den Händen von Julian, der die technische und funktionale Architektur der Software entwickelt.
+Der Bereich Entwurf liegt in den Händen von Alex, der die technische und funktionale Architektur der Software entwickelt.
 
-Die Entwicklung wird von Alex und Max umgesetzt. Sie programmieren die Kernfunktionen der Software, kümmern sich um die Integration der verschiedenen Module und sorgen dafür, dass die erstellten Prototypen einsatzbereit sind.
+Die Entwicklung wird von Alex, Max, und Radmir umgesetzt. Sie programmieren die Kernfunktionen der Software, kümmern sich um die Integration der verschiedenen Module und sorgen dafür, dass die erstellten Prototypen einsatzbereit sind.
 
 Im Bereich Test ist Jonas verantwortlich. Er stellt sicher, dass die entwickelte Software fehlerfrei funktioniert. Seine Aufgaben umfassen die Erstellung von Testplänen, die Durchführung umfangreicher Funktionstests sowie die Überprüfung, ob die Software die definierten Anforderungen erfüllt.
 
-Zusätzlich besteht eine enge Zusammenarbeit mit der STURA der HTW, insbesondere mit den Verantwortlichen der Sport-Abteilung. Die Kommunikation erfolgt über regelmäßige Meetings und einen gemeinsamen Austausch per Mail.
+Zusätzlich besteht eine enge Zusammenarbeit mit der STURA der HTW. Die Kommunikation erfolgt über regelmäßige Meetings und einen gemeinsamen Austausch per Mail.
 
 Intern kommuniziert das Projektteam über wöchentliche Meetings, die hauptsächlich zur Abstimmung und zur Klärung von Aufgaben dienen. Für die fortlaufende Zusammenarbeit nutzt das Team Tools wie GitHub für den schnellen Austausch sowie zur Aufgabenverfolgung. Visual Studio Code wurde genutzt, um Änderungen an den Dokumenten vorzunehmen und den Code für die Prototypen zu schreiben.
 
@@ -43,49 +43,16 @@ Im Rahmen des Projekts zur Entwicklung der Turnierauswertungssoftware für die S
 
 Die iterative Entwicklung bildet das zentrale Element des Projektansatzes. Das Team arbeitet in Iterationen von jeweils drei Wochen, in denen die Phasen Anforderungsanalyse, Entwurf, Implementierung und Test abgeschlossen werden. Jede Iteration beinhaltet eine Präsentation der Fortschritte, um Feedback von den Stakeholdern einzuholen. Damit wurde sichergestellt, dass das Projekt auf Kurs bleibt. Durch regelmäßige Retrospektiven wird der Entwicklungsprozess kontinuierlich verbessert, indem Stärken identifiziert und Schwächen adressiert werden.
 
-== Meilensteine und Ziele
-//Define and describe the high-level objectives for the iterations and define milestones. For example, use the following table to lay out the schedule. If needed you may group the iterations into phases and use a separate table for each phase
-
-[%header, cols="1,3a,2,1"]
-|===
-| Iteration
-| Primary objectives +
-(risks and use case scenarios)
-| Scheduled start or milestone
-| Target velocity
-
-| I1
-|
-* kennenlernen im Team
-* erste Bedarfsanalyse
-| 24.10.2024/ 11.11.2024
-|
-
-| I2
-|
-* Tiefgründige Bedarfsanalyse
-| 12.11.2024/ 29.11.2024
-|
-
-| I3
-| 
-* entwicklung erster Modelle
-* 1. Prototyp gestartet
-| 30.11.2024/ 20.12.2024
-|
-
-| I4
-|
-* Verfeinerung des 1. Prototyps
-* Anpassungen der bisherigen Ergebnisse durch neue Bedürfnisse
-| 21.12.2024/ 24.01.2025
-|
-|===
 
 
 == Deployment
 //Outline the strategy for deploying the software (and its updates) into the production environment.
-Die Software wird lokal auf einem Rechner des Stura per Docker eingerichtet und kann auch von dort au gestartet werden. Bei Turnieren soll in der Turnhalle ein mobiler Hotspot auf dem Rechner des Stura eröffnet werden, womit sich die Teilnehmenden dann verbinden können. Weitere Details zur Bereitstellung bzw. Übergabe der Software an den Stura werden gegen Ende des nächsten Semesters hinzugefügt.
+Die Software wird lokal auf einem Laptop des StuRa ausgeführt. Für den Einsatz bei Turnieren wird ein mobiler Hotspot eingerichtet, über den sich Teilnehmende vor Ort mit dem System verbinden können. Die Anwendung läuft im Browser, eine Internetverbindung ist nicht erforderlich.
+
+Eine einfache Startanleitung liegt in Form einer Benutzerdokumentation bei. Die Installation erfolgt ohne Docker und setzt lediglich eine lauffähige Java-Umgebung voraus.
+
+Die Übergabe der Software an den StuRa ist vorbereitet und kann bei Bedarf kurzfristig erfolgen. Zukünftige Wartung oder Weiterentwicklung kann durch studentische Projekte oder Mitglieder des StuRa übernommen werden.
+
 
 == Erkenntnisse (Lessons learned)
 //List lessons learned from the retrospective, with special emphasis on actions to be taken to improve, for example: the development environment, the process, or team collaboration.
