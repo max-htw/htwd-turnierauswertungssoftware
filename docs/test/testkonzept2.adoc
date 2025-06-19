@@ -25,7 +25,7 @@ Sicherstellung der korrekten Generierung von Spielplänen und Ergebnislisten (z.
 
 Der Testgegenstand ist die entwickelte Webanwendung mit folgenden Technologien:
 
-Backend: Java und SQLite
+Backend: Java und DB-InMemory
 
 Frontend: HTML und CSS
 
@@ -68,11 +68,13 @@ Ziel: Zusammenspiel von Komponenten und Datenbank-Anbindung prüfen.
 |===
 | Testfall-ID | Beschreibung                                            | Zielobjekt       | Automatisiert?
 
-| T13 | Speichern und Laden eines Turniers (SQLite)              | DB-SQLite         | Nein
-| T14 | Laden gespeicherter Turnierdaten                         | DB-SQLite          | Nein
-| T15 | Generierung der Gesamttabelle (Service + UI)             | SpielplanService   | Nein
-| T16 | PDF-Export des Spielplans                                | PDF-Export        | Nein
-| T17 | CSV-Export der Turnierdaten                              | CSV-Export       | Nein
+| T13 | Speichern und Laden eines Turniers (DB-InMemory)              | DB-InMemory         | Nein
+|T14 | Leere DB-Initialisierung nach reset() liefert Default-Werte | DB-InMemory (DBI)| Ja
+| T15 | Konfigurations-Methoden werfen bei Invalid-Werten Exception und übernehmen gültige Werte | DB-InMemory (DBI)| Ja
+| T16 | Laden gespeicherter Turnierdaten                         | DB-InMemory         | Nein
+| T17 | Generierung der Gesamttabelle (Service + UI)             | SpielplanService   | Nein
+| T18 | PDF-Export des Spielplans                                | PDF-Export        | Nein
+| T19 | CSV-Export der Turnierdaten                              | CSV-Export       | Nein
 |===
 
 === Systemtest (End-to-End)
@@ -95,9 +97,9 @@ Ziel: Endnutzer-Workflows im Browser gegen die vollständige Anwendung testen.
 
 == Testumgebung
 
-Unit-Integration: H2-InMemory-DB, JUnit 5. Frameworks wie Mockito für Mocking zur Unit-Test-Isolierung werden in Überlegung gezogen, sind jedoch bisher noch nicht implementiert.
+Unit-Integration: H2-InMemory-DB, JUnit 4. Frameworks wie Mockito für Mocking zur Unit-Test-Isolierung werden verwendet.
 
-Datenbank: H2-InMemory-DB & SQLite.
+Datenbank: H2-InMemory-DB.
 
 Netzwerk: Offline-Tests.
 
@@ -111,7 +113,7 @@ Integrationstests: Ausführung von Datenbank- und Service-Methoden-Tests.
 
 Systemtests: Manuelle End-to-End-Tests der definierten Workflows (Browser).
 
-Dokumentation: Ergebnisse in Testprotokollen (Asciidoc/Excel) und im Git-Repository ablegen.
+Dokumentation: Ergebnisse in Testprotokollen (Asciidoc) und im Git-Repository ablegen.
 
 == Abnahmekriterien
 
@@ -124,8 +126,4 @@ Systemtest-Workflows ohne kritische Fehler.
 == Dokumentation und Reporting
 
 Testfälle und -ergebnisse in Asciidoc pflegen.
-
-CI-Pipeline liefert automatisierte Reports (JUnit-XML).
-
-Fehler werden im Issue-Tracker (z. B. Jira) mit Verweis auf Testfall-IDs dokumentiert.
 
