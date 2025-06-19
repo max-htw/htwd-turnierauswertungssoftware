@@ -243,5 +243,7 @@ public abstract class DBInterfaceBase {
         }
   }
 
+  protected abstract void reset();
+
   
 }

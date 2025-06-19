@@ -311,4 +311,11 @@ public class DBInterface_SQLite extends DBInterfaceBase{
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'turnierKonf_setAnzTimeSlots'");
   }
+
+  @Override
+public void reset() {
+    // TODO: Hier die Logik zum Zurücksetzen der SQLite-Daten implementieren
+    // Zum Beispiel: Datenbanktabellen leeren oder auf Anfangszustand setzen
 }
+}
+
