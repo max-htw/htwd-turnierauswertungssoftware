@@ -749,4 +749,10 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     }
   }
 
+  @Override
+public void reset() {
+    // Setze alle relevanten Felder auf den Anfangszustand zurück
+    _initTurnier(); // oder deine eigene Reset-Logik
+}
+
 }

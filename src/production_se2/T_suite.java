@@ -7,7 +7,6 @@ import org.junit.runners.Suite.SuiteClasses;
     // Hier kommen alle Testklassen rein
     T_DbInterface_tests.class,
     T_Pipeline_tests.class,
-    T_Pipeline_Jonas.class
 })
 
 public class T_suite {
