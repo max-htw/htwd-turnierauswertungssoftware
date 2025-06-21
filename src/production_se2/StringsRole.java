@@ -4,7 +4,7 @@ public enum StringsRole {
     public  interface RoleTask{}
 
     enum AdminTasks implements RoleTask {
-        Einstellungen, Turnierplan, Matchdetails, Status, Ergebnisse, Historie,  Hallo
+        Einstellungen, Turnierplan, Matchdetails, Status, Ergebnisse, Historie, Home
     }
 
     enum TeamTasks implements RoleTask {

@@ -44,12 +44,18 @@ public class RequestVerteiler {
                 _requestController = new
                   RoleAdmin_TaskEinstellungen_Controller((RoleAdmin_TaskEinstellungen_Renderer) r, params, dbBackend);
               }
-            }else if(task == StringsRole.AdminTasks.Hallo){
-                _requestController = validateRendererType(RoleAdmin_TaskHallo_Renderer.class, r);
+            }else if(task == StringsRole.AdminTasks.Home){
+                _requestController = validateRendererType(RoleAdmin_TaskHome_Renderer.class, r);
                 if(_requestController == null)
                     _requestController = new
-                            RoleAdmin_TaskHallo_Controller((RoleAdmin_TaskHallo_Renderer)r, params, dbBackend);
-            }else if(task == StringsRole.AdminTasks.Ergebnisse){
+                            RoleAdmin_TaskHome_Controller((RoleAdmin_TaskHome_Renderer)r, params, dbBackend);
+            }else if(task == StringsRole.AdminTasks.Historie){
+                _requestController = validateRendererType(RoleAdmin_TaskHistorie_Renderer.class, r);
+                if(_requestController == null)
+                    _requestController = new
+                            RoleAdmin_TaskHistorie_Controller((RoleAdmin_TaskHistorie_Renderer)r, params, dbBackend);
+            }
+            else if(task == StringsRole.AdminTasks.Ergebnisse){
                 _requestController = validateRendererType(RoleAdmin_TaskErgebnisse_Renderer.class, r);
                 if(_requestController == null)
                     _requestController = new

@@ -36,23 +36,39 @@ public class RoleAdmin_TaskTurnierplan_Renderer extends RoleWithTaskBase_Rendere
       this.daten.planItems.add(new RoleTeam_TaskTurnierplan_Renderer.PlanItem("10:30", 2, "Team G", "Team H", "Schiri W", null, ""));*/
     
 
-      // Oben: Überschrift + Dropdown
-      r.append("<div class='flex flex-col md:flex-row justify-start items-center gap-4'>");
+      // Oben: Überschriften + Dropdowns
+      r.append("<div class='flex flex-col md:flex-row justify-start items-center gap-6'>");
+
+      // Feld-Auswahl
+      r.append("<div>");
       r.append("<h2 class='text-2xl font-semibold'>Auswahl des Feldes:</h2>");
-
-      r.append("<form method='get' action='#'>"); // Dummy-URL für Beispiel
-
+      r.append("<form method='get' action='#'>");
       r.append("<select onchange='this.form.submit()' ");
       r.append("class='px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500' ");
-      r.append("name='feld'>"); // Beispiel-Name
-
+      r.append("name='feld'>");
       r.append("<option value='alle'>Alle Felder</option>");
       r.append("<option value='feld1'>Feld 1</option>");
       r.append("<option value='feld2'>Feld 2</option>");
-
       r.append("</select>");
       r.append("</form>");
       r.append("</div>");
+
+      // Team-Auswahl
+      r.append("<div>");
+      r.append("<h2 class='text-2xl font-semibold'>Auswahl des Teams:</h2>");
+      r.append("<form method='get' action='#'>");
+      r.append("<select onchange='this.form.submit()' ");
+      r.append("class='px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500' ");
+      r.append("name='team'>");
+      r.append("<option value='alle'>Alle Teams</option>");
+      r.append("<option value='team1'>Team 1</option>");
+      r.append("<option value='team2'>Team 2</option>");
+      // Optional: Dynamisch aus Daten füllen, z.B. für(String t : daten.teamNames) { ... }
+      r.append("</select>");
+      r.append("</form>");
+      r.append("</div>");
+
+      r.append("</div>"); // Ende Flex-Container
 
       // Tabelle
       r.append("<div class='overflow-x-auto'>");

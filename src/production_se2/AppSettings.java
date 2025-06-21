@@ -20,8 +20,11 @@ public class AppSettings {
           else if(task == StringsRole.AdminTasks.Turnierplan){
               ausgabe = new RoleAdmin_TaskTurnierplan_Renderer();
           }
-          else if(task == StringsRole.AdminTasks.Hallo){
-              ausgabe = new RoleAdmin_TaskHallo_Renderer();
+          else if(task == StringsRole.AdminTasks.Home){
+              ausgabe = new RoleAdmin_TaskHome_Renderer();
+          }
+          else if(task == StringsRole.AdminTasks.Historie){
+              ausgabe = new RoleAdmin_TaskHistorie_Renderer();
           }
           else if(task == StringsRole.AdminTasks.Ergebnisse){
               ausgabe = new RoleAdmin_TaskErgebnisse_Renderer();

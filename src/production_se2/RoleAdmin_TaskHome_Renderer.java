@@ -1,7 +1,7 @@
-public class RoleAdmin_TaskHallo_Renderer extends RoleWithTaskBase_Renderer_Admin<RoleAdmin_TaskHallo_Data>{
+public class RoleAdmin_TaskHome_Renderer extends RoleWithTaskBase_Renderer_Admin<RoleAdmin_TaskHome_Data>{
     @Override
-    public RoleAdmin_TaskHallo_Data getEmptyDaten() {
-      RoleAdmin_TaskHallo_Data ausgabe = new RoleAdmin_TaskHallo_Data();
+    public RoleAdmin_TaskHome_Data getEmptyDaten() {
+      RoleAdmin_TaskHome_Data ausgabe = new RoleAdmin_TaskHome_Data();
       ausgabe.htmlTitel = "Startseite";
       return  ausgabe;
     }

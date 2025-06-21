@@ -87,9 +87,12 @@ public class WebserverInternal_ContextHandler implements HttpHandler, RoleWithTa
                     setTask(StringsRole.AdminTasks.Status);
                 } else if (sect1.equals(StringsRole.AdminTasks.Matchdetails.name().toLowerCase())) {
                     setTask(StringsRole.AdminTasks.Matchdetails);
-                } else if (sect1.equals(StringsRole.AdminTasks.Hallo.name().toLowerCase())) {
-                    setTask(StringsRole.AdminTasks.Hallo);
-                } else if (sect1.equals(StringsRole.AdminTasks.Ergebnisse.name().toLowerCase())) {
+                } else if (sect1.equals(StringsRole.AdminTasks.Home.name().toLowerCase())) {
+                    setTask(StringsRole.AdminTasks.Home);
+                } else if (sect1.equals(StringsRole.AdminTasks.Historie.name().toLowerCase())) {
+                    setTask(StringsRole.AdminTasks.Historie);
+                }
+                else if (sect1.equals(StringsRole.AdminTasks.Ergebnisse.name().toLowerCase())) {
                     setTask(StringsRole.AdminTasks.Ergebnisse);
                 }
             }

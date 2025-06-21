@@ -38,6 +38,10 @@ public class RoleAdmin_TaskEinstellungen_Renderer_Arbeitskopie extends RoleAdmin
   public StringBuilder renderHtmlResponse() {
     StringBuilder r = new StringBuilder();
 
+    String baseUrl = "http://localhost:8450"; // Dieser Wert sollte ggf. dynamisch gesetzt werden
+    String qrUrl = baseUrl + "/admin/home";
+
+
     // Hauptinhalt
     r.append("<div class=\"grid grid-cols-3 gap-6 py-6\">");
 
@@ -47,9 +51,10 @@ public class RoleAdmin_TaskEinstellungen_Renderer_Arbeitskopie extends RoleAdmin
     r.append("</div>");
 
     r.append("<div>");
-    r.append("<h2 class=\"text-xl text-secondary font-bold mb-2\">Generierung</h2>\n");
-    r.append("<form><button class=\"bg-transparent hover:bg-primary-light text-primary font-semibold hover:text-white hover:cursor-pointer py-1 px-2 border border-primary hover:border-transparent rounded-full\" type=\"submit\">Generieren!</button>\n</form>");
-    r.append("<img class=\"mt-5\" src=\"https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=Platzhalter\" alt=\"QR-Code\" class=\"w-36 h-36\" />");
+    r.append("<h2 class=\"text-xl text-secondary font-bold mb-2\">Teilen</h2>\n");
+    r.append("<img class=\"mt-5\" src=\"https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=")
+     .append(qrUrl)
+     .append("\" alt=\"QR-Code\" class=\"w-36 h-36\" />");
 
     r.append("</div>");
 
