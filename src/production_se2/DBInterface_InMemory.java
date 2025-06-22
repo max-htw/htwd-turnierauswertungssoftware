@@ -113,7 +113,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     //fillTurnierPlan();
   }
 
-  //das ist eine Platzhalterfunktion fuer die Turnierplanung. 
+  //das ist eine Platzhalterfunktion fuer die Turnierplanung.
   //Sie wurde verwendet befor der TurnierplanGenerator implementiert wurde.
   //ich lasse sie erstmal drin fuer den Fall, wenn TurnierplanGenerator weiterentwickelt wird
   //und temporaer nicht verfuegbar ist.
@@ -239,9 +239,9 @@ public class DBInterface_InMemory extends DBInterfaceBase{
         for(int i = 0; i<turnierKonf_getAnzGruppen(); i++){
             tgr.add(turnierKonf_getAnzTeamsByGroupID(i));
         }
-        List<TurnierplanGenerator.Spiel> tp = 
+        List<TurnierplanGenerator.Spiel> tp =
             TurnierplanGenerator.generierePlan(tgr, turnierKonf_getAnzTimeSlots(),
-                                                    turnierKonf_getAnzSpielfelder(), 
+                                                    turnierKonf_getAnzSpielfelder(),
                                                     turnierKonf_getNeedRueckspiele());
 
 
@@ -262,7 +262,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
                 }
             }
 
-            //jetzt der eigenliche Mapping. 
+            //jetzt der eigenliche Mapping.
             //im TurnierplanGenerator-Turnierplan sind die GruppenNr und TeamNr-in-der-Gruppe zusammen in dem TeamNr wie Folgt codiert:
             //jedes Team aus der Gruppe 0 bekommt den TeamNr = TeamNr-in-der-Gruppe
             //Teams aus den naechsten Gruppen bekommen fortlaufende Nummern.
@@ -286,7 +286,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
             }
 
             //vor der for-Schleife: s.getMatch().getTeamXnr() enthaelt die Fortlaufende TurnierplanGenerator-TeamNr
-            //nach der for-Schleife: s.getMatch().getTeamXnr() enthaelt die TeamNr-in-der-Gruppe und die GruppenNr 
+            //nach der for-Schleife: s.getMatch().getTeamXnr() enthaelt die TeamNr-in-der-Gruppe und die GruppenNr
             //                       ist in einer Variable gespeichert
             int firstNrOfThisGroup = 0;
             int dbgBakTeam1Nr = s.getMatch().getTeam1Nr();
@@ -481,7 +481,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     }
 
     //wenn Turnierkonfigurationen des letzten Turnierplans sich vom den aktuellen Turnierkonfigurationen unterscheiden,
-    //wird automatisch ein neuer Turnierplan berechnet. 
+    //wird automatisch ein neuer Turnierplan berechnet.
     if(!isTurnierPlanAktuell()){
       setupTurnierPlanFromGenerator();
     }
@@ -567,7 +567,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     return true;
   }
 
-  @Override 
+  @Override
   public ArrayList<AuswertungsEintrag> calculateAuswertung(int groupID){
         ArrayList<AuswertungsEintrag> ausgabe = new ArrayList<>();
         for(int i=0; i<turnierKonf_getAnzTeamsByGroupID(groupID);i++) {
@@ -750,9 +750,14 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   }
 
   @Override
-public void reset() {
-    // Setze alle relevanten Felder auf den Anfangszustand zurück
-    _initTurnier(); // oder deine eigene Reset-Logik
-}
+  public void reset() {
+      // Setze alle relevanten Felder auf den Anfangszustand zurück
+      _initTurnier(); // oder deine eigene Reset-Logik
+  }
+
+  @Override
+  public void updateMatch(DBInterfaceBase.TurnierMatch match) {
+      // InMemory-Implementierung: nichts tun oder Daten in einer Map aktualisieren
+  }
 
 }

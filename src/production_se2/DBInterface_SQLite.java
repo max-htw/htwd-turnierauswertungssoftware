@@ -313,9 +313,44 @@ public class DBInterface_SQLite extends DBInterfaceBase{
   }
 
   @Override
-public void reset() {
-    // TODO: Hier die Logik zum Zurücksetzen der SQLite-Daten implementieren
-    // Zum Beispiel: Datenbanktabellen leeren oder auf Anfangszustand setzen
-}
+  public void reset() {
+      // TODO: Hier die Logik zum Zurücksetzen der SQLite-Daten implementieren
+      // Zum Beispiel: Datenbanktabellen leeren oder auf Anfangszustand setzen
+  }
+
+  @Override
+  public void updateMatch(DBInterfaceBase.TurnierMatch match) {
+      Connection conn = connect(); // Используем твой метод connect()
+
+      if (conn == null) {
+          System.out.println("Keine Verbindung zur Datenbank möglich.");
+          return;
+      }
+
+      try {
+          String sql = "UPDATE turnier_match SET " +
+                      "team1PunkteHinspiel = ?, " +
+                      "team2PunkteHinspiel = ?, " +
+                      "team1PunkteRueckspiel = ?, " +
+                      "team2PunkteRueckspiel = ? " +
+                      "WHERE groupID = ? AND team1Nr = ? AND team2Nr = ?";
+
+          PreparedStatement pstmt = conn.prepareStatement(sql);
+          pstmt.setInt(1, match.getTeam1PunkteHinspiel());
+          pstmt.setInt(2, match.getTeam2PunkteHinspiel());
+          pstmt.setInt(3, match.getTeam1PunkteRueckspiel());
+          pstmt.setInt(4, match.getTeam2PunkteRueckspiel());
+          pstmt.setInt(5, match.getGroupID());
+          pstmt.setInt(6, match.getTeam1Nr());
+          pstmt.setInt(7, match.getTeam2Nr());
+
+          pstmt.executeUpdate();
+          pstmt.close();
+          conn.close();
+      } catch (SQLException e) {
+          System.out.println("Fehler beim Update des Matches: " + e.getMessage());
+      }
+  }
+
 }
 

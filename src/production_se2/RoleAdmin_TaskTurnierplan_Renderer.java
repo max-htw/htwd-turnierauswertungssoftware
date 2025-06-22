@@ -34,7 +34,7 @@ public class RoleAdmin_TaskTurnierplan_Renderer extends RoleWithTaskBase_Rendere
       this.daten.planItems.add(new RoleTeam_TaskTurnierplan_Renderer.PlanItem("10:00", 2, "Team C", "Team D", "Schiri Y", null, ""));
       this.daten.planItems.add(new RoleTeam_TaskTurnierplan_Renderer.PlanItem("10:30", 1, "Team E", "Team F", "Schiri Z", null, ""));
       this.daten.planItems.add(new RoleTeam_TaskTurnierplan_Renderer.PlanItem("10:30", 2, "Team G", "Team H", "Schiri W", null, ""));*/
-    
+
 
       // Oben: Überschriften + Dropdowns
       r.append("<div class='flex flex-col md:flex-row justify-start items-center gap-6'>");
@@ -89,22 +89,35 @@ public class RoleAdmin_TaskTurnierplan_Renderer extends RoleWithTaskBase_Rendere
       // Tabellenkörper
       r.append("<tbody>");
       for (RoleAdmin_TaskTurnierplan_Renderer.TimeSlotPlanItem item : this.daten.planItems) {
-          String zeitText = item.timeSlotString;
-          for(int i = 0; i < item.fieldLinks.size(); i++){
+        String zeitText = item.timeSlotString;
+        for (int i = 0; i < item.fieldLinks.size(); i++) {
             r.append("<tr class='hover:bg-gray-50'>");
+
             r.append("<td class='px-4 py-2 border'>").append(zeitText).append("</td>");
-            r.append("<td class='px-4 py-2 border'>").append(i+1).append("</td>");
+            r.append("<td class='px-4 py-2 border'>").append(i + 1).append("</td>");
             r.append("<td class='px-4 py-2 border'>").append(item.teamANames.get(i)).append("</td>");
             r.append("<td class='px-4 py-2 border'>").append(item.teamBNames.get(i)).append("</td>");
             r.append("<td class='px-4 py-2 border'>").append(item.schiriNames.get(i)).append("</td>");
+
             String lText = "";
-            if(item.ergebnisLinks.get(i) != null){
+            if (item.ergebnisLinks.get(i) != null) {
                 lText = item.ergebnisLinks.get(i).linkText;
             }
-            r.append("<td class='px-4 py-2 border'>").append(lText).append("</td>");
+
+            r.append("<td class='px-4 py-2 border'>");
+            r.append("<form method='post' action='?action=setScore' style='display:inline'>");
+            r.append("<input type='hidden' name='slot' value='").append(item.timeSlotNr).append("'/>");
+            r.append("<input type='hidden' name='feld' value='").append(i).append("'/>");
+            r.append("<input name='score' value='").append(lText).append("' ");
+            r.append("onblur='this.form.submit()' ");
+            r.append("onkeydown='if(event.key===\"Enter\"){this.form.submit();}' ");
+            r.append("class='text-center w-24 border rounded px-2 py-1'/>");
+            r.append("</form>");
+            r.append("</td>");
+
             r.append("</tr>");
             zeitText = "";
-          }
+        }
       }
       r.append("</tbody>");
 
@@ -119,7 +132,7 @@ public class RoleAdmin_TaskTurnierplan_Renderer extends RoleWithTaskBase_Rendere
     @Override
     public RoleAdmin_TaskTurnierplan_Data getEmptyDaten() {
         return new RoleAdmin_TaskTurnierplan_Data();
-    } 
+    }
 
     public  static  class TimeSlotPlanItem{
         public int timeSlotNr;
@@ -131,10 +144,10 @@ public class RoleAdmin_TaskTurnierplan_Renderer extends RoleWithTaskBase_Rendere
         public ArrayList<String> schiriNames = new ArrayList<>();
         public ArrayList<HyperLink> ergebnisLinks = new ArrayList<>();
 
-        TimeSlotPlanItem(int timeSlot, 
-                         String timeSlotText, 
-                         ArrayList<HyperLink> fieldLinks, 
-                         ArrayList<String> teamANames, 
+        TimeSlotPlanItem(int timeSlot,
+                         String timeSlotText,
+                         ArrayList<HyperLink> fieldLinks,
+                         ArrayList<String> teamANames,
                          ArrayList<String> teamBNames,
                          ArrayList<String> schiriNames,
                          ArrayList<HyperLink> ergebnisLinks){

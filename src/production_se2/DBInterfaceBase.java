@@ -188,7 +188,7 @@ public abstract class DBInterfaceBase {
   }
 
   public static class TurnierKonfiguration{
-    
+
     TurnierKonfiguration(){
       anzTeamsJedeGruppe = new ArrayList<>();
         anzahlSpielfelder = -1;
@@ -245,5 +245,6 @@ public abstract class DBInterfaceBase {
 
   protected abstract void reset();
 
-  
+  public abstract void updateMatch(TurnierMatch match);
+
 }

@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Map;
 
-public class RoleAdmin_TaskTurnierplan_Controller 
+public class RoleAdmin_TaskTurnierplan_Controller
     extends RoleWithTaskBase_Controller<RoleAdmin_TaskTurnierplan_Renderer>{
 
     RoleAdmin_TaskTurnierplan_Controller(RoleAdmin_TaskTurnierplan_Renderer renderer,
@@ -13,6 +13,54 @@ public class RoleAdmin_TaskTurnierplan_Controller
 
     @Override
     public void applyActions() {
+        // I tried to debug, because i have problems with the savings
+        String action = _params.get("action");
+        System.out.println("DEBUG: action = " + action);
+
+        if ("setScore".equals(action)) {
+            try {
+                String slotStr = _params.get("slot");
+                String feldStr = _params.get("feld");
+                String score = _params.get("score");
+
+                System.out.println("DEBUG: slot = " + slotStr + ", feld = " + feldStr + ", score = " + score);
+
+                if (score != null && !score.trim().isEmpty() && slotStr != null && feldStr != null) {
+                    int slot = Integer.parseInt(slotStr);
+                    int feld = Integer.parseInt(feldStr);
+
+                    String[] teile = score.split(" / ");
+                    if (teile.length == 2) {
+                        try {
+                            int punkteA = Integer.parseInt(teile[0].trim());
+                            int punkteB = Integer.parseInt(teile[1].trim());
+
+                            ArrayList<DBInterfaceBase.FeldSchedule> plan = _dbInterface.getTurnierPlan();
+                            DBInterfaceBase.SpielStats st = plan.get(feld).getSpiele().get(slot);
+                            DBInterfaceBase.TurnierMatch tm = _dbInterface.getMatch(st.groupid, st.team1, st.team2);
+
+                            if (st.isHinspiel) {
+                                tm.setTeam1PunkteHinspiel(punkteA);
+                                tm.setTeam2PunkteHinspiel(punkteB);
+                            } else {
+                                tm.setTeam1PunkteRueckspiel(punkteA);
+                                tm.setTeam2PunkteRueckspiel(punkteB);
+                            }
+
+                            _dbInterface.updateMatch(tm);
+                        } catch (Exception e) {
+                            System.out.println("Fehler beim Parsen oder Speichern (inner): " + e.getMessage());
+                        }
+                    } else {
+                        System.out.println("Fehler: Falsches Format beim Score: " + score);
+                    }
+                } else {
+                    System.out.println("Fehler: Ungültige Eingabewerte – einer der Werte ist null oder leer");
+                }
+            } catch (Exception e) {
+                System.out.println("Fehler beim Parsen oder Speichern (outer): " + e.getMessage());
+            }
+        }
         RoleAdmin_TaskTurnierplan_Data d = _renderer.daten;
         ArrayList<DBInterfaceBase.FeldSchedule> tp = _dbInterface.getTurnierPlan();
         int maxRows = 0;
@@ -20,7 +68,7 @@ public class RoleAdmin_TaskTurnierplan_Controller
             maxRows = tp.get(i).getSpiele().size() > maxRows? tp.get(i).getSpiele().size() : maxRows;
         }
         for(int i = 0; i < maxRows; i++){
-            
+
             ArrayList<RoleWithTaskBase_Renderer.HyperLink> fieldLinks = new ArrayList<>();
             ArrayList<String> teamANames = new ArrayList<>();
             ArrayList<String> teamBNames = new ArrayList<>();
@@ -32,15 +80,15 @@ public class RoleAdmin_TaskTurnierplan_Controller
                 if(tp.get(j).getSpiele().size() > i && tp.get(j).getSpiele().get(i) != null && tp.get(j).getSpiele().get(i).groupid>=0){
                     DBInterfaceBase.SpielStats st = tp.get(j).getSpiele().get(i);
                     DBInterfaceBase.TurnierMatch tm = _dbInterface.getMatch(st.groupid, st.team1, st.team2);
-                    RoleWithTaskBase_Renderer.ActionForRoleAndTask a = 
+                    RoleWithTaskBase_Renderer.ActionForRoleAndTask a =
                         new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Matchdetails, -1, -1);
                     a.parameters.put(StringsActions.refGroupID,"" + st.groupid);
                     a.parameters.put(StringsActions.refTeam1Nr,"" + st.team1);
                     a.parameters.put(StringsActions.refTeam2Nr,"" + st.team2);
 
-                    RoleWithTaskBase_Renderer.HyperLink fieldL = 
-                        new RoleWithTaskBase_Renderer.HyperLink("Gr." + (st.groupid+1) + ": " + 
-                            (char)('A' + st.team1) + " vs. " + (char)('A' + st.team2) + " | " + 
+                    RoleWithTaskBase_Renderer.HyperLink fieldL =
+                        new RoleWithTaskBase_Renderer.HyperLink("Gr." + (st.groupid+1) + ": " +
+                            (char)('A' + st.team1) + " vs. " + (char)('A' + st.team2) + " | " +
                             (char)('1' + (st.isHinspiel? tm.getHinspielRichterGroupID() : tm.getRueckspielRichterGroupID())) +
                             (char)('A' + (st.isHinspiel? tm.getHinspielRichterTeamID() : tm.getRueckspielRichterTeamID())), a, false);
                     fieldLinks.add(fieldL);
@@ -70,11 +118,11 @@ public class RoleAdmin_TaskTurnierplan_Controller
                     ergebnisLinks.add(null);
                 }
             }
-            RoleAdmin_TaskTurnierplan_Renderer.TimeSlotPlanItem p = 
+            RoleAdmin_TaskTurnierplan_Renderer.TimeSlotPlanItem p =
             new RoleAdmin_TaskTurnierplan_Renderer.TimeSlotPlanItem(i, timeText, fieldLinks,  teamANames, teamBNames, schiriNames, ergebnisLinks);
             d.planItems.add(p);
         }
-        
+
     }
 
     @Override
@@ -96,7 +144,7 @@ public class RoleAdmin_TaskTurnierplan_Controller
                 String shi = null;
                 RoleWithTaskBase_Renderer.HyperLink ergL = null;
                 if((j == 0) || (j == 1 && i < 8) || (j == 2 && i < 4)){
-                    RoleWithTaskBase_Renderer.ActionForRoleAndTask a = 
+                    RoleWithTaskBase_Renderer.ActionForRoleAndTask a =
                         new RoleWithTaskBase_Renderer.ActionForRoleAndTask(StringsRole.Admin, StringsRole.AdminTasks.Matchdetails, -1, -1);
                     a.parameters.put(StringsActions.matchID , "" + 333);
                     hl = new RoleWithTaskBase_Renderer.HyperLink("1A vs. 1B | 1C", a, true);
@@ -116,5 +164,5 @@ public class RoleAdmin_TaskTurnierplan_Controller
         }
 
     }
-    
+
 }
