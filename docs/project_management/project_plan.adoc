@@ -11,23 +11,23 @@ Dieser Projektplan beschreibt die Struktur, Methodik und Zielsetzungen des Teams
 
 == Projektorganisation
 //Introduce the project team, team members, and roles that they play during this project. If applicable, introduce work areas, domains, or technical work packages that are assigned to team members. Introduce neighboring projects, relationships, and communication channels. If the project is introduced somewhere else, reference that location with a link.
-Das Projektteam für die Entwicklung der Turnierauswertungssoftware der STURA der HTW besteht aus engagierten Mitgliedern mit klar definierten Rollen, die ihre individuellen Stärken in das Projekt einbringen. Ziel des Projekts ist es, eine benutzerfreundliche und zuverlässige Software zu entwickeln, die die Erstellung von Spielplänen, die Erfassung von Ergebnissen und die Auswertung von Turnieren effizient unterstützt.
+Das Projektteam für die Entwicklung der Turnierauswertungssoftware für den StuRa der HTW Dresden besteht aus engagierten Mitgliedern mit klar definierten Rollen, die ihre individuellen Stärken in das Projekt einbringen. Ziel des Projekts ist es, eine benutzerfreundliche und zuverlässige Software zu entwickeln, die die Erstellung von Spielplänen, die Erfassung von Ergebnissen und die Auswertung von Turnieren effizient unterstützt.
 
 Die Leitung des Projekts übernimmt Max als Projektleiter. Seine Hauptaufgaben umfassen die Koordination des Teams, die Überwachung des Projektfortschritts sowie die Kommunikation mit den Stakeholdern.
 
-Der Bereich Analyse wird von Kareen verantwortet. Ihren Aufgabe ist es, die Anforderungen an die Software zu erheben, zu dokumentieren und mit den Bedürfnissen der STURA-Mitglieder abzugleichen.
+Der Bereich Analyse wird von Kareen verantwortet. Ihren Aufgabe ist es, die Anforderungen an die Software zu erheben, zu dokumentieren und mit den Bedürfnissen der StuRa-Mitglieder abzugleichen.
 
 Der Bereich Entwurf liegt in den Händen von Alex, der die technische und funktionale Architektur der Software entwickelt.
 
-Die Entwicklung wird von Alex, Max, und Radmir umgesetzt. Sie programmieren die Kernfunktionen der Software, kümmern sich um die Integration der verschiedenen Module und sorgen dafür, dass die erstellten Prototypen einsatzbereit sind.
+Die Entwicklung wird von Alex, Max, und Radmir umgesetzt. Sie programmieren die Kernfunktionen der Software, kümmern sich um die Integration der verschiedenen Module und sorgen dafür, dass die erstellten Prototypen einsatzbereit sind. Dabei fokussiert sich Max speziell auf das Frontend, während Alex und Radmir die Backend-Entwicklung übernehmen. 
 
 Im Bereich Test ist Jonas verantwortlich. Er stellt sicher, dass die entwickelte Software fehlerfrei funktioniert. Seine Aufgaben umfassen die Erstellung von Testplänen, die Durchführung umfangreicher Funktionstests sowie die Überprüfung, ob die Software die definierten Anforderungen erfüllt.
 
-Zusätzlich besteht eine enge Zusammenarbeit mit der STURA der HTW. Die Kommunikation erfolgt über regelmäßige Meetings und einen gemeinsamen Austausch per Mail.
+Zusätzlich besteht eine enge Zusammenarbeit mit der StuRa der HTW. Die Kommunikation erfolgt über regelmäßige Meetings und einen gemeinsamen Austausch per Mail.
 
-Intern kommuniziert das Projektteam über wöchentliche Meetings, die hauptsächlich zur Abstimmung und zur Klärung von Aufgaben dienen. Für die fortlaufende Zusammenarbeit nutzt das Team Tools wie GitHub für den schnellen Austausch sowie zur Aufgabenverfolgung. Visual Studio Code wurde genutzt, um Änderungen an den Dokumenten vorzunehmen und den Code für die Prototypen zu schreiben.
+Intern kommuniziert das Projektteam über wöchentliche Meetings, die so oft wie möglich in Person an der HTW stattfinden. Diese werden hauptsächlich zur Abstimmung und zur Klärung von Aufgaben genutzt. Für die fortlaufende Zusammenarbeit nutzt das Team Tools wie GitHub zur Aufgabenverfolgung. Für den schnellen Austausch wurde eine WhatsApp-Gruppe eingerichtet. Visual Studio Code wird genutzt, um Änderungen an den Dokumenten vorzunehmen und den Source-Code zu schreiben.
 
-Durch diese klare Rollenverteilung und die effiziente Zusammenarbeit ist das Team optimal aufgestellt, um eine hochwertige und funktionale Turnierauswertungssoftware zu entwickeln, die den Anforderungen der STURA der HTW gerecht wird.
+Durch diese klare Rollenverteilung und die effiziente Zusammenarbeit ist das Team optimal aufgestellt, um eine hochwertige und funktionale Turnierauswertungssoftware zu entwickeln, die den Anforderungen des StuRa der HTW gerecht wird.
 
 Überarbeitung der Rollen für SE II:
 
@@ -35,29 +35,37 @@ Durch diese klare Rollenverteilung und die effiziente Zusammenarbeit ist das Tea
 * Analyse: Kareen
 * Entwurf: Alex
 * Test: Jonas
-* Entwicklung: Alex, Max
+* Entwicklung: Alex, Max, Radmir
 
 == Praktiken und Bewertung
 //Describe or reference which management and technical practices will be used in the project, such as iterative development, continuous integration, independent testing and list any changes or particular configuration to the project. Specify how you will track progress in each practice. As an example, for iterative development the team may decide to use iteration assessments and iteration burndown reports and collect metrics such as velocity (completed work item points/ iteration).
-Im Rahmen des Projekts zur Entwicklung der Turnierauswertungssoftware für die STURA der HTW werden verschiedene Management- und technische Praktiken eingesetzt, um eine strukturierte und qualitativ hochwertige Umsetzung sicherzustellen. Dazu gehört eine iterative Entwicklung.
+Im Rahmen des Projekts zur Entwicklung der Turnierauswertungssoftware für den StuRa der HTW werden verschiedene Management- und technische Praktiken eingesetzt, um eine strukturierte und qualitativ hochwertige Umsetzung sicherzustellen. Dazu gehört eine iterative Entwicklung.
 
-Die iterative Entwicklung bildet das zentrale Element des Projektansatzes. Das Team arbeitet in Iterationen von jeweils drei Wochen, in denen die Phasen Anforderungsanalyse, Entwurf, Implementierung und Test abgeschlossen werden. Jede Iteration beinhaltet eine Präsentation der Fortschritte, um Feedback von den Stakeholdern einzuholen. Damit wurde sichergestellt, dass das Projekt auf Kurs bleibt. Durch regelmäßige Retrospektiven wird der Entwicklungsprozess kontinuierlich verbessert, indem Stärken identifiziert und Schwächen adressiert werden.
+Die iterative Entwicklung bildet das zentrale Element des Projektansatzes. Das Team arbeitet in Iterationen von jeweils drei Wochen, in denen die Phasen Anforderungsanalyse, Entwurf, Implementierung und Test abgeschlossen werden. Jede Iteration beinhaltet eine Präsentation der Fortschritte, um intern oder extern Feedback einzuholen. Damit wird sichergestellt, dass das Projekt auf Kurs bleibt. Durch regelmäßige Retrospektiven wird der Entwicklungsprozess kontinuierlich verbessert, indem Stärken identifiziert und Schwächen adressiert werden.
 
 
 
 == Deployment
 //Outline the strategy for deploying the software (and its updates) into the production environment.
-Die Software wird lokal auf einem Laptop des StuRa ausgeführt. Für den Einsatz bei Turnieren wird ein mobiler Hotspot eingerichtet, über den sich Teilnehmende vor Ort mit dem System verbinden können. Die Anwendung läuft im Browser, eine Internetverbindung ist nicht erforderlich.
+Die Software wird lokal auf einem Laptop des StuRa ausgeführt. Für den Einsatz bei Turnieren wird ein mobiler Hotspot eingerichtet, über den sich Teilnehmende vor Ort mit dem System verbinden können. Die Anwendung läuft in allen aktuellen Webbrowsern.
 
-Eine einfache Startanleitung liegt in Form einer Benutzerdokumentation bei. Die Installation erfolgt ohne Docker und setzt lediglich eine lauffähige Java-Umgebung voraus.
+Eine einfache Startanleitung liegt in Form der Benutzerdokumentation bei. Die Installation erfolgt ohne Docker und setzt lediglich eine lauffähige Java-Umgebung voraus. Des Weiteren wird eine Anwenderdokumentation übergeben, die den Umgang mit der Software erklärt und Hilfestellungen bietet.
 
-Die Übergabe der Software an den StuRa ist vorbereitet und kann bei Bedarf kurzfristig erfolgen. Zukünftige Wartung oder Weiterentwicklung kann durch studentische Projekte oder Mitglieder des StuRa übernommen werden.
+Die Übergabe der Software an den StuRa ist vorbereitet und wird zeitnah erfolgen. Zukünftige Wartung oder Weiterentwicklung kann durch studentische Projekte oder Mitglieder des StuRa übernommen werden.
 
 
 == Erkenntnisse (Lessons learned)
 //List lessons learned from the retrospective, with special emphasis on actions to be taken to improve, for example: the development environment, the process, or team collaboration.
 * Die interne Absprache bei geteilten Aufgaben ist essenziell und darf unter keinen Umständen vernachlässigt werden.
 
-* Die präzise Vorbereitung der Meetings gestaltet diese deutlich effektiver
+* Die präzise Vorbereitung der Meetings gestaltet diese deutlich effektiver.
 
-* Die Kommunikation mit dem Auftraggeber ist der entscheidendste Faktor in der Bedarfsanalyse
+* Die Kommunikation mit dem Auftraggeber ist der entscheidendste Faktor in der Bedarfsanalyse.
+
+* Die Dokumentation der Software ist ein kontinuierlicher Prozess, der während der gesamten Entwicklung erfolgen muss.
+
+* Die Einschätzung vom Zeitaufwand gestaltet sich oft als schwierig und sollte daher eher konservativ angesetzt, regelmäßig überprüft und angepasst werden.
+
+* Ehrliche und offene Kommunikation im Team ist unerlässlich, um Missverständnisse zu vermeiden und die Zusammenarbeit effektiv voranzutreiben.
+
+* Projektausstiege oder Fehlen über längere Zeit sollten frühzeitig kommuniziert werden, um die Teamdynamik nicht zu gefährden und die Arbeit nahtlos fortsetzen zu können.
