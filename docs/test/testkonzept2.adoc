@@ -45,7 +45,7 @@ Ziel: Test einzelner Klassen/Methoden isoliert mit JUnit.
 
 [cols="1,4,3,2", options="header"]
 |===
-| Testfall-ID | Beschreibung                                                                                          | Zielobjekt       | Automatisiert?
+| Testfall-ID | Beschreibung                                                                                          | Testobjekt       | Automatisiert?
 
 | T1  | Dropdown "Anzahl Spielfelder" enthält alle zulässigen Werte und initialisiert korrekt               | KonfValidator       | Nein
 | T2  | Dropdown "Anzahl Leistungsgruppen" (1–3) erlaubt nur Werte 1 bis 3                                   | KonfValidator      | Nein
