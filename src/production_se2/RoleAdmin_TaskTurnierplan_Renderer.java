@@ -37,7 +37,7 @@ public class RoleAdmin_TaskTurnierplan_Renderer extends RoleWithTaskBase_Rendere
 
 
       // Oben: Überschriften + Dropdowns
-      r.append("<div class='flex flex-col md:flex-row justify-start items-center gap-6'>");
+      r.append("<div class='flex flex-col md:flex-row justify-start items-center md:gap-12'>");
 
       // Feld-Auswahl
       r.append("<div>");

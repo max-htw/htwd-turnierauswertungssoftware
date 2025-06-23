@@ -29,10 +29,10 @@ public class RoleAdmin_TaskHistorie_Renderer extends RoleWithTaskBase_Renderer_A
             // Buttons
             r.append("<div class='flex gap-2'>");
             r.append("<form method='post' action='").append(ladenUrl).append("'>");
-            r.append("<button type='submit' class='bg-transparent hover:bg-primary-light text-primary font-semibold hover:text-white hover:cursor-pointer py-1 px-2 border border-primary hover:border-transparent rounded-full'>Laden</button>");
+            r.append("<button type='submit' class='bg-transparent hover:bg-primary-light text-primary font-semibold hover:text-white hover:cursor-pointer py-1 px-2 border border-primary hover:border-transparent rounded-full my-2'>Laden</button>");
             r.append("</form>");
             r.append("<form method='post' action='").append(loeschenUrl).append("'>");
-            r.append("<button type='submit' class='bg-transparent hover:bg-primary-light text-primary font-semibold hover:text-white hover:cursor-pointer py-1 px-2 border border-primary hover:border-transparent rounded-full'>Löschen</button>");
+            r.append("<button type='submit' class='bg-transparent hover:bg-primary-light text-primary font-semibold hover:text-white hover:cursor-pointer py-1 px-2 border border-primary hover:border-transparent rounded-full my-2'>Löschen</button>");
             r.append("</form>");
             r.append("</div>");
             r.append("</div>");
