@@ -51,6 +51,12 @@ public class WebserverInternal_ContextHandler implements HttpHandler, RoleWithTa
         //Hier wird Response generiert:
         bs.write(v.getResponseHtmlBytes(this));
 
+        Headers headers = exchange.getResponseHeaders();
+        //damit im Browser-Cache nicht fuer unterscheidliche Querystrings
+        //extra eine Kopie der Seite gespeichert wird.
+        //aber das hat anscheinend keine wirkung (Stand 2025-06)
+        headers.add("No-Vary-Search", "params");
+
         exchange.sendResponseHeaders(200, bs.size());
         OutputStream os = exchange.getResponseBody();
         bs.writeTo(os);

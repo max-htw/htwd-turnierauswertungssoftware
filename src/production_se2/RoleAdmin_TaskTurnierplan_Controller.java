@@ -10,12 +10,13 @@ public class RoleAdmin_TaskTurnierplan_Controller
         super(renderer, params,StringsRole.Admin, StringsRole.AdminTasks.Turnierplan,dbBackend);
     }
 
+    private boolean _needDebug = false;
 
     @Override
     public void applyActions() {
         // I tried to debug, because i have problems with the savings
         String action = _params.get("action");
-        System.out.println("DEBUG: action = " + action);
+        if(_needDebug) System.out.println("DEBUG: action = " + action);
 
         if ("setScore".equals(action)) {
             try {
@@ -23,7 +24,7 @@ public class RoleAdmin_TaskTurnierplan_Controller
                 String feldStr = _params.get("feld");
                 String score = _params.get("score");
 
-                System.out.println("DEBUG: slot = " + slotStr + ", feld = " + feldStr + ", score = " + score);
+                if(_needDebug) System.out.println("DEBUG: slot = " + slotStr + ", feld = " + feldStr + ", score = " + score);
 
                 if (score != null && !score.trim().isEmpty() && slotStr != null && feldStr != null) {
                     int slot = Integer.parseInt(slotStr);

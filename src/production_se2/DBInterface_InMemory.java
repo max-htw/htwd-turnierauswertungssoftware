@@ -1,9 +1,24 @@
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Serializable;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class DBInterface_InMemory extends DBInterfaceBase{
 
@@ -50,7 +65,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
       }
       for(int i = 0; i<_anzGruppen; i++){
         if(_groupNames.size() < i+1) {
-          _groupNames.add("Gruppe" + i + "(ToDo: _initTurnier())");
+          _groupNames.add(defaultGroupName(i));
         }
         if(_anzTeamsProGruppe.size() < i+1){
           _anzTeamsProGruppe.add(AppSettings.minAnzTeams);
@@ -60,7 +75,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
         }
         if(_teamNames.get(i).size() < _anzTeamsProGruppe.get(i)){
           for(int j = _teamNames.get(i).size(); j < _anzTeamsProGruppe.get(i); j++){
-            _teamNames.get(i).add("Team" + (char)('A' + j) + "(ToDo: _initTurnier())");
+            _teamNames.get(i).add(defaultTeamName(i, j));
           }
         }
 
@@ -200,7 +215,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
               int gr = groupIdFromHash(h);
               int t1Id = team1FromHash(h);
               int t2Id = team2FromHash(h);
-              TurnierMatch m = getMatch(gr,t1Id,t2Id);
+              TurnierMatch m = _matches.get(TurnierMatch.calculateHashCode(gr,t1Id,t2Id));
               if(isHinspiel) {
                 m.setHinspielRichterGroupID(g);
                 m.setHinspielRichterTeamID(nr);
@@ -317,18 +332,28 @@ public class DBInterface_InMemory extends DBInterfaceBase{
                 throw new RuntimeException("Laut Programmlogik muessen team1GrNr und team2GrNr und getGroupID() gleich sein.");
             }
 
-            stats.feldID = s.getFeldNr();
             stats.groupid = team1GrNr;
             stats.isHinspiel = s.getIstHinspiel();
             stats.team1 = team1TeamNr;
             stats.team2 = team2TeamNr;
+
+            //in _matches jeder TurnierMatch hat Attribute fuer FeldNr und TimeslotNr
+            //diese Informationen sind zwar redundant, machen es aber bequem die FeldNr und TimeslotNr
+            //eines Matches abzufragen.
+            stats.feldID = s.getFeldNr();
+
+            TurnierMatch m = _matches.get(TurnierMatch.calculateHashCode(stats.groupid, stats.team1, stats.team2));
             if(stats.isHinspiel){
-                getMatch(stats.groupid, stats.team1, stats.team2).setHinspielRichterGroupID(richterHinspielGrNr);
-                getMatch(stats.groupid, stats.team1, stats.team2).setHinspielRichterTeamID(richterHinspielTeamNr);
+                m.setHinspielRichterGroupID(richterHinspielGrNr);
+                m.setHinspielRichterTeamID(richterHinspielTeamNr);
+                m.setHinspielFeldNr(s.getFeldNr());
+                m.setHinspielTimeSlot(s.getTimeSlotNr());
             }
             else if(turnierKonf_getNeedRueckspiele()){
-                getMatch(stats.groupid, stats.team1, stats.team2).setRueckspielRichterGroupID(richterRueckGrNr);
-                getMatch(stats.groupid, stats.team1, stats.team2).setRueckspielRichterTeamID(richterRueckTeamNr);
+                m.setRueckspielRichterGroupID(richterRueckGrNr);
+                m.setRueckspielRichterTeamID(richterRueckTeamNr);
+                m.setRueckspielFeldNr(s.getFeldNr());
+                m.setRueckspielTimeSlot(s.getTimeSlotNr());
             }
         }
         fillTurnierPlan(turnierPlan);
@@ -362,7 +387,11 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     if(_groupNames == null) {
       _groupNames = new ArrayList<>();
     }
-    return _groupNames;
+    ArrayList<String> a = new ArrayList<>();
+    for(String g: _groupNames){
+      a.add(g);
+    }
+    return a;
   }
 
   @Override
@@ -378,7 +407,11 @@ public class DBInterface_InMemory extends DBInterfaceBase{
       _teamNames.set(groupID, new ArrayList<String>());
     }
 
-    return _teamNames.get(groupID);
+    ArrayList<String> a = new ArrayList<>();
+    for(String t: _teamNames.get(groupID)){
+      a.add(t);
+    }
+    return a;
   }
 
   private static ArrayList<Integer> _anzTeamsProGruppe = new ArrayList<>();
@@ -423,7 +456,12 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     ArrayList<TurnierMatch> a = new ArrayList<>();
     for(int h : _matches.keySet()){
       if(groupIdFromHash(h) == groupID){
-        a.add(_matches.get(h));
+        try{
+          a.add((TurnierMatch)_matches.get(h).clone());
+        }
+        catch(CloneNotSupportedException e){
+
+        }
       }
     }
     return a;
@@ -436,7 +474,12 @@ public class DBInterface_InMemory extends DBInterfaceBase{
       _initializeMatches();
     }
     TurnierMatch m = new TurnierMatch(groupID, team1, team2);
-    return  _matches.get(m.hashCode());
+    try{
+      m = _matches.get(m.hashCode()).clone();
+    }
+    catch(CloneNotSupportedException e){}
+
+    return  m;
   }
 
   @Override
@@ -446,17 +489,144 @@ public class DBInterface_InMemory extends DBInterfaceBase{
 
   @Override
   boolean saveCurrentTurnierToArchive(String turnierName) {
-    return false;
+    boolean ausgabe = false;
+
+    TurnierArchiv ta = new TurnierArchiv(turnierName);
+    
+    for(int g = 0; g < turnierKonf_getAnzGruppen(); g++){
+      ta.teamsProGroup.add(turnierKonf_getAnzTeamsByGroupID(g));
+      ta.teamNames.add(turnierKonf_getTeamNamesByGroupID(g));
+    }
+    ta.groupNames = turnierKonf_getGroupNames();
+    ta.anzSpielfelder = turnierKonf_getAnzSpielfelder();
+    ta.needRueckspiele = turnierKonf_getNeedRueckspiele();
+    ta.turnierStartAsMinutes = turnierKonf_getTurnierStartAsMinutes();
+    ta.timeSlotDuration = turnierKonf_getTimeSlotDuration();
+    ta.turnierPlan = getTurnierPlan();
+    ta.matches = _matches;
+
+    File dir = new File("./" + AppSettings.archiveSubfolderName);
+    if(!dir.exists()){
+        boolean dirCreated = dir.mkdir();
+    }
+
+    String filePath = "./" + AppSettings.archiveSubfolderName + "/" + turnierName + ".json";
+    File f = new File(filePath);
+    if(f.exists()){
+      f.delete();
+    }
+
+    try(Writer writer = new FileWriter(filePath);){
+        
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        gson.toJson(ta, writer);
+
+        ausgabe = true;
+        writer.close();
+    }
+    catch(IOException e){
+      int dummy = 5;
+    }
+
+    return ausgabe;
   }
 
   @Override
   ArrayList<String> getTurnierArchiveNames() {
-    return new ArrayList<>();
+    ArrayList<String> a = new ArrayList<>();
+
+    File dir = new File("./" + AppSettings.archiveSubfolderName);
+    if(!dir.exists()){
+        boolean dirCreated = dir.mkdir();
+    }
+    
+    try (Stream<Path> stream = Files.list(Paths.get("./" + AppSettings.archiveSubfolderName))) {
+        for(String f: stream
+          .filter(file -> !Files.isDirectory(file))
+          .map(Path::getFileName)
+          .map(Path::toString)
+          .collect(Collectors.toSet())){
+            int dotIndex = f.lastIndexOf(".");
+            if (dotIndex >= 0) {
+                String ext = f.substring(dotIndex + 1);
+                if(ext.toLowerCase().equals("json")){
+                  a.add(f.substring(0, dotIndex));
+                };
+            }
+          }
+    }
+    catch(IOException e){
+      int dummy = 5;
+    }
+
+    
+
+    return a;
   }
 
   @Override
   void loadTurnierFromArchive(int pos) {
+    ArrayList<String> a = getTurnierArchiveNames();
+    if(a.size() > pos){
+      loadTurnierFromArchive(a.get(pos));
+    }
+    else{
+      throw new RuntimeException("DBInterface_InMemory.loadTurnierFromArchive(" + pos + "), but list size is " + a.size());
+    }
+  }
 
+  @Override
+  void loadTurnierFromArchive(String turnierName) {
+    File f = new File("./" + AppSettings.archiveSubfolderName + "/" + turnierName + ".json");
+    if(!f.exists()){
+      throw new RuntimeException("DBInterface_InMemory.loadTurnierFromArchive(" + turnierName + "): archive does not exist.");
+    }
+    
+    TurnierArchiv ta = new TurnierArchiv(turnierName);
+    Gson gson = new Gson();
+    try(Reader reader = new FileReader(f)){
+      ta = gson.fromJson(reader, TurnierArchiv.class);
+    }
+    catch(IOException e){
+      throw new RuntimeException("DBInterface_InMemory.loadTurnierFromArchive(" + turnierName + "): problem reading file.");
+    }
+
+    turnierKonf_setAnzGruppen(ta.teamsProGroup.size());
+
+    _anzTeamsProGruppe.clear();
+    _groupNames.clear();
+    _turnierPlanKonfig.anzTeamsJedeGruppe.clear();
+    for(int g = 0; g < ta.teamsProGroup.size(); g++){
+      int anz = ta.teamsProGroup.get(g);
+      _anzTeamsProGruppe.add(anz);
+      _turnierPlanKonfig.anzTeamsJedeGruppe.add(anz);
+
+      _groupNames.add(ta.groupNames.get(g));
+
+      //turnierKonf_setAnzTeamsByGroupID() aendert auch Gruppennamen.
+      //hier muss die logik noch ueberarbeitet werden.
+      //ich setze erstmal die Team-Namen wieder zurueck:
+      _teamNames.get(g).clear();
+
+      for(int t = 0; t < ta.teamNames.get(g).size(); t++){
+        _teamNames.get(g).add(ta.teamNames.get(g).get(t));
+      }
+    }
+    _anzSpielfelder = ta.anzSpielfelder;
+    _needRueckspiele = ta.needRueckspiele;
+    _turnierStartMinute = ta.turnierStartAsMinutes;
+    _timeSlotDuration = ta.timeSlotDuration;
+    
+    _matches = ta.matches;
+    _turnierPlan = ta.turnierPlan;
+    //toDo: wenn die json-Datei geaendert wurde, kann sie 
+    //Daten enthalten die mit der Turnierkonfiguration nicht uebereinstimmen.
+    //die uebernommene Daten muessen noch geprueft werden.
+
+    _turnierPlanKonfig.anzahlSpielfelder = ta.anzSpielfelder;
+    _turnierPlanKonfig.needRueckspiele = ta.needRueckspiele;
+
+    _initialized = true;
   }
 
   @Override
@@ -519,11 +689,11 @@ public class DBInterface_InMemory extends DBInterfaceBase{
       _anzTeamsProGruppe = new ArrayList<>();
       _teamNames = new ArrayList<>();
       for(int i = 0; i<_anzGruppen; i++){
-        _groupNames.add("Gruppe" + i + "(ToDo: setAnzGruppen())");
+        _groupNames.add(defaultGroupName(i));
         _anzTeamsProGruppe.add(AppSettings.minAnzTeams);
         _teamNames.add(new ArrayList<String>());
         for(int j = 0; j < AppSettings.minAnzTeams; j++){
-          _teamNames.get(i).add("Team" + (char)('A' + j) + "(ToDo: setAnzGruppen())");
+          _teamNames.get(i).add(defaultTeamName(i,j));
         }
       }
     _initialized = false;
@@ -539,7 +709,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     _anzTeamsProGruppe.set(groupID, anzTeams);
     _teamNames.set(groupID, new ArrayList<>());
     for(int j = 0; j < anzTeams; j++){
-      _teamNames.get(groupID).add("Team" + (char)('A' + j) + "(ToDo: _setAnzTeamsByGroupID())");
+      _teamNames.get(groupID).add(defaultTeamName(groupID ,j));
     }
     _initialized = false;
     return true;
@@ -644,6 +814,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     }
     _turnierPlanKonfig.anzahlSpielfelder = turnierKonf_getAnzSpielfelder();
     _turnierPlanKonfig.needRueckspiele = turnierKonf_getNeedRueckspiele();
+
   }
 
   @Override
@@ -681,7 +852,11 @@ public class DBInterface_InMemory extends DBInterfaceBase{
 
   @Override
   void match_setPunkteTeam1Hinspiel(int groupID, int team1id, int team2id, int team1Punkte) {
-    TurnierMatch m = getMatch(groupID, team1id, team2id);
+    if(!_initialized){
+      _initTurnier();
+      _initializeMatches();
+    }
+    TurnierMatch m = _matches.get(TurnierMatch.calculateHashCode(groupID, team1id, team2id));
     if(m != null){
       m.setTeam1PunkteHinspiel(team1Punkte);
     }
@@ -692,7 +867,11 @@ public class DBInterface_InMemory extends DBInterfaceBase{
 
   @Override
   void match_setPunkteTeam1Rueckspiel(int groupID, int team1id, int team2id, int team1Punkte) {
-    TurnierMatch m = getMatch(groupID, team1id, team2id);
+    if(!_initialized){
+      _initTurnier();
+      _initializeMatches();
+    }
+    TurnierMatch m = _matches.get(TurnierMatch.calculateHashCode(groupID, team1id, team2id));
     if(m != null){
       m.setTeam1PunkteRueckspiel(team1Punkte);
     }
@@ -703,7 +882,11 @@ public class DBInterface_InMemory extends DBInterfaceBase{
 
   @Override
   void match_setPunkteTeam2Hinspiel(int groupID, int team1id, int team2id, int team2Punkte) {
-    TurnierMatch m = getMatch(groupID, team1id, team2id);
+    if(!_initialized){
+      _initTurnier();
+      _initializeMatches();
+    }
+    TurnierMatch m = _matches.get(TurnierMatch.calculateHashCode(groupID, team1id, team2id));
     if(m != null){
       m.setTeam2PunkteHinspiel(team2Punkte);
     }
@@ -714,7 +897,11 @@ public class DBInterface_InMemory extends DBInterfaceBase{
 
   @Override
   void match_setPunkteTeam2Rueckspiel(int groupID, int team1id, int team2id, int team2Punkte) {
-    TurnierMatch m = getMatch(groupID, team1id, team2id);
+    if(!_initialized){
+      _initTurnier();
+      _initializeMatches();
+    }
+    TurnierMatch m = _matches.get(TurnierMatch.calculateHashCode(groupID, team1id, team2id));
     if(m != null){
       m.setTeam2PunkteRueckspiel(team2Punkte);
     }
@@ -752,7 +939,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   @Override
   public void reset() {
       // Setze alle relevanten Felder auf den Anfangszustand zurück
-      _initTurnier(); // oder deine eigene Reset-Logik
+      resetKonfiguration(); // oder deine eigene Reset-Logik
   }
 
   @Override
@@ -760,4 +947,34 @@ public class DBInterface_InMemory extends DBInterfaceBase{
       // InMemory-Implementierung: nichts tun oder Daten in einer Map aktualisieren
   }
 
+  private String defaultGroupName(int groupID){
+    return "Gruppe " + (groupID+1);
+  }
+
+  private String defaultTeamName (int groupID, int teamID){
+    return "Team " + (groupID+1) + (char)('A' + teamID);
+  }
+
+  public static class TurnierArchiv{
+
+        TurnierArchiv(){
+          this("leereName");
+        }
+
+        TurnierArchiv(String fileName){
+            this.fileName = fileName;
+        }
+
+        public String fileName = "";
+        public ArrayList<Integer> teamsProGroup = new ArrayList<>();
+        public ArrayList<String> groupNames = new ArrayList<>();
+        public ArrayList<ArrayList<String>> teamNames = new ArrayList<>();
+        public int anzSpielfelder = -1;
+        public boolean needRueckspiele = true;
+        public int turnierStartAsMinutes = -1;
+        public int timeSlotDuration = -1;
+        public HashMap<Integer, TurnierMatch> matches = new HashMap<>();
+        public ArrayList<FeldSchedule> turnierPlan = new ArrayList<>();
+
+  }
 }

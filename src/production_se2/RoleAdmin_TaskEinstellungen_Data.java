@@ -93,6 +93,7 @@ public class RoleAdmin_TaskEinstellungen_Data extends RoleWithTaskBase_Data{
         r.append(actionStringGenerator.generateActionString(n.linkAction));
         r.append("\">").append(n.linkText).append("</a><br>\n");
       }
+      r.append("<br><br>\n");
     return  r;
   }
 }

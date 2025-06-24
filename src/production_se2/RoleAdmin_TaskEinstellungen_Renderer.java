@@ -139,10 +139,30 @@ public class RoleAdmin_TaskEinstellungen_Renderer extends RoleWithTaskBase_Rende
 
     // Aktuelles Turnier speichern
     r.append("<br>Aktuelles Turnier speichern unter:<br>\n")
-      .append("<form action=\"").append(actionStringGenerator.generateActionString(daten.htmlFormAction)).append("\" >\n")
-      .append("<input type=\"text\" name=\"").append(daten.textBoxName.name().toLowerCase()).append("\" value=\"")
+      .append("<form id=\"saveForm\" action=\"").append(getHref(daten.htmlFormAction)).append("\" >\n")
+      .append("<input class=\"text-center border rounded px-2 py-1\" type=\"text\" name=\"").append(daten.textBoxName.name().toLowerCase()).append("\" value=\"")
       .append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"))).append("\">\n")
-      .append("<button class=\"bg-transparent hover:bg-primary-light text-primary font-semibold hover:text-white hover:cursor-pointer py-1 px-2 border border-primary hover:border-transparent rounded-full\" type=\"submit\">Speichern</button>\n</form>");
+      .append("<button class=\"bg-transparent hover:bg-primary-light text-primary font-semibold hover:text-white hover:cursor-pointer py-1 px-2 border border-primary hover:border-transparent rounded-full\" type=\"submit\">Speichern</button></form><br>\n");
+
+      if(daten.savedTurniereLinks.size() > 0){
+        r.append("Gespeicherte Turniere:<br>\n");
+        r.append("<form id=\"loadForm\" action=\"").append(getHref(daten.htmlFormAction)).append("\" >\n");
+        //r.append("<select onchange=\"document.getElementById('loadForm').submit();\" ");
+        r.append("<select ");
+        r.append("class=\"px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500\" ");
+        r.append("name=\"").append(StringsActions.loadArchiv.name().toLowerCase()).append("\">\n");
+
+        for(RoleWithTaskBase_Renderer.HyperLink l: daten.savedTurniereLinks){
+          String selected = "'>";
+          if(l.isActive){
+            selected = "' selected>";
+          }
+        r.append("<option value='").append(l.linkAction.parameters.get(StringsActions.loadArchiv)).append(selected).append(l.linkText).append("</option>\n");
+        }
+        r.append("</select>");
+        r.append("<button class=\"bg-transparent hover:bg-primary-light text-primary font-semibold hover:text-white hover:cursor-pointer py-1 px-2 border border-primary hover:border-transparent rounded-full\" type=\"submit\">Laden</button></form><br>\n");
+        r.append("</form>");
+      }
 
     return r;
   }

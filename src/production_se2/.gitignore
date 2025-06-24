@@ -5,6 +5,7 @@ classes/
 db/*.db
 frontend/
 out/
+turnierArchiv/*.json
 
 
 # Comment by AlZaj: folgende Regeln habe ich genommen von:

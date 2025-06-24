@@ -71,6 +71,10 @@ public class RoleAdmin_TaskEinstellungen_Controller extends RoleWithTaskBase_Con
           _renderer.daten.fehlermeldung += " Fehler bei saveCurrentTurnierToArchive().";
         }
     }
+    else if(existsParam(StringsActions.loadArchiv)){
+      String p = _params.get(StringsActions.loadArchiv.name().toLowerCase());
+      _dbInterface.loadTurnierFromArchive(p);
+    }
 
     //applyTestData(); //for debugging purposes
 
@@ -153,11 +157,11 @@ public class RoleAdmin_TaskEinstellungen_Controller extends RoleWithTaskBase_Con
             StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, -1, -1);
     d.textBoxName = StringsActions.saveTurnier;
 
-    for(int i = 0; i<_dbInterface.getTurnierArchiveNames().size(); i++){
+    for(String s: _dbInterface.getTurnierArchiveNames()){
       RoleWithTaskBase_Renderer.ActionForRoleAndTask a = new RoleWithTaskBase_Renderer.ActionForRoleAndTask(
-              StringsRole.Admin, StringsRole.AdminTasks.Status, -1, -1);
-      a.parameters.put(StringsActions.loadArchiv, "" + i);
-      d.savedTurniereLinks.add(new RoleWithTaskBase_Renderer.HyperLink(_dbInterface.getTurnierArchiveNames().get(i), a, true));
+              StringsRole.Admin, StringsRole.AdminTasks.Einstellungen, -1, -1);
+      a.parameters.put(StringsActions.loadArchiv, s);
+      d.savedTurniereLinks.add(new RoleWithTaskBase_Renderer.HyperLink(s, a, true));
     }
 
 

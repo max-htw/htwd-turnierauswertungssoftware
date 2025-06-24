@@ -12,7 +12,7 @@ public class T_DbInterface_tests extends T_DbInterface_setup {
 
   @Test
   public void db_resetKonfiguration(){
-    //assumeTrue(!(db instanceof DBInterface_In“Memory));
+    //assumeTrue(!(db instanceof DBInterface_InMemory));
     assumeTrue(!((db instanceof DBInterface_SQLite)));
 
     //einige zufaellige Konfigurationsaenderungen:
@@ -100,6 +100,7 @@ public class T_DbInterface_tests extends T_DbInterface_setup {
   }
 
   @Test
+  //der Test ist bei Radmir in toDo (stand 2025-06-03)  
   public void turnierConfig_TurnierPlan(){
     assumeTrue(!(db instanceof DBInterface_InMemory));
     assumeTrue(!((db instanceof DBInterface_SQLite)));
@@ -129,6 +130,25 @@ public class T_DbInterface_tests extends T_DbInterface_setup {
       }
     }
     assertEquals(24,anzMatches);
+  }
+
+  @Test
+  public void match_Update(){
+    //assumeTrue(!(db instanceof DBInterface_InMemory));
+    assumeTrue(!((db instanceof DBInterface_SQLite)));
+
+    db.resetKonfiguration();
+
+    db.match_setPunkteTeam1Hinspiel(0, 0, 1, 9);
+    db.match_setPunkteTeam2Hinspiel(0, 0, 1, 10);
+    db.match_setPunkteTeam1Rueckspiel(0, 0, 1, 11);
+    db.match_setPunkteTeam2Rueckspiel(0, 0, 1, 12);
+
+    DBInterfaceBase.TurnierMatch m = db.getMatch(0, 0, 1);
+    assertEquals(9, m.getTeam1PunkteHinspiel());
+    assertEquals(10, m.getTeam2PunkteHinspiel());
+    assertEquals(11, m.getTeam1PunkteRueckspiel());
+    assertEquals(12, m.getTeam2PunkteRueckspiel());
   }
 
 }

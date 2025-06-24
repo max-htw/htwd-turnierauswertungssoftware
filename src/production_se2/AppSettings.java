@@ -78,4 +78,6 @@ public class AppSettings {
     public static final int minAnzSpielfelder = 1;
     public static final int  minTimeSlotDuration = 15;
     public static final int  maxTimeSlotDuration = 30;
+
+    public static final String archiveSubfolderName = "turnierArchiv";
 }

@@ -26,6 +26,7 @@ public abstract class DBInterfaceBase {
 
   abstract ArrayList<String> getTurnierArchiveNames();
   abstract void loadTurnierFromArchive(int pos);
+  abstract void loadTurnierFromArchive(String turnierName);
 
   abstract ArrayList<SpielStats> getFeldSchedule(int feldNr);
   abstract SpielStats getSpielStatsByFeldUndTimeSlot(int feldNr, int idx);
@@ -78,7 +79,7 @@ public abstract class DBInterfaceBase {
 
   //Classen
 
-  public static class TurnierMatch{
+  public static class TurnierMatch implements Cloneable{
 
     public TurnierMatch(int group, int team1, int team2){
       groupID = group;
@@ -164,6 +165,10 @@ public abstract class DBInterfaceBase {
 
     @Override
     public int hashCode(){
+      return calculateHashCode(groupID, team1Nr, team2Nr);
+    }
+
+    public static int calculateHashCode(int groupID, int team1Nr, int team2Nr){
       return groupID*100000 + team1Nr*1000 + team2Nr;
     }
 
@@ -176,6 +181,30 @@ public abstract class DBInterfaceBase {
       //und bei den Rueckspielen: immer der groessere
       boolean ausgabe  = ((hash % 100000)/1000) < (hash%1000);;
       return  ausgabe;
+    }
+
+    public TurnierMatch clone() throws CloneNotSupportedException{
+      TurnierMatch m = (TurnierMatch)super.clone();
+
+      m.groupID = this.groupID;
+      m.team1Nr = this.team1Nr;
+      m.team1Name = this.team1Name;
+      m.team1PunkteHinspiel = this.team1PunkteHinspiel;
+      m.team1PunkteRueckspiel = this.team1PunkteRueckspiel;
+      m.team2Nr = this.team2Nr;
+      m.team2Name = this.team2Name;
+      m.team2PunkteHinspiel = this.team2PunkteHinspiel;
+      m.team2PunkteRueckspiel = this.team2PunkteRueckspiel;
+      m.hinspielRichterGroupID = this.hinspielRichterGroupID;
+      m.hinspielRichterTeamID = this.hinspielRichterTeamID;
+      m.rueckspielRichterGroupID = this.rueckspielRichterGroupID;
+      m.rueckspielRichterTeamID = this.rueckspielRichterTeamID;
+      //m.hinspielFeldNr = this.hinspielFeldNr;
+      //m.rueckspielFeldNr = this.rueckspielFeldNr;
+      //m.hinspielTimeSlot = this.hinspielTimeSlot;
+      //m.rueckspielTimeSlot = this.rueckspielTimeSlot;
+
+      return m;
     }
   }
 

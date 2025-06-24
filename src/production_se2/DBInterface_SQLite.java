@@ -178,6 +178,11 @@ public class DBInterface_SQLite extends DBInterfaceBase{
   }
 
   @Override
+  void loadTurnierFromArchive(String turnierName){
+    
+  }
+
+  @Override
   ArrayList<SpielStats> getFeldSchedule(int feldNr) {
     return null;
   }
