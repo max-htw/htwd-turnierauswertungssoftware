@@ -55,7 +55,7 @@ public class T_Pipeline_Jonas {
     public void testSpeichernUndLaden_ÜberInterface() {
         // 1) Turnier konfigurieren
         db.turnierKonf_setAnzGruppen(3);
-        db.turnierKonf_setAnzTeamsByGroupID(0, 3);
+        db.turnierKonf_setAnzTeamsByGroupID(0, 4);
         db.turnierKonf_setNeedRueckspiele(true);
 
         // 2) Speichern unter Name "MeinCup"
@@ -79,7 +79,7 @@ public class T_Pipeline_Jonas {
         assertEquals("Anzahl Gruppen muss nach Laden 3 sein",
                      3, db.turnierKonf_getAnzGruppen());
         assertEquals("Team-Anzahl Gruppe 0 muss 2 sein",
-                     2, db.turnierKonf_getAnzTeamsByGroupID(0));
+                     4, db.turnierKonf_getAnzTeamsByGroupID(0));
         assertTrue("Rückspiel-Flag muss true sein",
                    db.turnierKonf_getNeedRueckspiele());
     }
@@ -144,7 +144,8 @@ public class T_Pipeline_Jonas {
 
     // Reset und Laden aus Archiv
     db.reset();
-    db.loadTurnierFromArchive(0); // Annahme: 0 ist die Position von "TestArchiv"
+    //db.loadTurnierFromArchive(0); // Annahme: 0 ist die Position von "TestArchiv"
+    db.loadTurnierFromArchive("TestArchiv");
 
     // Ergebnis prüfen
    DBInterfaceBase.TurnierMatch match = db.getMatch(0, 0, 1);

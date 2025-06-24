@@ -228,7 +228,7 @@ public abstract class DBInterfaceBase {
       public boolean needRueckspiele;
   }
 
-  public  static  class FeldSchedule  {
+  public  static  class FeldSchedule implements Cloneable {
     public  final int feldNr;
 
     private ArrayList<SpielStats> spiele = new ArrayList<>();
@@ -243,6 +243,22 @@ public abstract class DBInterfaceBase {
 
     public ArrayList<SpielStats> getSpiele(){
       return spiele;
+    }
+
+    public FeldSchedule clone() throws CloneNotSupportedException{
+      FeldSchedule f = new FeldSchedule(this.feldNr);
+
+      for(SpielStats s : spiele){
+        SpielStats newS = new SpielStats();
+        newS.feldID = s.feldID;
+        newS.groupid = s.groupid;
+        newS.isHinspiel = s.isHinspiel;
+        newS.team1 = s.team1;
+        newS.team2 = s.team2;
+        f.spiele.add(newS);
+      }
+      
+      return f;
     }
   }
 

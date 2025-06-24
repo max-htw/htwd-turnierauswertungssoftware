@@ -645,9 +645,10 @@ public class DBInterface_InMemory extends DBInterfaceBase{
 
   @Override
   ArrayList<FeldSchedule> getTurnierPlan() {
-    if(_turnierPlan.isEmpty() || !_initialized){
+    if(!_initialized){ // _turnierPlan.isEmpty() || 
       _initTurnier();
       _initializeMatches();
+      _initialized = true;
     }
 
     //wenn Turnierkonfigurationen des letzten Turnierplans sich vom den aktuellen Turnierkonfigurationen unterscheiden,
@@ -655,10 +656,19 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     if(!isTurnierPlanAktuell()){
       setupTurnierPlanFromGenerator();
     }
-    return _turnierPlan;
+
+    ArrayList<FeldSchedule> tp = new ArrayList<>();
+    for(FeldSchedule fs : _turnierPlan){
+      try{
+        FeldSchedule c = fs.clone();
+        tp.add(c);
+      }
+      catch(CloneNotSupportedException e){}
+    }
+    return tp;
   }
 
-  private static int _anzTimeSlots = 1000;
+  private static int _anzTimeSlots = 30;
   @Override
   int turnierKonf_getAnzTimeSlots() {
     if(!_initialized) _initTurnier();
@@ -855,6 +865,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     if(!_initialized){
       _initTurnier();
       _initializeMatches();
+      _initialized = true;
     }
     TurnierMatch m = _matches.get(TurnierMatch.calculateHashCode(groupID, team1id, team2id));
     if(m != null){
@@ -870,6 +881,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     if(!_initialized){
       _initTurnier();
       _initializeMatches();
+      _initialized = true;
     }
     TurnierMatch m = _matches.get(TurnierMatch.calculateHashCode(groupID, team1id, team2id));
     if(m != null){
@@ -885,6 +897,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     if(!_initialized){
       _initTurnier();
       _initializeMatches();
+      _initialized = true;
     }
     TurnierMatch m = _matches.get(TurnierMatch.calculateHashCode(groupID, team1id, team2id));
     if(m != null){
@@ -900,6 +913,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     if(!_initialized){
       _initTurnier();
       _initializeMatches();
+      _initialized = true;
     }
     TurnierMatch m = _matches.get(TurnierMatch.calculateHashCode(groupID, team1id, team2id));
     if(m != null){
@@ -930,7 +944,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
 
   @Override
   void turnierKonf_setAnzTimeSlots(int anz) {
-    _anzTimeSlots = 1000;
+    _anzTimeSlots = 30;
     if(anz > 0){
       _anzTimeSlots = anz;
     }
