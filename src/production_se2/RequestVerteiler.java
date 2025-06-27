@@ -107,12 +107,12 @@ public class RequestVerteiler {
 
         _requestController.fillNavLinks();
 
-        if(DevSettings.useTestDataForRendering()){
-            _requestController.applyTestData();
-        }
-        else {
+        //if(DevSettings.useTestDataForRendering()){
+        //    _requestController.applyTestData();
+        //}
+        //else {
             _requestController.applyActions();
-        }
+        //}
     }
 
     public byte[] getResponseHtmlBytes(RoleWithTaskBase_Renderer.ActionStringGenerator actionStringGenerator){

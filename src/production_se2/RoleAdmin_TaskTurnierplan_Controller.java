@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Map;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 
 public class RoleAdmin_TaskTurnierplan_Controller
     extends RoleWithTaskBase_Controller<RoleAdmin_TaskTurnierplan_Renderer>{
@@ -15,6 +17,7 @@ public class RoleAdmin_TaskTurnierplan_Controller
     @Override
     public void applyActions() {
         // I tried to debug, because i have problems with the savings
+        System.out.println("PARAMS: " + _params);
         String action = _params.get("action");
         if(_needDebug) System.out.println("DEBUG: action = " + action);
 
@@ -22,44 +25,33 @@ public class RoleAdmin_TaskTurnierplan_Controller
             try {
                 String slotStr = _params.get("slot");
                 String feldStr = _params.get("feld");
-                String score = _params.get("score");
+                String scoreAStr = _params.get("scoreA");
+                String scoreBStr = _params.get("scoreB");
+                System.out.println("DEBUG: action=" + action + ", slotStr=" + slotStr + ", feldStr=" + feldStr + ", scoreA=" + scoreAStr + ", scoreB=" + scoreBStr);
 
-                if(_needDebug) System.out.println("DEBUG: slot = " + slotStr + ", feld = " + feldStr + ", score = " + score);
-
-                if (score != null && !score.trim().isEmpty() && slotStr != null && feldStr != null) {
+                if (scoreAStr != null && scoreBStr != null && !scoreAStr.trim().isEmpty() && !scoreBStr.trim().isEmpty() && slotStr != null && feldStr != null) {
                     int slot = Integer.parseInt(slotStr);
                     int feld = Integer.parseInt(feldStr);
+                    int punkteA = Integer.parseInt(scoreAStr.trim());
+                    int punkteB = Integer.parseInt(scoreBStr.trim());
 
-                    String[] teile = score.split(" / ");
-                    if (teile.length == 2) {
-                        try {
-                            int punkteA = Integer.parseInt(teile[0].trim());
-                            int punkteB = Integer.parseInt(teile[1].trim());
+                    ArrayList<DBInterfaceBase.FeldSchedule> plan = _dbInterface.getTurnierPlan();
+                    DBInterfaceBase.SpielStats st = plan.get(feld).getSpiele().get(slot);
+                    DBInterfaceBase.TurnierMatch tm = _dbInterface.getMatch(st.groupid, st.team1, st.team2);
 
-                            ArrayList<DBInterfaceBase.FeldSchedule> plan = _dbInterface.getTurnierPlan();
-                            DBInterfaceBase.SpielStats st = plan.get(feld).getSpiele().get(slot);
-                            DBInterfaceBase.TurnierMatch tm = _dbInterface.getMatch(st.groupid, st.team1, st.team2);
-
-                            if (st.isHinspiel) {
-                                tm.setTeam1PunkteHinspiel(punkteA);
-                                tm.setTeam2PunkteHinspiel(punkteB);
-                            } else {
-                                tm.setTeam1PunkteRueckspiel(punkteA);
-                                tm.setTeam2PunkteRueckspiel(punkteB);
-                            }
-
-                            _dbInterface.updateMatch(tm);
-                        } catch (Exception e) {
-                            System.out.println("Fehler beim Parsen oder Speichern (inner): " + e.getMessage());
-                        }
+                    if (st.isHinspiel) {
+                        tm.setTeam1PunkteHinspiel(punkteA);
+                        tm.setTeam2PunkteHinspiel(punkteB);
                     } else {
-                        System.out.println("Fehler: Falsches Format beim Score: " + score);
+                        tm.setTeam1PunkteRueckspiel(punkteA);
+                        tm.setTeam2PunkteRueckspiel(punkteB);
                     }
+                    _dbInterface.updateMatch(tm);
                 } else {
-                    System.out.println("Fehler: Ungültige Eingabewerte – einer der Werte ist null oder leer");
+                    System.out.println("Fehler: Ungültige Eingabewerte – einer из значений пустое");
                 }
             } catch (Exception e) {
-                System.out.println("Fehler beim Parsen oder Speichern (outer): " + e.getMessage());
+                System.out.println("Fehler beim Parsen или Speichern: " + e.getMessage());
             }
         }
         RoleAdmin_TaskTurnierplan_Data d = _renderer.daten;
@@ -108,7 +100,8 @@ public class RoleAdmin_TaskTurnierplan_Controller
                     String teamBpktStr = teamBpunkte>=0?(String.format("%02d",teamBpunkte)) : "--";
 
                     RoleWithTaskBase_Renderer.HyperLink ergebnL;
-                    ergebnL = new RoleWithTaskBase_Renderer.HyperLink(teamApktStr + " / " + teamBpktStr  , a, false);
+                    //ergebnL = new RoleWithTaskBase_Renderer.HyperLink(teamApktStr + " / " + teamBpktStr  , a, false);
+                    ergebnL = new RoleWithTaskBase_Renderer.HyperLink(teamApktStr + ":" + teamBpktStr  , a, false);
                     ergebnisLinks.add(ergebnL);
                 }
                 else{

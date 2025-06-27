@@ -18,7 +18,7 @@ public class RoleAdmin_TaskErgebnisse_Renderer extends RoleWithTaskBase_Renderer
     r.append("<h2 class='text-2xl font-semibold'>Auswahl der Gruppe:</h2>");
 
     r.append("\n<form method='get' action=\"").append(getHref(daten.htmlFormAction)).append("\">\n");
-    
+
     r.append("<select onchange=\"this.form.submit()\" ");
     r.append("class=\"px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500\" ");
     r.append("name=\"").append(daten.selectBoxName.name().toLowerCase()).append("\">\n");
@@ -59,10 +59,37 @@ public class RoleAdmin_TaskErgebnisse_Renderer extends RoleWithTaskBase_Renderer
             RoleAdmin_TaskErgebnisse_Renderer.ErgebnisItem e = daten.ergebnisse.get(i);
             r.append("<tr class='hover:bg-gray-50'><td class='px-4 py-2 border'>").append(i+1).
             append(".</td><td class='px-4 py-2 border'>").append(e.teamName).
-            append("</td><td class='px-4 py-2 border'>").append(e.gewonneneSpiele).
-            append("</td><td class='px-4 py-2 border'>").append(e.gespielteSpiele).
-            append("</td><td class='px-4 py-2 border'>").append(String.format("%+d", e.punkteDifferenz)).
-            append("</td></tr>\n");
+            append("</td>");
+
+            // Editable Felder für die Ergebnisse:
+            r.append("<td class='px-4 py-2 border'>")
+             .append("<form method='post' style='display:inline;margin:0;' id='form_").append(i).append("'>")
+             .append("<input type='hidden' name='editResult' value='1'>")
+             .append("<input type='hidden' name='groupID' value='").append(e.groupID).append("'>")
+             .append("<input type='hidden' name='teamID' value='").append(e.teamID).append("'>")
+             .append("<input type='number' name='gewonnen' value='").append(e.gewonneneSpiele).append("' style='width:50px;' ")
+             .append("onblur='this.form.submit()' onkeydown=\"if(event.key==='Enter'){this.form.submit();return false;}\" >")
+             .append("</form></td>");
+
+            r.append("<td class='px-4 py-2 border'>")
+             .append("<form method='post' style='display:inline;margin:0;' id='form_g").append(i).append("'>")
+             .append("<input type='hidden' name='editResult' value='1'>")
+             .append("<input type='hidden' name='groupID' value='").append(e.groupID).append("'>")
+             .append("<input type='hidden' name='teamID' value='").append(e.teamID).append("'>")
+             .append("<input type='number' name='gespielt' value='").append(e.gespielteSpiele).append("' style='width:50px;' ")
+             .append("onblur='this.form.submit()' onkeydown=\"if(event.key==='Enter'){this.form.submit();return false;}\" >")
+             .append("</form></td>");
+
+            r.append("<td class='px-4 py-2 border'>")
+             .append("<form method='post' style='display:inline;margin:0;' id='form_d").append(i).append("'>")
+             .append("<input type='hidden' name='editResult' value='1'>")
+             .append("<input type='hidden' name='groupID' value='").append(e.groupID).append("'>")
+             .append("<input type='hidden' name='teamID' value='").append(e.teamID).append("'>")
+             .append("<input type='number' name='differenz' value='").append(e.punkteDifferenz).append("' style='width:50px;' ")
+             .append("onblur='this.form.submit()' onkeydown=\"if(event.key==='Enter'){this.form.submit();return false;}\" >")
+             .append("</form></td>");
+
+            r.append("</tr>\n");
         }
 
     r.append("</tbody>");
@@ -85,7 +112,7 @@ public class RoleAdmin_TaskErgebnisse_Renderer extends RoleWithTaskBase_Renderer
   public  static  class ErgebnisItem{
       int groupID;
       int teamID;
-      
+
       String teamName;
       int gewonneneSpiele;
       int gespielteSpiele;

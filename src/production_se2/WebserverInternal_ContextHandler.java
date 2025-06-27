@@ -42,7 +42,29 @@ public class WebserverInternal_ContextHandler implements HttpHandler, RoleWithTa
         setTeamNr(0);
 
         extractRole_Task_GroupNr_TeamNr_FromUrl(exchange.getRequestURI().getPath());
+
+
+
+        // Bekommen Parametern aus GET
         Map<String, String> qs = MyHelpers.queryToMap(exchange.getRequestURI().getQuery());
+
+        // Wenn POST — stellen parametern aus Request-Body
+        if ("post".equalsIgnoreCase(exchange.getRequestMethod())) {
+            InputStreamReader isr = new InputStreamReader(exchange.getRequestBody(), "utf-8");
+            BufferedReader br = new BufferedReader(isr);
+            StringBuilder buf = new StringBuilder();
+            int b;
+            while ((b = br.read()) != -1) {
+                buf.append((char) b);
+            }
+            String postData = buf.toString();
+            Map<String, String> postParams = MyHelpers.queryToMap(postData);
+            qs.putAll(postParams); // vereinigen GET und POST parametern
+        }
+
+
+
+
         RequestVerteiler v = new RequestVerteiler(getRole(),
                 getTask(), getGroupNr(), getTeamNr(), qs);
 
