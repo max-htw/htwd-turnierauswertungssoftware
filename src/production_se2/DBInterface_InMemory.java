@@ -492,7 +492,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     boolean ausgabe = false;
 
     TurnierArchiv ta = new TurnierArchiv(turnierName);
-    
+
     for(int g = 0; g < turnierKonf_getAnzGruppen(); g++){
       ta.teamsProGroup.add(turnierKonf_getAnzTeamsByGroupID(g));
       ta.teamNames.add(turnierKonf_getTeamNamesByGroupID(g));
@@ -517,7 +517,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     }
 
     try(Writer writer = new FileWriter(filePath);){
-        
+
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         gson.toJson(ta, writer);
 
@@ -539,7 +539,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     if(!dir.exists()){
         boolean dirCreated = dir.mkdir();
     }
-    
+
     try (Stream<Path> stream = Files.list(Paths.get("./" + AppSettings.archiveSubfolderName))) {
         for(String f: stream
           .filter(file -> !Files.isDirectory(file))
@@ -559,7 +559,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
       int dummy = 5;
     }
 
-    
+
 
     return a;
   }
@@ -581,7 +581,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     if(!f.exists()){
       throw new RuntimeException("DBInterface_InMemory.loadTurnierFromArchive(" + turnierName + "): archive does not exist.");
     }
-    
+
     TurnierArchiv ta = new TurnierArchiv(turnierName);
     Gson gson = new Gson();
     try(Reader reader = new FileReader(f)){
@@ -616,10 +616,10 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     _needRueckspiele = ta.needRueckspiele;
     _turnierStartMinute = ta.turnierStartAsMinutes;
     _timeSlotDuration = ta.timeSlotDuration;
-    
+
     _matches = ta.matches;
     _turnierPlan = ta.turnierPlan;
-    //toDo: wenn die json-Datei geaendert wurde, kann sie 
+    //toDo: wenn die json-Datei geaendert wurde, kann sie
     //Daten enthalten die mit der Turnierkonfiguration nicht uebereinstimmen.
     //die uebernommene Daten muessen noch geprueft werden.
 
@@ -645,7 +645,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
 
   @Override
   ArrayList<FeldSchedule> getTurnierPlan() {
-    if(!_initialized){ // _turnierPlan.isEmpty() || 
+    if(!_initialized){ // _turnierPlan.isEmpty() ||
       _initTurnier();
       _initializeMatches();
       _initialized = true;
@@ -959,6 +959,8 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   @Override
   public void updateMatch(DBInterfaceBase.TurnierMatch match) {
       // InMemory-Implementierung: nichts tun oder Daten in einer Map aktualisieren
+      _matches.put(match.hashCode(), match);
+      System.out.println("Match updated: " + match);
   }
 
   private String defaultGroupName(int groupID){

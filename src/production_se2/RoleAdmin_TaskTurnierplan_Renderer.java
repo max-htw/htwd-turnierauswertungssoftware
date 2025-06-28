@@ -104,14 +104,26 @@ public class RoleAdmin_TaskTurnierplan_Renderer extends RoleWithTaskBase_Rendere
                 lText = item.ergebnisLinks.get(i).linkText;
             }
 
+            // Bekommen Werte für Teams(z. Bsp., aus lText oder aus anderen Variablen)
+            String punkteA = "";
+            String punkteB = "";
+            if (item.ergebnisLinks.get(i) != null) {
+                String[] teile = item.ergebnisLinks.get(i).linkText.split(":");
+                if (teile.length == 2) {
+                    punkteA = teile[0].trim();
+                    punkteB = teile[1].trim();
+                }
+            }
+
             r.append("<td class='px-4 py-2 border'>");
             r.append("<form method='post' action='?action=setScore' style='display:inline'>");
             r.append("<input type='hidden' name='slot' value='").append(item.timeSlotNr).append("'/>");
             r.append("<input type='hidden' name='feld' value='").append(i).append("'/>");
-            r.append("<input name='score' value='").append(lText).append("' ");
-            r.append("onblur='this.form.submit()' ");
-            r.append("onkeydown='if(event.key===\"Enter\"){this.form.submit();}' ");
-            r.append("class='text-center w-24 border rounded px-2 py-1'/>");
+            r.append("<input type='number' name='scoreA' value='").append(punkteA).append("' style='width:40px;text-align:center;' ");
+            r.append("onblur='this.form.submit()' onkeydown='if(event.key===\"Enter\"){this.form.submit();}' />");
+            r.append(" : ");
+            r.append("<input type='number' name='scoreB' value='").append(punkteB).append("' style='width:40px;text-align:center;' ");
+            r.append("onblur='this.form.submit()' onkeydown='if(event.key===\"Enter\"){this.form.submit();}' />");
             r.append("</form>");
             r.append("</td>");
 
