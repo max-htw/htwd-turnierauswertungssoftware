@@ -36,8 +36,13 @@ public class WebserverInternal_ContextHandler implements HttpHandler, RoleWithTa
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         //Attribute zuruecksetzen, da sonst sie erhalten ihre Werte zwischen den Requests
-        setRole(StringsRole.Stranger);
-        setTask(StringsRole.KeineRoleTasks.SelectRole);
+
+        ////Default Role und Task
+        //setRole(StringsRole.Stranger);
+        //setTask(StringsRole.KeineRoleTasks.SelectRole);
+        setRole(StringsRole.Admin);
+        setTask(StringsRole.AdminTasks.Home);
+
         setGroupNr(0);
         setTeamNr(0);
 
