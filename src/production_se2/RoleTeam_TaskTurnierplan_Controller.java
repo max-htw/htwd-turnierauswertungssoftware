@@ -39,13 +39,15 @@ public class RoleTeam_TaskTurnierplan_Controller
         String punkteTeam1 = m.getTeam1PunkteHinspiel() > 0 ? Integer.toString(m.getTeam1PunkteHinspiel()) : "--";
         String punkteTeam2 = m.getTeam2PunkteHinspiel() > 0 ? Integer.toString(m.getTeam2PunkteHinspiel()) : "--";
 
+        int richterID = m.getHinspielRichterTeamID();
+        String richterName = (richterID >= 0 && richterID < teamNames.size()) ? teamNames.get(richterID) : "";
         d.planItems.add(
           new RoleTeam_TaskTurnierplan_Renderer.PlanItem
             (_dbInterface.getTimeSlotString(m.getHinspielTimeSlot()),
               m.getHinspielFeldNr(),
               teamNames.get(m.getTeam1Nr()),
               teamNames.get(m.getTeam2Nr()),
-              teamNames.get(m.getHinspielRichterTeamID()),
+              richterName,
               actionHinspiel,
               punkteTeam1 + "/" + punkteTeam2));
 
@@ -62,13 +64,15 @@ public class RoleTeam_TaskTurnierplan_Controller
         punkteTeam1 = m.getTeam1PunkteRueckspiel() > 0 ? Integer.toString(m.getTeam1PunkteRueckspiel()) : "--";
         punkteTeam2 = m.getTeam2PunkteRueckspiel() > 0 ? Integer.toString(m.getTeam2PunkteRueckspiel()) : "--";
 
+        richterID = m.getRueckspielRichterTeamID();
+        richterName = (richterID >= 0 && richterID < teamNames.size()) ? teamNames.get(richterID) : "";
         d.planItems.add(
           new RoleTeam_TaskTurnierplan_Renderer.PlanItem
             (_dbInterface.getTimeSlotString(m.getRueckspielTimeSlot()),
               m.getRueckspielFeldNr(),
               teamNames.get(m.getTeam1Nr()),
               teamNames.get(m.getTeam2Nr()),
-              teamNames.get(m.getRueckspielRichterTeamID()),
+              richterName,
               actionRueckspiel,
               punkteTeam1 + "/" + punkteTeam2));
       }

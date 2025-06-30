@@ -17,7 +17,7 @@ public class RoleAdmin_TaskTurnierplan_Controller
     @Override
     public void applyActions() {
         // I tried to debug, because i have problems with the savings
-        System.out.println("PARAMS: " + _params);
+        if(_needDebug) System.out.println("PARAMS: " + _params);
         String action = _params.get("action");
         if(_needDebug) System.out.println("DEBUG: action = " + action);
 
@@ -27,7 +27,7 @@ public class RoleAdmin_TaskTurnierplan_Controller
                 String feldStr = _params.get("feld");
                 String scoreAStr = _params.get("scoreA");
                 String scoreBStr = _params.get("scoreB");
-                System.out.println("DEBUG: action=" + action + ", slotStr=" + slotStr + ", feldStr=" + feldStr + ", scoreA=" + scoreAStr + ", scoreB=" + scoreBStr);
+                if(_needDebug) System.out.println("DEBUG: action=" + action + ", slotStr=" + slotStr + ", feldStr=" + feldStr + ", scoreA=" + scoreAStr + ", scoreB=" + scoreBStr);
 
                 if (scoreAStr != null && scoreBStr != null && !scoreAStr.trim().isEmpty() && !scoreBStr.trim().isEmpty() && slotStr != null && feldStr != null) {
                     int slot = Integer.parseInt(slotStr);
@@ -48,10 +48,10 @@ public class RoleAdmin_TaskTurnierplan_Controller
                     }
                     _dbInterface.updateMatch(tm);
                 } else {
-                    System.out.println("Fehler: Ungültige Eingabewerte – einer из значений пустое");
+                    if(_needDebug) System.out.println("Fehler: Ungültige Eingabewerte – ein der Werten ist null");
                 }
             } catch (Exception e) {
-                System.out.println("Fehler beim Parsen или Speichern: " + e.getMessage());
+                if(_needDebug) System.out.println("Fehler beim Parsen oder Speichern: " + e.getMessage());
             }
         }
         RoleAdmin_TaskTurnierplan_Data d = _renderer.daten;

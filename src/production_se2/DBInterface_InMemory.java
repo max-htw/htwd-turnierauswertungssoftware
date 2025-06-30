@@ -426,7 +426,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     }
   }
 
-  private static boolean _needRueckspiele = true;
+  private static boolean _needRueckspiele = false;
   @Override
   boolean turnierKonf_getNeedRueckspiele() {
     if(!_initialized) _initTurnier();
@@ -440,7 +440,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     return _anzSpielfelder;
   }
 
-  private static boolean _needPrefillScores = true;
+  private static boolean _needPrefillScores = false;
   @Override
   boolean turnierKonf_getNeedPrefillScores() {
     if(!_initialized) _initTurnier();

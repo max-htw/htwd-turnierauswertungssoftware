@@ -14,7 +14,7 @@ public class RoleAdmin_TaskHistorie_Renderer extends RoleWithTaskBase_Renderer_A
         r.append("<div class='max-w-2xl mx-auto mt-10'>");
         r.append("<h2 class=\"text-xl text-secondary font-bold mb-5 \">Gespeicherte Turniere</h2>");
 
-        for (int index = 1; index < daten.archiveLinks.size(); index++) {
+        for (int index = 0; index < daten.archiveLinks.size(); index++) {
             String name = daten.archiveLinks.get(index).linkText;
             String ladenUrl = getHref(daten.archiveLinks.get(index).linkAction);
             //String loeschenUrl = "/admin/historie/loeschen?id=" + index;
@@ -22,7 +22,7 @@ public class RoleAdmin_TaskHistorie_Renderer extends RoleWithTaskBase_Renderer_A
             r.append("<div class='flex items-center justify-between border-b'>");
             // Turnier-Info
             r.append("<span class='font-mono'>")
-            .append(index).append(". ")
+            .append(index + 1).append(". ")
             .append(name)
             .append("</span>");
             // Buttons

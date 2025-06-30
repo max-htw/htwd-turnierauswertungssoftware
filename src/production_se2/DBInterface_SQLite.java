@@ -325,7 +325,7 @@ public class DBInterface_SQLite extends DBInterfaceBase{
 
   @Override
   public void updateMatch(DBInterfaceBase.TurnierMatch match) {
-      Connection conn = connect(); // Используем твой метод connect()
+      Connection conn = connect(); // wir nutzen dein method connect()
 
       if (conn == null) {
           System.out.println("Keine Verbindung zur Datenbank möglich.");
