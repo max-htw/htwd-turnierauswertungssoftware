@@ -960,7 +960,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   public void updateMatch(DBInterfaceBase.TurnierMatch match) {
       // InMemory-Implementierung: nichts tun oder Daten in einer Map aktualisieren
       _matches.put(match.hashCode(), match);
-      System.out.println("Match updated: " + match);
+      //System.out.println("Match updated: " + match);
   }
 
   private String defaultGroupName(int groupID){

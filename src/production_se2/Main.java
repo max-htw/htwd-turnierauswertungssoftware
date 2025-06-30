@@ -11,6 +11,12 @@ public class Main {
 
         if(webserverType == AppSettings.SupportedWebServerTypes.internal) {
             int p = 8450;
+            if(args.length > 0){
+              try{
+                p = Integer.parseInt(args[0]);
+              }
+              catch(Exception e){};
+            }
             HttpServer server = HttpServer.create(
                     new InetSocketAddress(p), 1024);
             //server.createContext("/", new ContextHandlers.CombHandler());
