@@ -74,6 +74,71 @@ public class T_Pipeline_tests extends T_Pipeline_setup {
         assertTrue("Rückspiel-Flag muss true sein",
                    db.turnierKonf_getNeedRueckspiele());
     }
+
+@Test
+public void testGesamttabelleGenerierung() {
+    // 1. Turnier konfigurieren: 1 Gruppe, 3 Teams
+    db.turnierKonf_setAnzGruppen(1);
+    db.turnierKonf_setAnzTeamsByGroupID(0, 3);
+    db.turnierKonf_setNeedRueckspiele(false);
+
+    // 2. Ergebnisse setzen: Team 0 schlägt Team 1, Team 1 schlägt Team 2, Team 2 schlägt Team 0
+    db.match_setPunkteTeam1Hinspiel(0, 0, 1, 10); // Team 0: 10, Team 1: 5
+    db.match_setPunkteTeam2Hinspiel(0, 0, 1, 5);
+
+    db.match_setPunkteTeam1Hinspiel(0, 1, 2, 8);  // Team 1: 8, Team 2: 12
+    db.match_setPunkteTeam2Hinspiel(0, 1, 2, 12);
+
+    db.match_setPunkteTeam1Hinspiel(0, 2, 0, 15); // Team 2: 15, Team 0: 7
+    db.match_setPunkteTeam2Hinspiel(0, 2, 0, 7);
+
+    // 3. Gesamttabelle berechnen
+    java.util.ArrayList<DBInterfaceBase.AuswertungsEintrag> tabelle = db.calculateAuswertung(0);
+
+    // 4. Prüfen, ob alle Teams in der Tabelle sind
+    assertEquals(3, tabelle.size());
+
+    // 5. Prüfen, ob die Werte stimmen (Siege, Spiele, Punktdifferenz)
+    // Beispiel: Team 0 sollte 1 Sieg, 2 Spiele, Punktdifferenz -3 haben
+    DBInterfaceBase.AuswertungsEintrag team0 = tabelle.stream().filter(e -> e.teamId == 0).findFirst().get();
+    assertEquals(1, team0.anzGewonnen);
+    assertEquals(2, team0.anzGespielt);
+    assertEquals(-3, team0.pktDifferenz);
+
+    // Du kannst analog für Team 1 und Team 2 prüfen
+}
+
+
+@Test
+public void testPdfExport_Spielplan() throws Exception {
+    // Nur In-Memory-DB, SQLite überspringen
+    assumeTrue("Nur InMemory-DB", db.getClass().getSimpleName().equals("DBInterface_InMemory"));
+
+    // 1) Turnier konfigurieren (minimal)
+    db.turnierKonf_setAnzGruppen(2);
+    db.turnierKonf_setAnzTeamsByGroupID(0, 4);
+    db.turnierKonf_setAnzTeamsByGroupID(1, 4);
+    db.turnierKonf_setNeedRueckspiele(false);
+
+    // 2) Turnierplan aus DB holen
+    List<DBInterfaceBase.FeldSchedule> plan = db.getTurnierPlan();
+    assertNotNull("Turnierplan darf nicht null sein", plan);
+    assertTrue("Mindestens ein Spielfeld erwartet", plan.size() > 0);
+
+    // 3) PDF-Export-Service aufrufen
+    PDFExportService pdfService = new PDFExportService();
+    byte[] pdfBytes = pdfService.exportSpielplanAsPdf(plan);
+
+    // 4) Grundlegende Assertions am PDF
+    assertNotNull("PDF-Bytes dürfen nicht null sein", pdfBytes);
+    assertTrue("PDF darf nicht leer sein", pdfBytes.length > 1000);
+
+    // 5) PDF-Kopf prüfen (erste 4 Zeichen müssen \"%PDF\" sein)
+    String header = new String(pdfBytes, 0, 4, "ISO-8859-1");
+    assertEquals("PDF-Kopfzeile stimmt nicht", "%PDF", header);
+}
+
+
 }
 
     
