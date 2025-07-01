@@ -112,19 +112,32 @@ public class RoleAdmin_TaskTurnierplan_Renderer extends RoleWithTaskBase_Rendere
                 if (teile.length == 2) {
                     punkteA = teile[0].trim();
                     punkteB = teile[1].trim();
+                    // Show empty if value is "--" (which means -1)
+                    if (punkteA.equals("--")) punkteA = "";
+                    if (punkteB.equals("--")) punkteB = "";
                 }
             }
 
             r.append("<td class='px-4 py-2 border'>");
+
+            // Form for scoreA
             r.append("<form method='post' action='?action=setScore' style='display:inline'>");
             r.append("<input type='hidden' name='slot' value='").append(item.timeSlotNr).append("'/>");
             r.append("<input type='hidden' name='feld' value='").append(i).append("'/>");
             r.append("<input type='number' name='scoreA' value='").append(punkteA).append("' style='width:40px;text-align:center;' ");
             r.append("onblur='this.form.submit()' onkeydown='if(event.key===\"Enter\"){this.form.submit();}' />");
+            r.append("</form>");
+
             r.append(" : ");
+
+            // Form for scoreB
+            r.append("<form method='post' action='?action=setScore' style='display:inline'>");
+            r.append("<input type='hidden' name='slot' value='").append(item.timeSlotNr).append("'/>");
+            r.append("<input type='hidden' name='feld' value='").append(i).append("'/>");
             r.append("<input type='number' name='scoreB' value='").append(punkteB).append("' style='width:40px;text-align:center;' ");
             r.append("onblur='this.form.submit()' onkeydown='if(event.key===\"Enter\"){this.form.submit();}' />");
             r.append("</form>");
+
             r.append("</td>");
 
             r.append("</tr>");

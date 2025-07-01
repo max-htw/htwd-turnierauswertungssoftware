@@ -61,33 +61,10 @@ public class RoleAdmin_TaskErgebnisse_Renderer extends RoleWithTaskBase_Renderer
             append(".</td><td class='px-4 py-2 border'>").append(e.teamName).
             append("</td>");
 
-            // Editable Felder für die Ergebnisse:
-            r.append("<td class='px-4 py-2 border'>")
-             .append("<form method='post' style='display:inline;margin:0;' id='form_").append(i).append("'>")
-             .append("<input type='hidden' name='editResult' value='1'>")
-             .append("<input type='hidden' name='groupID' value='").append(e.groupID).append("'>")
-             .append("<input type='hidden' name='teamID' value='").append(e.teamID).append("'>")
-             .append("<input type='number' name='gewonnen' value='").append(e.gewonneneSpiele).append("' style='width:50px;' ")
-             .append("onblur='this.form.submit()' onkeydown=\"if(event.key==='Enter'){this.form.submit();return false;}\" >")
-             .append("</form></td>");
-
-            r.append("<td class='px-4 py-2 border'>")
-             .append("<form method='post' style='display:inline;margin:0;' id='form_g").append(i).append("'>")
-             .append("<input type='hidden' name='editResult' value='1'>")
-             .append("<input type='hidden' name='groupID' value='").append(e.groupID).append("'>")
-             .append("<input type='hidden' name='teamID' value='").append(e.teamID).append("'>")
-             .append("<input type='number' name='gespielt' value='").append(e.gespielteSpiele).append("' style='width:50px;' ")
-             .append("onblur='this.form.submit()' onkeydown=\"if(event.key==='Enter'){this.form.submit();return false;}\" >")
-             .append("</form></td>");
-
-            r.append("<td class='px-4 py-2 border'>")
-             .append("<form method='post' style='display:inline;margin:0;' id='form_d").append(i).append("'>")
-             .append("<input type='hidden' name='editResult' value='1'>")
-             .append("<input type='hidden' name='groupID' value='").append(e.groupID).append("'>")
-             .append("<input type='hidden' name='teamID' value='").append(e.teamID).append("'>")
-             .append("<input type='number' name='differenz' value='").append(e.punkteDifferenz).append("' style='width:50px;' ")
-             .append("onblur='this.form.submit()' onkeydown=\"if(event.key==='Enter'){this.form.submit();return false;}\" >")
-             .append("</form></td>");
+            // Just show the values, no forms/inputs
+            r.append("<td class='px-4 py-2 border'>").append(e.gewonneneSpiele).append("</td>");
+            r.append("<td class='px-4 py-2 border'>").append(e.gespielteSpiele).append("</td>");
+            r.append("<td class='px-4 py-2 border'>").append(e.punkteDifferenz).append("</td>");
 
             r.append("</tr>\n");
         }

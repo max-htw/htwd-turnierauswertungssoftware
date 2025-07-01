@@ -29,29 +29,55 @@ public class RoleAdmin_TaskTurnierplan_Controller
                 String scoreBStr = _params.get("scoreB");
                 if(_needDebug) System.out.println("DEBUG: action=" + action + ", slotStr=" + slotStr + ", feldStr=" + feldStr + ", scoreA=" + scoreAStr + ", scoreB=" + scoreBStr);
 
-                if (scoreAStr != null && scoreBStr != null && !scoreAStr.trim().isEmpty() && !scoreBStr.trim().isEmpty() && slotStr != null && feldStr != null) {
+                if (slotStr != null && feldStr != null) {
                     int slot = Integer.parseInt(slotStr);
                     int feld = Integer.parseInt(feldStr);
-                    int punkteA = Integer.parseInt(scoreAStr.trim());
-                    int punkteB = Integer.parseInt(scoreBStr.trim());
 
                     ArrayList<DBInterfaceBase.FeldSchedule> plan = _dbInterface.getTurnierPlan();
                     DBInterfaceBase.SpielStats st = plan.get(feld).getSpiele().get(slot);
                     DBInterfaceBase.TurnierMatch tm = _dbInterface.getMatch(st.groupid, st.team1, st.team2);
 
-                    if (st.isHinspiel) {
-                        tm.setTeam1PunkteHinspiel(punkteA);
-                        tm.setTeam2PunkteHinspiel(punkteB);
-                    } else {
-                        tm.setTeam1PunkteRueckspiel(punkteA);
-                        tm.setTeam2PunkteRueckspiel(punkteB);
+                    // Update only the score that was submitted (the other stays unchanged)
+                    if (scoreAStr != null) {
+                        if (scoreAStr.trim().isEmpty()) {
+                            // If empty, clear the score (set to -1)
+                            if (st.isHinspiel) {
+                                tm.setTeam1PunkteHinspiel(-1);
+                            } else {
+                                tm.setTeam1PunkteRueckspiel(-1);
+                            }
+                        } else {
+                            int punkteA = Integer.parseInt(scoreAStr.trim());
+                            if (st.isHinspiel) {
+                                tm.setTeam1PunkteHinspiel(punkteA);
+                            } else {
+                                tm.setTeam1PunkteRueckspiel(punkteA);
+                            }
+                        }
+                    }
+                    if (scoreBStr != null) {
+                        if (scoreBStr.trim().isEmpty()) {
+                            // If empty, clear the score (set to -1)
+                            if (st.isHinspiel) {
+                                tm.setTeam2PunkteHinspiel(-1);
+                            } else {
+                                tm.setTeam2PunkteRueckspiel(-1);
+                            }
+                        } else {
+                            int punkteB = Integer.parseInt(scoreBStr.trim());
+                            if (st.isHinspiel) {
+                                tm.setTeam2PunkteHinspiel(punkteB);
+                            } else {
+                                tm.setTeam2PunkteRueckspiel(punkteB);
+                            }
+                        }
                     }
                     _dbInterface.updateMatch(tm);
                 } else {
-                    if(_needDebug) System.out.println("Fehler: Ungültige Eingabewerte – ein der Werten ist null");
+                    if(_needDebug) System.out.println("Error: Invalid input values – one of the values is null");
                 }
             } catch (Exception e) {
-                if(_needDebug) System.out.println("Fehler beim Parsen oder Speichern: " + e.getMessage());
+                if(_needDebug) System.out.println("Error while parsing or saving: " + e.getMessage());
             }
         }
         RoleAdmin_TaskTurnierplan_Data d = _renderer.daten;
