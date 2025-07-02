@@ -1,0 +1,10 @@
+= Einzelreflexion Turnierauswertungssoftware - Team C
+include::../_includes/default-attributes.inc.adoc[]
+
+== Maximilian Lohr
+
+
+== Kareen Khouri
+== Jonas Grießhaber
+== Alexander Zajcev
+== Radmir Mullagaliev

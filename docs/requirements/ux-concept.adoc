@@ -1,8 +1,6 @@
 = UX-Konzept: {project-name}
-Jonas Grießhaber <s87547@htw-dresden.de>; 
-{localdatetime}
 include::../_includes/default-attributes.inc.adoc[]
-:imagesdir: docs\requirements\images
+:imagesdir: images
 
 == Einführung
 In diesem Dokument werden die Benutzeroberflächen des Systems {project-system-name} beschrieben. Dies können sein:
@@ -42,8 +40,13 @@ Sekundärfarbe: Schwarz, Grün
 
 === Wireframes
 
-image::Wireframes_V3_Adminansicht.pdf[]
-image::Wireframes_V3_Nutzeransicht.pdf[]
+image::Wireframes_Organisator.png[Wireframes Organisator Ansicht]
+
+__Wireframes Organisator Ansicht__
+
+image::Wireframes_Nutzeransicht.png[Wireframes Nutzer Ansicht]
+
+__Wireframes Nutzer Ansicht__
 
 
 Startbildschirm:
