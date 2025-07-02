@@ -1,4 +1,6 @@
-= Einzelreflexion Turnierauswertungssoftware - Team C
+//Befehl zum Erstellen der PDF (im Terminal): 
+// asciidoctor-pdf .\Einzelreflexion.adoc -o .\Einzelreflexion.pdf
+= Einzelreflexion Turnierauswertungssoftware Team{nbsp}C
 include::../_includes/default-attributes.inc.adoc[]
 
 == Maximilian Lohr
@@ -6,5 +8,12 @@ include::../_includes/default-attributes.inc.adoc[]
 
 == Kareen Khouri
 == Jonas Grießhaber
+
+<<<
+
 == Alexander Zajcev
+include::./Einzelleistung_Alex.adoc[]
+
+<<<
+
 == Radmir Mullagaliev
