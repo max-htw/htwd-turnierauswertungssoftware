@@ -1,0 +1,88 @@
+= Projektreflexion – Einzelleistung
+:author: Radmir Mullagaliev
+:date: 03.07.2025
+
+== 1. Ausgangssituation / Problemstellung
+
+Im Rahmen unseres Projekts zur Entwicklung einer Turnierverwaltungssoftware habe ich die Verantwortung für die Erstellung eines Algorithmus zur automatischen Spielplan-Generierung übernommen.
+
+Im Dokument `Anforderungen.adoc` wurden folgende Anforderungen definiert:
+
+* Alle Teams einer Gruppe sollen gegeneinander spielen.
+* Jedes Spiel benötigt ein drittes Team als Schiedsrichter.
+* Es gibt eine begrenzte Anzahl an Feldern und Timeslots.
+* Die Schiedsrichterrollen sollen fair verteilt werden.
+* Bestimmte Muster (z. B. *Schiri–Pause–Schiri* oder *Schiri–Schiri*) sollen vermieden werden.
+* Kein Team soll mehr als eine Pause hintereinander haben.
+* Kein Team darf gleichzeitig spielen und Schiedsrichter sein.
+
+Zu Beginn des Projekts gab es keinen passenden Algorithmus, der all diese Regeln gleichzeitig erfüllen konnte.
+Deshalb war eine vollständige *Anforderungsanalyse*, ein eigener *Systementwurf* sowie Tests nach den Prinzipien der *Verifikation und Validierung* notwendig.
+
+== 2. Lösungsweg
+
+Zuerst habe ich die grundlegende Logik in einem Dokument namens `Algorithmus_Turnierplangenerator.docx` beschrieben.
+Dort habe ich die Abläufe wie in Use-Case-Szenarien dargestellt – von der Spielgenerierung bis zur Zuweisung von Rollen und Slots.
+
+Für die Umsetzung habe ich mich an folgenden Prinzipien orientiert:
+
+* Iteratives Vorgehen gemäß Unified Process (Construction Phase)
+* Architekturprinzipien wie *Separation of Concerns*, *Loose Coupling* und *High Cohesion*
+* SOLID-Prinzipien, insbesondere das *Single Responsibility Principle (SRP)* und das *Dependency Inversion Principle (DIP)*
+* *Modultests* und *Systemtests* zur Qualitätssicherung
+
+Die zentrale Logik wurde in der Datei https://github.com/max-htw/htwd-turnierauswertungssoftware/blob/main/src/production_se2/TurnierplanGenerator.java[TurnierplanGenerator.java] implementiert.
+
+Zum Testen habe ich folgende Dateien verwendet:
+
+* https://github.com/max-htw/htwd-turnierauswertungssoftware/blob/main/src/production_se2/TurnierTest.java[TurnierTest.java]: Konsolen-Ausgabe des Plans
+* https://github.com/max-htw/htwd-turnierauswertungssoftware/blob/main/src/production_se2/TurnierSimulation.java[TurnierSimulation.java]: Simulation mit verschiedenen Parametern
+
+Im Rahmen des *Objektentwurfs* habe ich außerdem Hilfsklassen erstellt, die den Prinzipien von *Information Hiding* und geringen Abhängigkeiten folgen.
+
+== 3. Bewertung des Ergebnisses
+
+Der entwickelte Algorithmus erfüllt die meisten Anforderungen und beachtet wichtige Einschränkungen.
+Der Spielplan wird Slot-für-Slot und Feld-für-Feld aufgebaut. Die Schiedsrichter werden möglichst fair verteilt.
+
+Trotzdem gab es einige Herausforderungen:
+
+* Bei vielen Teams und wenigen Slots ist es schwer, alle Regeln gleichzeitig einzuhalten.
+* In Einzelfällen mussten Kompromisse gemacht werden (z. B. zwei Pausen hintereinander oder zu viele Schiri-Einsätze).
+* Die Rollenverteilung ist nicht immer vollständig gleichmäßig.
+
+Durch einen *evolutionären Architekturansatz* und ständiges *Refactoring* konnte ich jedoch die Struktur und Lesbarkeit des Codes deutlich verbessern.
+
+Ich habe in dieser Arbeit gelernt:
+
+* den Code iterativ zu verbessern
+* *Clean-Code-Prinzipien* wie *KISS* und *DRY* anzuwenden
+* *Testgetriebene Entwicklung* praktisch umzusetzen
+* Architekturentscheidungen gut zu dokumentieren und verständlich zu erklären
+
+== 4. Zusammenarbeit mit anderen Teammitgliedern
+
+Mein Beitrag war eine wichtige Grundlage für andere Projektbereiche.
+Der Spielplan, den ich generiert habe, wurde später im Interface dargestellt.
+Zusätzlich habe ich die Möglichkeit zur Ergebnisbearbeitung direkt im Turnierplan umgesetzt. Dafür habe ich folgende Dateien geändert:
+
+* https://github.com/max-htw/htwd-turnierauswertungssoftware/blob/main/src/production_se2/RoleAdmin_TaskTurnierplan_Controller.java[RoleAdmin_TaskTurnierplan_Controller.java]
+* https://github.com/max-htw/htwd-turnierauswertungssoftware/blob/main/src/production_se2/RoleAdmin_TaskTurnierplan_Renderer.java[RoleAdmin_TaskTurnierplan_Renderer.java]
+
+Damit habe ich nicht nur an der *Systemlogik*, sondern auch an der *UI-Integration* und dem *User Interaction Flow* mitgearbeitet.
+
+== 5. Bezug zu den Lernzielen des Moduls SE II
+
+_"Die Studierenden verfügen über Fähigkeiten und Fertigkeiten zur arbeitsteiligen Entwicklung modularer, wiederverwendbarer und erweiterbarer Softwaresysteme."_
+(Quelle: *Einführung und Organisatorisches, SE II, Foliensatz, S. 4*)
+
+Durch diese Aufgabe habe ich konkret zu den Lernzielen des Moduls beigetragen, insbesondere in folgenden Bereichen:
+
+* Arbeitsteilige Entwicklung im Team
+* Modularer und wiederverwendbarer Code
+* Systemarchitektur mit klaren Schnittstellen
+* Anwendung von Konzepten aus der Vorlesung:
+** *Architekturprinzipien* (z. B. Separation of Concerns)
+** *Entwurfsmuster* (z. B. SRP, DIP)
+** *Testmethoden* (z. B. Modultests)
+** *Codequalität* (z. B. Clean Code, Refactoring)
