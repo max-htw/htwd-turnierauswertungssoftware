@@ -25,28 +25,27 @@ Projektverantwortliche:: Kareen Khouri, Jonas Grießhaber, Alexander Zajcev, Rad
 | 5 | Mobile Nutzung der Spieleransicht auf Android/Apple | funktioniert teilweise
 | 6 | Offline-Nutzung der App | funktioniert teilweise
 | 7 | Abspeichern der Turnierdaten (auch bei Beendigung der Webanwendung) | funktioniert teilweise
-| 8 | Generierung eines Spielplans | funktioniert
+| 8 | Generierung eines leeren Turnierplans | funktioniert
 | 9 | Herunterladen des Spielplans als PDF oder Excel | funktioniert nicht
-| 10 | Generierung eines leeren Turnierplans | funktioniert -> tbdb??
-| 11 | Eintragung der Punkte von Spielern | funktioniert teilweise
-| 12 | Auswertung und Siegerermittlung | funktioniert
-| 13 | Gleichmäßige Verteilung von Spielen, Pfeifen, Aussetzen | funktioniert teilweise
-| 14 | Kein Team setzt mehr als ein Spiel in Folge aus | funktioniert nicht
-| 15 | Keine unfaire zeitliche Anordnung von Einsätzen | funktioniert nicht
-| 16 | App für ähnliche Turnierformate wiederverwendbar | funktioniert
-| 17 | Bedienoberfläche für Spieler auf dem Feld vereinfacht | funktioniert teilweise
-| 18 | Aktuelle Partie farblich hervorgehoben | funktioniert nicht
-| 19 | Gespielte Matches durchgestrichen | funktioniert nicht
-| 20 | Turnierplan zeigt Rollen (Spieler/Schiri) | funktioniert
-| 21 | Uhrzeiten tabellarisch übersichtlich dargestellt | funktioniert
-| 22 | Turnierhistorie sichtbar | funktioniert
-| 23 | Gespeicherte Turniere können bearbeitet werden | funktioniert 
-| 24 | Aktuelle Aufgabe (Spiel/Schiri) über Teamnamen sichtbar | funktioniert nicht
-| 25 | Komplexität der Buttons reduziert | weitesgehend
-| 26 | Oberfläche kompakt und übersichtlich | teilweise
-| 27 | UI so einfach wie möglich gehalten | weitesgehend
-| 28 | Teamnamen vor Ort zu Beginn änderbar | funktioniert nicht
-| 29 | Farben des Stura werden verwendet | funktioniert
+| 10 | Eintragung der Punkte von Spielern | funktioniert teilweise
+| 11 | Auswertung und Siegerermittlung | funktioniert
+| 12 | Gleichmäßige Verteilung von Spielen, Pfeifen, Aussetzen | funktioniert teilweise
+| 13 | Kein Team setzt mehr als ein Spiel in Folge aus | funktioniert nicht
+| 14 | Keine unfaire zeitliche Anordnung von Einsätzen | funktioniert nicht
+| 15 | App für ähnliche Turnierformate wiederverwendbar | funktioniert
+| 16 | Bedienoberfläche für Spieler auf dem Feld vereinfacht | funktioniert teilweise
+| 17 | Aktuelle Partie farblich hervorgehoben | funktioniert nicht
+| 18 | Gespielte Matches durchgestrichen | funktioniert nicht
+| 19 | Turnierplan zeigt Rollen (Spieler/Schiri) | funktioniert
+| 20 | Uhrzeiten tabellarisch übersichtlich dargestellt | funktioniert
+| 21 | Turnierhistorie sichtbar | funktioniert
+| 22 | Gespeicherte Turniere können bearbeitet werden | funktioniert 
+| 23 | Aktuelle Aufgabe (Spiel/Schiri) über Teamnamen sichtbar | funktioniert nicht
+| 24 | Komplexität der Buttons reduziert | weitesgehend
+| 25 | Oberfläche kompakt und übersichtlich | teilweise
+| 26 | UI so einfach wie möglich gehalten | weitesgehend
+| 27 | Teamnamen vor Ort zu Beginn änderbar | funktioniert nicht
+| 28 | Farben des Stura werden verwendet | funktioniert
 |===
 
 == 2. Abnahmeerklärung
