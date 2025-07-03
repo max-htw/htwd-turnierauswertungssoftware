@@ -6,7 +6,12 @@ include::../_includes/default-attributes.inc.adoc[]
 == Maximilian Lohr
 include::./Einzelleistung_Max.adoc[]
 
+<<<
+
 == Kareen Khouri
+
+<<<
+
 == Jonas Grießhaber
 
 <<<
@@ -17,3 +22,4 @@ include::./Einzelleistung_Alex.adoc[]
 <<<
 
 == Radmir Mullagaliev
+include::./Einzelleistung_Radmir.adoc[]

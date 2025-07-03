@@ -1,8 +1,8 @@
-= Projektreflexion – Einzelleistung
 :author: Radmir Mullagaliev
 :date: 03.07.2025
 
-== 1. Ausgangssituation / Problemstellung
+[discrete]
+==== 1. Ausgangssituation / Problemstellung
 
 Im Rahmen unseres Projekts zur Entwicklung einer Turnierverwaltungssoftware habe ich die Verantwortung für die Erstellung eines Algorithmus zur automatischen Spielplan-Generierung übernommen.
 
@@ -19,7 +19,8 @@ Im Dokument `Anforderungen.adoc` wurden folgende Anforderungen definiert:
 Zu Beginn des Projekts gab es keinen passenden Algorithmus, der all diese Regeln gleichzeitig erfüllen konnte.
 Deshalb war eine vollständige *Anforderungsanalyse*, ein eigener *Systementwurf* sowie Tests nach den Prinzipien der *Verifikation und Validierung* notwendig.
 
-== 2. Lösungsweg
+[discrete]
+==== 2. Lösungsweg
 
 Zuerst habe ich die grundlegende Logik in einem Dokument namens `Algorithmus_Turnierplangenerator.adoc` beschrieben.
 Dort habe ich die Abläufe wie in Use-Case-Szenarien dargestellt – von der Spielgenerierung bis zur Zuweisung von Rollen und Slots.
@@ -40,7 +41,8 @@ Zum Testen habe ich folgende Dateien verwendet:
 
 Im Rahmen des *Objektentwurfs* habe ich außerdem Hilfsklassen erstellt, die den Prinzipien von *Information Hiding* und geringen Abhängigkeiten folgen.
 
-== 3. Bewertung des Ergebnisses
+[discrete]
+==== 3. Bewertung des Ergebnisses
 
 Der entwickelte Algorithmus erfüllt die meisten Anforderungen und beachtet wichtige Einschränkungen.
 Der Spielplan wird Slot-für-Slot und Feld-für-Feld aufgebaut. Die Schiedsrichter werden möglichst fair verteilt.
@@ -60,7 +62,8 @@ Ich habe in dieser Arbeit gelernt:
 * *Testgetriebene Entwicklung* praktisch umzusetzen
 * Architekturentscheidungen gut zu dokumentieren und verständlich zu erklären
 
-== 4. Zusammenarbeit mit anderen Teammitgliedern
+[discrete]
+==== 4. Zusammenarbeit mit anderen Teammitgliedern
 
 Mein Beitrag war eine wichtige Grundlage für andere Projektbereiche.
 Der Spielplan, den ich generiert habe, wurde später im Interface dargestellt.
@@ -71,7 +74,8 @@ Zusätzlich habe ich die Möglichkeit zur Ergebnisbearbeitung direkt im Turnierp
 
 Damit habe ich nicht nur an der *Systemlogik*, sondern auch an der *UI-Integration* und dem *User Interaction Flow* mitgearbeitet.
 
-== 5. Bezug zu den Lernzielen des Moduls SE II
+[discrete]
+==== 5. Bezug zu den Lernzielen des Moduls SE II
 
 _"Die Studierenden verfügen über Fähigkeiten und Fertigkeiten zur arbeitsteiligen Entwicklung modularer, wiederverwendbarer und erweiterbarer Softwaresysteme."_
 (Quelle: *Einführung und Organisatorisches, SE II, Foliensatz, S. 5, Übergeordnetes Qualifikationsziel von SE II*)
