@@ -24,7 +24,7 @@ public class TurnierSimulation {
                 int geplanteSpiele = plan.size();
                 boolean vollstaendig = geplanteSpiele == maxMatches;
 
-                System.out.printf("Slots=%2d, Felder=%d → Spiele: %2d/%2d %s%n",
+                System.out.printf("Slots=%2d, Felder=%d -> Spiele: %2d/%2d %s%n",
                         anzahlTimeSlots,
                         anzahlSpielfelder,
                         geplanteSpiele,
