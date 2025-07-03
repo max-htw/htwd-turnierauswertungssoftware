@@ -1,0 +1,43 @@
+*Erhebung, Dokumentation und iterative Verfeinerung der fachlichen Anforderungen einschließlich Erstellung von User Stories, Vision und Glossar*
+
+
+
+== Ausgangssituation
+
+Im Projekt zur Erstellung und Verwaltung von Turnierauswertungssoftware für den StuRa der HTW Dresden war ich für die Analyse verantwortlich. Mein Aufgabenbereich umfasste die Erfassung und Dokumentation der fachlichen Anforderungen, die Erstellung und Aktualisierung der Vision sowie die kontinuierliche Ableitung der User Stories mit Akzeptanzkriterien. Ich war zudem für das Glossar zuständig, um ein einheitliches Verständnis der Begriffe sicherzustellen. Die OpenUP-Methode diente als Grundlage für die Struktur und Inhalte der Dokumentation.
+
+Ein wesentlicher Teil meiner Arbeit war es, nicht nur die Anforderungen zu dokumentieren, sondern auch den Überblick über die Umsetzung im Team zu behalten. Ich habe regelmäßig den Stand der Entwicklung verfolgt, um sicherzustellen, dass die Anforderungen korrekt umgesetzt wurden und um frühzeitig festzustellen, wo weitere Anforderungen oder Anpassungen nötig waren. Die Vision wurde von mir immer wieder an den aktuellen Projektstand angepasst, insbesondere wenn sich durch die Arbeit der Entwickler neue Erkenntnisse oder Notwendigkeiten ergaben.
+
+== Meine Aufgaben und Lösungsweg
+
+Ich habe die Anforderungen aus den Gesprächen mit dem Auftraggeber und der Projektbeschreibung in User Stories überführt, die ich im GitHub-Repository als Issues erstellte z.B. (Issue #174). Diese waren mit Akzeptanzkriterien, Prioritäten und T-Shirt-Größen-Komplexitäten versehen. So konnten die Aufgaben im Team geplant und priorisiert werden. Die Priorisierung haben wir gemeinsam im Teammeeting in Abstimmung mit dem Auftraggeber festgelegt.
+
+Die Vision habe ich nicht nur initial erstellt, sondern über den gesamten Projektverlauf hinweg angepasst. Immer wenn sich Anforderungen änderten oder die Entwickler bei der Umsetzung auf neue Sachverhalte stießen, habe ich die Vision aktualisiert. So konnte sichergestellt werden, dass das Projektziel stets klar blieb und alle Teammitglieder eine einheitliche Grundlage hatten.
+
+Das Glossar entstand, um die Verwendung wichtiger Begriffe zu standardisieren und Missverständnisse im Team zu vermeiden. Ich habe dabei darauf geachtet, neue Begriffe oder Abkürzungen, die im Verlauf des Projekts hinzukamen, aufzunehmen.
+
+Ich habe alle relevanten Meetings dokumentiert – sowohl interne Besprechungen als auch Meetings mit dem Coach und dem Auftraggeber. Die Protokolle habe ich dem Team im Repository zur Verfügung gestellt. Sie dienten dazu, getroffene Entscheidungen, offene Punkte und Absprachen festzuhalten und nachvollziehbar zu machen.
+
+Neben der reinen Dokumentation habe ich regelmäßig den Quellcode und die GitHub-Issues der Entwickler durchgesehen, um einen Überblick darüber zu behalten, welche Anforderungen bereits umgesetzt waren und wo noch Lücken bestanden. Dadurch konnte ich gezielt weitere Anforderungen ableiten und mit dem Team besprechen.
+
+Die Anwender- und Betriebsdokumentation sowie die Anforderungsspezifikation und der Projektplan wurden von mir erstellt und mit dem Team abgestimmt. Auch hier habe ich darauf geachtet, dass sie den aktuellen Projektstand widerspiegelten und mit den OpenUP-Artefakten konsistent waren.
+
+== Herausforderungen und Erkenntnisse
+
+Eine der größten Herausforderungen war es, die Anforderungen des Auftraggebers so zu erfassen und zu dokumentieren, dass sie für alle Teammitglieder verständlich und umsetzbar waren. Oft war die Beschreibung durch den Auftraggeber unvollständig oder mehrdeutig, sodass Rückfragen notwendig waren. Ich habe gelernt, wie wichtig es ist, bei Unklarheiten sofort nachzufragen und die Kommunikation aktiv zu gestalten.
+Obwohl ich die Anforderungen der Auftraggeber ständig dokumentiert habe, gab es auf unserer Seite Unklarheiten - zum Beispiel darüber, welche Betriebssysteme auf den StuRa-Rechnern zur Verfügung standen. Unser Team war sich hier nicht sicher, sodass ich noch einmal nachfragen musste.
+
+Die Anpassung der Vision an den laufenden Entwicklungsfortschritt war ein weiterer anspruchsvoller Aspekt. Ich musste den Überblick über den Code und die erledigten Aufgaben behalten, um sicherzustellen, dass die Vision und die Dokumentation dem tatsächlichen Stand entsprachen. Das hat mir gezeigt, wie eng Analyse und Umsetzung miteinander wichtig sind und dass ein ständiger Abgleich notwendig ist.
+
+Die Erstellung der Anwender- und Betriebsdokumentation war für mich neu. Ich konnte dabei wertvolle praktische Erfahrungen sammeln, insbesondere darin, wie diese Dokumente aufgebaut sein müssen, um späteren Nutzern und Betreibern der Software zu helfen.
+
+Ein wichtiger Lerneffekt war, dass Anforderungen nicht statisch sind. Sie verändern sich im Verlauf des Projekts, und es ist Aufgabe der Analyse, diese Veränderungen frühzeitig zu erkennen, zu dokumentieren und ins Team zu kommunizieren. Auch habe ich verstanden, dass klare Anforderungen und eine saubere Dokumentation entscheidend für eine effiziente Umsetzung und für die Qualität des Endprodukts sind.
+
+== Bewertung
+
+Meine Arbeit in der Analyse war erfolgreich. Ich habe nicht nur die Anforderungen dokumentiert, sondern aktiv darauf geachtet, dass sie im Projekt umgesetzt wurden und dem aktuellen Entwicklungsstand entsprachen. Die iterative Anpassung der Vision und die enge Verbindung zur Umsetzung halfen dem Team, die Projektziele im Blick zu behalten und neue Anforderungen oder notwendige Änderungen frühzeitig zu identifizieren.
+
+Besonders wertvoll war für mich die Erfahrung, wie wichtig der Überblick über alle Bereiche – von den Anforderungen bis hin zum Code – ist, um die Analyse erfolgreich umzusetzen. Die Arbeit hat mir gezeigt, dass gute Analysearbeit weit mehr ist als das Schreiben von Dokumenten: Sie erfordert Kommunikation, Abstimmung, Weitblick und die Fähigkeit, Zusammenhänge zwischen fachlichen Anforderungen und technischer Umsetzung zu erkennen.
+
+Für zukünftige Projekte nehme ich mir vor, die Abstimmung mit dem Auftraggeber noch strukturierter zu gestalten und die Dokumentation mit Hilfe von standardisierten Vorlagen und Tools noch effizienter und nachvollziehbarer zu gestalten. Auch möchte ich die Reviews im Team intensiver nutzen, um Analyse-Artefakte gemeinsam zu überprüfen und weiter zu verbessern.
+Insgesamt war die Rolle der Analyse für mich eine wertvolle und prägende Erfahrung, die mir praxisnahe Einblicke in die Bedeutung von Anforderungsmanagement und dessen Einfluss auf den Projekterfolg gegeben hat.
