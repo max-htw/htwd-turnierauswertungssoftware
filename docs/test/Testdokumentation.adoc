@@ -1,0 +1,129 @@
+= Testdokumentation: Volleyball-Turnier-Software
+:project-name: Volleyball-Turnier-Software
+:localdatetime: 2025-07-04 10:00
+:toc:
+:toclevels: 2
+
+== Einleitung
+
+Dieses Testkonzept beschreibt die Vorgehensweise zur Planung, Durchführung und Dokumentation der Tests für die Volleyballturnier-Software. Ziel ist es, die Qualität der Software sicherzustellen und zu gewährleisten, dass alle Anforderungen erfüllt werden.
+
+Für die Durchführung der Tests war es uns insbesondere wichtig, sowohl die Funktionen und Komponenten des Frontends (UI) als auch des Backends (z. B. Datenbankschnittstelle) zu testen. So soll sichergestellt werden, dass die Zusammenarbeit beider Schichten fehlerfrei funktioniert.
+
+Folgende Testmethoden und -verfahren kommen zum Einsatz:
+
+* *Unittests (automatisch und manuell)*  
+  Überprüfung einzelner Softwarekomponenten in Isolation (unabhängig von anderen Systemteilen). Ziel ist der Nachweis korrekter Funktionalität und technischer Lauffähigkeit.
+
+* *Integrationstests (manuell/automatisiert)*  
+  Überprüfen das Zusammenspiel mehrerer Module und Subsysteme (z. B. Datenbank und Services). Voraussetzung ist, dass die Einzelkomponenten bereits erfolgreich getestet wurden.
+
+Bei der Entscheidung über den Automatisierungsgrad fiel die Wahl auf automatisierte Unittests zur Absicherung der Backend-Logik. Aufgrund begrenzter Ressourcen erfolgt ein Teil der Integrationstests manuell. 
+
+* **Systemtests (manuell)**
+  End-to-End-Tests wurden in Form manueller Systemtests berücksichtigt, um typische Benutzerworkflows zu prüfen.
+
+
+== Testziele
+
+* Sicherstellung der korrekten Erfassung und Auswertung von Spielergebnissen  
+* Überprüfung der Benutzerfreundlichkeit auf mobilen Geräten  
+* Prüfung der Stabilität im Offline-Betrieb  
+* Sicherstellung der korrekten Generierung von Spielplänen und Ergebnislisten (z. B. als PDF/CSV)  
+
+== Testgegenstand
+
+Die entwickelte Webanwendung mit folgenden Technologien:
+
+* **Backend**: Java, DBInterface-InMemory (H2-InMemory)  
+* **Frontend**: HTML, CSS  
+* **Weitere Tools**: PDF-Export, CSV-Export  
+
+== Testarten und Testfall-Zuordnung
+
+=== Statischer Test (Review & Analyse)
+Ziel: Früherkennung von Fehlern in Anforderungen und Code durch Reviews und Spezifikations-Checks.  
+Alle Testfälle werden im statischen Test auf Vollständigkeit und Konsistenz der Spezifikation überprüft.
+
+=== Modultest (Unit-Test)
+Ziel: Test einzelner Klassen/Methoden isoliert mit JUnit4.
+
+[cols="1,4,3,2", options="header"]
+|===
+| Testfall-ID | Beschreibung | Testobjekt | Automatisiert?
+
+| T01 | Dropdown „Anzahl Spielfelder“ enthält alle zulässigen Werte und initialisiert korrekt | KonfValidator | Ja
+| T02 | Dropdown „Anzahl Leistungsgruppen“ (1–3) erlaubt nur Werte 1 bis 3 | KonfValidator | Ja
+| T03 | „Teams pro LG“ validiert Eingabe auf positive Ganzzahlen im zulässigen Bereich | KonfValidator | Ja
+| T04 | Auswahl Rückspiel (Ja/Nein) setzt Modus korrekt auf Hinspiel oder Hin-/Rückspiel | TurnierKonfig | Ja
+| T05 | Eingabe „Dauer pro Spiel“ validiert numerischen Wert, wirft bei ungültigen Eingaben Exception | KonfValidator | Ja
+| T06 | Eingabe „Startzeit“ validiert Zeitformat (HH:mm), meldet Fehler bei Fehleingabe | KonfValidator | Ja
+| T07 | Turnierplan-Generator: maximal ein Aussetzen (Bye) pro Team in Folge | SpielplanGen | Ja
+| T08 | Spielplan-Generator: verteilt Spiele, Pausen und Aussetzen gleichmäßig | SpielplanGen | Ja
+| T09 | Bearbeiten gespeicherter Spielstände erlaubt und speichert Änderungen korrekt | ErgebnisService | Ja
+| T10 | Blockierung von Nutzern bei Vorsatzfehleingaben verhindert weitere Änderungen | ErgebnisService | Ja
+| T11 | Erfassung eines Spielstandes nach Spielende ermöglicht, Pflichtfelder validiert | ErgebnisService | Ja
+| T12 | Validierung der Zeitspanne zwischen Spielende und Eintrag (max. 3 Minuten) | ErgebnisService | Ja
+|===
+
+=== Integrationstest
+Ziel: Zusammenspiel von Komponenten und Datenbank-Anbindung prüfen.
+
+[cols="1,4,3,1,1", options="header"]
+|===
+| Testfall-ID | Beschreibung | Zielobjekt | Implementiert? | Erfolgreich?
+
+| T13 | Speichern und Laden eines Turniers über API | DB-InMemory (DBInterface) | Ja | Nein
+| T14 | Leere DB-Initialisierung nach `reset()` liefert Default-Werte | DB-InMemory | Ja | Ja
+| T15 | Konfig-Setter/Get-Getter validieren (Fehler-/Erfolgsfälle) | DB-InMemory | Ja | Ja
+| T16 | Laden gespeicherter Turnierdaten | DB-InMemory | Ja | Ja
+| T17 | Generierung der Gesamttabelle (Service + UI) | SpielplanService + UI | Ja | Nein
+| T18 | PDF-Export des Spielplans | PDFExportService | Ja | Nein
+| T19 | CSV-Export der Turnierdaten | CSVExportService | Nein | –
+|===
+
+
+=== Systemtest (End-to-End)
+Ziel: Endnutzer-Workflows im Browser gegen die vollständige Anwendung testen.
+
+[cols="1,4,3,2", options="header"]
+|===
+| Testfall-ID | Beschreibung | Workflow | Erfolgreich durchgelaufen?
+
+| T20 | Anzeige auf Smartphone (Responsive) | UI-Frontend | Ja
+| T21 | Responsive Design bei Gerätewechsel | UI-Frontend | Ja
+| T22 | Navigation zwischen Seiten | UI-Frontend | Ja
+| T23 | Farbliche Hervorhebung der nächsten Teams | UI-Frontend | Ja
+| T24 | Anzeige bei fehlenden Daten | UI-Frontend | Ja
+| T25 | Anzeige der aktuellen Uhrzeit/Spielzeit | UI-Frontend | Ja
+| T26 | Rollenabhängige Anzeige | UI-Frontend + Auth | Ja
+| T27 | Anzeige des Spielfeldstatus | UI-Frontend | Ja
+| T28 | URL enthält Benutzerrolle | Routing | Ja
+|===
+
+
+== Testumgebung
+
+* **Unit/Integration:** H2-InMemory-DB, JUnit 4, Mockito  
+* **Systemtests:** Lokale Deployment-Instanz, Selenium/Cypress (geplant)  
+* **Netzwerk:** Offline- und Normalbetrieb  
+
+== Testvorgehen
+
+. **Statischer Test:** Review aller Spezifikationen und Testfall-Definitionen  
+. **Modultests:** JUnit4-Ausführung – Entwickler pflegen  
+. **Integrationstests:** JUnit4-Automatisierung – Tester führt wöchentlich aus  
+. **Systemtests:** Manuelle End-to-End-Durchläufe im Browser  
+. **Dokumentation:** Ergebnisse in AsciiDoc-Protokollen und Git-Repository  
+
+== Abnahmekriterien
+
+* Alle Must-Have-Testfälle (Modul & Integration) müssen grün sein  
+* Keine Blocker-Bugs offen  
+* Systemtest-Workflows ohne kritische Fehler  
+
+== Dokumentation und Reporting
+
+* Testfälle und -ergebnisse in AsciiDoc pflegen  
+* Integration ins Git-Repository  
+* Fehlerbehandlung und Priorisierung über Testmanagement-Tool (z. B. Jira)
