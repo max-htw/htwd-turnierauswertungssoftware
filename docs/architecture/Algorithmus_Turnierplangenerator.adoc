@@ -1,0 +1,61 @@
+= Algorithmus zur Turnierplangenerierung
+:doctype: article
+:icons: font
+:toc: left
+:sectnums:
+
+== Schritt 1: Generierung der Match-Objekte
+
+Für jede Gruppe:
+
+* Bestimme die Anzahl der Teams in dieser Gruppe.
+* Erzeuge eine Liste von Teamnummern: `[0, 1, …, n-1]`
+* Für alle Kombinationen (i, j) mit `i < j`:
+** Erstelle ein Match mit:
+*** `groupID = aktuelleGruppe`
+*** `team1Nr = i`
+*** `team2Nr = j`
+*** eindeutige `matchID`
+*** Falls Rückspiele erlaubt sind, wird später auch ein zweites, gleiches Spiel geplant.
+
+== Schritt 2: Erstellung der Spiel-Objekte aus Match
+
+Für jedes Match:
+
+* Erstelle ein Spiel mit:
+** `spiel.matchID = match.matchID` (Schlüsselattribut)
+** `istHinspiel = true`
+* Falls Rückspiel erlaubt ist, generiere ein weiteres Spiel.
+
+== Schritt 3: Planung der Spiele
+
+Initialisiere:
+
+* `Turnierplan`
+* Hilfsstrukturen zur Überprüfung:
+** Welche Teams spielen oder pfeifen in welchem Slot?
+** Welche Felder sind wann belegt?
+** Welche Rollen (`Spiel`, `Schiri`, `Pause`) hatte jedes Team zuletzt?
+
+Für jedes Spiel:
+
+* Suche den ersten `timeSlotNr`, in dem:
+** beide Teams nicht spielen
+** beide Teams nicht als Schiedsrichter tätig sind
+
+* Stelle sicher, dass:
+** kein Team zwei Pausen hintereinander hat
+** kein Team die Folge `Schiri – Pause – Schiri` oder `Schiri – Schiri` hat
+
+* Finde ein freies `feldNr` im aktuellen Timeslot
+
+* Wähle ein verfügbares Team als Schiedsrichter:
+** nicht kürzlich als Schiri aktiv
+** nicht gleichzeitig Spieler
+** wer weniger pfeift, wird bevorzugt als Schiri ausgewählt
+
+* Trage den Schiedsrichter in das Match ein
+
+* Aktualisiere Zeitpläne und Rollenhistorien
+
+* Füge das Spiel dem `Turnierplan` hinzu

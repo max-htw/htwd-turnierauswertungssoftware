@@ -74,7 +74,7 @@ Damit habe ich nicht nur an der *Systemlogik*, sondern auch an der *UI-Integrati
 == 5. Bezug zu den Lernzielen des Moduls SE II
 
 _"Die Studierenden verfügen über Fähigkeiten und Fertigkeiten zur arbeitsteiligen Entwicklung modularer, wiederverwendbarer und erweiterbarer Softwaresysteme."_
-(Quelle: *Einführung und Organisatorisches, SE II, Foliensatz, S. 4*)
+(Quelle: *Einführung und Organisatorisches, SE II, Foliensatz, S. 5, Übergeordnetes Qualifikationsziel von SE II*)
 
 Durch diese Aufgabe habe ich konkret zu den Lernzielen des Moduls beigetragen, insbesondere in folgenden Bereichen:
 
