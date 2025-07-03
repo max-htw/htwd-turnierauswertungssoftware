@@ -3,7 +3,7 @@
 include::../_includes/default-attributes.inc.adoc[]
 
 == Einleitung
-Im Rahmen des Projekts im Modul Software Engineering II arbeitete unser Team (Gruppe C) an der Entwicklung eines Softwaresystems zur Erstellung und Durchführung von Ballspielturnieren in Zusammenarbeit mit dem Auftraggeber StuRa der HTW Dresden. Der Entwicklungsprozess folgte dem OpenUP-Vorgehensmodell. Zentrale Bestandteile unseres Projektmanagements waren strukturierte Anforderungsanalyse, Aufgabenverteilung über GitHub Issues, regelmäßige Teammeetings und dokumentierte Reviews.
+Im Rahmen des Projekts im Modul Software Engineering II arbeitete unser Team (Gruppe C) an der Entwicklung eines Softwaresystems zur Erstellung und Durchführung von Turnierauswertung in Zusammenarbeit mit dem Auftraggeber StuRa der HTW Dresden. Der Entwicklungsprozess folgte dem OpenUP-Vorgehensmodell. Zentrale Bestandteile unseres Projektmanagements waren strukturierte Anforderungsanalyse, Aufgabenverteilung über GitHub Issues, regelmäßige Teammeetings und dokumentierte Reviews.
 
 == Top Erfolge
 === Strukturierte Anforderungsanalyse und Aufgabenverteilung im Team
