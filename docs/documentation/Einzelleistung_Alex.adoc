@@ -2,7 +2,7 @@
 *Entwurf und Implementierung der Request-Verarbeitungskette unter Verwendung des Model-View-Presenter Architekturmusters.*
 
 [discrete]
-=== Ausgangssituation
+==== Ausgangssituation
 
 Im Prototyp war die Code der Benutzerobeflächengenerierung stark mit der Code der Anwendungslogik vermischt.
 Es hat ausgereicht um die gewünschte Funktionalität der Anwendung bereitzustellen. Aber das hat die Zusammenarbeit an der Code mit den anderen Teammitglieder stark verhindert.
@@ -14,11 +14,11 @@ Die Störfaktoren waren unter anderem:
 - Eventuelle zukünftige Verwendung eines alternativen Datenbankmanagementsystems wäre mit zu großen Änderungen verbunden.
 
 [discrete]
-=== Lösungsweg
+==== Lösungsweg
 Um die Schwierigkeiten zu adressieren haben wir im Team entschieden eine saubere "Separation of Concerns" durchzusetzen. Den MVP-Architekturmuster fand ich dafür am besten geeignet.
 
 [discrete]
-==== View-Presenter-Verbindung
+===== View-Presenter-Verbindung
 Die Daten, die durch eine View-Komponente dem Nutzer angezeigt werden sollen, waren großenteils noch aus der Analyse-Phase des Projekts bekannt.
 Für jede View-Komponente musste eine Klasse für die anzuzeigende Daten entworfen werden. Die Daten-Klasse diente dann als Schnittstelle zwichen der Controller-Komponente und dem View.
 
@@ -29,20 +29,20 @@ Als erstes habe ich View-, Controller- und Datenschnittstellen-Basisklasse imple
 Die von der Datenschnittstellen-Basisklasse geerbte Datenschnittstellen-Klasse konnte sowohl der View-Entwickler als auch der Cotroller-Entwickler anlegen. Damit war die Abhängigkeit der beiden Entwickler voneinander abgekoppelt und sie mussten nicht aufeinander warten.
 
 [discrete]
-===== Nutzeraktionen
+====== Nutzeraktionen
 Eine besondere Herausforderung war einen Weg zu finden, wie die View-Komponente die Benutzereingabemöglichkeiten in den HTML-Response integriert. Dafür habe ich Nutzeraktion-Klasse eingeführt. Controller übergab der View-Komponente Instanzen dieser Nutzeraktion-Klasse und View-Komponente konnte die Nutzeraktion-Instanzen auf die HTML-Benutzereigabemöglichkeiten (Hyperlinks, Eingabefelder, Buttons, ...) abbilden.
 
 [discrete]
-==== Modell
+===== Modell
 Die für die Anwendung erforderliche Datenstrukturen wurden im Prototyp im Programm-Speicher verwaltet. Es gab Bedenken, dass die Leistung der InMemory-Datenverwaltung irgendwann nicht mehr ausreicht und deswegen ein externes Datenbanksystems (z.B SQLite) notwendig wird.
 Der Austausch des Datenverwaltungmoduls ist nur möglich, wenn die Datenabfragen und Datenmanipulationen in der Anwendung über eine genau definierte Schnittstelle durchgeführt werden. Die Datenbankschnittstelle habe ich als eine abstrakte Klasse realisiert. In der abstrakten Klasse sind die Funktionen nur deklariert und die Klassen der Datenstrukturen definiert. Konkrete Implementierung der Funktionen findet in den von der abstrakten Klasse abgeleiteten Datenbank-Backend-Klassen statt.
 
 [discrete]
-=== Documentation
+===== Documentation
 Um den anderen Teammitglieder die Anwendungsstruktur zu erklären habe ich eine graphische Skizze des Requestsablaufs erstellt. Für einige Views habe ich die View-, Datenschnittstelle- und Controller-Klassen komplett implementiert, damit sie als Beispiel bei der Erstellung weiterer Klassen dienen. In jeder Datenschnittstellenklasse habe ich Platzhalterdaten definiert, damit die View-Entwickler die Beispiele bei noch nicht abgeschlossener Datenbankimplementierung nachvollziehen können.
 
 [discrete]
-=== Bewertung
+==== Bewertung
 Das Vorhaben ist meiner Meinung nach gelungen. Großer Teil der User-Stories kann mit der Requestverarbeitungskette realisiert werden. Auf die implementierte Struktur kann man sich verlassen. Die Arbeitsschritte für die Benutzung des Systems durch einen neuen Entwickler sind erlernbar. Aufgaben für die Entwickler können damit genau definiert und in einer vorhersehbaren Zeit erledigt werden.
 
 In unserem Team war sowohl ein Entwickler, der von Anfang an da war als auch jemand, der später dazugekommen ist. Sie beide konnten sich gut in das Requestbearbeitungsprozess einarbeiten.
