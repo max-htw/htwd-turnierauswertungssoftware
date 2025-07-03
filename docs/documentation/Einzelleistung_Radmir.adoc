@@ -21,7 +21,7 @@ Deshalb war eine vollständige *Anforderungsanalyse*, ein eigener *Systementwurf
 
 == 2. Lösungsweg
 
-Zuerst habe ich die grundlegende Logik in einem Dokument namens `Algorithmus_Turnierplangenerator.docx` beschrieben.
+Zuerst habe ich die grundlegende Logik in einem Dokument namens `Algorithmus_Turnierplangenerator.adoc` beschrieben.
 Dort habe ich die Abläufe wie in Use-Case-Szenarien dargestellt – von der Spielgenerierung bis zur Zuweisung von Rollen und Slots.
 
 Für die Umsetzung habe ich mich an folgenden Prinzipien orientiert:
