@@ -1,6 +1,7 @@
 // Meta
 :project-name: Turnierauswertungssoftware
 :project-system-name: Turnierauswertungssoftware
+:authors: Kareen Khouri, Jonas Grießhaber, Alexander Zajcev, Radmir Mullagaliev, Maximilian Lohr
 // Settings:
 :toc:
 :toc-title: Inhaltsverzeichnis
