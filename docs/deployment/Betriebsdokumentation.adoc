@@ -1,4 +1,4 @@
-= Einrichten, Konfigurieren und Betreuen des Systems
+= Betriebsdokumentation Turnierplanungssoftware
 include::../_includes/default-attributes.inc.adoc[]
 
 *Turnierauswertungssoftware, Projekt im Kurs Software Engineering 2024/2025, Team C*

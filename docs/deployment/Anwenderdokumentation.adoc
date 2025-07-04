@@ -1,0 +1,81 @@
+= Anwenderdokumentation Turnierplanungssoftware
+include::../_includes/default-attributes.inc.adoc[]
+imagesdir:: images
+
+*Turnierauswertungssoftware, Projekt im Kurs Software Engineering 2024/2025, Team C*
+
+<<<
+
+== Einleitung
+Diese Anleitung richtet sich an Organisatoren und Teilnehmer eines Volleyballturniers. Die Anwendung dient der Planung, Durchführung und Auswertung von Turnieren direkt in der Sporthalle. Die Software läuft im Webbrowser (z. B. auf Smartphones, Tablets oder Laptops) und ist über einen lokalen Hotspot erreichbar.
+
+== Aufbau und Navigation der Benutzeroberfläche
+Die Webanwendung ist in drei Hauptbereiche unterteilt:
+
+[discrete]
+=== Startseite
+- Navigation zu den Kernfunktionen
+
+image::startseite.png[Abbildung der Startseite]
+
+[discrete]
+=== Turnierplan
+- Automatisch generierter Spielplan mit Zeiten, Spielfeldern und Teams
+- In der Spalte ganz rechts gibt es Eingabefelder für den Punktestand
+
+[discrete]
+=== Ergebnisse
+- Live aktualisierter Stand mit Rangliste aller Teams
+
+== Nutzung der Hauptfunktionen
+
+=== Ergebnisse eintragen
+-	Wechsle zum Reiter *„Turnierplan“*
+-	Suche das gespielte Match und gehe in die Spalte ganz rechts
+-	Trage die Ergebnisse ins Eingabefeld ein oder nutze die Pfeile und klicke danach *Enter*
+
+=== Offline-Nutzung und Synchronisierung
+-	Die Software speichert Informationen auch *offline*
+-	Bei Wieder-Verbindung mit dem Hotspot erfolgt die *automatische Synchronisierung*
+-	Bei Problemen wende dich bitte an die Organisatoren vor Ort
+
+
+== FAQ
+
+[discrete]
+=== Was passiert, wenn mein Gerät offline ist?
+→ Die App funktioniert weiterhin. Daten werden lokal gespeichert und später synchronisiert, sobald die Verbindung wiederhergestellt wird
+
+[discrete]
+=== Warum kann ich einen Spielstand nicht bearbeiten?
+→ Du kannst Spielstände nur so lange bearbeiten, bis der Organisator das Turnier archiviert oder ein neues Turnier startet
+
+[discrete]
+=== Wie viele Teilnehmer werden unterstützt?
+→ Bis zu 200 Spieler können gleichzeitig am Turnier teilnehmen
+
+== Technische Voraussetzungen
+-	Gerät mit aktuellem Webbrowser (Smartphone, Tablet, Laptop)
+-	Zugriff auf lokalen Hotspot des Organisators
+-	Keine zusätzliche App oder Installation erforderlich
+
+== Zusätzliche Hinweise für die Organisatoren
+
+[discrete]
+=== Neues Turnier erstellen
+-	Rufe die Webanwendung im Browser auf 
+-	Wähle den Reiter *„Konfiguration“*
+-	Gib die *Konfigurationsparameter* (Anzahl Gruppen, Hin-/Rückspiel etc.) ein
+-	Der Turnierplan wird automatisch angepasst
+-	Der *QR-Code* kann mit den Spielern für einen schnellen Zugriff geteilt werden
+
+[discrete]
+=== Turniere speichern und laden
+-	Nach der Konfiguration kann das aktuelle Turnier auf der gleichen Seite mit einem Klick auf *„Speichern“* archiviert werden. Dabei wird der gesamte aktuelle Stand (inkl. Konfiguration und Spielständen) übernommen
+-	Im Eingabefeld kann dem Turnier ein individueller Name vergeben werden
+-	Archivierte Turniere können über den Reiter *„Historie“* angesehen werden. Dort gibt es auch die Möglichkeit zum Laden der Turniere
+
+[discrete]
+=== Ergebnisexport als PDF oder Excel
+-	Unter dem Reiter „Ergebnisse“ kann die Ergebnisliste per Klick auf den entsprechenden Button als .pdf oder .xlsx-Datei heruntergeladen werden.
+- _Stand Juni 2025: PDF- und Excel-Export noch nicht implementiert_
