@@ -52,6 +52,7 @@ include::{docs-project-management}/project_plan.adoc[lines=1..1;4..-1,leveloffse
 = Technische Spezifikation
 * Produktvision
 * Glossar und Domänenmodel
+* UX-Konzept
 
 :imagesdir: {docs-requirements}/images
 
@@ -64,4 +65,7 @@ include::{docs-requirements}/glossary.adoc[lines=1..1;4..-1,leveloffset=+1]
 <<<
 [#domain-model]
 include::{docs-requirements}/domain_model.adoc[lines=1..1;4..-1,leveloffset=+1]
+<<<
+// UX-Konzept
+include::{docs-requirements}/ux-concept.adoc[lines=1..1;4..-1,leveloffset=+1]
 <<<
