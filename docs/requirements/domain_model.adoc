@@ -5,4 +5,5 @@ include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
 
 == Domain-Model-Diagramm
-plantuml::{plantumlsdir}/domain_model.puml[svg]
+//plantuml::{plantumlsdir}/domain_model.puml[svg]
+image::../images/domain_model.png[Domain Model, width=100%]
