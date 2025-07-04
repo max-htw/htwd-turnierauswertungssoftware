@@ -77,7 +77,7 @@ Ziel: Zusammenspiel von Komponenten und Datenbank-Anbindung prüfen.
 | T14 | Leere DB-Initialisierung nach `reset()` liefert Default-Werte | DB-InMemory | Ja | Ja
 | T15 | Konfig-Setter/Get-Getter validieren (Fehler-/Erfolgsfälle) | DB-InMemory | Ja | Ja
 | T16 | Laden gespeicherter Turnierdaten | DB-InMemory | Ja | Ja
-| T17 | Generierung der Gesamttabelle (Service + UI) | SpielplanService + UI | Ja | Nein
+| T17 | Generierung der Gesamttabelle (Service + UI) | SpielplanService + UI | Ja | Ja
 | T18 | PDF-Export des Spielplans | PDFExportService | Ja | Nein
 | T19 | CSV-Export der Turnierdaten | CSVExportService | Nein | –
 |===
@@ -93,7 +93,7 @@ Ziel: Endnutzer-Workflows im Browser gegen die vollständige Anwendung testen.
 | T20 | Anzeige auf Smartphone (Responsive) | UI-Frontend | Ja
 | T21 | Responsive Design bei Gerätewechsel | UI-Frontend | Ja
 | T22 | Navigation zwischen Seiten | UI-Frontend | Ja
-| T23 | Farbliche Hervorhebung der nächsten Teams | UI-Frontend | Ja
+| T23 | Farbliche Hervorhebung der nächsten Teams | UI-Frontend | Nein
 | T24 | Anzeige bei fehlenden Daten | UI-Frontend | Ja
 | T25 | Anzeige der aktuellen Uhrzeit/Spielzeit | UI-Frontend | Ja
 | T26 | Rollenabhängige Anzeige | UI-Frontend + Auth | Ja
@@ -105,7 +105,8 @@ Ziel: Endnutzer-Workflows im Browser gegen die vollständige Anwendung testen.
 == Testumgebung
 
 * **Unit/Integration:** H2-InMemory-DB, JUnit 4, Mockito  
-* **Systemtests:** Lokale Deployment-Instanz, Selenium/Cypress (geplant)  
+* **Systemtests:** Lokale Deployment-Instanz
+  
 * **Netzwerk:** Offline- und Normalbetrieb  
 
 == Testvorgehen
@@ -122,8 +123,81 @@ Ziel: Endnutzer-Workflows im Browser gegen die vollständige Anwendung testen.
 * Keine Blocker-Bugs offen  
 * Systemtest-Workflows ohne kritische Fehler  
 
+== Testergebnisse
+
+=== Einordnung
+
+Die dokumentierten Tests stammen aus den Integrationstests (`T_Pipeline_tests`, `T_DBInterface_tests`) und decken zentrale Systemfunktionen wie Konfiguration, Datenhaltung, Auswertung und Export ab.  
+Die Modultests (z. B. zu einzelnen Validator- und Service-Klassen) wurden von den Entwicklern durchgeführt, jedoch nicht durchgängig dokumentiert. Eine zentrale Auswertung oder Referenz im Testkonzept war daher nicht möglich.
+
+Die Systemtests wurden manuell im Browser durchgeführt. Die geprüften Funktionen sind im Abnahmedokument dokumentiert und durch Testfall-IDs (T20–T28) nachvollziehbar zugeordnet.
+
+=== RoleAdmin_TaskEinstellungen_SetAnzGroups
+
+*Ziel:*  
+Überprüft, ob die Änderung der Gruppenzahl durch den Admin korrekt verarbeitet wird.
+
+*Ergebnis:*  
+-Die Anzahl der Gruppen wird korrekt gesetzt.  
+-Die Links zur Gruppenauswahl werden entsprechend angepasst.
+
+*Status:*  
+Test erfolgreich bestanden.
+
+=== testSpeichernUndLaden_ÜberInterface
+
+*Ziel:*  
+Überprüft das Speichern und Laden eines Turniers über das Datenbank-Interface.
+
+*Ergebnis:*  
+- Das Turnier kann gespeichert werden (sofern Implementierung vorhanden).  
+- Nach dem Laden aus dem Archiv sind alle Konfigurationsdaten (Gruppenanzahl, Teamanzahl, Rückspiel-Flag) korrekt wiederhergestellt.  
+- Nach einem Reset werden die Default-Werte geladen.  
+- Die Archivliste enthält den gespeicherten Turniernamen.
+
+*Hinweis:*  
+Test ist aktuell mit `@Ignore` markiert, da die Speicherfunktion noch nicht implementiert ist.
+
+*Status:*  
+Test wird übersprungen.
+
+=== testGesamttabelleGenerierung
+
+*Ziel:*  
+Überprüft die korrekte Generierung der Gesamttabelle (Auswertung) für eine Gruppe.
+
+*Ergebnis:*  
+- Nach Setzen verschiedener Spielergebnisse werden die Anzahl der Siege, Spiele und die Punktdifferenz für jedes Team korrekt berechnet.  
+- Die Tabelle enthält alle Teams der Gruppe.  
+- Beispiel: Team 0 hat 1 Sieg, 2 Spiele, Punktdifferenz -3 (wie erwartet).
+
+*Status:*  
+Test erfolgreich bestanden.
+
+=== testPdfExport_Spielplan
+
+*Ziel:*  
+Überprüft den PDF-Export des Spielplans.
+
+*Ergebnis:*  
+- Nach Konfiguration eines Turniers und Erzeugung eines Spielplans wird ein PDF erzeugt.  
+
+
+*Hinweis:*  
+Die Methode `PDFExportService.export()` ist noch nicht vollständig implementiert. Der Test basiert derzeit auf einer vorbereiteten Dummy-Implementierung.
+
+*Status:*  
+Test nicht bestanden – Funktion wird nicht mehr implementiert.
+
+=== Zusammenfassung
+
+- Die Tests zeigen, dass zentrale Funktionen wie das Setzen von Turnierkonfigurationen und die Auswertung der Gesamttabelle korrekt funktionieren.  
+- Die Archivierungs- und PDF-Export-Funktionen sind noch nicht vollständig implementiert, was in den Tests durch `@Ignore` bzw. fehlschlagende Assertions sichtbar wurde.  
+- Die Testabdeckung umfasst insbesondere Konfiguration, Datenhaltung, Auswertung und Exportlogik.
+
+
 == Dokumentation und Reporting
 
 * Testfälle und -ergebnisse in AsciiDoc pflegen  
 * Integration ins Git-Repository  
-* Fehlerbehandlung und Priorisierung über Testmanagement-Tool (z. B. Jira)
+
