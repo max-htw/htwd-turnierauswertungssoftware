@@ -1,6 +1,4 @@
-//Befehl zum Erstellen der PDF (im Terminal): 
-// asciidoctor-pdf .\Einzelreflexion.adoc -o .\Einzelreflexion.pdf
-= Einzelreflexion Turnierauswertungssoftware Team{nbsp}C
+= Einzelreflexion Turnierauswertungssoftware Team C
 include::../_includes/default-attributes.inc.adoc[]
 
 == Maximilian Lohr
@@ -9,10 +7,12 @@ include::./Einzelleistung_Max.adoc[]
 <<<
 
 == Kareen Khouri
+include::./Einzelleistung_Kareen.adoc[]
 
 <<<
 
 == Jonas Grießhaber
+include::./Einzelleistung_Jonas.adoc[]
 
 <<<
 

@@ -1,16 +1,14 @@
-= Einzelreflexion – Rolle als Tester
-:project: Volleyballturnier-Software
-:date: 2025-07-03
-:icons: font
-:sectnums:
+*Einzelreflexion – Rolle als Tester*
 
-== Ausgangssituation
+[discrete]
+==== Ausgangssituation
 
 Zu Beginn des Projekts war ich Teil des Analyse-Teams und habe die funktionalen Anforderungen erarbeitet und dokumentiert. Ein zentrales Ergebnis war das Visionsdokument, das die grundlegenden Ziele und Nutzungsanforderungen an die Volleyballturnier-Software festgehalten hat. Diese frühe Auseinandersetzung mit den fachlichen Anforderungen half mir später bei der Formulierung konkreter Testfälle, da ich dadurch ein gutes Verständnis für die erwarteten Funktionen und Nutzerinteraktionen hatte.
 
 Im weiteren Projektverlauf habe ich die Rolle des Testverantwortlichen übernommen. Ziel meiner Aufgabe war es, systematisch die Qualität der Software sicherzustellen und Abweichungen frühzeitig zu erkennen – insbesondere im Hinblick auf Validierung, Spielplanlogik, Ergebnisanzeige und Frontend-Verhalten.
 
-== Lösungsweg
+[discrete]
+==== Lösungsweg
 
 Meine erste Aufgabe war die Konzeption eines vollständigen Testkonzepts, das die Testziele, -arten und -methoden sowie konkrete Testfälle abbildet. Dabei orientierte ich mich an OpenUP sowie an Praktiken aus dem agilen Vorgehen.
 
@@ -32,7 +30,8 @@ Die Systemtests habe ich außerdem mit konkreten Anforderungen aus dem Abnahmedo
 * Testklassen: `T_Pipeline_tests`, `T_DBInterface_tests`
 * Abnahmedokument und Testdokumentation
 
-== Bewertung und Learnings
+[discrete]
+==== Bewertung und Learnings
 
 Die meisten Tests konnten erfolgreich durchgeführt werden und haben Bugs frühzeitig sichtbar gemacht. Besonders hilfreich war, dass ich durch meine frühere Analysearbeit die Anforderungen bereits gut kannte und zielgerichtete Testfälle formulieren konnte.
 

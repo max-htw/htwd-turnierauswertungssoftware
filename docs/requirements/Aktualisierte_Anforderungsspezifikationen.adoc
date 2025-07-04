@@ -1,12 +1,12 @@
+include::../_includes/default-attributes.inc.adoc[]
 // --- 1. Projektthema -------------------------
-= SE I - Belegabgabe: {project-name}
+= SE II - Aktualisierte Anforderungsspezifikationen: {project-name}
 // --- 2. Teammitglieder -----------------------
-Julian Groß <s86368@htw-dresden.de>; Alexander Zajcev <s87413@htw-dresden.de>; Kareen Khouri <s85594@htw-dresden.de>; Jonas Grießhaber  <s87547@htw-dresden.de>; Maximilian Lohr <s86327@htw-dresden.de>; Tim Reimann <s85696@htw-dresden.de>; Benedikt Mühlhans <s85662@htw-dresden.de>; Radmir Mullagaliev <s85138@htw-dresden.de>
+{authors}
 // --- 3. Abgabedatum --------------------------
-01. Januar 2025
+04. Juli 2025
 // ---------------------------------------------
-:docs: ../docs
-include::{docs}/_includes/default-attributes.inc.adoc[]
+:docs: ..
 // ---
 :doctype: book
 :toc:
@@ -27,7 +27,6 @@ include::{docs}/_includes/default-attributes.inc.adoc[]
 :experimental:
 // Folders
 :imagesdir-reset: {imagesdir}
-:plantumlsdir-reset: {plantumlsdir}
 :docs-test2: {docs}/test2
 :docs-requirements: {docs}/requirements
 :docs-project-management: {docs}/project_management
@@ -51,44 +50,18 @@ include::{docs-project-management}/project_plan.adoc[lines=1..1;4..-1,leveloffse
 
 // --- Technische Spezifikation ---
 = Technische Spezifikation
-* Vision
-* Glossar
-* Domänenmodel
-* UX-Konzept
+* Produktvision
+* Glossar und Domänenmodel
 
 :imagesdir: {docs-requirements}/images
-:plantumlsdir: {docs-requirements}/plantuml
 
-// Vision
+// Produktvision
 include::{docs-requirements}/vision.adoc[lines=1..1;4..-1,leveloffset=+1]
 <<<
-// Glossar
+// Glossar und Domänenmodell
 [#glossary]
 include::{docs-requirements}/glossary.adoc[lines=1..1;4..-1,leveloffset=+1]
 <<<
-// Domänenmodell
+[#domain-model]
 include::{docs-requirements}/domain_model.adoc[lines=1..1;4..-1,leveloffset=+1]
 <<<
-// UX-Konzept
-include::{docs-requirements}/ux-concept.adoc[lines=1..1;4..-1,leveloffset=+1]
-<<<
-
-// --- Entwurfsdokumentation ---
-= Entwurfsdokumentation
-* Architektur-Notizbuch
-* Test Cases
-
-// Architektur-Notizbuch
-:imagesdir: {docs-architecture}/images
-:plantumlsdir: {docs-architecture}/plantuml
-
-include::{docs-architecture}/architecture_notebook.adoc[lines=1..1;4..-1,leveloffset=+1]
-<<<
-// Test Cases
-:imagesdir: {docs-test}/images
-include::{docs-test}/testkonzept.adoc[lines=1..1;4..-1,leveloffset=+1]
-<<<
-
-// ---------------------------------------------
-
-:imagesdir: {imagesdir-reset}/images

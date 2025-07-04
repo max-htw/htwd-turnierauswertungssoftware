@@ -4,9 +4,5 @@
 include::../_includes/default-attributes.inc.adoc[]
 // Platzhalter für weitere Dokumenten-Attribute
 
-== Allgemeine Informationen
-
-
-
 == Domain-Model-Diagramm
 plantuml::{plantumlsdir}/domain_model.puml[svg]
