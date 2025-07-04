@@ -1,0 +1,9 @@
+@startuml
+
+class TurnierMatch
+class TurnierKonfiguration
+class SpielStats
+class FeldSchedule
+class AuswertungsEintrag
+
+@enduml

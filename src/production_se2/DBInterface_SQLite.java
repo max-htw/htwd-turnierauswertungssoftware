@@ -78,7 +78,7 @@ public class DBInterface_SQLite extends DBInterfaceBase{
   }
 
   @Override
-  ArrayList<TurnierMatch> getMatchesByGroupID(int groupID) {
+  public ArrayList<TurnierMatch> getMatchesByGroupID(int groupID) {
 
     ArrayList<TurnierMatch> a = new ArrayList<>();
 
@@ -115,7 +115,7 @@ public class DBInterface_SQLite extends DBInterfaceBase{
 
 
   @Override
-  ArrayList<String> turnierKonf_getGroupNames() {
+  public ArrayList<String> turnierKonf_getGroupNames() {
     ArrayList<String> a = new ArrayList<>();
     for(int i = 0; i < AppSettings.maxAnzGroups; i++){
       a.add("Gruppe" + i + "(ToDo: getGroupNames)");
@@ -124,12 +124,12 @@ public class DBInterface_SQLite extends DBInterfaceBase{
   }
 
   @Override
-  int turnierKonf_getAnzGruppen() {
+  public int turnierKonf_getAnzGruppen() {
     return AppSettings.minAnzGroups;
   }
 
   @Override
-  ArrayList<String> turnierKonf_getTeamNamesByGroupID(int groupID) {
+  public ArrayList<String> turnierKonf_getTeamNamesByGroupID(int groupID) {
     ArrayList<String> a = new ArrayList<>();
     for(int i = 0; i < AppSettings.maxAnzTeams; i++){
       a.add("Team" + i + "(ToDo: getTeamNamesByGroupID)");
@@ -138,97 +138,97 @@ public class DBInterface_SQLite extends DBInterfaceBase{
   }
 
   @Override
-  int turnierKonf_getAnzTeamsByGroupID(int GroupID) {
+  public int turnierKonf_getAnzTeamsByGroupID(int GroupID) {
     return 0;
   }
 
   @Override
-  boolean turnierKonf_getNeedRueckspiele() {
+  public boolean turnierKonf_getNeedRueckspiele() {
     return false;
   }
 
   @Override
-  int turnierKonf_getAnzSpielfelder() {
+  public int turnierKonf_getAnzSpielfelder() {
     return 0;
   }
 
   @Override
-  boolean turnierKonf_getNeedPrefillScores() {
+  public boolean turnierKonf_getNeedPrefillScores() {
     return false;
   }
 
   @Override
-  TurnierMatch getMatch(int groupID, int team1, int team2) {
+  public TurnierMatch getMatch(int groupID, int team1, int team2) {
     return null;
   }
 
   @Override
-  SpielStats getSpielStats(int groupID, int team1, int team2, boolean isHinspiel) {
+  public SpielStats getSpielStats(int groupID, int team1, int team2, boolean isHinspiel) {
     return null;
   }
 
   @Override
-  ArrayList<String> getTurnierArchiveNames() {
+  public ArrayList<String> getTurnierArchiveNames() {
     return null;
   }
 
   @Override
-  void loadTurnierFromArchive(int pos) {
+  public void loadTurnierFromArchive(int pos) {
 
   }
 
   @Override
-  void loadTurnierFromArchive(String turnierName){
+  public void loadTurnierFromArchive(String turnierName){
     
   }
 
   @Override
-  ArrayList<SpielStats> getFeldSchedule(int feldNr) {
+  public ArrayList<SpielStats> getFeldSchedule(int feldNr) {
     return null;
   }
 
   @Override
-  SpielStats getSpielStatsByFeldUndTimeSlot(int feldNr, int idx) {
+  public SpielStats getSpielStatsByFeldUndTimeSlot(int feldNr, int idx) {
     return null;
   }
 
   @Override
-  ArrayList<FeldSchedule> getTurnierPlan() {
+  public ArrayList<FeldSchedule> getTurnierPlan() {
     return null;
   }
 
   @Override
-  int turnierKonf_getAnzTimeSlots() {
+  public int turnierKonf_getAnzTimeSlots() {
     return 20;
   }
 
   @Override
-  boolean turnierKonf_setAnzGruppen(int anz) {
+  public boolean turnierKonf_setAnzGruppen(int anz) {
     return false;
   }
 
   @Override
-  boolean turnierKonf_setAnzTeamsByGroupID(int groupID, int anzTeams) {
+  public boolean turnierKonf_setAnzTeamsByGroupID(int groupID, int anzTeams) {
     return false;
   }
 
   @Override
-  boolean turnierKonf_setAnzSpielfelder(int anz) {
+  public boolean turnierKonf_setAnzSpielfelder(int anz) {
     return false;
   }
 
   @Override
-  boolean turnierKonf_setNeedRueckspiele(boolean needRueckspiele) {
+  public boolean turnierKonf_setNeedRueckspiele(boolean needRueckspiele) {
     return false;
   }
 
   @Override
-  boolean turnierKonf_setNeedPrefillScores(boolean needPrefillScores) {
+  public boolean turnierKonf_setNeedPrefillScores(boolean needPrefillScores) {
     return false;
   }
 
   @Override
-  boolean saveCurrentTurnierToArchive(String turnierName) {
+  public boolean saveCurrentTurnierToArchive(String turnierName) {
     return false;
   }
 
@@ -239,80 +239,80 @@ public class DBInterface_SQLite extends DBInterfaceBase{
   }
 
   @Override
-  boolean isTurnierPlanAktuell() {
+  public boolean isTurnierPlanAktuell() {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'isTurnierPlanAktuell'");
   }
 
   @Override
-  void fillTurnierPlan(ArrayList<DBInterfaceBase.FeldSchedule> turnierPlan) {
+  public void fillTurnierPlan(ArrayList<DBInterfaceBase.FeldSchedule> turnierPlan) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'fillTurnierPlan'");
   }
 
   @Override
-  int turnierKonf_getTimeSlotDuration() {
+  public int turnierKonf_getTimeSlotDuration() {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'turnierKonf_getTimeSlotDuration'");
   }
 
 
   @Override
-  void resetKonfiguration() {
+  public void resetKonfiguration() {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'resetKonfiguration'");
   }
 
   @Override
-  void resetMatches() {
+  public void resetMatches() {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'resetMatches'");
   }
 
   @Override
-  void match_setPunkteTeam1Hinspiel(int groupID, int team1id, int team2id, int team1Punkte) {
+  public void match_setPunkteTeam1Hinspiel(int groupID, int team1id, int team2id, int team1Punkte) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'match_setPunkteTeam1Hinspiel'");
   }
 
   @Override
-  void match_setPunkteTeam1Rueckspiel(int groupID, int team1id, int team2id, int team1Punkte) {
+  public void match_setPunkteTeam1Rueckspiel(int groupID, int team1id, int team2id, int team1Punkte) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'match_setPunkteTeam1Rueckspiel'");
   }
 
   @Override
-  void match_setPunkteTeam2Hinspiel(int groupID, int team1id, int team2id, int team2Punkte) {
+  public void match_setPunkteTeam2Hinspiel(int groupID, int team1id, int team2id, int team2Punkte) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'match_setPunkteTeam2Hinspiel'");
   }
 
   @Override
-  void match_setPunkteTeam2Rueckspiel(int groupID, int team1id, int team2id, int team2Punkte) {
+  public void match_setPunkteTeam2Rueckspiel(int groupID, int team1id, int team2id, int team2Punkte) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'match_setPunkteTeam2Rueckspiel'");
   }
 
   @Override
-  int turnierKonf_getTurnierStartAsMinutes() {
+  public int turnierKonf_getTurnierStartAsMinutes() {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'turnierKonf_getTurnierStartAsMinutes'");
   }
 
   @Override
-  void turnierKonf_setTurnierStartAsMinutes(int minutes) {
+  public void turnierKonf_setTurnierStartAsMinutes(int minutes) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'turnierKonf_setTurnierStartAsMinutes'");
   }
 
   @Override
-  void turnierKonf_setTimeSlotDuration(int minutes) {
+  public void turnierKonf_setTimeSlotDuration(int minutes) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'turnierKonf_setTimeSlotDuration'");
   }
 
   @Override
-  void turnierKonf_setAnzTimeSlots(int minutes) {
+  public void turnierKonf_setAnzTimeSlots(int minutes) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'turnierKonf_setAnzTimeSlots'");
   }

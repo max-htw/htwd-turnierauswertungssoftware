@@ -375,14 +375,14 @@ public class DBInterface_InMemory extends DBInterfaceBase{
 
   private static int _anzGruppen = AppSettings.minAnzGroups;
   @Override
-  int turnierKonf_getAnzGruppen() {
+  public int turnierKonf_getAnzGruppen() {
     if(!_initialized) _initTurnier();
     return _anzGruppen;
   }
 
   private  static ArrayList<String> _groupNames = new ArrayList<>();
   @Override
-  ArrayList<String> turnierKonf_getGroupNames() {
+  public ArrayList<String> turnierKonf_getGroupNames() {
     if(!_initialized) _initTurnier();
     if(_groupNames == null) {
       _groupNames = new ArrayList<>();
@@ -395,7 +395,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   }
 
   @Override
-  ArrayList<String> turnierKonf_getTeamNamesByGroupID(int groupID) {
+  public ArrayList<String> turnierKonf_getTeamNamesByGroupID(int groupID) {
     if(!_initialized) _initTurnier();
     if(_teamNames == null){
       _teamNames = new ArrayList<>();
@@ -416,7 +416,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
 
   private static ArrayList<Integer> _anzTeamsProGruppe = new ArrayList<>();
   @Override
-  int turnierKonf_getAnzTeamsByGroupID(int GroupID) {
+  public int turnierKonf_getAnzTeamsByGroupID(int GroupID) {
     if(!_initialized) _initTurnier();
     if(_anzTeamsProGruppe.size() <= GroupID){
       throw new IllegalArgumentException();
@@ -428,27 +428,27 @@ public class DBInterface_InMemory extends DBInterfaceBase{
 
   private static boolean _needRueckspiele = false;
   @Override
-  boolean turnierKonf_getNeedRueckspiele() {
+  public boolean turnierKonf_getNeedRueckspiele() {
     if(!_initialized) _initTurnier();
     return _needRueckspiele;
   }
 
   private static int _anzSpielfelder = AppSettings.minAnzSpielfelder;
   @Override
-  int turnierKonf_getAnzSpielfelder() {
+  public int turnierKonf_getAnzSpielfelder() {
     if(!_initialized) _initTurnier();
     return _anzSpielfelder;
   }
 
   private static boolean _needPrefillScores = false;
   @Override
-  boolean turnierKonf_getNeedPrefillScores() {
+  public boolean turnierKonf_getNeedPrefillScores() {
     if(!_initialized) _initTurnier();
     return _needPrefillScores;
   }
 
   @Override
-  ArrayList<TurnierMatch> getMatchesByGroupID(int groupID) {
+  public ArrayList<TurnierMatch> getMatchesByGroupID(int groupID) {
     if(!_initialized){
       _initTurnier();
       _initializeMatches();
@@ -468,7 +468,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   }
 
   @Override
-  TurnierMatch getMatch(int groupID, int team1, int team2) {
+  public TurnierMatch getMatch(int groupID, int team1, int team2) {
     if(!_initialized){
       _initTurnier();
       _initializeMatches();
@@ -483,12 +483,12 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   }
 
   @Override
-  SpielStats getSpielStats(int groupID, int team1, int team2, boolean isHinspiel) {
+  public SpielStats getSpielStats(int groupID, int team1, int team2, boolean isHinspiel) {
     return null;
   }
 
   @Override
-  boolean saveCurrentTurnierToArchive(String turnierName) {
+  public boolean saveCurrentTurnierToArchive(String turnierName) {
     boolean ausgabe = false;
 
     TurnierArchiv ta = new TurnierArchiv(turnierName);
@@ -532,7 +532,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   }
 
   @Override
-  ArrayList<String> getTurnierArchiveNames() {
+  public ArrayList<String> getTurnierArchiveNames() {
     ArrayList<String> a = new ArrayList<>();
 
     File dir = new File("./" + AppSettings.archiveSubfolderName);
@@ -565,7 +565,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   }
 
   @Override
-  void loadTurnierFromArchive(int pos) {
+  public void loadTurnierFromArchive(int pos) {
     ArrayList<String> a = getTurnierArchiveNames();
     if(a.size() > pos){
       loadTurnierFromArchive(a.get(pos));
@@ -576,7 +576,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   }
 
   @Override
-  void loadTurnierFromArchive(String turnierName) {
+  public void loadTurnierFromArchive(String turnierName) {
     File f = new File("./" + AppSettings.archiveSubfolderName + "/" + turnierName + ".json");
     if(!f.exists()){
       throw new RuntimeException("DBInterface_InMemory.loadTurnierFromArchive(" + turnierName + "): archive does not exist.");
@@ -630,7 +630,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   }
 
   @Override
-  ArrayList<SpielStats> getFeldSchedule(int feldNr) {
+  public ArrayList<SpielStats> getFeldSchedule(int feldNr) {
     ArrayList<SpielStats> a = null;
     if(feldNr < _turnierPlan.size()){
       a = _turnierPlan.get(feldNr).getSpiele();
@@ -639,12 +639,12 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   }
 
   @Override
-  SpielStats getSpielStatsByFeldUndTimeSlot(int feldNr, int idx) {
+  public SpielStats getSpielStatsByFeldUndTimeSlot(int feldNr, int idx) {
     return null;
   }
 
   @Override
-  ArrayList<FeldSchedule> getTurnierPlan() {
+  public ArrayList<FeldSchedule> getTurnierPlan() {
     if(!_initialized){ // _turnierPlan.isEmpty() ||
       _initTurnier();
       _initializeMatches();
@@ -670,7 +670,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
 
   private static int _anzTimeSlots = 30;
   @Override
-  int turnierKonf_getAnzTimeSlots() {
+  public int turnierKonf_getAnzTimeSlots() {
     if(!_initialized) _initTurnier();
     return _anzTimeSlots;
   }
@@ -684,13 +684,13 @@ public class DBInterface_InMemory extends DBInterfaceBase{
 
   private static int _timeSlotDuration = 0;
   @Override
-  int turnierKonf_getTimeSlotDuration(){
+  public int turnierKonf_getTimeSlotDuration(){
     if(!_initialized) _initTurnier();
     return _timeSlotDuration;
   }
 
   @Override
-  boolean turnierKonf_setAnzGruppen(int anz) {
+  public boolean turnierKonf_setAnzGruppen(int anz) {
     if(anz < AppSettings.minAnzGroups || anz > AppSettings.maxAnzGroups){
       throw new IllegalArgumentException();
     }
@@ -711,7 +711,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   }
 
   @Override
-  boolean turnierKonf_setAnzTeamsByGroupID(int groupID, int anzTeams) {
+  public boolean turnierKonf_setAnzTeamsByGroupID(int groupID, int anzTeams) {
     int g = turnierKonf_getAnzGruppen();
     if(groupID < 0 || groupID >= g || anzTeams < AppSettings.minAnzTeams || anzTeams > AppSettings.maxAnzTeams){
       throw new IllegalArgumentException();
@@ -726,14 +726,14 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   }
 
   @Override
-  boolean turnierKonf_setAnzSpielfelder(int anz) {
+  public boolean turnierKonf_setAnzSpielfelder(int anz) {
     _anzSpielfelder = anz>AppSettings.maxAnzSpielfelder? AppSettings.maxAnzSpielfelder : anz;
     _initialized = false;
     return true;
   }
 
   @Override
-  boolean turnierKonf_setNeedRueckspiele(boolean needRueckspiele) {
+  public boolean turnierKonf_setNeedRueckspiele(boolean needRueckspiele) {
     if(needRueckspiele != _needRueckspiele){
       _initialized = false;
     }
@@ -742,7 +742,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   }
 
   @Override
-  boolean turnierKonf_setNeedPrefillScores(boolean needPrefillScores) {
+  public boolean turnierKonf_setNeedPrefillScores(boolean needPrefillScores) {
     _needPrefillScores = needPrefillScores;
     return true;
   }
@@ -801,7 +801,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
     }
 
   @Override
-  boolean isTurnierPlanAktuell() {
+  public boolean isTurnierPlanAktuell() {
     boolean a = _turnierPlanKonfig.needRueckspiele == turnierKonf_getNeedRueckspiele();
     a = a && _turnierPlanKonfig.anzahlSpielfelder == turnierKonf_getAnzSpielfelder();
     a = a && _turnierPlanKonfig.anzTeamsJedeGruppe.size() == turnierKonf_getAnzGruppen();
@@ -815,7 +815,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   }
 
   @Override
-  void fillTurnierPlan(ArrayList<DBInterfaceBase.FeldSchedule> turnierPlan) {
+  public void fillTurnierPlan(ArrayList<DBInterfaceBase.FeldSchedule> turnierPlan) {
     _turnierPlan = turnierPlan;
 
     _turnierPlanKonfig.anzTeamsJedeGruppe.clear();
@@ -828,7 +828,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   }
 
   @Override
-  void resetKonfiguration() {
+  public void resetKonfiguration() {
     _anzGruppen = -1;
     _anzSpielfelder = -1;
     _anzTeamsProGruppe = new ArrayList<>();
@@ -842,7 +842,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   }
 
   @Override
-  void resetMatches() {
+  public void resetMatches() {
     for(int h : _matches.keySet()){
       TurnierMatch m = _matches.get(h);
       m.setHinspielFeldNr(-1);
@@ -861,7 +861,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   }
 
   @Override
-  void match_setPunkteTeam1Hinspiel(int groupID, int team1id, int team2id, int team1Punkte) {
+  public void match_setPunkteTeam1Hinspiel(int groupID, int team1id, int team2id, int team1Punkte) {
     if(!_initialized){
       _initTurnier();
       _initializeMatches();
@@ -877,7 +877,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   }
 
   @Override
-  void match_setPunkteTeam1Rueckspiel(int groupID, int team1id, int team2id, int team1Punkte) {
+  public void match_setPunkteTeam1Rueckspiel(int groupID, int team1id, int team2id, int team1Punkte) {
     if(!_initialized){
       _initTurnier();
       _initializeMatches();
@@ -893,7 +893,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   }
 
   @Override
-  void match_setPunkteTeam2Hinspiel(int groupID, int team1id, int team2id, int team2Punkte) {
+  public void match_setPunkteTeam2Hinspiel(int groupID, int team1id, int team2id, int team2Punkte) {
     if(!_initialized){
       _initTurnier();
       _initializeMatches();
@@ -909,7 +909,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   }
 
   @Override
-  void match_setPunkteTeam2Rueckspiel(int groupID, int team1id, int team2id, int team2Punkte) {
+  public void match_setPunkteTeam2Rueckspiel(int groupID, int team1id, int team2id, int team2Punkte) {
     if(!_initialized){
       _initTurnier();
       _initializeMatches();
@@ -925,7 +925,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   }
 
   @Override
-  void turnierKonf_setTurnierStartAsMinutes(int minutes) {
+  public void turnierKonf_setTurnierStartAsMinutes(int minutes) {
     if (minutes > 0){
       _turnierStartMinute = minutes;
     }
@@ -935,7 +935,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   }
 
   @Override
-  void turnierKonf_setTimeSlotDuration(int minutes) {
+  public void turnierKonf_setTimeSlotDuration(int minutes) {
     if(minutes < AppSettings.minTimeSlotDuration || minutes > AppSettings.maxTimeSlotDuration){
       minutes = AppSettings.minTimeSlotDuration;
     }
@@ -943,7 +943,7 @@ public class DBInterface_InMemory extends DBInterfaceBase{
   }
 
   @Override
-  void turnierKonf_setAnzTimeSlots(int anz) {
+  public void turnierKonf_setAnzTimeSlots(int anz) {
     _anzTimeSlots = 30;
     if(anz > 0){
       _anzTimeSlots = anz;

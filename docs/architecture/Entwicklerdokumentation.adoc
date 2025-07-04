@@ -1,0 +1,115 @@
+= Entwicklerdokumentation: {project-name}
+;
+{localdatetime}
+include::../_includes/default-attributes.inc.adoc[]
+
+== Einleitung
+Ziel dieses Dokumentes ist es einem neuen Entwickler die Architektur der Turnierauswertungssoftware zu erklären und die Codeorganisazion im Projekt zu zeigen.
+
+Um sich einen Überblick über das eigentliche Projekt zu beschaffen, über die Kundenanforderungen und über die fachliche Zusammenhänge, soll man die Projektdokumentation lesen. Im Git-Repositorium befinden sich die adoc-Dokumente unter /docs/.
+
+Link zum Github Repositorium (Stand 2025-07):
+
+https://github.com/max-htw/htwd-turnierauswertungssoftware
+
+In der Datei `/src/production_se2.Readme.md` ist beschrieben, wie man mit der Arbeit an der Anwendung beginnt.
+
+== Architektur-relevante Anforderungen
+
+*funktionale Anforderungen:*
+
+* Entstehende Daten (Ergebnisse, Turnierhistorie, Teamnamen) etc. müssen gespeichert werden.
+* Die Software muss ohne Internet-Verbindung funktionieren und Eingaben müssen zwischen verschiedenen Endgeräten synchronisiert werden.
+
+*Benutzbarkeit:*
+
+* Die Software muss für den Spieler auf mobilen Endgeräten und für die Organisatoren auf Desktop-Geräten optimiert sein.
+* Es muss Mechanismen zum Exportieren von Daten als PDF- und Excel-Datei geben.
+
+*Leistung:*
+
+* Der Algorithmus zur Turnierplangenerierung muss den vorgegebenen Regeln folgen (Gleichmäßige Aufteilung zwischen Spielen, Pfeifen und Aussetzen, maximal ein Aussetzen nacheinander)
+
+*Wartbarkeit:*
+
+* Nach Ablauf des Projekts muss die Software von Dritten weiterentwickeln und gewartet werden können.
+
+== Entscheidungen, Nebenbedingungen und Begründungen
+
+*Client-Server*
+
+Wir haben uns für eine Client-Server-Webanwendung aus folgenden Gründen entschieden:
+
+- Da derselbe Datenbestand von mehreren unabhängigen Benutzern geändert wird, würde die Datensynchronisation bei einer Peer-To-Peer-Architektur einen zu großen Aufwand erfordern.
+- Der Aufwand für die Konfiguration von den Clientgeräten ist gering, wenn zur Nutzung des Softwaresystems auf der Benuzerseite nur ein Webbrowser benötigt wird.
+
+*autonomes WLAN-Netz*
+
+Um bei fehlender Internetverbindung die Systemnutzer kabellos zu vernetzen, muss vor Ort ein WLAN-Netz aufgebaut werden.
+
+*ohne JavaScript*
+
+Auf die Frontend-Logik auf den Clientgeräten haben wir verzichtet weil:
+
+- Die Benutzereingaben für die Anwendung nicht sehr Komplex sind.
+- Unser Kenntnisstand über die Full-Stack-Webentwicklung noch nicht so weit war.
+
+Nichtdestotrotz haben wir die Client-Logik nicht komplett ausgeschlossen und werden bestimmt in einigen Situationen JavaScript verwenden.
+
+*Java*
+
+Als Programmiersprache für die serverseitige Entwicklung haben wir uns für Java entschieden.
+Die Java-Laufzeitumgebung beinhaltet alle erforderlichen Module um die Webanwendung mit unseren während des Studium erworbenen Kenntnissen zu Realisieren. Unter anderem der eingebaute HTTPServer macht die Abhängigkeit von einem "richtigen" Webserver unnötig.
+Außerdem hat Java eine sehr gute Unterstützung und eine große menge von Drittanbieterbibliotheken.
+
+== Architektursichten
+
+=== C4-Views
+
+Anhand des C4-Models kann man die Architektur der Webanwendung aus unterschidlichen Perspektiven nachvollziehen.
+
+*C4-Context* ist die höchste Abstraktion. Zwei Typen von Benutzern nutzen Dienste der Anwendung. Man erkennt auch, dass die Anwendung ein abgeschlossenes System ist. Es nutzt keine externen Dienste.
+
+*C4-Container* Zeigt mehr Details über die Anwendungsstruktur. Ganze Programmlogik ist in die mit Java programmierte Anwendung verlegt. Die Datenverwaltungsdieste werden von einem selbständigen Datenbankmodul angeboten. Und wie es später ersichtlich wird, über die Schnittstelle für das Datenbankmodul kann auch eine in Java implementierte Komponente aus demselben Container die Datenverwaltungsdieste bereitstellen.
+
+[cols="1,52a,5,5,36a,1", frame=none, grid=none]
+|===
+|
+| plantuml::{plantumlsdir}/an_c4_context.puml[svg,pdfwidth=100%]
+|
+|
+| plantuml::{plantumlsdir}/an_c4_container.puml[svg,pdfwidth=100%]
+|
+|===
+
+=== Container-Komponenten
+Der zentrale Container der Webanwendung besteht aus 4 Typen von Komponenten. 
+
+- Componenten zum Verarbeiten des Requests.
+- Datenverwaltungskomponenten, die über DBInterface ansprechbar sind.
+- Komponenten die Dinste für die Datenverwaltung bereitstellen.
+- Weitere Komponenten, wie z.B. PDF-Generierung (Stand 2025-07: noch nicht implementiert)
+
+plantuml::{plantumlsdir}/an_components.puml[svg,pdfwidth=75%]
+
+
+=== Requestbearbeitungsreihenfolge 
+Die folgende Sequenzdiagramm veranschaulicht den Ablauf bei der Bearbeitung eines Requests.
+
+plantuml::{plantumlsdir}/an_request_reihenfolge.puml[svg,pdfwidth=80%]
+
+== Datenmanagementschnittstelle
+Die abstrakte Klasse *DBInterfaceBase* definiert Methoden, über welche die Controller die Daten abfragen und modifizieren. 
+
+plantuml::{plantumlsdir}/an_dbinterface.puml[svg,pdfwidth=100%]
+
+Die DBInterfaceBase-Klasse enthält auch Definitionen der für die Datenübergabe entworfener Klassen. Für eine detailierte Beschreibung der Klassen sehen Sie den Quelltext oder die mit dem Javadoc generierte Softwaredokumentation.
+
+plantuml::{plantumlsdir}/an_dbclassen.puml[svg,pdfwidth=100%]
+
+
+== Zukünftige Entwicklungsziele
+
+- InMemory-DatenVerwaltung nicht thread safe
+- Java-Projektstruktur: zur Zeit alles (inklusive Tests) liegt in der default-Package
+

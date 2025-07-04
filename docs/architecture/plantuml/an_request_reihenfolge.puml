@@ -1,0 +1,23 @@
+@startuml
+!pragma teoz true
+participant "User" as U
+participant "Request Verteiler" as RV
+participant "Controller" as C
+participant "Renderer" as R
+participant "DMS"
+participant "Service-Komponente" as SK
+U ->(10) RV: Request
+RV ->(10) C: (Role,\nTätigkeit,\nAktion)
+activate C
+C ->(10) DMS: Aktion
+DMS ->(10) SK
+SK ->(10) DMS
+DMS ->(10) C: Ergebnis
+C -> C: Renderer-Daten füllen
+C ->(10) R: Renderer-Daten
+R ->(10) C: Response
+C ->(10) RV: Response
+deactivate C
+RV ->(10) U: Response
+
+@enduml

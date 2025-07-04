@@ -1,0 +1,62 @@
+@startuml
+abstract class  "DBInterfaceBase"
+
+DBInterfaceBase : void reset();
+DBInterfaceBase : void resetKonfiguration();
+DBInterfaceBase : void resetMatches();
+
+DBInterfaceBase : ArrayList <String> turnierKonf_getGroupNames(); // index = groupID -> groupName
+DBInterfaceBase : int turnierKonf_getAnzGruppen();
+
+  DBInterfaceBase : ArrayList<String> turnierKonf_getTeamNamesByGroupID(int groupID); // <teamNr, teamName>
+  DBInterfaceBase : int turnierKonf_getAnzTeamsByGroupID(int GroupID);
+
+DBInterfaceBase : boolean turnierKonf_getNeedRueckspiele();
+DBInterfaceBase : int turnierKonf_getAnzSpielfelder();
+
+DBInterfaceBase : boolean turnierKonf_getNeedPrefillScores();
+
+DBInterfaceBase : int turnierKonf_getTurnierStartAsMinutes();
+DBInterfaceBase : int turnierKonf_getTimeSlotDuration();
+DBInterfaceBase : int turnierKonf_getAnzTimeSlots();
+
+DBInterfaceBase : ArrayList<TurnierMatch> getMatchesByGroupID(int groupID);
+DBInterfaceBase : TurnierMatch getMatch(int groupID, int team1, int team2);
+
+DBInterfaceBase : SpielStats getSpielStats(int groupID, int team1, int team2, boolean isHinspiel);
+
+DBInterfaceBase : ArrayList<String> getTurnierArchiveNames();
+DBInterfaceBase : void loadTurnierFromArchive(int pos);
+DBInterfaceBase : void loadTurnierFromArchive(String turnierName);
+
+DBInterfaceBase : ArrayList<SpielStats> getFeldSchedule(int feldNr);
+DBInterfaceBase : SpielStats getSpielStatsByFeldUndTimeSlot(int feldNr, int idx);
+
+DBInterfaceBase :  ArrayList<FeldSchedule> getTurnierPlan();
+DBInterfaceBase :  boolean isTurnierPlanAktuell();
+DBInterfaceBase :  void fillTurnierPlan(ArrayList<FeldSchedule> turnierPlan);
+DBInterfaceBase :  ArrayList<AuswertungsEintrag> calculateAuswertung(int groupID);
+
+DBInterfaceBase :  ---
+
+DBInterfaceBase :  boolean turnierKonf_setAnzGruppen(int anz);
+DBInterfaceBase :  boolean turnierKonf_setAnzTeamsByGroupID(int groupID, int anzTeams);
+DBInterfaceBase :  boolean turnierKonf_setAnzSpielfelder(int anz);
+DBInterfaceBase :  boolean turnierKonf_setNeedRueckspiele(boolean needRueckspiele);
+DBInterfaceBase :  boolean turnierKonf_setNeedPrefillScores(boolean needPrefillScores);
+
+DBInterfaceBase :  void turnierKonf_setTurnierStartAsMinutes(int minutes);
+DBInterfaceBase :  void turnierKonf_setTimeSlotDuration(int minutes);
+DBInterfaceBase :  void turnierKonf_setAnzTimeSlots(int anz);
+
+DBInterfaceBase :  void match_setPunkteTeam1Hinspiel(int groupID, int team1ID, int team2ID, int team1Punkte);
+DBInterfaceBase :  void match_setPunkteTeam1Rueckspiel(int groupID, int team1ID, int team2ID, int team1Punkte);
+
+DBInterfaceBase :  void match_setPunkteTeam2Hinspiel(int groupID, int team1ID, int team2ID, int team2Punkte);
+DBInterfaceBase :  void match_setPunkteTeam2Rueckspiel(int groupID, int team1ID, int team2ID, int team2Punkte);
+
+DBInterfaceBase :  public abstract boolean saveCurrentTurnierToArchive(String turnierName);
+DBInterfaceBase :  void updateMatch(TurnierMatch match);
+
+
+@enduml

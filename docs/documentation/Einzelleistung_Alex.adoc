@@ -1,5 +1,6 @@
 
-*Entwurf und Implementierung der Request-Verarbeitungskette unter Verwendung des Model-View-Presenter Architekturmusters.*
+*Entwurf und Implementierung der Request-Verarbeitungskette unter Verwendung des* + 
+*Model-View-Presenter Architekturmusters.*
 
 [discrete]
 ==== Ausgangssituation
@@ -15,7 +16,7 @@ Die Störfaktoren waren unter anderem:
 
 [discrete]
 ==== Lösungsweg
-Um die Schwierigkeiten zu adressieren haben wir im Team entschieden eine saubere "Separation of Concerns" durchzusetzen. Den MVP-Architekturmuster fand ich dafür am besten geeignet.
+Um die Schwierigkeiten zu adressieren haben wir uns im Team in der *Entwurfsphase* entschieden eine saubere "Separation of Concerns" durchzusetzen. Den MVP-Architekturmuster fand ich dafür am besten geeignet und habe mit der *Implementierung* angefangen.
 
 [discrete]
 ===== View-Presenter-Verbindung
@@ -34,7 +35,7 @@ Eine besondere Herausforderung war einen Weg zu finden, wie die View-Komponente 
 
 [discrete]
 ===== Modell
-Die für die Anwendung erforderliche Datenstrukturen wurden im Prototyp im Programm-Speicher verwaltet. Es gab Bedenken, dass die Leistung der InMemory-Datenverwaltung irgendwann nicht mehr ausreicht und deswegen ein externes Datenbanksystems (z.B SQLite) notwendig wird.
+Die für die Anwendung erforderliche Datenstrukturen wurden im Prototyp im Programm-Speicher verwaltet. Es gab Bedenken, dass die Leistung der InMemory-Datenverwaltung irgendwann nicht mehr ausreicht und deswegen ein externes Datenbanksystem (z.B SQLite) notwendig wird.
 Der Austausch des Datenverwaltungmoduls ist nur möglich, wenn die Datenabfragen und Datenmanipulationen in der Anwendung über eine genau definierte Schnittstelle durchgeführt werden. Die Datenbankschnittstelle habe ich als eine abstrakte Klasse realisiert. In der abstrakten Klasse sind die Funktionen nur deklariert und die Klassen der Datenstrukturen definiert. Konkrete Implementierung der Funktionen findet in den von der abstrakten Klasse abgeleiteten Datenbank-Backend-Klassen statt.
 
 [discrete]

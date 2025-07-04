@@ -1,0 +1,46 @@
+@startuml
+
+skinparam interface {
+  backgroundColor<<Request>> DarkKhaki
+  backgroundColor<<DB>> Yellow
+}
+
+skinparam component {
+  backgroundColor<<Request>> DarkKhaki
+  backgroundColor<<Other-Service>> Green
+  backgroundColor<<DB>> Yellow
+  backgroundColor<<DMS-Service>> Aqua
+}
+
+component Java-Web-Anwendung {
+
+    interface "Renderer Data" as RD <<Request>>
+    interface "DBInterface" as DB <<DB>>
+
+    [Request Verteiler] as Rv <<Request>>
+    [Controller] as Ctrl <<Request>>
+    [InMemory-DMS] as IM <<DB>>
+    [Renderer] <<Request>>
+    [Turnierplan\nGenerierung] as TG <<DMS-Service>>
+    [Ergebnis-\nAuswertung] as ERG <<DMS-Service>>
+    [Archivierung] as ARC <<DMS-Service>>
+    [PDF-Generierung] as PDF <<Other-Service>>
+
+    PDF - Ctrl
+    Rv --> Ctrl
+    Ctrl -> DB
+    DB - IM
+    Ctrl --> RD
+    [Renderer] - RD
+    IM -- ARC
+    IM -- TG
+    IM -- ERG
+}
+
+component [SQLite-DBMS] as SQ <<DB>>
+DB -- SQ
+TG -- SQ
+ARC -- SQ
+ERG -- SQ
+
+@enduml

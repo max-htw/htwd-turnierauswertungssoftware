@@ -1,0 +1,114 @@
+= Einrichten, Konfigurieren und Betreuen des Systems
+include::../_includes/default-attributes.inc.adoc[]
+
+*Turnierauswertungssoftware, Projekt im Kurs Software Engineering 2024/2025, Team C*
+
+<<<
+
+== Auslieferung
+Die Anwendung wird als eine ausführbare jar-Datei ausgeliefert. Dazu gehört noch eine CSS-Datei zur Gestaltung der Webanwendung und einige externe Bibliotheken in Form von jar-Dateien.
+
+Verzeichnisstruktur:
+[plantuml, format=svg, opts="inline"]
+----
+
+/
+|_ volley.jar
+|_ output.css
+|_ libs (Ordner)
+  |_ <lib1>.jar
+  |_ <lib2>.jar
+  |_ ...
+  |_ index.md
+
+----
+
+== Systemanforderungen
+Die Java-Anwendung soll auf einem Laptop installiert werden, der mit zum Turnier genommen wird.
+
+Auf dem Laptop muss Java installiert sein:
+
+- am besten JDK, nicht JRE.
+- https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html[Java version 17] oder höher.
+- es gelten die https://www.oracle.com/java/technologies/javase/products-doc-jdk17certconfig.html[Systemvoraussetzungen für Java]
+
+Sowohl Windows als Linux Betriebsysteme sind von Java unterstützt. Wenn man sich später für einen WiFi-Hotspot auf dem Laptop entscheidet (siehe unten unter WiFi-Netzwerk), Linux ist dafür besser geeignet, da er mehr Kontrolle bietet.
+
+== Installation
+
+Die Ausgelieferten Dateien (siehe oben) sollen auf den Laptop in ein lokales Verzeichnis kopiert werden.
+
+Dabei muss sichergestellt werden, dass diejenige Person, die die Java-Anwendung ausführt, auch die Schreibrechte für das Verzeichnis hat.
+
+== Ausführung
+In einem Terminal (root-Rechte sind NICHT erforderlich) in das Verzeichnis mit der volley.jar wechseln und den folgenden Befehl ausführen: 
+
+[source, bash]
+----
+java -jar volley.jar
+----
+
+standardmäßig wird ein Webserver unter der Port 80 gestartet und somit unter http://localhost erreichbar.
+
+Falls ein anderer Port gewünscht ist, kann er als Argumente in der Kommandozeile angegeben werden:
+
+[source, bash]
+----
+java -jar volley.jar 8080
+----
+
+Es gibt auch Argumente für die Generierung der QR-Code. Dazu siehe unten unter WiFi-Netzwerk.
+
+== Aufbewahrung der Turnierdaten
+
+Die Anwendung speichert Turniere auf dem Dateisystem als JSON-Dateien. Dafür Braucht die Anwendung Schreibrechte für das Verzeichnis, wo die volley.jar Datei liegt und dafür muss die Person, die die Anwendung ausführt die Schreibberechtigungen für das Verzeichnis besitzen.
+
+Die Anwendung legt ein Ordner mit dem Namen *turnierArchiv* an und speichert in dem Ordner die archivierte Turniere.
+
+Für die Sicherung der Archivdaten müssen lediglich die JSON-Dateien aus dem turnierArchiv Ordner gesichert werden.
+
+Um den Organisatoren des Turniers die ältere archivierte Turniere zur Verfügung zu stellen, sollen die JSON-Dateien mit den Turnieren einfach in den Ordner kopiert werden.
+
+- Achtung. Die JSON-Datei *current.json* hat eine besondere Bedeutung: in der Datei befindet sich komplette Kopie der Daten des aktuellen Turniers. Sobald in der Anwendung ein Spielstand sich ändert, wird die current.json aktualisiert. So gehen bei einem Abstürz und Neustart der Anwendung die Turnierdaten nicht verloren. (Stand 2025-07-03: die current.json ist noch nicht implementiert).
+
+== WiFi-Netzwerk
+Für die Nutzung der Webanwendung mit den mobilen Geräten ist ein autonomes WiFi-Netzwerk vor Ort notwendig. 
+
+Um den Anmeldeprozess am WiFi-Netzwerk für die mobile Geräte zu automatisieren kann die Anwendung eine QR-Code generieren. Für die QR-Code erforderliche Parameter können beim Ausführen der Anwendung über die Kommandozeilenargumente übergeben werden. Zum Beispiel:
+
+[source, bash]
+----
+java -jar volley.jar 8080 http://volleyball.htwd VOLLEYBALL uVwXyZ
+----
+
+. Port-Nummer
+. URL der Webseite
+. WLAN-SSID 
+. WLAN-Password
+
+Die Berechnung und Planung des Netzwerkes haben wir im Rahmen des Softwareprojektes nicht realisiert. 
+
+Unten finden Sie als Beispiel Anweisungen zur Einrichtung des WiFi-Hotspots auf demselben Laptop, auf dem die Webanwendung läuft. Der Abdeckungsradius beträgt dabei mit einem guten WLAN-Adapter ca. 30m.
+
+Getestet mit:
+
+- Betriebsystem: GNU/Linux Debian 12
+- USB WiFi-Adapter: TP-Link TL-WN721N
+
+[discrete]
+=== Die Anleitung ist noch nicht fertig :(
+
+* package for accessPoint: *hostapd*
+** setting up: https://www.cyberciti.biz/faq/debian-ubuntu-linux-setting-wireless-access-point/
+** show connected devices, Befehl: # watch -n1 'iw dev wlo1 station dump | grep Station'
+* package for DHCP: *dnsmasq*
+** setup for RaspberryPi: https://github.com/TomHumphries/RaspberryPiHotspot
+* Einrichtung des *Captive Portals*
+** Wir brauchen vereinfachte Einrichtung: keine Authentifizierung, kein Routing und deswegen keine iptables-Regeln.
+** https://opennds.readthedocs.io/en/latest/howitworks.html#captive-portal-detection-cpd
+* Deaktivierung des NetworkManagers
+** https://wiki.debian.org/NetworkManager
+* Konfiguration ohne NetworkManager
+** https://wiki.debian.org/NetworkConfiguration
+** https://wiki.debianforum.de/WLAN-Access-Point_mit_hostapd_und_USB-Stick
+

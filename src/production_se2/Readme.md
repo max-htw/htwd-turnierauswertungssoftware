@@ -33,6 +33,7 @@ Datei `.vscode\settings.json`
 - Voraussetzung: installierte Java Standard Edition.
   - Zum Beispiel von hier: https://adoptium.net/temurin/releases/
     - JDK-Packung auswählen, nicht JRE.
+    - Getestet wurde die Anwendung mit Java 17 und höher.
 
 Bemerkung (2025-06): Alle Klassen des Projekts befinden sich in der default-Package. Wir haben bis jetzt keine Packet-Manager wie Maven verwendet. Die folgende Anweisungen gelten für diese "flache" Projektstruktur.
 

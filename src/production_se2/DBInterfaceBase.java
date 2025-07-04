@@ -5,37 +5,37 @@ public abstract class DBInterfaceBase {
   //Datenabfragen
 
   //die zwei Funktionen werden hauptsaechlich in Tests verwendet.
-  abstract void resetKonfiguration();
-  abstract void resetMatches();
+  public abstract void resetKonfiguration();
+  public abstract void resetMatches();
 
-  abstract ArrayList <String> turnierKonf_getGroupNames(); // index = groupID -> groupName
-  abstract int turnierKonf_getAnzGruppen();
+  public abstract ArrayList <String> turnierKonf_getGroupNames(); // index = groupID -> groupName
+  public abstract int turnierKonf_getAnzGruppen();
 
-  abstract ArrayList<String> turnierKonf_getTeamNamesByGroupID(int groupID); // <teamNr, teamName>
-  abstract int turnierKonf_getAnzTeamsByGroupID(int GroupID);
+  public abstract ArrayList<String> turnierKonf_getTeamNamesByGroupID(int groupID); // <teamNr, teamName>
+  public abstract int turnierKonf_getAnzTeamsByGroupID(int GroupID);
 
-  abstract boolean turnierKonf_getNeedRueckspiele();
-  abstract int turnierKonf_getAnzSpielfelder();
+  public abstract boolean turnierKonf_getNeedRueckspiele();
+  public abstract int turnierKonf_getAnzSpielfelder();
 
-  abstract boolean turnierKonf_getNeedPrefillScores();
+  public abstract boolean turnierKonf_getNeedPrefillScores();
 
-  abstract ArrayList<TurnierMatch> getMatchesByGroupID(int groupID);
-  abstract TurnierMatch getMatch(int groupID, int team1, int team2);
+  public abstract ArrayList<TurnierMatch> getMatchesByGroupID(int groupID);
+  public abstract TurnierMatch getMatch(int groupID, int team1, int team2);
 
-  abstract SpielStats getSpielStats(int groupID, int team1, int team2, boolean isHinspiel);
+  public abstract SpielStats getSpielStats(int groupID, int team1, int team2, boolean isHinspiel);
 
-  abstract ArrayList<String> getTurnierArchiveNames();
-  abstract void loadTurnierFromArchive(int pos);
-  abstract void loadTurnierFromArchive(String turnierName);
+  public abstract ArrayList<String> getTurnierArchiveNames();
+  public abstract void loadTurnierFromArchive(int pos);
+  public abstract void loadTurnierFromArchive(String turnierName);
 
-  abstract ArrayList<SpielStats> getFeldSchedule(int feldNr);
-  abstract SpielStats getSpielStatsByFeldUndTimeSlot(int feldNr, int idx);
+  public abstract ArrayList<SpielStats> getFeldSchedule(int feldNr);
+  public abstract SpielStats getSpielStatsByFeldUndTimeSlot(int feldNr, int idx);
 
-  abstract ArrayList<FeldSchedule> getTurnierPlan();
+  public abstract ArrayList<FeldSchedule> getTurnierPlan();
 
-  abstract int turnierKonf_getTurnierStartAsMinutes();
-  abstract int turnierKonf_getTimeSlotDuration();
-  abstract int turnierKonf_getAnzTimeSlots();
+  public abstract int turnierKonf_getTurnierStartAsMinutes();
+  public abstract int turnierKonf_getTimeSlotDuration();
+  public abstract int turnierKonf_getAnzTimeSlots();
 
   public String getTimeSlotString(int timeSlotNr) {
     if(timeSlotNr < 0){return "--:--";}
@@ -51,30 +51,30 @@ public abstract class DBInterfaceBase {
   }
 
 
-  abstract boolean isTurnierPlanAktuell();
-  abstract void fillTurnierPlan(ArrayList<FeldSchedule> turnierPlan);
+public abstract boolean isTurnierPlanAktuell();
+public abstract void fillTurnierPlan(ArrayList<FeldSchedule> turnierPlan);
 
-  abstract public ArrayList<AuswertungsEintrag> calculateAuswertung(int groupID);
+abstract public ArrayList<AuswertungsEintrag> calculateAuswertung(int groupID);
 
   //Datenmanipulationen
 
-  abstract boolean turnierKonf_setAnzGruppen(int anz);
-  abstract boolean turnierKonf_setAnzTeamsByGroupID(int groupID, int anzTeams);
-  abstract boolean turnierKonf_setAnzSpielfelder(int anz);
-  abstract boolean turnierKonf_setNeedRueckspiele(boolean needRueckspiele);
-  abstract boolean turnierKonf_setNeedPrefillScores(boolean needPrefillScores);
+public abstract boolean turnierKonf_setAnzGruppen(int anz);
+public abstract boolean turnierKonf_setAnzTeamsByGroupID(int groupID, int anzTeams);
+public abstract boolean turnierKonf_setAnzSpielfelder(int anz);
+public abstract boolean turnierKonf_setNeedRueckspiele(boolean needRueckspiele);
+public abstract boolean turnierKonf_setNeedPrefillScores(boolean needPrefillScores);
 
-  abstract void turnierKonf_setTurnierStartAsMinutes(int minutes);
-  abstract void turnierKonf_setTimeSlotDuration(int minutes);
-  abstract void turnierKonf_setAnzTimeSlots(int anz);
+public abstract void turnierKonf_setTurnierStartAsMinutes(int minutes);
+public abstract void turnierKonf_setTimeSlotDuration(int minutes);
+public abstract void turnierKonf_setAnzTimeSlots(int anz);
 
-  abstract void match_setPunkteTeam1Hinspiel(int groupID, int team1ID, int team2ID, int team1Punkte);
-  abstract void match_setPunkteTeam1Rueckspiel(int groupID, int team1ID, int team2ID, int team1Punkte);
+public abstract void match_setPunkteTeam1Hinspiel(int groupID, int team1ID, int team2ID, int team1Punkte);
+public abstract void match_setPunkteTeam1Rueckspiel(int groupID, int team1ID, int team2ID, int team1Punkte);
 
-  abstract void match_setPunkteTeam2Hinspiel(int groupID, int team1ID, int team2ID, int team2Punkte);
-  abstract void match_setPunkteTeam2Rueckspiel(int groupID, int team1ID, int team2ID, int team2Punkte);
+public abstract void match_setPunkteTeam2Hinspiel(int groupID, int team1ID, int team2ID, int team2Punkte);
+public abstract void match_setPunkteTeam2Rueckspiel(int groupID, int team1ID, int team2ID, int team2Punkte);
 
-  abstract boolean saveCurrentTurnierToArchive(String turnierName);
+public abstract boolean saveCurrentTurnierToArchive(String turnierName);
 
 
   //Classen
