@@ -191,13 +191,25 @@ Test nicht bestanden – Funktion wird nicht mehr implementiert.
 
 === Zusammenfassung
 
-- Die Tests zeigen, dass zentrale Funktionen wie das Setzen von Turnierkonfigurationen und die Auswertung der Gesamttabelle korrekt funktionieren.  
+- Die Integrationstests zeigen, dass zentrale Funktionen wie das Setzen von Turnierkonfigurationen und die Auswertung der Gesamttabelle korrekt funktionieren.  
 - Die Archivierungs- und PDF-Export-Funktionen sind noch nicht vollständig implementiert, was in den Tests durch `@Ignore` bzw. fehlschlagende Assertions sichtbar wurde.  
-- Die Testabdeckung umfasst insbesondere Konfiguration, Datenhaltung, Auswertung und Exportlogik.
+- Die Testabdeckung umfasst insbesondere Konfiguration, Datenhaltung, Auswertung und Exportlogik. 
+- Die Modultests wurden von den Entwicklern durchgeführt, allerdings ohne standardisierte Testprotokolle oder zentrale Dokumentation.  
+- Die Systemtests wurden manuell durchgeführt. Ihre Ergebnisse sind in der entsprechenden Tabelle und im Abnahmedokument festgehalten.
+
 
 
 == Dokumentation und Reporting
 
-* Testfälle und -ergebnisse in AsciiDoc pflegen  
-* Integration ins Git-Repository  
+Alle Testfälle sowie die zugehörigen Ergebnisse wurden strukturiert im Format AsciiDoc dokumentiert. Dabei wurden die Tests nach Teststufen (Modul-, Integrations- und Systemtests) gegliedert und jeweils mit Zielbeschreibung, Ergebnisbewertung und Status versehen.
+
+Das Testkonzept ist im Projektrepository abgelegt und wurde fortlaufend aktualisiert. Änderungen an Testfällen oder Testergebnissen wurden über Pull Requests integriert und im Git-Historienverlauf nachvollziehbar dokumentiert.
+
+Für die Systemtests erfolgte die Verknüpfung der getesteten Funktionen mit den Anforderungen aus dem Abnahmedokument, um eine transparente Rückverfolgbarkeit zwischen Anforderung und Testnachweis sicherzustellen.
+
+Fehlgeschlagene Tests und unvollständige Implementierungen (z. B. Archivfunktion, PDF-Export) wurden in den Testtabellen dokumentiert und teils als Issues im GitHub-Tracker erfasst.
+
+*Hinweis:*  
+Eine zentrale Schwäche bestand darin, dass fehlgeschlagene oder problematische Tests nicht konsequent über ein separates Kommunikationsinstrument weitergegeben wurden. Dies führte stellenweise dazu, dass einzelne Fehler nicht rechtzeitig im Team diskutiert wurde. Für künftige Projekte wäre ein abgestimmter Prozess zur aktiven Fehlerkommunikation und Nachverfolgung empfehlenswert.
+
 
