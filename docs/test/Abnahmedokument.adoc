@@ -50,10 +50,4 @@ Projektverantwortliche:: Kareen Khouri, Jonas Grießhaber, Alexander Zajcev, Rad
 
 == 2. Abnahmeerklärung
 
-Ich bestätige, dass alle oben aufgelisteten Anforderungen erfolgreich umgesetzt und getestet wurden. Die Software wird damit als *abgenommen* erklärt.
-
-Ort, Datum:: .....................................................
-
-Unterschrift Abnehmer:: ...........................................
-
-Unterschrift Projektverantwortliche:: ...................................
+Die Abnahme wurde am 03.07.2025 unter Anwesenheit von *Lotte Richter*, StuRa, durchgeführt. Sie fand in der A105/106 statt. Zur Abnahme waren vom Team C Jonas Grießhaber, Alexander Zajcev und Maximilian Lohr anwesend.
