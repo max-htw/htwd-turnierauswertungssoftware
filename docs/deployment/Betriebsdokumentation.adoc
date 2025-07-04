@@ -96,7 +96,7 @@ Getestet mit:
 - USB WiFi-Adapter: TP-Link TL-WN721N
 
 [discrete]
-=== Die Anleitung ist noch nicht fertig :(
+=== Weiterführende Informationen finden Sie in den folgenden Dokumentationen
 
 * package for accessPoint: *hostapd*
 ** setting up: https://www.cyberciti.biz/faq/debian-ubuntu-linux-setting-wireless-access-point/
