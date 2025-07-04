@@ -1,14 +1,15 @@
 *Erhebung, Dokumentation und iterative Verfeinerung der fachlichen Anforderungen einschließlich Erstellung von User Stories, Vision und Glossar*
 
 
-
-== Ausgangssituation
+[discrete]
+=== Ausgangssituation
 
 Im Projekt zur Erstellung und Verwaltung von Turnierauswertungssoftware für den StuRa der HTW Dresden war ich für die Analyse verantwortlich. Mein Aufgabenbereich umfasste die Erfassung und Dokumentation der fachlichen Anforderungen, die Erstellung und Aktualisierung der Vision sowie die kontinuierliche Ableitung der User Stories mit Akzeptanzkriterien. Ich war zudem für das Glossar zuständig, um ein einheitliches Verständnis der Begriffe sicherzustellen. Die OpenUP-Methode diente als Grundlage für die Struktur und Inhalte der Dokumentation.
 
 Ein wesentlicher Teil meiner Arbeit war es, nicht nur die Anforderungen zu dokumentieren, sondern auch den Überblick über die Umsetzung im Team zu behalten. Ich habe regelmäßig den Stand der Entwicklung verfolgt, um sicherzustellen, dass die Anforderungen korrekt umgesetzt wurden und um frühzeitig festzustellen, wo weitere Anforderungen oder Anpassungen nötig waren. Die Vision wurde von mir immer wieder an den aktuellen Projektstand angepasst, insbesondere wenn sich durch die Arbeit der Entwickler neue Erkenntnisse oder Notwendigkeiten ergaben.
 
-== Meine Aufgaben und Lösungsweg
+[discrete]
+=== Meine Aufgaben und Lösungsweg
 
 Ich habe die Anforderungen aus den Gesprächen mit dem Auftraggeber und der Projektbeschreibung in User Stories überführt, die ich im GitHub-Repository als Issues erstellte z.B. (Issue #174). Diese waren mit Akzeptanzkriterien, Prioritäten und T-Shirt-Größen-Komplexitäten versehen. So konnten die Aufgaben im Team geplant und priorisiert werden. Die Priorisierung haben wir gemeinsam im Teammeeting in Abstimmung mit dem Auftraggeber festgelegt.
 
@@ -23,7 +24,8 @@ Neben der reinen Dokumentation habe ich regelmäßig den Quellcode und die GitHu
 
 Die Anwender- und Betriebsdokumentation sowie die Anforderungsspezifikation und der Projektplan wurden von mir erstellt und mit dem Team abgestimmt. Auch hier habe ich darauf geachtet, dass sie den aktuellen Projektstand widerspiegelten und mit den OpenUP-Artefakten konsistent waren.
 
-== Herausforderungen und Erkenntnisse
+[discrete]
+=== Herausforderungen und Erkenntnisse
 
 Eine der größten Herausforderungen war es, die Anforderungen des Auftraggebers so zu erfassen und zu dokumentieren, dass sie für alle Teammitglieder verständlich und umsetzbar waren. Oft war die Beschreibung durch den Auftraggeber unvollständig oder mehrdeutig, sodass Rückfragen notwendig waren. Ich habe gelernt, wie wichtig es ist, bei Unklarheiten sofort nachzufragen und die Kommunikation aktiv zu gestalten.
 Obwohl ich die Anforderungen der Auftraggeber ständig dokumentiert habe, gab es auf unserer Seite Unklarheiten - zum Beispiel darüber, welche Betriebssysteme auf den StuRa-Rechnern zur Verfügung standen. Unser Team war sich hier nicht sicher, sodass ich noch einmal nachfragen musste.
@@ -34,7 +36,8 @@ Die Erstellung der Anwender- und Betriebsdokumentation war für mich neu. Ich ko
 
 Ein wichtiger Lerneffekt war, dass Anforderungen nicht statisch sind. Sie verändern sich im Verlauf des Projekts, und es ist Aufgabe der Analyse, diese Veränderungen frühzeitig zu erkennen, zu dokumentieren und ins Team zu kommunizieren. Auch habe ich verstanden, dass klare Anforderungen und eine saubere Dokumentation entscheidend für eine effiziente Umsetzung und für die Qualität des Endprodukts sind.
 
-== Bewertung
+[discrete]
+=== Bewertung
 
 Meine Arbeit in der Analyse war erfolgreich. Ich habe nicht nur die Anforderungen dokumentiert, sondern aktiv darauf geachtet, dass sie im Projekt umgesetzt wurden und dem aktuellen Entwicklungsstand entsprachen. Die iterative Anpassung der Vision und die enge Verbindung zur Umsetzung halfen dem Team, die Projektziele im Blick zu behalten und neue Anforderungen oder notwendige Änderungen frühzeitig zu identifizieren.
 
