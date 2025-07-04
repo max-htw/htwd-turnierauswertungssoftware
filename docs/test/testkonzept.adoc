@@ -59,6 +59,8 @@ Ziel: Test einzelner Klassen/Methoden isoliert mit JUnit.
 | T10 | Blockierung von Nutzern bei Vorsatzfehleingaben verhindert weitere Änderungen                          | ErgebnisService     | Nein
 | T11 | Erfassung eines Spielstandes nach Spielende ermöglicht und Pflichtfelder validiert                   | ErgebnisService     | Nein
 | T12 | Validierung der Zeitspanne zwischen Spielende und Eintrag (max. 3 Minuten)                            | ErgebnisService     | Nein
+| T27 | Round-Robin bei 8 Teams erzeugt 28 Spiele korrekt                     | TurnierplanGenerator | Ja
+| T28 | Alle Teams aus (3,5,3) erhalten mindestens ein Spiel                  | TurnierplanGenerator | Ja
 |===
 
 === Integrationstest
@@ -94,6 +96,7 @@ Ziel: Endnutzer-Workflows im Browser gegen die vollständige Anwendung testen.
 | T24 | Rollenabhängige Anzeige                                  | UI-Frontend + Auth      | Nein
 | T25 | Anzeige des Spielfeldstatus                             | UI-Frontend             | Nein
 | T26 | URL enthält Benutzerrolle                               | Routing                 | Nein
+
 |===
 
 == Testumgebung

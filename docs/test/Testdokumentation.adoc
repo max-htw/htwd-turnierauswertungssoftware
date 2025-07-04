@@ -46,25 +46,27 @@ Ziel: Früherkennung von Fehlern in Anforderungen und Code durch Reviews und Spe
 Alle Testfälle werden im statischen Test auf Vollständigkeit und Konsistenz der Spezifikation überprüft.
 
 === Modultest (Unit-Test)
-Ziel: Test einzelner Klassen/Methoden isoliert mit JUnit4.
 
 [cols="1,4,3,2", options="header"]
 |===
 | Testfall-ID | Beschreibung | Testobjekt | Automatisiert?
 
-| T01 | Dropdown „Anzahl Spielfelder“ enthält alle zulässigen Werte und initialisiert korrekt | KonfValidator | Ja
-| T02 | Dropdown „Anzahl Leistungsgruppen“ (1–3) erlaubt nur Werte 1 bis 3 | KonfValidator | Ja
-| T03 | „Teams pro LG“ validiert Eingabe auf positive Ganzzahlen im zulässigen Bereich | KonfValidator | Ja
-| T04 | Auswahl Rückspiel (Ja/Nein) setzt Modus korrekt auf Hinspiel oder Hin-/Rückspiel | TurnierKonfig | Ja
-| T05 | Eingabe „Dauer pro Spiel“ validiert numerischen Wert, wirft bei ungültigen Eingaben Exception | KonfValidator | Ja
-| T06 | Eingabe „Startzeit“ validiert Zeitformat (HH:mm), meldet Fehler bei Fehleingabe | KonfValidator | Ja
-| T07 | Turnierplan-Generator: maximal ein Aussetzen (Bye) pro Team in Folge | SpielplanGen | Ja
-| T08 | Spielplan-Generator: verteilt Spiele, Pausen und Aussetzen gleichmäßig | SpielplanGen | Ja
-| T09 | Bearbeiten gespeicherter Spielstände erlaubt und speichert Änderungen korrekt | ErgebnisService | Ja
-| T10 | Blockierung von Nutzern bei Vorsatzfehleingaben verhindert weitere Änderungen | ErgebnisService | Ja
-| T11 | Erfassung eines Spielstandes nach Spielende ermöglicht, Pflichtfelder validiert | ErgebnisService | Ja
-| T12 | Validierung der Zeitspanne zwischen Spielende und Eintrag (max. 3 Minuten) | ErgebnisService | Ja
+| T01 | Dropdown „Anzahl Spielfelder“ enthält alle zulässigen Werte und initialisiert korrekt | KonfValidator | Nein
+| T02 | Dropdown „Anzahl Leistungsgruppen“ (1–3) erlaubt nur Werte 1 bis 3 | KonfValidator | Nein
+| T03 | „Teams pro LG“ validiert Eingabe auf positive Ganzzahlen im zulässigen Bereich | KonfValidator | Nein
+| T04 | Auswahl Rückspiel (Ja/Nein) setzt Modus korrekt auf Hinspiel oder Hin-/Rückspiel | TurnierKonfig | Nein
+| T05 | Eingabe „Dauer pro Spiel“ validiert numerischen Wert, wirft bei ungültigen Eingaben Exception | KonfValidator | Nein
+| T06 | Eingabe „Startzeit“ validiert Zeitformat (HH:mm), meldet Fehler bei Fehleingabe | KonfValidator | Nein
+| T07 | Turnierplan-Generator: maximal ein Aussetzen (Bye) pro Team in Folge | SpielplanGen | Nein
+| T08 | Spielplan-Generator: verteilt Spiele, Pausen und Aussetzen gleichmäßig | SpielplanGen | Nein
+| T09 | Bearbeiten gespeicherter Spielstände erlaubt und speichert Änderungen korrekt | ErgebnisService | Nein
+| T10 | Blockierung von Nutzern bei Vorsatzfehleingaben verhindert weitere Änderungen | ErgebnisService | Nein
+| T11 | Erfassung eines Spielstandes nach Spielende ermöglicht, Pflichtfelder validiert | ErgebnisService | Nein
+| T12 | Validierung der Zeitspanne zwischen Spielende und Eintrag (max. 3 Minuten) | ErgebnisService | Nein
+| T13 | Round-Robin bei 8 Teams erzeugt 28 Spiele korrekt | TurnierplanGenerator | Ja
+| T14 | Alle Teams aus (3,5,3) erhalten mindestens ein Spiel | TurnierplanGenerator | Ja
 |===
+
 
 === Integrationstest
 Ziel: Zusammenspiel von Komponenten und Datenbank-Anbindung prüfen.
@@ -73,13 +75,13 @@ Ziel: Zusammenspiel von Komponenten und Datenbank-Anbindung prüfen.
 |===
 | Testfall-ID | Beschreibung | Zielobjekt | Implementiert? | Erfolgreich?
 
-| T13 | Speichern und Laden eines Turniers über API | DB-InMemory (DBInterface) | Ja | Nein
-| T14 | Leere DB-Initialisierung nach `reset()` liefert Default-Werte | DB-InMemory | Ja | Ja
-| T15 | Konfig-Setter/Get-Getter validieren (Fehler-/Erfolgsfälle) | DB-InMemory | Ja | Ja
-| T16 | Laden gespeicherter Turnierdaten | DB-InMemory | Ja | Ja
-| T17 | Generierung der Gesamttabelle (Service + UI) | SpielplanService + UI | Ja | Nein
-| T18 | PDF-Export des Spielplans | PDFExportService | Ja | Nein
-| T19 | CSV-Export der Turnierdaten | CSVExportService | Nein | –
+| T15 | Speichern und Laden eines Turniers über API | DB-InMemory (DBInterface) | Ja | Nein
+| T16 | Leere DB-Initialisierung nach `reset()` liefert Default-Werte | DB-InMemory | Ja | Ja
+| T17 | Konfig-Setter/Get-Getter validieren (Fehler-/Erfolgsfälle) | DB-InMemory | Ja | Ja
+| T18 | Laden gespeicherter Turnierdaten | DB-InMemory | Ja | Ja
+| T19 | Generierung der Gesamttabelle (Service + UI) | SpielplanService + UI | Ja | Ja
+| T20 | PDF-Export des Spielplans | PDFExportService | Ja | Nein
+| T21 | CSV-Export der Turnierdaten | CSVExportService | Nein | –
 |===
 
 
@@ -90,22 +92,23 @@ Ziel: Endnutzer-Workflows im Browser gegen die vollständige Anwendung testen.
 |===
 | Testfall-ID | Beschreibung | Workflow | Erfolgreich durchgelaufen?
 
-| T20 | Anzeige auf Smartphone (Responsive) | UI-Frontend | Ja
-| T21 | Responsive Design bei Gerätewechsel | UI-Frontend | Ja
-| T22 | Navigation zwischen Seiten | UI-Frontend | Ja
-| T23 | Farbliche Hervorhebung der nächsten Teams | UI-Frontend | Ja
-| T24 | Anzeige bei fehlenden Daten | UI-Frontend | Ja
-| T25 | Anzeige der aktuellen Uhrzeit/Spielzeit | UI-Frontend | Ja
-| T26 | Rollenabhängige Anzeige | UI-Frontend + Auth | Ja
-| T27 | Anzeige des Spielfeldstatus | UI-Frontend | Ja
-| T28 | URL enthält Benutzerrolle | Routing | Ja
+| T22 | Anzeige auf Smartphone (Responsive) | UI-Frontend | Ja
+| T23 | Responsive Design bei Gerätewechsel | UI-Frontend | Ja
+| T24 | Navigation zwischen Seiten | UI-Frontend | Ja
+| T25 | Farbliche Hervorhebung der nächsten Teams | UI-Frontend | Nein
+| T26 | Anzeige bei fehlenden Daten | UI-Frontend | Ja
+| T27 | Anzeige der aktuellen Uhrzeit/Spielzeit | UI-Frontend | Ja
+| T28 | Rollenabhängige Anzeige | UI-Frontend + Auth | Ja
+| T29 | Anzeige des Spielfeldstatus | UI-Frontend | Ja
+| T30 | URL enthält Benutzerrolle | Routing | Ja
 |===
 
 
 == Testumgebung
 
 * **Unit/Integration:** H2-InMemory-DB, JUnit 4, Mockito  
-* **Systemtests:** Lokale Deployment-Instanz, Selenium/Cypress (geplant)  
+* **Systemtests:** Lokale Deployment-Instanz
+  
 * **Netzwerk:** Offline- und Normalbetrieb  
 
 == Testvorgehen
@@ -122,8 +125,93 @@ Ziel: Endnutzer-Workflows im Browser gegen die vollständige Anwendung testen.
 * Keine Blocker-Bugs offen  
 * Systemtest-Workflows ohne kritische Fehler  
 
+== Testergebnisse
+
+=== Einordnung
+
+Die dokumentierten Tests stammen aus den Integrationstests (`T_Pipeline_tests`, `T_DBInterface_tests`) und decken zentrale Systemfunktionen wie Konfiguration, Datenhaltung, Auswertung und Export ab.  
+Die Modultests (z. B. zu einzelnen Validator- und Service-Klassen) wurden von den Entwicklern durchgeführt, jedoch nicht durchgängig dokumentiert. Eine zentrale Auswertung oder Referenz im Testkonzept war daher nicht möglich.
+
+Die Systemtests wurden manuell im Browser durchgeführt. Die geprüften Funktionen sind im Abnahmedokument dokumentiert und durch Testfall-IDs (T20–T28) nachvollziehbar zugeordnet.
+
+=== RoleAdmin_TaskEinstellungen_SetAnzGroups
+
+*Ziel:*  
+Überprüft, ob die Änderung der Gruppenzahl durch den Admin korrekt verarbeitet wird.
+
+*Ergebnis:*  
+-Die Anzahl der Gruppen wird korrekt gesetzt.  
+-Die Links zur Gruppenauswahl werden entsprechend angepasst.
+
+*Status:*  
+Test erfolgreich bestanden.
+
+=== testSpeichernUndLaden_ÜberInterface
+
+*Ziel:*  
+Überprüft das Speichern und Laden eines Turniers über das Datenbank-Interface.
+
+*Ergebnis:*  
+- Das Turnier kann gespeichert werden (sofern Implementierung vorhanden).  
+- Nach dem Laden aus dem Archiv sind alle Konfigurationsdaten (Gruppenanzahl, Teamanzahl, Rückspiel-Flag) korrekt wiederhergestellt.  
+- Nach einem Reset werden die Default-Werte geladen.  
+- Die Archivliste enthält den gespeicherten Turniernamen.
+
+*Hinweis:*  
+Test ist aktuell mit `@Ignore` markiert, da die Speicherfunktion noch nicht implementiert ist.
+
+*Status:*  
+Test wird übersprungen.
+
+=== testGesamttabelleGenerierung
+
+*Ziel:*  
+Überprüft die korrekte Generierung der Gesamttabelle (Auswertung) für eine Gruppe.
+
+*Ergebnis:*  
+- Nach Setzen verschiedener Spielergebnisse werden die Anzahl der Siege, Spiele und die Punktdifferenz für jedes Team korrekt berechnet.  
+- Die Tabelle enthält alle Teams der Gruppe.  
+- Beispiel: Team 0 hat 1 Sieg, 2 Spiele, Punktdifferenz -3 (wie erwartet).
+
+*Status:*  
+Test erfolgreich bestanden.
+
+=== testPdfExport_Spielplan
+
+*Ziel:*  
+Überprüft den PDF-Export des Spielplans.
+
+*Ergebnis:*  
+- Nach Konfiguration eines Turniers und Erzeugung eines Spielplans wird ein PDF erzeugt.  
+
+
+*Hinweis:*  
+Die Methode `PDFExportService.export()` ist noch nicht vollständig implementiert. Der Test basiert derzeit auf einer vorbereiteten Dummy-Implementierung.
+
+*Status:*  
+Test nicht bestanden – Funktion wird nicht mehr implementiert.
+
+=== Zusammenfassung
+
+- Die Integrationstests zeigen, dass zentrale Funktionen wie das Setzen von Turnierkonfigurationen und die Auswertung der Gesamttabelle korrekt funktionieren.  
+- Die Archivierungs- und PDF-Export-Funktionen sind noch nicht vollständig implementiert, was in den Tests durch `@Ignore` bzw. fehlschlagende Assertions sichtbar wurde.  
+- Die Testabdeckung umfasst insbesondere Konfiguration, Datenhaltung, Auswertung und Exportlogik. 
+- Die Modultests wurden von den Entwicklern durchgeführt, allerdings ohne standardisierte Testprotokolle oder zentrale Dokumentation.  
+- Die Systemtests wurden manuell durchgeführt. Ihre Ergebnisse sind in der entsprechenden Tabelle und im Abnahmedokument festgehalten.
+
+
+
 == Dokumentation und Reporting
 
-* Testfälle und -ergebnisse in AsciiDoc pflegen  
-* Integration ins Git-Repository  
-* Fehlerbehandlung und Priorisierung über Testmanagement-Tool (z. B. Jira)
+Alle Testfälle sowie die zugehörigen Ergebnisse wurden strukturiert im Format AsciiDoc dokumentiert. Dabei wurden die Tests nach Teststufen (Modul-, Integrations- und Systemtests) gegliedert und jeweils mit Zielbeschreibung, Ergebnisbewertung und Status versehen.
+
+Das Testkonzept ist im Projektrepository abgelegt und wurde fortlaufend aktualisiert. Änderungen an Testfällen oder Testergebnissen wurden über Pull Requests integriert und im Git-Historienverlauf nachvollziehbar dokumentiert.
+
+Für die Systemtests erfolgte die Verknüpfung der getesteten Funktionen mit den Anforderungen aus dem Abnahmedokument, um eine transparente Rückverfolgbarkeit zwischen Anforderung und Testnachweis sicherzustellen.
+
+Fehlgeschlagene Tests und unvollständige Implementierungen (z. B. Archivfunktion, PDF-Export) wurden in den Testtabellen dokumentiert und teils als Issues im GitHub-Tracker erfasst.
+
+*Hinweis:*  
+Eine zentrale Schwäche bestand darin, dass fehlgeschlagene oder problematische Tests nicht konsequent über ein separates Kommunikationsinstrument weitergegeben wurden. Dies führte stellenweise dazu, dass einzelne Fehler nicht rechtzeitig im Team diskutiert wurde. Für künftige Projekte wäre ein abgestimmter Prozess zur aktiven Fehlerkommunikation und Nachverfolgung empfehlenswert.
+
+

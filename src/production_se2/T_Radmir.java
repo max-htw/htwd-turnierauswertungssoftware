@@ -36,5 +36,31 @@ public class T_Radmir {
     assertEquals(24,anzMatches);
   }
 
+  @Test
+  public void testVollständigerPlanBei8Teams() {
+      int anzahlTeams = 8;
+      int maxMatches = anzahlTeams * (anzahlTeams - 1) / 2; // 28 Spiele bei Round-Robin
+      var anzTeamsInGruppe = java.util.List.of(anzahlTeams);
+
+      var plan = TurnierplanGenerator.generierePlan_01(
+          1, anzTeamsInGruppe, 20, 2, false);
+
+      assertEquals("Plan sollte alle Spiele enthalten", maxMatches, plan.size());
+  }
+
+  @Test
+  public void testJedesTeamSpieltMindestensEinmal() {
+      var anzTeamsInGruppe = java.util.List.of(3, 5, 3);
+      int totalTeams = anzTeamsInGruppe.stream().mapToInt(i -> i).sum();
+
+      var plan = TurnierplanGenerator.generierePlan_01(
+          anzTeamsInGruppe.size(), anzTeamsInGruppe, 1000, 3, false);
+
+      long aktiveTeams = plan.stream()
+          .flatMap(s -> java.util.List.of(s.getMatch().getTeam1Nr(), s.getMatch().getTeam2Nr()).stream())
+          .distinct().count();
+
+      assertEquals("Alle Teams sollen mindestens ein Spiel haben", totalTeams, aktiveTeams);
+  }
 
 }
